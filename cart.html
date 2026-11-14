@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- Flower Shop Management System - cart.html (cart and delivery form) - CSE326 - Made by: Raghav -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - Flower Shop Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Customer - Neha Sharma</div> </header>
+    <nav class="menu"> <a href="dashboard-customer.html">Dashboard</a> <a href="catalog.html">Flowers</a> <a class="active" href="cart.html">Cart</a> <a href="index.html">Logout</a> </nav>
+    <main class="container">
+        <p><button type="button" class="btn btn-small" onclick="history.back()">Back</button></p>
+        <h1>My cart</h1>
+        <p>Check the flowers in your cart and fill in the delivery details.</p>
+        <div class="card">
+            <h2>Flowers in the cart</h2>
+            <table>
+                <tr><th>Flower</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
+                <tr><td>Red Rose Bouquet</td><td>Rs 800</td><td>1</td><td>Rs 800</td></tr>
+                <tr><td>Single Red Rose</td><td>Rs 100</td><td>2</td><td>Rs 200</td></tr>
+                <tfoot>
+                    <tr><td colspan="3">Items total</td><td>Rs 1,000</td></tr>
+                    <tr><td colspan="3">Delivery charge</td><td>Rs 0</td></tr>
+                    <tr><td colspan="3">To pay</td><td>Rs 1,000</td></tr>
+                </tfoot>
+            </table>
+            <p class="small-note">Delivery is Rs 50. It is free on orders above Rs 999.</p>
+        </div>
+        <div class="card">
+            <h2>Delivery details</h2>
+            <!-- alert() shows a message box. Then the form opens the dashboard again. -->
+            <form action="dashboard-customer.html" method="get" onsubmit="alert('Thank you! Your order has been placed.')">
+                <label for="rname">Receiver name</label>
+                <input type="text" id="rname" placeholder="Who will receive the flowers" required>
+                <label for="rphone">Phone</label>
+                <input type="tel" id="rphone" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit number" required>
+                <label for="raddress">Full address</label>
+                <textarea id="raddress" placeholder="House number, street, city" required></textarea>
+                <label for="rdate">Delivery date</label>
+                <input type="date" id="rdate" required>
+                <label for="rpayment">Payment</label>
+                <select id="rpayment"> <option>Cash on delivery</option> <option>UPI</option> <option>Card</option> </select>
+                <button type="submit" class="btn btn-main">Place order</button>
+            </form>
+            <p><a href="catalog.html">Add more flowers</a></p>
+        </div>
+    </main>
+    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+</body>
+</html>

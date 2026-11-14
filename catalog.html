@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- Flower Shop Management System - catalog.html (list of flowers to buy) - CSE326 - Made by: Raghav -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowers - Flower Shop Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Customer - Neha Sharma</div> </header>
+    <nav class="menu"> <a href="dashboard-customer.html">Dashboard</a> <a class="active" href="catalog.html">Flowers</a> <a href="cart.html">Cart</a> <a href="index.html">Logout</a> </nav>
+    <main class="container">
+        <p><button type="button" class="btn btn-small" onclick="history.back()">Back</button></p>
+        <h1>Our flowers</h1>
+        <p>Pick the flowers you like and add them to your cart.</p>
+        <div class="card">
+            <h2>Search flowers</h2>
+            <!-- The form uses method="get" because the project has no server. -->
+            <form action="catalog.html" method="get">
+                <label for="search">Search by name</label>
+                <input type="text" id="search" placeholder="Rose, Lily, Plant...">
+                <label for="type">Type</label>
+                <select id="type"> <option>All types</option> <option>Bouquet</option> <option>Single flower</option> <option>Plant</option> <option>Gift</option> </select>
+                <button type="submit" class="btn btn-main">Search</button>
+            </form>
+            <p class="small-note">This search is only the design for now. It will work after we learn more JavaScript.</p>
+        </div>
+        <div class="flowers">
+            <div class="flower"> <img class="pic" src="images/red-rose-bouquet.jpg" alt="Red Rose Bouquet"> <div class="name">Red Rose Bouquet</div> <div>Bouquet</div> <div class="price">Rs 800</div> <p>20 in stock</p> <a class="btn btn-main btn-small" href="cart.html">Add to cart</a> </div>
+            <div class="flower"> <img class="pic" src="images/white-lily-bunch.jpg" alt="White Lily Bunch"> <div class="name">White Lily Bunch</div> <div>Bouquet</div> <div class="price">Rs 650</div> <p>15 in stock</p> <a class="btn btn-main btn-small" href="cart.html">Add to cart</a> </div>
+            <div class="flower"> <img class="pic" src="images/sunflower-basket.jpg" alt="Sunflower Basket"> <div class="name">Sunflower Basket</div> <div>Bouquet</div> <div class="price">Rs 900</div> <p>8 in stock</p> <a class="btn btn-main btn-small" href="cart.html">Add to cart</a> </div>
+            <div class="flower"> <img class="pic" src="images/single-red-rose.jpg" alt="Single Red Rose"> <div class="name">Single Red Rose</div> <div>Single flower</div> <div class="price">Rs 100</div> <p>50 in stock</p> <a class="btn btn-main btn-small" href="cart.html">Add to cart</a> </div>
+            <div class="flower"> <img class="pic" src="images/money-plant-pot.jpg" alt="Money Plant Pot"> <div class="name">Money Plant Pot</div> <div>Plant</div> <div class="price">Rs 400</div> <p>12 in stock</p> <a class="btn btn-main btn-small" href="cart.html">Add to cart</a> </div>
+            <div class="flower"> <img class="pic" src="images/birthday-combo.jpg" alt="Birthday Combo"> <div class="name">Birthday Combo</div> <div>Gift</div> <div class="price">Rs 1,300</div> <p class="low">Only 5 left</p> <a class="btn btn-main btn-small" href="cart.html">Add to cart</a> </div>
+        </div>
+    </main>
+    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+</body>
+</html>
