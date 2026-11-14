@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!-- Flower Shop Management System - index.html (login page) - CSE326 - Made by: Yash -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Flower Shop Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Flower Shop Management System</div> </header>
+    <main class="container">
+        <h1>Login</h1>
+        <p>Please enter your email and password to open your account.</p>
+        <div class="card">This is a college project made with HTML, CSS and a little JavaScript. The pages show example records. Any email and password will work. Use the emails below to open each side.</div>
+        <div class="card">
+            <!-- the browser first checks "required" and type="email", then checkLogin() in js/script.js opens the right page -->
+            <form onsubmit="return checkLogin()">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="neha@example.com" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Your password" required>
+                <button type="submit" class="btn btn-main">Login</button>
+            </form>
+        </div>
+        <div class="card">
+            <h2>New customer?</h2>
+            <p>If you do not have an account, please fill the registration form.</p>
+            <p><a class="btn btn-main" href="register.html">Create an account</a></p>
+        </div>
+        <div class="card">
+            <h2>Example emails</h2>
+            <table>
+                <tr><th>Who</th><th>Email</th></tr>
+                <tr><td>Shop owner</td><td>meera@flowershop.com</td></tr>
+                <tr><td>Florist</td><td>priya@flowershop.com</td></tr>
+                <tr><td>Customer</td><td>any other email</td></tr>
+            </table>
+        </div>
+    </main>
+    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
