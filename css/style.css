@@ -1,0 +1,50 @@
+/* Flower Shop Management System - style.css - CSE326 - Made by: Yash */
+/* Only one colour (pink) is used. Everything else is black, white and grey. */
+
+* { box-sizing: border-box; }   /* padding stays inside the width */
+body { margin: 0; font-family: Arial, sans-serif; background-color: white; }
+a { color: black; }
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }   /* auto = in the middle */
+
+/* top bar and menu (flexbox) */
+.topbar { display: flex; flex-wrap: wrap; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #ccc; }
+.logo { font-size: 20px; font-weight: bold; }
+.menu { display: flex; flex-wrap: wrap; padding: 0 20px; border-bottom: 1px solid #ccc; }
+.menu a { padding: 10px 12px; text-decoration: none; }
+.menu a.active { background-color: #c2185b; color: white; }
+
+/* boxes */
+.card { border: 1px solid #ccc; padding: 16px; margin-bottom: 20px; }
+.boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }   /* grid: 2 columns */
+.box { border: 1px solid #ccc; padding: 14px; }
+.number { font-size: 26px; font-weight: bold; }
+
+/* table */
+table { width: 100%; border-collapse: collapse; }
+th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+th { background-color: #eee; }
+.table-scroll { overflow-x: auto; }   /* wide table moves sideways on a phone */
+.low { color: #c2185b; font-weight: bold; }
+
+/* buttons and forms */
+.btn { display: inline-block; padding: 8px 14px; border: 1px solid #999; border-radius: 4px; text-decoration: none; background-color: white; font-size: 16px; font-family: inherit; }
+.btn-main { background-color: #c2185b; border-color: #c2185b; color: white; }
+.btn-small { padding: 4px 10px; font-size: 13px; }
+label { display: block; font-weight: bold; margin-bottom: 4px; }
+input, select, textarea { width: 100%; padding: 8px; margin-bottom: 14px; font-size: 16px; font-family: inherit; }   /* inherit = same font as the page */
+.small-note { font-size: 13px; }
+
+/* flower cards (grid, 3 columns). .pic is the photo */
+.flowers { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.flower { border: 1px solid #ccc; padding: 14px; text-align: center; }
+.pic { width: 100%; margin-bottom: 8px; }
+.name, .price { font-weight: bold; }
+
+/* bars on the reports page */
+.bar { background-color: #eee; }
+.bar-fill { background-color: #c2185b; height: 18px; }
+
+.foot { border-top: 1px solid #ccc; padding: 16px; text-align: center; font-size: 13px; }
+
+/* phone screens: boxes and flower cards come one below the other */
+@media (max-width: 700px) { .boxes, .flowers { grid-template-columns: 1fr; } }
