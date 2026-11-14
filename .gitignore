@@ -1,0 +1,6 @@
+# made by the editor or the computer, not part of the website
+.claude/
+.mcp.json
+.vscode/
+.DS_Store
+Thumbs.db
