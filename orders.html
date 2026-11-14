@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- Flower Shop Management System - orders.html (order list) - CSE326 - Made by: Satyam -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Flower Shop Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Shop owner - Meera Kapoor</div> </header>
+    <nav class="menu"> <a href="dashboard-admin.html">Dashboard</a> <a class="active" href="orders.html">Orders</a> <a href="flowers.html">Stock</a> <a href="reports.html">Reports</a> <a href="index.html">Logout</a> </nav>
+    <main class="container">
+        <p><button type="button" class="btn btn-small" onclick="history.back()">Back</button></p>
+        <h1>Orders</h1>
+        <p>All orders of the shop and the stage each one is in.</p>
+        <div class="card">
+            <h2>Search orders</h2>
+            <form action="orders.html" method="get">
+                <label for="ordernum">Order number</label>
+                <input type="text" id="ordernum" placeholder="e.g. 104">
+                <label for="status">Status</label>
+                <select id="status"> <option>All</option> <option>Pending</option> <option>Confirmed</option> <option>Preparing</option> <option>Out for delivery</option> <option>Delivered</option> <option>Cancelled</option> </select>
+                <button type="submit" class="btn btn-main">Search</button>
+            </form>
+            <p class="small-note">This search is only the design for now. It will work after we learn more JavaScript.</p>
+        </div>
+        <div class="card">
+            <h2>All orders</h2>
+            <div class="table-scroll">
+                <table>
+                    <tr><th>Order</th><th>Customer</th><th>Delivery date</th><th>Items</th><th>Total</th><th>Status</th></tr>
+                    <tr><td>104</td><td>Neha Sharma</td><td>14 Dec 2026</td><td>Money Plant Pot x1</td><td>Rs 450</td><td>Cancelled</td></tr>
+                    <tr><td>103</td><td>Simran Kaur</td><td>12 Dec 2026</td><td>Birthday Combo x1</td><td>Rs 1,300</td><td>Pending</td></tr>
+                    <tr><td>102</td><td>Aman Verma</td><td>10 Dec 2026</td><td>Sunflower Basket x1</td><td>Rs 950</td><td>Preparing</td></tr>
+                    <tr><td>101</td><td>Neha Sharma</td><td>05 Sep 2026</td><td>Red Rose Bouquet x1, Single Red Rose x2</td><td>Rs 1,000</td><td>Delivered</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <h2>How an order moves</h2>
+            <p>Pending, then Confirmed, then Preparing, then Out for delivery, then Delivered.</p>
+            <p>An order can be cancelled only before it is out for delivery.</p>
+        </div>
+    </main>
+    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+</body>
+</html>

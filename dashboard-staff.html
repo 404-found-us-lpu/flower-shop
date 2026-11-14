@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- Flower Shop Management System - dashboard-staff.html (florist dashboard) - CSE326 - Made by: Yash -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florist Dashboard - Flower Shop Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Florist - Priya Sharma</div> </header>
+    <nav class="menu"> <a class="active" href="dashboard-staff.html">Dashboard</a> <a href="index.html">Logout</a> </nav>
+    <main class="container">
+        <p><button type="button" class="btn btn-small" onclick="history.back()">Back</button></p>
+        <h1>Florist dashboard</h1>
+        <p>Welcome Priya. Here are the orders that are still open.</p>
+        <div class="card">1 flower is low in stock: Birthday Combo.</div>
+        <div class="boxes">
+            <div class="box"><div>Preparing</div><div class="number">1</div></div>
+            <div class="box"><div>Pending</div><div class="number">1</div></div>
+        </div>
+        <div class="card">
+            <h2>Open orders</h2>
+            <div class="table-scroll">
+                <table>
+                    <tr><th>Order</th><th>Customer</th><th>Delivery date</th><th>Status</th><th>Action</th></tr>
+                    <tr><td>102</td><td>Aman Verma</td><td>10 Dec 2026</td><td id="s102">Preparing</td><td><button type="button" class="btn btn-small" onclick="nextStage('s102', 'Out for delivery')">Next stage</button></td></tr>
+                    <tr><td>103</td><td>Simran Kaur</td><td>12 Dec 2026</td><td id="s103">Pending</td><td><button type="button" class="btn btn-small" onclick="nextStage('s103', 'Confirmed')">Next stage</button></td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Low stock</h2>
+            <table>
+                <tr><th>Flower</th><th>Stock left</th></tr>
+                <tr><td>Birthday Combo</td><td class="low">5 left</td></tr>
+            </table>
+        </div>
+    </main>
+    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

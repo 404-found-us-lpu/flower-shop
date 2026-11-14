@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- Flower Shop Management System - reports.html (totals and sales by type) - CSE326 - Made by: Satyam -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Flower Shop Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Shop owner - Meera Kapoor</div> </header>
+    <nav class="menu"> <a href="dashboard-admin.html">Dashboard</a> <a href="orders.html">Orders</a> <a href="flowers.html">Stock</a> <a class="active" href="reports.html">Reports</a> <a href="index.html">Logout</a> </nav>
+    <main class="container">
+        <p><button type="button" class="btn btn-small" onclick="history.back()">Back</button></p>
+        <h1>Reports</h1>
+        <p>See how many orders came in, how much was sold and which type sold the most.</p>
+        <div class="boxes">
+            <div class="box"><div>Orders</div><div class="number">4</div></div>
+            <div class="box"><div>Total sales</div><div class="number">Rs 3,250</div></div>
+            <div class="box"><div>Cancelled</div><div class="number">1</div></div>
+            <div class="box"><div>Average sale</div><div class="number">Rs 1,083</div></div>
+        </div>
+        <div class="card">
+            <h2>Sales by type</h2>
+            <table>
+                <tr><th>Type</th><th>Amount</th><th style="width: 50%">Bar</th></tr>
+                <tr><td>Bouquet</td><td>Rs 1,700</td><td><div class="bar"><div class="bar-fill" style="width: 100%"></div></div></td></tr>
+                <tr><td>Gift</td><td>Rs 1,300</td><td><div class="bar"><div class="bar-fill" style="width: 76%"></div></div></td></tr>
+                <tr><td>Single flower</td><td>Rs 200</td><td><div class="bar"><div class="bar-fill" style="width: 12%"></div></div></td></tr>
+            </table>
+            <p class="small-note">The biggest amount is taken as 100% and the others are compared with it. Amounts are flower prices only, without the Rs 50 delivery charge.</p>
+        </div>
+    </main>
+    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+</body>
+</html>

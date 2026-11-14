@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Flower Shop Management System - flowers.html (flower stock page) - CSE326 - Made by: Satyam -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Stock - Flower Shop Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Shop owner - Meera Kapoor</div> </header>
+    <nav class="menu"> <a href="dashboard-admin.html">Dashboard</a> <a href="orders.html">Orders</a> <a class="active" href="flowers.html">Stock</a> <a href="reports.html">Reports</a> <a href="index.html">Logout</a> </nav>
+    <main class="container">
+        <p><button type="button" class="btn btn-small" onclick="history.back()">Back</button></p>
+        <h1>Flower stock</h1>
+        <p>Search the flowers in the shop, or add, edit and delete a flower below.</p>
+        <div class="card">
+            <h2>Search flowers</h2>
+            <form action="flowers.html" method="get">
+                <label for="search-name">Flower name</label>
+                <input type="text" id="search-name" placeholder="Rose">
+                <label for="search-type">Type</label>
+                <select id="search-type"> <option>All types</option> <option>Bouquet</option> <option>Single flower</option> <option>Plant</option> <option>Gift</option> </select>
+                <button type="submit" class="btn btn-main">Search</button>
+            </form>
+            <p class="small-note">This search is only the design for now. It will work after we learn more JavaScript.</p>
+        </div>
+        <div class="card">
+            <h2>All flowers</h2>
+            <div class="table-scroll">
+                <table>
+                    <tr><th>Name</th><th>Type</th><th>Price</th><th>Stock</th><th>Action</th></tr>
+                    <tr id="f1"><td>Red Rose Bouquet</td><td>Bouquet</td><td>Rs 800</td><td>20</td><td><a class="btn btn-small" href="#add" onclick="editFlower('Red Rose Bouquet', 'Bouquet', 800, 20)">Edit</a> <button type="button" class="btn btn-small" onclick="deleteFlower('f1')">Delete</button></td></tr>
+                    <tr id="f2"><td>White Lily Bunch</td><td>Bouquet</td><td>Rs 650</td><td>15</td><td><a class="btn btn-small" href="#add" onclick="editFlower('White Lily Bunch', 'Bouquet', 650, 15)">Edit</a> <button type="button" class="btn btn-small" onclick="deleteFlower('f2')">Delete</button></td></tr>
+                    <tr id="f3"><td>Sunflower Basket</td><td>Bouquet</td><td>Rs 900</td><td>8</td><td><a class="btn btn-small" href="#add" onclick="editFlower('Sunflower Basket', 'Bouquet', 900, 8)">Edit</a> <button type="button" class="btn btn-small" onclick="deleteFlower('f3')">Delete</button></td></tr>
+                    <tr id="f4"><td>Single Red Rose</td><td>Single flower</td><td>Rs 100</td><td>50</td><td><a class="btn btn-small" href="#add" onclick="editFlower('Single Red Rose', 'Single flower', 100, 50)">Edit</a> <button type="button" class="btn btn-small" onclick="deleteFlower('f4')">Delete</button></td></tr>
+                    <tr id="f5"><td>Money Plant Pot</td><td>Plant</td><td>Rs 400</td><td>12</td><td><a class="btn btn-small" href="#add" onclick="editFlower('Money Plant Pot', 'Plant', 400, 12)">Edit</a> <button type="button" class="btn btn-small" onclick="deleteFlower('f5')">Delete</button></td></tr>
+                    <tr id="f6"><td>Birthday Combo</td><td>Gift</td><td>Rs 1,300</td><td class="low">5</td><td><a class="btn btn-small" href="#add" onclick="editFlower('Birthday Combo', 'Gift', 1300, 5)">Edit</a> <button type="button" class="btn btn-small" onclick="deleteFlower('f6')">Delete</button></td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="card" id="add">
+            <h2>Add or edit a flower</h2>
+            <form action="flowers.html" method="get" onsubmit="alert('Flower saved.')">
+                <label for="fname">Flower name</label>
+                <input type="text" id="fname" placeholder="Red Rose Bouquet" required>
+                <label for="ftype">Type</label>
+                <select id="ftype"> <option>Bouquet</option> <option>Single flower</option> <option>Plant</option> <option>Gift</option> </select>
+                <label for="fprice">Price</label>
+                <input type="number" id="fprice" min="1" max="10000" required>
+                <label for="fstock">Stock</label>
+                <input type="number" id="fstock" min="0" max="500" required>
+                <button type="submit" class="btn btn-main">Save flower</button>
+            </form>
+        </div>
+    </main>
+    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
