@@ -8,7 +8,9 @@ There is no server and no database, so the pages show example records.
 
 ## How to open it
 
-Double click `index.html`, or in VS Code right click it and choose *Open with Live Server*.
+Live website: https://project.lpu.lol
+
+On your own computer: double click `index.html`, or in VS Code right click it and choose *Open with Live Server*.
 
 ## Login
 
