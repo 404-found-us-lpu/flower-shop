@@ -1,129 +1,121 @@
 <!DOCTYPE html>
-<!-- Bloom & Petal - cart.html - Made by: Raghav -->
+<!-- Bloom & Petal - cart.html - Made by: Satyam -->
 <html lang="en" data-page="cart" data-roles="customer">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Your Bloom &amp; Petal cart: change quantities, add the delivery details and place your order.">
+  <meta name="description" content="Your Bloom &amp; Petal cart: change quantities, say who gets the flowers and when, and place the order.">
   <title>Your cart · Bloom &amp; Petal</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <script src="js/app.js?v=3"></script>
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/app.js?v=4"></script>
 </head>
 <body>
   <main id="main">
-    <section class="hero hero-sm">
+    <header class="hero hero-sm">
       <div class="wrap">
-        <nav class="crumbs" aria-label="Breadcrumb">
-          <a href="home.html">Home</a>
-          <span aria-hidden="true">/</span>
-          <a href="catalog.html">Flowers</a>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">Cart</span>
-        </nav>
         <h1>Your cart</h1>
-        <p class="hero-sub" id="cart-sub">Check your flowers, then tell us where and when to deliver.</p>
-        <div class="chips" id="hero-chips"></div>
+        <p class="hero-sub" id="cart-sub">Check your flowers, then tell us who gets them and when.</p>
       </div>
+    </header>
+
+    <!-- Shown while the cart has flowers (js/pages/cart.js hides it when the cart is empty) -->
+    <div class="wrap section split" id="cart-full">
+      <div class="stack-lg">
+        <section class="card" aria-labelledby="lines-title">
+          <h2 class="card-title" id="lines-title">In your cart</h2>
+          <ul class="list" id="cart-list"></ul>
+        </section>
+
+        <form class="card form" id="checkout" aria-labelledby="checkout-title">
+          <h2 class="card-title" id="checkout-title">Delivery details</h2>
+
+          <fieldset>
+            <legend>Who receives it</legend>
+            <div class="form-grid">
+              <div class="field">
+                <label for="c-name">Name</label>
+                <input type="text" id="c-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="c-phone">Mobile number</label>
+                <input type="tel" id="c-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric"
+                       autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
+              </div>
+              <div class="field full">
+                <label for="c-address">Address</label>
+                <textarea id="c-address" name="address" required minlength="10" maxlength="200" rows="3"
+                          placeholder="House number, street, area and city"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>When</legend>
+            <div class="stack">
+              <div class="field">
+                <label for="c-date">Delivery day</label>
+                <input type="date" id="c-date" name="deliveryDate" required>
+                <p class="hint">Any day from today up to 60 days ahead.</p>
+              </div>
+              <div class="field">
+                <span class="label" id="slot-label">Time</span>
+                <div class="segmented" role="radiogroup" aria-labelledby="slot-label">
+                  <label><input type="radio" name="slot" value="Morning (9 am - 12 pm)" required checked><span>Morning (9 am - 12 pm)</span></label>
+                  <label><input type="radio" name="slot" value="Afternoon (12 pm - 4 pm)"><span>Afternoon (12 pm - 4 pm)</span></label>
+                  <label><input type="radio" name="slot" value="Evening (4 pm - 8 pm)"><span>Evening (4 pm - 8 pm)</span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment and card</legend>
+            <div class="stack">
+              <div class="field">
+                <span class="label" id="pay-label">Pay by</span>
+                <div class="segmented" role="radiogroup" aria-labelledby="pay-label">
+                  <label><input type="radio" name="payment" value="Cash on delivery" required checked><span><abbr title="Cash on delivery">COD</abbr></span></label>
+                  <label><input type="radio" name="payment" value="UPI"><span><abbr title="Unified Payments Interface">UPI</abbr></span></label>
+                  <label><input type="radio" name="payment" value="Card"><span>Card</span></label>
+                </div>
+                <p class="hint">Nothing is charged now. You pay when the flowers arrive.</p>
+              </div>
+              <div class="field">
+                <label for="c-note">Card message <small>(optional)</small></label>
+                <input type="text" id="c-note" name="note" list="card-notes" maxlength="120" placeholder="Pick one or write your own">
+                <datalist id="card-notes">
+                  <option value="Happy birthday!">
+                  <option value="Happy anniversary, with all my love.">
+                  <option value="Get well soon.">
+                  <option value="Congratulations on your big day!">
+                  <option value="Thank you for everything.">
+                </datalist>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+      <!-- Totals, the free-delivery bar and the button that submits the form above (form="checkout") -->
+      <aside class="card stack" aria-labelledby="sum-title" style="position: sticky; top: 96px;">
+        <h2 class="card-title" id="sum-title">Order summary</h2>
+        <div class="summary" id="summary"></div>
+        <div class="progress" aria-hidden="true"><span id="free-fill"></span></div>
+        <p class="small muted mb-0" id="free-text"></p>
+        <button type="submit" form="checkout" class="btn btn-primary btn-lg btn-block">Place order</button>
+      </aside>
+    </div>
+
+    <section class="wrap section card empty" id="cart-empty" hidden>
+      <h2>Your cart is empty</h2>
+      <p>Add a bouquet, a pot of mogra or a single red rose, and it waits for you here.</p>
+      <a class="btn btn-primary" href="catalog.html">Browse flowers</a>
     </section>
 
-    <div class="wrap section">
-      <!-- Two columns while the cart has flowers (js/pages/cart.js removes "split" when it is empty) -->
-      <div class="split" id="layout">
-        <div class="stack-lg">
-          <!-- The flowers in the cart (rows filled by js/pages/cart.js) -->
-          <section class="card reveal" aria-labelledby="cart-title">
-            <div class="card-head">
-              <h2 class="card-title" id="cart-title">In your cart</h2>
-              <span class="chip chip-gold" id="cart-chip" hidden></span>
-            </div>
-            <ul class="list" id="cart-list" aria-label="Flowers in your cart"></ul>
-            <div id="cart-empty" hidden></div>
-            <div id="cart-foot">
-              <hr class="divider">
-              <a class="link-arrow" href="catalog.html">Continue shopping <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            </div>
-          </section>
-
-          <!-- Who gets the flowers, where and when. The "Place order" button in the summary submits this form. -->
-          <section class="card reveal reveal-2" id="delivery-card" aria-labelledby="delivery-title">
-            <div class="card-head">
-              <div>
-                <h2 class="card-title" id="delivery-title">Delivery details</h2>
-                <p class="muted mb-0">Who gets the flowers, where and when.</p>
-              </div>
-            </div>
-            <form class="form-grid" id="delivery-form">
-              <label class="check full">
-                <input type="checkbox" id="to-me" checked>
-                <span>Send it to me <span class="muted small">(your own name, number and address)</span></span>
-              </label>
-
-              <div class="field">
-                <label for="d-name">Receiver's name</label>
-                <input type="text" id="d-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
-                <p class="error"></p>
-              </div>
-
-              <div class="field">
-                <label for="d-phone">Mobile number</label>
-                <input type="tel" id="d-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric" autocomplete="tel-national" aria-describedby="d-phone-hint" title="10 digits, starting with 6, 7, 8 or 9">
-                <p class="hint" id="d-phone-hint">10 digits, starting with 6, 7, 8 or 9.</p>
-                <p class="error"></p>
-              </div>
-
-              <div class="field full">
-                <label for="d-address">Delivery address</label>
-                <textarea id="d-address" name="address" required minlength="10" maxlength="200" rows="3" autocomplete="street-address" aria-describedby="d-address-hint"></textarea>
-                <p class="hint" id="d-address-hint">House number, street, area and city.</p>
-                <p class="error"></p>
-              </div>
-
-              <div class="field">
-                <label for="d-date">Delivery date</label>
-                <input type="date" id="d-date" name="deliveryDate" required>
-                <p class="hint">Any day from today to 60 days ahead.</p>
-                <p class="error"></p>
-              </div>
-
-              <div class="field full" role="radiogroup" aria-labelledby="slot-label">
-                <span class="label" id="slot-label">Delivery time</span>
-                <div class="segmented" id="slot-options"></div>
-                <p class="error"></p>
-              </div>
-
-              <div class="field full" role="radiogroup" aria-labelledby="pay-label">
-                <span class="label" id="pay-label">Payment</span>
-                <div class="segmented" id="pay-options"></div>
-                <p class="error"></p>
-              </div>
-
-              <div class="field full">
-                <div class="label-row">
-                  <label class="label" for="d-note">Card message <span class="muted">(optional)</span></label>
-                  <span class="tiny muted num" id="note-count">0/120</span>
-                </div>
-                <textarea id="d-note" name="note" maxlength="120" rows="3" aria-describedby="note-count"></textarea>
-                <p class="error"></p>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <!-- Totals and the button that places the order (stays in view while scrolling on big screens) -->
-        <aside class="card stack reveal reveal-3" id="summary" aria-labelledby="summary-title" style="position: sticky; top: 96px;">
-          <h2 class="card-title" id="summary-title">Order summary</h2>
-          <div class="summary" id="summary-lines"></div>
-          <div>
-            <div class="progress" id="free-bar" role="progressbar" aria-label="Progress to free delivery" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span style="width: 0%;"></span></div>
-            <p class="small muted mb-0" id="free-text" style="margin-top: 8px;"></p>
-          </div>
-          <button type="submit" form="delivery-form" class="btn btn-primary btn-lg btn-block">Place order</button>
-          <p class="tiny muted center mb-0" id="pay-note"></p>
-        </aside>
-      </div>
-    </div>
+    <!-- A short sound after an order is placed (no controls: js/pages/cart.js plays it) -->
+    <audio id="chime" src="media/chime.mp3" preload="auto">Your browser cannot play the order chime.</audio>
   </main>
-  <script src="js/pages/cart.js?v=3"></script>
+  <script src="js/pages/cart.js?v=4"></script>
 </body>
 </html>

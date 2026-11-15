@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal - contact.html - Made by: Satyam -->
+<html lang="en" data-page="contact" data-roles="public">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reach Bloom &amp; Petal in Model Town, Jalandhar: address, phone, email, opening hours, a message form and a map.">
+  <title>Contact us · Bloom &amp; Petal</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/app.js?v=4"></script>
+</head>
+<body>
+  <main id="main">
+    <header class="hero hero-sm">
+      <div class="wrap">
+        <h1>Contact us</h1>
+        <p class="hero-sub">A question about an order, a wedding or a wilting plant? Call, write, or drop by the shop in Model Town.</p>
+      </div>
+    </header>
+
+    <div class="wrap section contact-grid">
+      <div class="contact-info stack-lg">
+        <section class="card" aria-labelledby="visit-title">
+          <h2 id="visit-title">Visit or call</h2>
+          <!-- Lines, phone and email come from FS.SHOP (js/pages/contact.js) -->
+          <address id="shop-address"></address>
+          <h3>Opening hours</h3>
+          <h4>Every day</h4>
+          <p><time datetime="09:00">9 am</time> to <time datetime="20:00">8 pm</time>, for the shop, the phone and deliveries.</p>
+          <h5>Holidays</h5>
+          <p class="mb-0">Open on Sundays and festivals too. Before Diwali and Valentine's Day, please order a day early.</p>
+        </section>
+
+        <section class="card" aria-labelledby="owners-title">
+          <h2 id="owners-title">Who runs the shop</h2>
+          <div class="owners" id="owners"></div>
+        </section>
+      </div>
+
+      <section class="contact-form card" aria-labelledby="write-title">
+        <h2 id="write-title">Write to us</h2>
+        <form class="form" id="contact-form">
+          <fieldset>
+            <legend>Send us a message</legend>
+            <div class="form-grid">
+              <div class="field">
+                <label for="m-name">Your name</label>
+                <input type="text" id="m-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
+              </div>
+              <div class="field">
+                <label for="m-email">Email</label>
+                <input type="email" id="m-email" name="email" required maxlength="80" autocomplete="email">
+              </div>
+              <div class="field">
+                <label for="m-phone">Mobile number</label>
+                <input type="tel" id="m-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric"
+                       autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
+              </div>
+              <div class="field">
+                <label for="m-topic">Topic</label>
+                <select id="m-topic" name="topic" required>
+                  <option value="">Choose a topic</option>
+                  <optgroup label="Orders">
+                    <option>Change a delivery day</option>
+                    <option>Wedding or bulk order</option>
+                  </optgroup>
+                  <optgroup label="Other">
+                    <option>Plant care help</option>
+                    <option>Feedback</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="m-message">Message</label>
+                <textarea id="m-message" name="message" required minlength="10" maxlength="500" rows="5"></textarea>
+              </div>
+            </div>
+          </fieldset>
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <p class="hint"><small>This is a class project: the message is only checked, not sent anywhere.</small></p>
+        </form>
+      </section>
+
+      <section class="map card" aria-labelledby="map-title">
+        <h2 id="map-title">Find the shop</h2>
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=75.565%2C31.305%2C75.595%2C31.325&amp;layer=mapnik&amp;marker=31.315%2C75.580"
+                title="Map of Bloom &amp; Petal in Model Town, Jalandhar" loading="lazy"></iframe>
+        <small>Map © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a></small>
+      </section>
+    </div>
+  </main>
+  <script src="js/pages/contact.js?v=4"></script>
+</body>
+</html>

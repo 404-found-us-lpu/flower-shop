@@ -1,25 +1,75 @@
 <!DOCTYPE html>
-<!-- Bloom & Petal - order.html - Made by: Raghav -->
-<html lang="en" data-page="order" data-roles="customer,florist,owner">
+<!-- Bloom & Petal - order.html - Made by: Satyam -->
+<html lang="en" data-page="order" data-roles="customer">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="One Bloom &amp; Petal order: where it is now, the flowers in it, the delivery details, its history and what can be done next.">
+  <meta name="description" content="One of your Bloom &amp; Petal orders: delivery day, receiver, the flowers in it and a receipt to print.">
   <title>Order details · Bloom &amp; Petal</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <script src="js/app.js?v=3"></script>
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/app.js?v=4"></script>
 </head>
 <body>
   <main id="main">
-    <section class="hero hero-tall" id="order-hero">
-      <div class="wrap" id="order-head">
-        <h1>Order details</h1>
+    <header class="hero hero-sm">
+      <div class="wrap">
+        <nav class="crumbs no-print" aria-label="Breadcrumb">
+          <a href="orders.html">My orders</a><span aria-hidden="true">/</span><span aria-current="page">Order</span>
+        </nav>
+        <h1 id="order-title">Order</h1>
+        <p class="hero-sub" id="order-sub"></p>
       </div>
+    </header>
+
+    <!-- Shown when ?id= is one of your orders (js/pages/order.js fills it) -->
+    <div class="wrap section split" id="order-found" hidden>
+      <div class="stack-lg">
+        <section class="card" aria-labelledby="items-title">
+          <h2 class="card-title" id="items-title">Flowers</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <caption>The flowers in this order, how many and what they cost.</caption>
+              <colgroup>
+                <col>  <!-- the flower -->
+                <col span="3">  <!-- the numbers: quantity, price each, amount -->
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">Flower</th>
+                  <th scope="col" class="right">Qty</th>
+                  <th scope="col" class="right">Price</th>
+                  <th scope="col" class="right">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="order-items"></tbody>
+              <tfoot id="order-totals"></tfoot>
+            </table>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="delivery-title">
+          <h2 class="card-title" id="delivery-title">Delivery</h2>
+          <div id="order-delivery"></div>
+        </section>
+      </div>
+
+      <section class="card stack" aria-labelledby="receipt-title">
+        <h2 class="card-title" id="receipt-title">Receipt</h2>
+        <pre class="receipt"><code id="receipt"></code></pre>
+        <div class="row no-print">
+          <button type="button" class="btn btn-primary" id="print">Print receipt</button>
+          <a class="btn btn-ghost" href="orders.html">Back to My orders</a>
+        </div>
+      </section>
+    </div>
+
+    <section class="wrap section card empty" id="order-missing" hidden>
+      <h2>We could not find this order</h2>
+      <p>The link may be old, or the order belongs to another account. All your own orders are on My orders.</p>
+      <a class="btn btn-primary" href="orders.html">Go to My orders</a>
     </section>
-    <div class="wrap hero-pull no-print reveal" id="order-pull"></div>
-    <div class="wrap section reveal reveal-2" id="order-body"></div>
   </main>
-  <script src="js/pages/order.js?v=3"></script>
+  <script src="js/pages/order.js?v=4"></script>
 </body>
 </html>

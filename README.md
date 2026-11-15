@@ -1,11 +1,12 @@
-# Bloom & Petal - Flower Shop Management System
+# Bloom & Petal - online flower shop
 
-A role-based web app for a flower shop: customers order flowers, florists move orders through the
-workflow, and the owner manages stock, users and reports. Made with **HTML, CSS and JavaScript only**
-(no frameworks, no server). All data is saved in the browser with `localStorage`.
+A flower shop website for customers: browse flowers (including Indian favourites like mogra, genda and
+aprajita), see how many of each are in stock, fill a cart, choose a delivery day and time, place the order and
+look back at past orders. Made with **HTML, CSS and JavaScript only** (no frameworks, no server). All data is
+saved in the browser with `localStorage`.
 
 * Subject: CSE326 - Internet Programming
-* Made by: Yash, Raghav and Satyam (Section K4P26GH)
+* Made by: Yash, Satyam and Raghav (Section K4P26GH), who are also the shop's owners on the site
 * Live website: https://project.lpu.lol
 * Code: https://github.com/yash-dhanda/flower-shop
 
@@ -16,72 +17,52 @@ Live: https://project.lpu.lol
 On your own computer: open the folder in VS Code and use *Open with Live Server*, or run
 `python3 -m http.server` in the folder and open http://localhost:8000.
 
-## Demo logins
-
-| Role | Email | Password |
-|---|---|---|
-| Customer | neha@example.com | neha123 |
-| Florist | priya@bloompetal.in | florist123 |
-| Shop owner | meera@bloompetal.in | owner123 |
-
-The login page also has one-click demo buttons. "Reset demo data" in the account menu puts
-everything back to the start.
-
-## What each role can do
-
-| Customer | Florist | Shop owner |
-|---|---|---|
-| Register and log in | Log in | Log in |
-| Browse, search, filter and sort flowers | See today's work board | See sales, open orders and low stock |
-| Add to cart, change quantities | Move orders to the next stage | Everything a florist can do |
-| Check out with delivery date, time and payment | Add and edit flowers, change stock | Delete flowers |
-| Track orders and cancel early ones | See all orders, search and filter them | Add, edit and remove users |
-| Get notifications | Get notifications for new orders | Reports with charts and CSV download |
+Demo login: **neha@example.com / neha123** (the login page has a one-click demo button). "Reset demo data"
+in the account menu puts every flower, order and account back to the start.
 
 ## Pages
 
-| Page | Who | What it does |
+| Page | Who can open it | What it does |
 |---|---|---|
-| index.html | everyone | Front page of the shop |
-| login.html, register.html | visitors | Sign in, create a customer account |
-| home.html | customer | Dashboard: order on the way, shop by type, recent orders |
-| catalog.html | customer | All flowers with search, type tabs, sorting and add to cart |
-| cart.html | customer | Cart, delivery details, payment, place order |
-| orders.html | customer | My orders with tabs and cancel |
-| order.html | all logged in | One order: tracker, items, history, status buttons for the shop |
-| staff.html | florist | Work board with the four order stages |
-| manage-orders.html | florist, owner | Every order with search and filters |
-| stock.html | florist, owner | Add, edit, archive and delete flowers, change stock |
-| admin.html | owner | Sales, charts, recent orders, low stock |
-| reports.html | owner | Reports for a date range, CSV download, print |
-| users.html | owner | Add, edit and remove users and their roles |
-| profile.html | all logged in | Own details and password |
-
-## The order workflow
-
-Pending -> Confirmed -> Preparing -> Out for delivery -> Delivered.
-An order can be cancelled before it is out for delivery (by the customer while it is Pending or
-Confirmed). Cancelling puts the flowers back in stock. Every change is written into the order's
-history and the customer gets a notification.
+| index.html | everyone | Front page: flowers today, Indian favourites, in season, how it works, reviews, shop tour video, questions |
+| contact.html | everyone | Address, phone, email, opening hours, the three owners, a message form and a map |
+| login.html, register.html | visitors | Sign in, create an account |
+| home.html | logged in | Greeting, next delivery, Indian favourites, shop by type, recent orders, tip of the day |
+| catalog.html | logged in | All 18 flowers with search, type tabs, sorting, stock counts and add to cart |
+| cart.html | logged in | Cart, free-delivery bar, delivery details, day and time, payment, place order |
+| orders.html | logged in | Table of my orders with the total spent |
+| order.html | logged in | One order: items, receiver, delivery day, printable receipt |
+| profile.html | logged in | My details, change password, a chart of my orders |
 
 ## How the code is organised
 
-* `css/style.css` - the one stylesheet (colours, layout, every component)
-* `js/app.js` - shared code: data store, login and roles, cart, orders, notifications, header, dialogs
+* `css/style.css` - the one stylesheet (colours, layout, every component), with comments naming the Unit 3 topic of each part
+* `js/app.js` - shared code: data store, login, flowers and cart, orders, header and footer, dialogs, helpers
 * `js/pages/*.js` - one small script per page
-* `images/` - flower photos (credits in `images/CREDITS.md`), `fonts/` - the two web fonts
+* `images/` - flower photos (credits in `images/CREDITS.md`), `media/` - shop tour video, captions and the order chime, `fonts/` - the two web fonts
+
+## What we used from each unit
+
+| Unit | Where |
+|---|---|
+| 1 HTML fundamentals | headings h1-h6, p, br, hr, strong/em/b/i, mark, small, sub/sup, abbr, q, blockquote, pre/code, kbd, del/ins, ul/ol/li, dl/dt/dd, links (tel:, mailto:), img, inline SVG (rect, line, polyline, polygon, circle, ellipse, text), audio, video with track, iframe |
+| 2 Semantic HTML and forms | header, nav, main, section, article, aside, footer, address, time, figure/figcaption, picture/source, details/summary, search, menu, wbr, forms with fieldset/legend, input types, datalist, select with optgroup, textarea, HTML validation, tables with caption, colgroup/col, thead, tbody, tfoot |
+| 3 CSS | variables, selectors and specificity, attribute selectors, all four combinators, colours (hex, rgb, hsl), gradients, units (rem, em, %, vw, ch, fr), typography, box model, positioning, flexbox, grid with areas, pseudo-classes (nth-child, LVHA, user-invalid...) and pseudo-elements (marker, first-letter...), form styling with accent-color, transitions and keyframes, media queries |
+| 4 JavaScript fundamentals | const/let, operators, template literals, string methods (trim, includes, padStart, padEnd, replaceAll...), numbers and Math, if / else if, switch, ternary, functions, arrow functions, default parameters, scope and closures, arrays and array methods (map, filter, find, reduce, sort, includes), spread and destructuring, objects and Object.entries |
+
+Beyond Unit 4 (needed to make the shop work): the DOM, events, `localStorage` / `sessionStorage` and JSON.
 
 ## Who made what
 
 | Student | Files |
 |---|---|
-| Yash | `css/style.css`, `index`, `login`, `register`, `profile`, `users` pages |
-| Raghav | Customer side: `home`, `catalog`, `cart`, `orders`, `order` pages |
-| Satyam | Shop side: `staff`, `manage-orders`, `stock`, `admin`, `reports` pages |
+| Yash | `css/style.css`, `index`, `login`, `register`, `profile` pages |
+| Raghav | `home`, `catalog`, `orders` pages |
+| Satyam | `cart`, `order`, `contact` pages |
 | All three | `js/app.js` (the shared data and login code) |
 
 ## Limits
 
-There is no server, so the data lives in each browser separately, and the login is a demo:
-passwords are only scrambled, not truly protected. A real shop would keep the data and check logins
-on a server.
+There is no server, so the data lives in each browser separately and the login is a demo: passwords are only
+scrambled, not truly protected. The contact form checks the message but does not send it anywhere. Contact
+details and reviews are made up for the project.
