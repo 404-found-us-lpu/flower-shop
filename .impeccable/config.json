@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "css/style.css"
+        ],
+        "createdAt": "2026-11-15T14:00:11.445Z",
+        "reason": "agent decision: only remaining hit is the cart free-delivery meter fill (.progress > span), updated in place by cart.js; a progress fill growing is literal motion in a fixed-height overflow-hidden track, and scaleX would squash its rounded end"
+      }
+    ]
+  }
+}
