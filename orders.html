@@ -4,34 +4,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Your Bloom &amp; Petal orders: follow each one from the shop to the door, look back at past orders and cancel one that is not being prepared yet.">
+  <meta name="description" content="Your Bloom &amp; Petal orders in one table: when each was placed, its delivery day and time, the flowers and what you spent.">
   <title>My orders · Bloom &amp; Petal</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <script src="js/app.js?v=3"></script>
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/app.js?v=4"></script>
 </head>
 <body>
   <main id="main">
-    <section class="hero hero-sm">
+    <header class="hero hero-sm">
       <div class="wrap">
         <h1>My orders</h1>
-        <p class="hero-sub">Follow each order from our workbench to the door, and look back at the flowers you have sent.</p>
-        <div class="chips" id="order-chips"></div>
+        <p class="hero-sub">Every bunch you have sent, with its delivery day and time.</p>
+        <!-- How many orders and the total spent (filled by js/pages/orders.js) -->
+        <div class="chips" id="summary"></div>
       </div>
-    </section>
-    <div class="wrap section stack">
-      <div class="row reveal">
-        <div class="tabs" id="order-tabs" role="group" aria-label="Show orders" style="overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none">
-          <button type="button" class="tab active" data-tab="all" aria-pressed="true">All <span class="count">0</span></button>
-          <button type="button" class="tab" data-tab="active" aria-pressed="false">Active <span class="count">0</span></button>
-          <button type="button" class="tab" data-tab="delivered" aria-pressed="false">Delivered <span class="count">0</span></button>
-          <button type="button" class="tab" data-tab="cancelled" aria-pressed="false">Cancelled <span class="count">0</span></button>
+    </header>
+
+    <div class="wrap section">
+      <div class="card reveal">
+        <div class="table-wrap" id="table-box">
+          <table class="table">
+            <caption>Your orders, newest first</caption>
+            <colgroup>
+              <col>           <!-- order number -->
+              <col span="2">  <!-- the two dates: placed and delivery -->
+              <col>           <!-- items -->
+              <col>           <!-- total -->
+            </colgroup>
+            <thead>
+              <tr>
+                <th scope="col">Order</th>
+                <th scope="col">Placed</th>
+                <th scope="col">Delivery</th>
+                <th scope="col">Items</th>
+                <th scope="col" class="right">Total</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+            <tfoot>
+              <tr>
+                <th scope="row" colspan="4">Total spent</th>
+                <td class="right num strong" id="spent"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="empty" id="empty" hidden>
+          <span class="empty-icon"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+          <h2>No orders yet</h2>
+          <p>Pick something beautiful for someone, and your orders will be listed here.</p>
+          <a class="btn btn-primary" href="catalog.html">Shop flowers</a>
         </div>
       </div>
-      <h2 class="sr-only" id="list-title">All orders</h2>
-      <div class="stack reveal reveal-2" id="order-list"></div>
     </div>
   </main>
-  <script src="js/pages/orders.js?v=3"></script>
+  <script src="js/pages/orders.js?v=4"></script>
 </body>
 </html>

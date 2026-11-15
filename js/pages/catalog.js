@@ -1,282 +1,180 @@
 /* Made by: Raghav */
-/* Bloom & Petal - js/pages/catalog.js - the flowers page: search, filter, sort, add to cart. */
-FS.ready(function () {
-  // How each choice in the sort box orders the flowers. FS.getFlowers() comes A-Z and
-  // sort() keeps that order for ties, so two flowers with the same price stay A-Z.
+/* Bloom & Petal - js/pages/catalog.js - the flowers page: search, type tabs, sort, flower pop-up and add to cart. */
+FS.ready(() => {
+  const byId = (id) => document.getElementById(id);
+  const search = byId('q');
+  const sortBox = byId('sort');
+  const tabs = byId('tabs');
+  const grid = byId('grid');
+
+  // Hindi names of the Indian flowers, found by the first word of the flower's name.
+  const HINDI = { Mogra: 'मोगरा', Marigold: 'गेंदा', Aprajita: 'अपराजिता', Guldaudi: 'गुलदाउदी', Madhumalti: 'मधुमालती' };
+
+  // How each sort choice orders two flowers a and b.
   const SORTS = {
-    popular: function (a, b) { return b.stock - a.stock; },          // most in stock first
-    'price-asc': function (a, b) { return a.price - b.price; },
-    'price-desc': function (a, b) { return b.price - a.price; },
-    name: function (a, b) { return a.name.localeCompare(b.name); }
+    'price-asc': (a, b) => a.price - b.price,
+    'price-desc': (a, b) => b.price - a.price,
+    name: (a, b) => a.name.localeCompare(b.name),
+    stock: (a, b) => b.stock - a.stock
   };
 
-  const form = document.getElementById('filters');
-  const search = document.getElementById('q');
-  const sortBox = document.getElementById('sort');
-  const stockBox = document.getElementById('instock');
-  const tabs = document.getElementById('tabs');
-  const grid = document.getElementById('grid');
-  const empty = document.getElementById('empty');
-  const resultText = document.getElementById('result-text');
-  const shownChip = document.getElementById('shown-chip');
-  const clearTop = document.getElementById('clear-top');
-
-  // What the customer is looking for. It starts from the address bar: ?q=rose&cat=Plants&sort=price-asc
+  // Start from the address bar, for example catalog.html?q=rose&type=Plants
   const params = FS.params();
-  const state = {
-    q: params.get('q') || '',
-    cat: FS.CATEGORIES.find(c => c.toLowerCase() === (params.get('cat') || '').toLowerCase()) || '',   // capitals do not matter, '' = all types
-    sort: Object.keys(SORTS).indexOf(params.get('sort')) !== -1 ? params.get('sort') : 'popular',
-    inStock: params.get('instock') === '1'
+  let q = (params.get('q') || '').trim();
+  let type = FS.CATEGORIES.find((t) => t.toLowerCase() === (params.get('type') || '').toLowerCase()) || 'All';
+
+  // The Hindi name of an Indian flower ('' for the others).
+  const hindi = ({ name }) => HINDI[name.split(' ')[0]] || '';
+
+  // The Hindi name in a small <span lang="hi">, so it is read out in Hindi.
+  const hindiTag = (f) => (hindi(f) ? ` <span class="hindi" lang="hi">${hindi(f)}</span>` : '');
+
+  // True when the search words are in the flower's name, botanical name, Hindi name or type.
+  const matches = (f) => `${f.name} ${f.botanical} ${hindi(f)} ${f.category}`.toLowerCase().includes(q.toLowerCase());
+
+  // True when the flower belongs to tab t ("All" holds every flower).
+  const inType = (f, t) => t === 'All' || f.category === t;
+
+  // The name with the search words wrapped in <mark>. The name is escaped first, so it stays safe.
+  const markName = (name) => {
+    const safe = FS.esc(name);
+    const word = FS.esc(q);
+    const at = safe.toLowerCase().indexOf(word.toLowerCase());
+    if (!word || at < 0) return safe;
+    return `${safe.slice(0, at)}<mark>${safe.slice(at, at + word.length)}</mark>${safe.slice(at + word.length)}`;
   };
-  let drawnFlowers = '';   // the flower data now on screen, so a cart-only change does not redraw the cards
 
-  // "1 flower", "5 flowers"
-  function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
-
-  // True when a flower fits the search words, the "In stock only" box and (unless skipType) the chosen tab.
-  function matches(f, skipType) {
-    const text = (f.name + ' ' + f.category + ' ' + (f.description || '')).toLowerCase();
-    const words = state.q.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    if (!words.every(function (w) { return text.indexOf(w) !== -1; })) return false;
-    if (state.inStock && f.stock < 1) return false;
-    return skipType || !state.cat || f.category === state.cat;
-  }
-
-  function hasFilters() { return state.q.trim() !== '' || state.cat !== '' || state.inStock; }
-
-  // Builds the type tabs once: "All" and one per category. drawTabs() keeps them up to date.
-  function buildTabs() {
-    tabs.innerHTML = [''].concat(FS.CATEGORIES).map(function (cat) {
-      return `<button type="button" class="tab" data-cat="${FS.esc(cat)}" aria-pressed="false">${FS.esc(cat || 'All')}<span class="count">0</span></button>`;
-    }).join('');
-  }
-
-  // Marks the chosen tab and shows how many flowers each type has after the search and stock filters.
-  function drawTabs(all) {
-    const pool = all.filter(function (f) { return matches(f, true); });
-    tabs.querySelectorAll('.tab').forEach(function (tab) {
-      const cat = tab.dataset.cat;
-      const on = cat === state.cat;
-      tab.querySelector('.count').textContent = pool.filter(function (f) { return !cat || f.category === cat; }).length;
-      tab.classList.toggle('active', on);
-      tab.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-  }
-
-  // The [-] [1] [+] quantity box (max = stock). It is switched off when the flower is sold out.
-  function qtyHTML(f, label, id) {
-    const off = f.stock < 1 ? ' disabled' : '';
-    return `<div class="qty">
-        <button type="button" data-step="-1" aria-label="Less"${off}>−</button>
-        <input type="number" value="1" min="1" max="${FS.esc(f.stock)}" step="1" inputmode="numeric"${id ? ` id="${id}"` : ''}${label ? ` aria-label="${FS.esc(label)}"` : ''}${off}>
-        <button type="button" data-step="1" aria-label="More"${off}>+</button>
-      </div>`;
-  }
-
-  // One flower card. The photo and the name both open the pop-up. The description stays on one line (the pop-up shows all of it).
-  function cardHTML(f) {
+  // One flower card: photo with its stock pill, name, botanical name, price and Add (off when sold out).
+  const cardHTML = (f) => {
     const id = FS.esc(f.id);
-    const name = FS.esc(f.name);
-    return `<article class="product" data-flower="${id}">
-      <button type="button" class="product-media" data-open="${id}" tabindex="-1">${FS.flowerImg(f)}${f.stock <= FS.LOW_STOCK ? FS.stockBadge(f) : ''}</button>
+    return `<article class="product">
+      <button type="button" class="product-media" data-open="${id}" tabindex="-1">${FS.flowerImg(f)}<span class="stock-pill">${FS.stockBadge(f)}</span></button>
       <div class="product-body">
         <span class="product-cat">${FS.esc(f.category)}</span>
-        <h3 class="product-name"><a href="catalog.html?flower=${id}" data-open="${id}">${name}</a></h3>
-        <p class="product-desc" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${FS.esc(f.description)}</p>
+        <h2 class="product-name"><a href="catalog.html?flower=${id}" data-open="${id}">${markName(f.name)}</a>${hindiTag(f)}</h2>
+        ${f.botanical ? `<i class="small muted">${FS.esc(f.botanical)}</i>` : ''}
+        <p class="product-desc">${FS.esc(f.description)}</p>
         <div class="product-foot">
           <span class="product-price">${FS.money(f.price)}</span>
-          <div class="row">
-            ${qtyHTML(f, 'Quantity of ' + f.name)}
-            <button type="button" class="btn btn-primary btn-sm" data-add="${id}" aria-label="Add ${name} to cart"${f.stock < 1 ? ' disabled' : ''}>Add</button>
-          </div>
+          <button type="button" class="btn btn-primary btn-sm" data-add="${id}" aria-label="Add ${FS.esc(f.name)} to cart"${f.stock < 1 ? ' disabled' : ''}>${FS.icon('plus', 16)}Add</button>
         </div>
       </div>
     </article>`;
-  }
+  };
 
-  // What to show when no card is on screen.
-  function emptyHTML(total) {
-    if (!total) {
-      return `<span class="empty-icon">${FS.icon('flower', 28)}</span>
-        <h3>No flowers on sale right now</h3>
-        <p>The shop is restocking. Please look again a little later.</p>
-        <a class="btn btn-primary" href="home.html">Back to home</a>`;
-    }
-    const q = state.q.trim();
-    const what = (q ? ` for "${FS.esc(q)}"` : '') + (state.cat ? ` in ${FS.esc(state.cat)}` : '') + (state.inStock ? ' that is in stock' : '');
-    return `<span class="empty-icon">${FS.icon('search', 28)}</span>
-      <h3>No flowers match</h3>
-      <p>We found nothing${what}. Try another word or type, or clear the filters to see every flower.</p>
-      <button type="button" class="btn btn-primary" data-clear>Clear filters</button>`;
-  }
+  // A care tip with <sub> and <sup>: pots get a sun-and-water tip, cut flowers a vase tip.
+  const careTip = ({ name }) => (name.includes('Pot')
+    ? 'Give it 4 to 6 hours of sun and water it every 3<sup>rd</sup> day. In daylight its leaves turn CO<sub>2</sub> into fresh O<sub>2</sub>.'
+    : 'Trim 2 cm off the stems and change the H<sub>2</sub>O every 2<sup>nd</sup> day.');
 
-  // "Showing all 12 flowers" or "Showing 3 of 12 flowers for "rose" in Bouquets"
-  function resultLine(shown, total) {
-    if (!total) return 'No flowers on sale right now.';
-    if (!hasFilters()) return 'Showing all ' + plural(total, 'flower');
-    let line = 'Showing ' + shown + ' of ' + plural(total, 'flower');
-    if (state.q.trim()) line += ' for "' + state.q.trim() + '"';
-    if (state.cat) line += ' in ' + state.cat;
-    if (state.inStock) line += ', in stock only';
-    return line;
-  }
-
-  // Draws the tabs, the cards (or the empty state) and the counts.
-  function render() {
-    const all = FS.getFlowers();
-    const shown = all.filter(function (f) { return matches(f, false); }).sort(SORTS[state.sort]);
-    drawnFlowers = JSON.stringify(all);
-    drawTabs(all);
-    grid.innerHTML = shown.map(cardHTML).join('');
-    grid.hidden = shown.length === 0;
-    empty.hidden = shown.length > 0;
-    if (!shown.length) empty.innerHTML = emptyHTML(all.length);
-    shownChip.innerHTML = FS.icon('flower', 16) + plural(shown.length, 'flower') + ' shown';
-    resultText.textContent = resultLine(shown.length, all.length);
-    clearTop.hidden = !hasFilters() || !shown.length;
-  }
-
-  // Keeps the address bar in step (?q=&cat=&sort=), so a refresh or a shared link shows the same flowers.
-  function saveToUrl() {
-    const p = new URLSearchParams();
-    if (state.q.trim()) p.set('q', state.q.trim());
-    if (state.cat) p.set('cat', state.cat);
-    if (state.sort !== 'popular') p.set('sort', state.sort);
-    if (state.inStock) p.set('instock', '1');
-    const query = p.toString();
-    try { history.replaceState(null, '', location.pathname + (query ? '?' + query : '')); } catch (err) { /* some browsers block this for local files */ }
-  }
-
-  // A filter changed: redraw and update the address bar.
-  function update() { render(); saveToUrl(); }
-
-  // "Clear filters": back to every flower. The sort order stays as it is.
-  function clearFilters() {
-    state.q = ''; state.cat = ''; state.inStock = false;
-    search.value = ''; stockBox.checked = false;
-    update();
-    tabs.querySelector('.tab').focus();
-  }
-
-  // Reads a quantity box and corrects it to a whole number from 1 to its max (the stock).
-  function readQty(input) {
-    const max = Math.max(Number(input.max) || 1, 1);
-    let n = Math.floor(Number(input.value));
-    if (!(n >= 1)) n = 1;
-    if (n > max) n = max;
-    input.value = n;
-    return n;
-  }
-
-  // [-] and [+]: change the number by one, staying inside the limits.
-  function stepQty(button) {
-    const input = button.parentElement.querySelector('input');
-    input.value = (Number(input.value) || 1) + Number(button.dataset.step);
-    readQty(input);
-  }
-
-  // The small line under the pop-up buttons.
-  function noteText(f) {
-    if (f.stock < 1) return 'Sold out right now. Please check again soon.';
-    const line = FS.getCart().find(function (l) { return l.flower.id === f.id; });
-    if (line) return `You have ${line.qty} in your cart. We have ${f.stock} in stock.`;
-    return 'Free delivery on orders over ' + FS.money(FS.FREE_DELIVERY_FROM) + '.';
-  }
-
-  // "Add" on a card or "Add to cart" in the pop-up: put the chosen number in the cart.
-  function addFromButton(button) {
-    const box = button.closest('[data-flower]');
-    const input = box.querySelector('.qty input');
-    const qty = readQty(input);
-    const result = FS.addToCart(button.dataset.add, qty);
-    if (!result.ok) { FS.toast(result.error, 'error'); return; }
-    const flower = FS.getFlower(button.dataset.add);
-    FS.toast(`Added ${qty} x ${flower.name} to your cart (${plural(result.count, 'item')} in total).`);
-    input.value = 1;
-    const note = box.querySelector('[data-note]');
-    if (note) note.textContent = noteText(flower);
-  }
-
-  // The pop-up: big photo and full details of one flower.
-  function modalHTML(f) {
-    const id = FS.esc(f.id);
-    return `<div class="grid-2" data-flower="${id}">
-      <div class="tile">${FS.flowerImg(f)}</div>
+  // The pop-up: the photo in a <figure> captioned with the names and description, then the tip, quantity and Add to cart.
+  const modalHTML = (f) => {
+    const off = f.stock < 1 ? ' disabled' : '';
+    return `<div class="grid-2">
+      <figure>
+        <div class="tile">${FS.flowerImg(f)}<span class="stock-pill">${FS.stockBadge(f)}</span></div>
+        <figcaption><strong>${FS.esc(f.name)}</strong>${hindiTag(f)}${f.botanical ? `<br><i>${FS.esc(f.botanical)}</i>` : ''}<br>${FS.esc(f.description)}</figcaption>
+      </figure>
       <div class="stack">
         <span class="product-cat">${FS.esc(f.category)}</span>
-        <p class="mb-0">${FS.esc(f.description || 'A fresh pick from our shop.')}</p>
-        <div class="row between">
-          <span class="product-price">${FS.money(f.price)}</span>
-          ${FS.stockBadge(f)}
-        </div>
+        <p class="callout mb-0">${FS.icon('flower', 18)}<span>${careTip(f)}</span></p>
+        <p class="product-price mb-0">${FS.money(f.price)}</p>
         <div class="row">
-          <label class="label" for="modal-qty">Quantity</label>
-          ${qtyHTML(f, '', 'modal-qty')}
+          <label class="label" for="qty">Quantity</label>
+          <div class="qty">
+            <button type="button" data-step="-1" aria-label="One less"${off}>${FS.icon('minus', 16)}</button>
+            <input type="number" id="qty" value="1" min="1" max="${FS.esc(f.stock)}" step="1"${off}>
+            <button type="button" data-step="1" aria-label="One more"${off}>${FS.icon('plus', 16)}</button>
+          </div>
         </div>
-        <div class="row">
-          <button type="button" class="btn btn-primary" data-add="${id}"${f.stock < 1 ? ' disabled' : ''}>${FS.icon('bag', 18)}Add to cart</button>
-          <a class="btn btn-ghost" href="cart.html">Go to cart</a>
-        </div>
-        <p class="hint" data-note>${FS.esc(noteText(f))}</p>
+        <button type="button" class="btn btn-primary" data-add="${FS.esc(f.id)}"${off}>${FS.icon('bag', 18)}Add to cart</button>
       </div>
     </div>`;
-  }
+  };
 
-  // Opens the pop-up for one flower. opener gets the focus back when it closes.
-  function openFlower(id, opener) {
+  // Opens the pop-up for one flower. When it closes, the focus goes back to that flower's card.
+  const openFlower = (id) => {
     const f = FS.getFlower(id);
-    if (!f || !f.active) { FS.toast('Sorry, that flower is not on sale any more.', 'error'); return; }
-    const modal = FS.openModal({ title: f.name, html: modalHTML(f), wide: true });
-    const add = modal.el.querySelector('[data-add]');
-    (add.disabled ? modal.el.querySelector('a.btn') : add).focus();
-    modal.closed.then(function () { if (opener && opener.isConnected) opener.focus(); });
-  }
+    if (!f) return;
+    FS.openModal({ title: f.name, html: modalHTML(f), wide: true }).closed
+      .then(() => grid.querySelector(`a[data-open="${f.id}"]`)?.focus());
+  };
 
-  // Filters: live while typing or clicking.
-  search.addEventListener('input', function () { state.q = search.value; update(); });
-  form.addEventListener('submit', function (e) { e.preventDefault(); search.blur(); });   // Enter: stay here, close the phone keyboard
-  sortBox.addEventListener('change', function () { state.sort = sortBox.value; update(); });
-  stockBox.addEventListener('change', function () { state.inStock = stockBox.checked; update(); });
-  tabs.addEventListener('click', function (e) {
-    const tab = e.target.closest('.tab');
-    if (!tab) return;
-    state.cat = tab.dataset.cat;
-    update();
-  });
+  // Keeps a quantity box a whole number from 1 to its max (the stock).
+  const readQty = (input) => {
+    const n = Math.min(Math.max(Math.floor(Number(input.value)) || 1, 1), Number(input.max));
+    input.value = n;
+    return n;
+  };
 
-  // One click handler for the cards and the pop-up (the pop-up lives outside the grid).
-  document.addEventListener('click', function (e) {
-    const step = e.target.closest('.qty [data-step]');
-    const add = e.target.closest('[data-add]');
-    const clear = e.target.closest('[data-clear]');
+  // [-] and [+] change the quantity by one.
+  const stepQty = (button) => {
+    const input = button.parentElement.querySelector('input');
+    input.value = Number(input.value) + Number(button.dataset.step);
+    readQty(input);
+  };
+
+  // Adds to the cart: 1 from a card, the chosen number from the pop-up.
+  const addFlower = (button) => {
+    const id = button.dataset.add;
+    const modal = button.closest('.modal');
+    const qty = modal ? readQty(modal.querySelector('input')) : 1;
+    const { ok, error } = FS.addToCart(id, qty);   // saving fires fs:change, which redraws the cards
+    FS.toast(ok ? `${qty} × ${FS.getFlower(id).name} added to your cart.` : error, ok ? 'success' : 'error');
+    if (!modal) grid.querySelector(`[data-add="${id}"]`).focus();   // keep the focus on the same Add button
+  };
+
+  // Draws the tab counts, the cards (or the empty message) and the result line.
+  const render = () => {
+    const all = FS.getFlowers();
+    const found = all.filter(matches);
+    const shown = found.filter((f) => inType(f, type)).sort(SORTS[sortBox.value]);
+    tabs.querySelectorAll('.tab').forEach((tab) => {
+      const t = tab.dataset.type;
+      tab.classList.toggle('active', t === type);
+      tab.setAttribute('aria-pressed', t === type);
+      tab.querySelector('.count').textContent = found.filter((f) => inType(f, t)).length;
+    });
+    grid.innerHTML = shown.map(cardHTML).join('');
+    byId('empty').hidden = shown.length > 0;
+    byId('result').textContent = `Showing ${shown.length} of ${all.length} flowers` +
+      (q ? ` for "${q}"` : '') + (type === 'All' ? '' : ` in ${type}`);
+  };
+
+  // A filter changed: draw again and keep ?q= and ?type= in the address bar, so a refresh or a shared link shows the same flowers.
+  const update = () => {
+    render();
+    const p = new URLSearchParams();
+    if (q) p.set('q', q);
+    if (type !== 'All') p.set('type', type);
+    history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
+  };
+
+  // Build the tabs once ("All" and the five types) and the search suggestions.
+  tabs.innerHTML = ['All', ...FS.CATEGORIES].map((t) =>
+    `<button type="button" class="tab" data-type="${FS.esc(t)}">${FS.esc(t)} <span class="count"></span></button>`).join('');
+  byId('flower-names').innerHTML = FS.getFlowers().map(({ name }) => `<option value="${FS.esc(name)}">`).join('');
+  search.value = q;
+
+  search.addEventListener('input', () => { q = search.value.trim(); update(); });
+  byId('filters').addEventListener('submit', (e) => { e.preventDefault(); search.blur(); });   // Enter: stay here, close the phone keyboard
+  sortBox.addEventListener('change', render);
+  document.addEventListener('change', (e) => { if (e.target.id === 'qty') readQty(e.target); });
+
+  // One click handler for the tabs, the cards and the pop-up (the pop-up sits outside the grid).
+  document.addEventListener('click', (e) => {
+    const tab = e.target.closest('[data-type]');
     const open = e.target.closest('[data-open]');
-    if (step) stepQty(step);
-    else if (add) addFromButton(add);
-    else if (clear) clearFilters();
-    else if (open && !(e.ctrlKey || e.metaKey || e.shiftKey)) {   // Ctrl+click on a name still opens a new tab
-      e.preventDefault();
-      openFlower(open.dataset.open, open);
-    }
-  });
-  // A typed quantity is corrected when the box loses focus.
-  document.addEventListener('change', function (e) {
-    if (e.target.matches('.qty input')) readQty(e.target);
+    const add = e.target.closest('[data-add]');
+    const step = e.target.closest('[data-step]');
+    if (tab) { type = tab.dataset.type; update(); }
+    else if (open) { e.preventDefault(); openFlower(open.dataset.open); }
+    else if (add) addFlower(add);
+    else if (step) stepQty(step);
+    else if (e.target.closest('[data-clear]')) { q = ''; type = 'All'; search.value = ''; update(); search.focus(); }
   });
 
-  // Data changed here or in another tab. Redraw only when the flowers changed (stock, price, new ones),
-  // so adding to the cart does not reset the other quantity boxes.
-  window.addEventListener('fs:change', function () {
-    if (JSON.stringify(FS.getFlowers()) !== drawnFlowers) render();
-  });
-
-  // Start: fill the controls from the address bar, draw, and open a flower if the link asked for one.
-  buildTabs();
-  search.value = state.q;
-  sortBox.value = state.sort;
-  stockBox.checked = state.inStock;
-  document.getElementById('delivery-chip').innerHTML = FS.icon('truck', 16) + 'Free delivery over ' + FS.money(FS.FREE_DELIVERY_FROM);
-  render();
-  saveToUrl();
+  window.addEventListener('fs:change', render);
+  update();
   if (params.get('flower')) openFlower(params.get('flower'));
 });
