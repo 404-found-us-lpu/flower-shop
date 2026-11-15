@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Create a Bloom &amp; Petal customer account to order fresh flowers and follow every delivery.">
+  <meta name="description" content="Create a free Bloom &amp; Petal account to order fresh flowers for any day and time.">
   <title>Create account · Bloom &amp; Petal</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <script src="js/app.js?v=3"></script>
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/app.js?v=4"></script>
 </head>
 <body>
   <main id="main" class="auth">
@@ -23,7 +23,7 @@
       </div>
       <div>
         <h1>Join the shop in a minute.</h1>
-        <p class="mb-0">Pick fresh flowers, choose a delivery time and follow each order to the door.</p>
+        <p class="mb-0">Pick fresh flowers, choose a delivery day and time, and we bring them to the door.</p>
       </div>
       <div class="auth-photos">
         <img src="images/white-lily-bunch.jpg" alt="White lilies with green leaves" loading="lazy">
@@ -32,77 +32,83 @@
       </div>
     </section>
 
-    <!-- Right: the sign-up form -->
+    <!-- Right: the sign-up form, in two groups (fieldset + legend) -->
     <section class="auth-side" aria-labelledby="register-title">
       <div class="auth-card">
         <h2 id="register-title">Create your account</h2>
-        <p class="muted">Order flowers and follow every delivery. Shop staff get their login from the owner.</p>
+        <p class="muted">It is free. You can add your delivery address now or later.</p>
 
-        <form class="form-grid section" id="register-form">
-          <div class="field">
-            <label for="name">Full name</label>
-            <div class="input-icon">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <input id="name" name="name" type="text" autocomplete="name" autocapitalize="words" minlength="2" maxlength="60" required aria-describedby="name-error">
+        <form class="form section" id="register-form">
+          <fieldset class="form-grid">
+            <legend>Your details</legend>
+            <div class="field">
+              <label for="name">Full name</label>
+              <div class="input-icon">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input id="name" name="name" type="text" autocomplete="name" autocapitalize="words" minlength="2" maxlength="60" required aria-describedby="name-error">
+              </div>
+              <p class="error" id="name-error"></p>
             </div>
-            <p class="error" id="name-error"></p>
-          </div>
 
-          <div class="field">
-            <label for="phone">Mobile number</label>
-            <div class="input-icon">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-              <input id="phone" name="phone" type="tel" autocomplete="tel-national" maxlength="10" pattern="[6-9][0-9]{9}" title="10 digits, starting with 6, 7, 8 or 9" required aria-describedby="phone-hint phone-error">
+            <div class="field">
+              <label for="phone">Mobile number</label>
+              <div class="input-icon">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+                <input id="phone" name="phone" type="tel" autocomplete="tel-national" maxlength="10" pattern="[6-9][0-9]{9}" title="10 digits, starting with 6, 7, 8 or 9" required aria-describedby="phone-hint phone-error">
+              </div>
+              <p class="hint" id="phone-hint">10 digits, without +91.</p>
+              <p class="error" id="phone-error"></p>
             </div>
-            <p class="hint" id="phone-hint">10 digits, without +91.</p>
-            <p class="error" id="phone-error"></p>
-          </div>
 
-          <div class="field full">
-            <label for="email">Email</label>
-            <div class="input-icon">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-              <input id="email" name="email" type="email" autocomplete="email" maxlength="100" required aria-describedby="email-hint email-error">
+            <div class="field full">
+              <label for="email">Email</label>
+              <div class="input-icon">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                <input id="email" name="email" type="email" autocomplete="email" maxlength="100" required aria-describedby="email-hint email-error">
+              </div>
+              <p class="hint" id="email-hint">You will sign in with this email.</p>
+              <p class="error" id="email-error"></p>
             </div>
-            <p class="hint" id="email-hint">You will sign in with this email.</p>
-            <p class="error" id="email-error"></p>
-          </div>
 
-          <div class="field full">
-            <div class="label-row">
-              <label class="label" for="password">Password</label>
-              <!-- One button shows or hides both password boxes -->
-              <button type="button" class="btn btn-ghost btn-sm" id="show-passwords" aria-controls="password confirm" aria-label="Show passwords">Show</button>
+            <div class="field full">
+              <div class="label-row">
+                <label class="label" for="address">Delivery address</label>
+                <span class="hint">Optional</span>
+              </div>
+              <textarea id="address" name="address" rows="3" maxlength="200" autocomplete="street-address" placeholder="House, street, area and city"></textarea>
             </div>
-            <div class="input-icon">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input id="password" name="password" type="password" autocomplete="new-password" minlength="6" required aria-describedby="password-hint password-error">
+          </fieldset>
+
+          <fieldset class="form-grid">
+            <legend>Choose a password</legend>
+            <div class="field full">
+              <div class="label-row">
+                <label class="label" for="password">Password</label>
+                <!-- One button shows or hides both password boxes -->
+                <button type="button" class="btn btn-ghost btn-sm" id="show-passwords" aria-controls="password confirm" aria-label="Show passwords">Show</button>
+              </div>
+              <div class="input-icon">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input id="password" name="password" type="password" autocomplete="new-password" minlength="6" required aria-describedby="password-hint password-error">
+              </div>
+              <p class="hint" id="password-hint">At least 6 characters.</p>
+              <p class="error" id="password-error"></p>
             </div>
-            <p class="hint" id="password-hint">At least 6 characters.</p>
-            <p class="error" id="password-error"></p>
-          </div>
 
-          <div class="field full">
-            <label for="confirm">Confirm password</label>
-            <div class="input-icon">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input id="confirm" name="confirm" type="password" autocomplete="new-password" minlength="6" required aria-describedby="confirm-error">
+            <div class="field full">
+              <label for="confirm">Confirm password</label>
+              <div class="input-icon">
+                <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input id="confirm" name="confirm" type="password" autocomplete="new-password" minlength="6" required aria-describedby="confirm-error">
+              </div>
+              <p class="error" id="confirm-error"></p>
             </div>
-            <p class="error" id="confirm-error"></p>
-          </div>
+          </fieldset>
 
-          <div class="field full">
-            <div class="label-row">
-              <label class="label" for="address">Delivery address</label>
-              <span class="hint">Optional</span>
-            </div>
-            <textarea id="address" name="address" rows="3" maxlength="200" autocomplete="street-address"></textarea>
-          </div>
+          <label class="check"><input type="checkbox" name="agree" required> I understand this demo shop saves my details only in this browser</label>
 
-          <label class="check full"><input type="checkbox" name="updates" required> I agree to receive order updates</label>
-
-          <button type="submit" class="btn btn-primary btn-block btn-lg full">
-            <span>Create account</span>
+          <button type="submit" class="btn btn-primary btn-block btn-lg">
+            Create account
             <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
         </form>
@@ -112,6 +118,6 @@
     </section>
 
   </main>
-  <script src="js/pages/register.js?v=3"></script>
+  <script src="js/pages/register.js?v=4"></script>
 </body>
 </html>

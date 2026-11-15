@@ -4,52 +4,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Bloom &amp; Petal keeps flower orders, stock and deliveries in one place for customers, florists and the shop owner.">
+  <meta name="description" content="Bloom &amp; Petal delivers fresh bouquets, plants and Indian favourites like mogra and marigold across Jalandhar.">
   <title>Welcome · Bloom &amp; Petal</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <script src="js/app.js?v=3"></script>
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/app.js?v=4"></script>
 </head>
 <body>
   <main id="main">
-    <section class="hero hero-tall">
+    <!-- The page's own header (the site header with the menu is made by js/app.js) -->
+    <header class="hero hero-tall">
       <div class="wrap reveal">
-        <p class="hero-eyebrow">Flower shop management</p>
-        <h1>Fresh flowers,<br> managed beautifully.</h1>
-        <p class="hero-sub">Orders, stock and deliveries in one place, for the customers who send flowers, the florists who make them and the owner who runs the shop.</p>
-        <!-- Signed-in visitors get "Go to my dashboard" here instead (js/pages/index.js) -->
+        <p class="hero-eyebrow">Flower shop in Jalandhar</p>
+        <h1>Fresh flowers,<br> brought to your door.</h1>
+        <p class="hero-sub">Bouquets, plants and Indian favourites like mogra and genda, picked fresh <em>every</em> morning and delivered by our own team.</p>
+        <!-- Signed-in customers get one "Shop now" button here instead (js/pages/index.js) -->
         <div class="hero-actions" data-actions>
           <a class="btn btn-gold btn-lg" href="register.html">Create an account</a>
           <a class="btn btn-outline-light btn-lg" href="login.html">Sign in</a>
         </div>
         <div class="chips">
-          <span class="chip chip-gold" data-icon="flower" data-size="16"><span id="flower-kinds">12 kinds of flowers</span></span>
-          <span class="chip" data-icon="truck" data-size="16">Same-day delivery in Jalandhar</span>
-          <span class="chip" data-icon="users" data-size="16">3 roles, one shop</span>
+          <span class="chip chip-gold" data-icon="flower">Indian favourites are in</span>
+          <span class="chip" data-icon="truck">Same-day delivery in Jalandhar</span>
+          <span class="chip" data-icon="gift">Free delivery from ₹999</span>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- The dark card that slides up over the hero: live numbers about the flowers on sale -->
+    <!-- "Flowers today": live numbers worked out in js/pages/index.js -->
     <div class="wrap hero-pull">
-      <section class="card-dark reveal reveal-2" aria-label="The shop today">
-        <div class="stats" id="shop-today"></div>
+      <section class="card-dark reveal reveal-2" aria-label="Flowers today">
+        <div class="stats" id="today"></div>
       </section>
     </div>
 
     <div class="wrap section stack-lg">
-      <section class="card reveal reveal-3" aria-labelledby="season-title">
+      <section class="card reveal reveal-3" aria-labelledby="indian-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="indian-title">Indian favourites</h2>
+            <p class="muted mb-0">Six flowers from Indian gardens, temples and weddings.</p>
+          </div>
+          <a class="link-arrow" href="catalog.html?cat=Indian%20favourites">Shop Indian favourites</a>
+        </div>
+        <div class="product-grid" id="indian"></div>
+      </section>
+
+      <!-- Art direction: phones get a different (portrait-friendly) photo from the <source> -->
+      <article class="card-dark reveal" aria-labelledby="festival-title">
+        <div class="grid-2">
+          <picture>
+            <source media="(max-width: 760px)" srcset="images/mogra-pot.jpg">
+            <img src="images/marigold.jpg" alt="Festival flowers: orange marigold and white mogra" width="720" height="480" loading="lazy" onerror="FS.imgError(this)">
+          </picture>
+          <div class="stack">
+            <p class="hero-eyebrow mb-0">Diwali, weddings and pooja</p>
+            <h2 id="festival-title">Festival flowers: marigold and mogra</h2>
+            <p class="muted">Bright <b>marigold</b> (genda) for torans and garlands, and sweet-smelling <b>mogra</b> for the pooja thali and hair. Order a few days early in the festival season, when they sell fast.</p>
+            <div><a class="btn btn-gold" href="catalog.html?cat=Indian%20favourites">Order festival flowers</a></div>
+          </div>
+        </div>
+      </article>
+
+      <section class="card reveal" aria-labelledby="season-title">
         <div class="card-head">
           <div>
             <h2 class="card-title" id="season-title">In season</h2>
-            <p class="muted mb-0">Picked from what our florists have the most of right now.</p>
+            <p class="muted mb-0">Bouquets, stems and plants we have the most of right now.</p>
           </div>
-          <a class="link-arrow" id="all-flowers" href="login.html?next=catalog.html">See all flowers</a>
+          <a class="link-arrow" href="catalog.html">See all flowers</a>
         </div>
-        <div id="season"></div>
+        <div class="tiles" id="season"></div>
       </section>
 
-      <div class="grid-2 reveal reveal-4">
+      <div class="grid-2">
         <section class="card" aria-labelledby="how-title">
           <div class="card-head">
             <div>
@@ -57,67 +85,114 @@
               <p class="muted mb-0">From the first flower to the front door.</p>
             </div>
           </div>
-          <div class="stack-lg">
-            <ol class="steps-list">
-              <li class="active">
-                <span class="step-num">1</span>
-                <div>
-                  <strong>Pick your flowers</strong>
-                  <p>Browse bouquets, single stems, plants and gifts, then add what you like to your cart.</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-num">2</span>
-                <div>
-                  <strong>Choose a delivery time</strong>
-                  <p>Pick a day in the next two months and a morning, afternoon or evening slot. Pay by cash, UPI or card.</p>
-                </div>
-              </li>
-              <li>
-                <span class="step-num">3</span>
-                <div>
-                  <strong>Track it to the door</strong>
-                  <p>Watch it move from confirmed to delivered, with a notification at every step.</p>
-                </div>
-              </li>
-            </ol>
-            <div class="callout" data-icon="clock"><span>Changed your mind? You can cancel an order until the florist starts preparing it.</span></div>
-          </div>
+          <ol class="steps-list">
+            <li class="active">
+              <span class="step-num">1</span>
+              <div>
+                <strong>Pick your flowers</strong>
+                <p>Browse bouquets, Indian favourites, single stems, plants and gifts, and add what you like to your cart.</p>
+              </div>
+            </li>
+            <li>
+              <span class="step-num">2</span>
+              <div>
+                <strong>Choose a day, a time and how to pay</strong>
+                <p>Morning, afternoon or evening, paid by <abbr title="Unified Payments Interface">UPI</abbr>, card or <abbr title="Cash on delivery">COD</abbr>. Add a card message like <q>Happy birthday, Maa!</q></p>
+              </div>
+            </li>
+            <li>
+              <span class="step-num">3</span>
+              <div>
+                <strong>We deliver it to the door</strong>
+                <p>Our team brings your flowers fresh, wrapped and on the day you chose.</p>
+              </div>
+            </li>
+          </ol>
         </section>
 
-        <section class="card" aria-labelledby="roles-title">
-          <div class="card-head">
-            <div>
-              <h2 class="card-title" id="roles-title">One shop, three roles</h2>
-              <p class="muted mb-0">Everyone signs in to a space made for their job.</p>
-            </div>
-          </div>
-          <div class="stack-lg">
-            <div class="feature">
-              <span class="feature-icon" data-icon="bag" data-size="22"></span>
-              <h3>Customer</h3>
-              <p>Orders flowers for any day and tracks every delivery to the door.</p>
-            </div>
-            <div class="feature">
-              <span class="feature-icon" data-icon="flower" data-size="22"></span>
-              <h3>Florist</h3>
-              <p>Confirms and prepares orders, and keeps the flower stock up to date.</p>
-            </div>
-            <div class="feature">
-              <span class="feature-icon" data-icon="chart" data-size="22"></span>
-              <h3>Shop owner</h3>
-              <p>Reads the sales reports and manages staff and customer accounts.</p>
-            </div>
-          </div>
+        <!-- Each rating's five stars are an inline SVG drawn by js/pages/index.js from data-rating -->
+        <section class="card stack" aria-labelledby="quotes-title">
+          <h2 class="card-title" id="quotes-title">What customers say</h2>
+          <figure class="quote" data-rating="5">
+            <blockquote><p>The marigolds for our Diwali pooja came early in the morning, fresh and bright. The mogra pot is still flowering on my balcony.</p></blockquote>
+            <figcaption><cite>Neha Sharma</cite>, Model Town, Jalandhar</figcaption>
+          </figure>
+          <figure class="quote" data-rating="5">
+            <blockquote><p>I sent the birthday combo to my sister. It reached in the evening slot, just as I had picked.</p></blockquote>
+            <figcaption><cite>Aman Verma</cite>, Ludhiana</figcaption>
+          </figure>
+          <figure class="quote" data-rating="4">
+            <blockquote><p>A lovely sunflower basket and a healthy money plant. I only wish there were more succulents in stock.</p></blockquote>
+            <figcaption><cite>Simran Kaur</cite>, Phagwara</figcaption>
+          </figure>
         </section>
       </div>
+
+      <section class="card" aria-labelledby="tour-title">
+        <div class="grid-2">
+          <figure class="tour">
+            <video controls preload="metadata" poster="media/shop-tour-poster.jpg">
+              <source src="media/shop-tour.mp4" type="video/mp4">
+              <track kind="captions" src="media/shop-tour.vtt" srclang="en" label="English">
+              Your browser cannot play this video. <a href="media/shop-tour.mp4">Download the shop tour</a> instead.
+            </video>
+            <figcaption>A one-minute walk through the shop, with English captions.</figcaption>
+          </figure>
+          <div>
+            <h2 class="card-title" id="tour-title">Take a tour of the shop</h2>
+            <p class="muted">See where your flowers are kept cool, trimmed and wrapped before they leave for your door.</p>
+            <p class="mb-0"><a class="link-arrow" href="contact.html">Find the shop</a></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="faq-title">
+        <div class="card-head">
+          <h2 class="card-title" id="faq-title">Questions and answers</h2>
+        </div>
+        <div class="split">
+          <div class="faq">
+            <details open>
+              <summary>Where do you deliver, and what does it cost?</summary>
+              <p>We deliver across Jalandhar, Phagwara and Ludhiana. Delivery is ₹50 per order and <mark>free on orders of ₹999 or more</mark>. You can order for today or <strong>any day in the next 60 days</strong>.</p>
+            </details>
+            <details>
+              <summary>How can I pay?</summary>
+              <p>Choose UPI, card or cash on delivery when you place the order. You see the full total, with delivery, before you confirm.</p>
+            </details>
+            <details>
+              <summary>How do I keep my flowers fresh?</summary>
+              <p>Cut 2 cm off each stem at a slant and put them straight into clean, cool H<sub>2</sub>O. Change the water every 2<sup>nd</sup> day and keep the vase out of direct sun. <strong>Keep cut flowers away from ripe fruit</strong>, which makes them wilt faster.</p>
+            </details>
+            <details>
+              <summary>How do I contact you?</summary>
+              <p>Call, email or drop in at the shop. Our phone number, email and address are on the <a href="contact.html">contact page</a>.</p>
+            </details>
+          </div>
+
+          <aside class="card card-sm" aria-labelledby="know-title">
+            <h3 id="know-title">Good to know</h3>
+            <dl>
+              <dt>Delivery</dt>
+              <dd>₹50 per order, in a morning, afternoon or evening slot. <small>Free on orders of ₹999 or more.</small></dd>
+              <dt>Payment</dt>
+              <dd>UPI, card or cash on delivery</dd>
+              <dt>Areas we deliver to</dt>
+              <dd>All of Jalandhar, plus Phagwara and Ludhiana</dd>
+            </dl>
+            <hr class="divider">
+            <h4>Visit the shop</h4>
+            <p class="mb-0">Shop 12, Model Town Market<br>Jalandhar, Punjab 144003<br><small>Open every day, 9 am to 8 pm</small></p>
+          </aside>
+        </div>
+      </section>
 
       <section class="card-dark reveal" aria-labelledby="cta-title">
         <div class="row between">
           <div>
             <p class="hero-eyebrow">Ready when you are</p>
             <h2 id="cta-title">Start your first order</h2>
-            <p class="muted mb-0" id="cta-text">Create a free account in a minute. Your cart, orders and delivery updates stay in one place.</p>
+            <p class="muted mb-0" id="cta-text">Create a free account in a minute. Your cart and your orders stay in one place.</p>
           </div>
           <div class="row" data-actions>
             <a class="btn btn-gold btn-lg" href="register.html">Create an account</a>
@@ -127,6 +202,6 @@
       </section>
     </div>
   </main>
-  <script src="js/pages/index.js?v=3"></script>
+  <script src="js/pages/index.js?v=4"></script>
 </body>
 </html>

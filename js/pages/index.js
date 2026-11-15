@@ -1,128 +1,80 @@
 /* Made by: Yash */
-/* Bloom & Petal - js/pages/index.js - the public front page: live shop numbers, flowers in season and the sign-up buttons. */
-FS.ready(function (user) {
-  const shown = {};                                   // the HTML each box shows now (see setHTML)
+/* Bloom & Petal - js/pages/index.js - the public front page: flowers today, Indian favourites, flowers in season and star ratings. */
+FS.ready((user) => {
+  const HINDI = { 13: 'मोगरा', 14: 'गेंदा', 15: 'अपराजिता', 17: 'गुलदाउदी', 18: 'मधुमालती' };   // by flower id
+  const STAR = '10,0 12.4,6.8 19.5,6.9 13.8,11.2 15.9,18.1 10,14 4.1,18.1 6.2,11.2 0.5,6.9 7.6,6.8';   // corners of one star
 
-  // Puts the icon named in data-icon="..." at the start of each element. data-size sets its size.
-  function addIcons() {
-    document.querySelectorAll('[data-icon]').forEach(function (el) {
-      el.insertAdjacentHTML('afterbegin', FS.icon(el.dataset.icon, Number(el.dataset.size) || 18));
-    });
-  }
+  // A rating as an inline SVG: five <polygon> stars side by side, the ones above the rating faded.
+  const starsSVG = (rating) => `<svg class="stars" width="116" height="20" viewBox="0 0 116 20" fill="#a8843d" role="img" aria-label="${rating} out of 5 stars">` +
+    [0, 1, 2, 3, 4].map((i) => `<polygon points="${STAR}" transform="translate(${i * 24})"${i < rating ? '' : ' opacity=".25"'}/>`).join('') + '</svg>';
 
-  // Changes a box only when its HTML is different, so the photos do not flash on every data change.
-  function setHTML(id, html) {
-    if (shown[id] === html) return;
-    shown[id] = html;
-    document.getElementById(id).innerHTML = html;
-  }
+  // One number box in the "Flowers today" card.
+  const statHTML = (iconName, label, value, note) => `<div class="stat stat-dark">
+    <span class="stat-label">${FS.icon(iconName, 16)}${label}</span>
+    <span class="stat-value">${FS.esc(value)}</span>
+    <span class="stat-note">${FS.esc(note)}</span>
+  </div>`;
 
-  // Where a flower link goes: customers search the catalogue, the shop team opens stock, guests sign in first.
-  function flowerLink(name) {
-    const catalog = name ? 'catalog.html?q=' + encodeURIComponent(name) : 'catalog.html';
-    if (!user) return 'login.html?next=' + encodeURIComponent(catalog);
-    return user.role === 'customer' ? catalog : 'stock.html';
-  }
-
-  // Signed-in people get one "Go to my dashboard" button in place of "Create an account" and "Sign in".
-  function showDashboardButtons() {
-    if (!user) return;                                // guests keep the buttons written in the HTML
-    const button = `<a class="btn btn-light btn-lg" href="${FS.esc(FS.ROLE_HOME[user.role])}">Go to my dashboard${FS.icon('arrow', 18)}</a>`;
-    document.querySelectorAll('[data-actions]').forEach(function (box) { box.innerHTML = button; });
-  }
-
-  // The link above the flower tiles.
-  function setAllFlowersLink() {
-    const link = document.getElementById('all-flowers');
-    const staff = user && user.role !== 'customer';
-    link.href = flowerLink('');
-    link.innerHTML = (staff ? 'Manage stock' : 'See all flowers') + FS.icon('arrow', 16);
-  }
-
-  // Text for the first hero chip: "12 kinds of flowers".
-  function kindsText(count) {
-    if (count === 0) return 'New flowers coming soon';
-    return count === 1 ? '1 kind of flower' : count + ' kinds of flowers';
-  }
-
-  // One small number box in the dark card.
-  function statHTML(iconName, label, value, note) {
-    return `<div class="stat stat-dark">
-      <span class="stat-label">${FS.icon(iconName, 16)}${FS.esc(label)}</span>
-      <span class="stat-value">${FS.esc(value)}</span>
-      <span class="stat-note">${FS.esc(note)}</span>
-    </div>`;
-  }
-
-  // The dark card over the hero: how many flowers are on sale, the cheapest one, free delivery and stock.
-  function todayHTML(flowers) {
-    const cheapest = flowers.reduce(function (low, f) { return !low || f.price < low.price ? f : low; }, null);
-    const units = flowers.reduce(function (sum, f) { return sum + f.stock; }, 0);
+  // "Flowers today": how many flowers, the cheapest one, free delivery and the total in stock.
+  const todayHTML = (flowers) => {
+    const lowest = Math.min(...flowers.map((f) => f.price));
+    const cheapest = flowers.find((f) => f.price === lowest);
+    const units = flowers.reduce((sum, f) => sum + f.stock, 0);
     return `<div>
         <p class="hero-eyebrow">Flowers today</p>
         <div class="big-number">${flowers.length}<small>on sale</small></div>
       </div>
-      ${statHTML('receipt', 'Cheapest', cheapest ? FS.money(cheapest.price) : 'None yet', cheapest ? cheapest.name : 'New stock is on its way')}
-      ${statHTML('truck', 'Free delivery from', FS.money(FS.FREE_DELIVERY_FROM), FS.money(FS.DELIVERY_FEE) + ' delivery below that')}
-      ${statHTML('box', 'In stock', units.toLocaleString('en-IN'), units === 1 ? 'item ready to send' : 'items ready to send')}`;
-  }
+      ${statHTML('receipt', 'Cheapest', FS.money(lowest), cheapest.name)}
+      ${statHTML('truck', 'Free delivery from', FS.money(FS.FREE_DELIVERY_FROM), `${FS.money(FS.DELIVERY_FEE)} delivery below that`)}
+      ${statHTML('box', 'Total in stock', units.toLocaleString('en-IN'), 'ready to send today')}`;
+  };
 
-  // One photo tile: picture, name and price.
-  function tileHTML(f) {
-    return `<a class="tile" href="${FS.esc(flowerLink(f.name))}" aria-label="${FS.esc(f.name + ', ' + FS.money(f.price))}">
-      ${FS.flowerImg(f)}
-      <span class="tile-name">${FS.esc(f.name)}</span>
-      <span class="price-pill">${Number(f.price).toLocaleString('en-IN')} <small>INR</small></span>
-    </a>`;
-  }
+  // The two pills on a photo: how many are left (top right) and the price (bottom left).
+  const pillsHTML = (f) => `<span class="stock-pill">${FS.stockBadge(f)}</span>
+    <span class="price-pill">${f.price.toLocaleString('en-IN')} <small>INR</small></span>`;
 
-  // The button under the empty state, for this visitor.
-  function emptyButton() {
-    if (!user) return '<a class="btn btn-primary" href="register.html">Create an account</a>';
-    if (user.role === 'customer') return '<a class="btn btn-primary" href="catalog.html">See all flowers</a>';
-    return '<a class="btn btn-primary" href="stock.html">Update stock</a>';
-  }
+  // One Indian favourite: photo with pills, name, Hindi name, botanical name and description.
+  const indianHTML = (f) => `<article class="product">
+    <a class="product-media" href="catalog.html?q=${encodeURIComponent(f.name)}">${FS.flowerImg(f)}${pillsHTML(f)}</a>
+    <div class="product-body">
+      <h3 class="product-name">${FS.esc(f.name)}${HINDI[f.id] ? ` <span class="hindi" lang="hi">${HINDI[f.id]}</span>` : ''}</h3>
+      <p class="muted small mb-0"><i lang="la">${FS.esc(f.botanical)}</i></p>
+      <p class="product-desc">${FS.esc(f.description)}</p>
+    </div>
+  </article>`;
 
-  // "In season": the 8 flowers in stock that we have the most of, or a friendly empty state.
-  function seasonHTML(flowers) {
-    const picks = flowers.filter(function (f) { return f.stock > 0; })
-      .sort(function (a, b) { return b.stock - a.stock; })
-      .slice(0, 8);
-    if (picks.length) return `<div class="tiles">${picks.map(tileHTML).join('')}</div>`;
-    return `<div class="empty">
-      <span class="empty-icon">${FS.icon('flower', 28)}</span>
-      <h3>Nothing in stock right now</h3>
-      <p>Fresh flowers are on their way. Please check back soon.</p>
-      ${emptyButton()}
-    </div>`;
-  }
+  // One "In season" photo tile: picture, name and the two pills.
+  const tileHTML = (f) => `<a class="tile" href="catalog.html?q=${encodeURIComponent(f.name)}">
+    ${FS.flowerImg(f)}<span class="tile-name">${FS.esc(f.name)}</span>${pillsHTML(f)}
+  </a>`;
 
-  // The last dark card: its words change for people who are signed in.
-  function renderCta() {
-    if (!user) return;                                // guests keep the words written in the HTML
-    let title = 'Back to the shop';
-    let text = user.role === 'owner' ? 'Sales, orders, stock and your team are all on your dashboard.' : 'New orders and stock levels are on your dashboard.';
-    if (user.role === 'customer') {
-      const placed = FS.getOrders().length;
-      title = placed ? 'Plan your next order' : 'Start your first order';
-      text = placed ? 'Your orders and delivery updates are waiting on your dashboard.' : 'Pick your flowers, choose a delivery time and leave the rest to us.';
-    }
-    document.getElementById('cta-title').textContent = title;
-    document.getElementById('cta-text').textContent = text;
-  }
+  // Signed-in customers get one "Shop now" button, and the last card speaks about their orders.
+  const showCustomerButtons = () => {
+    const placed = FS.getOrders().length;
+    document.querySelectorAll('[data-actions]').forEach((box) => {
+      box.innerHTML = `<a class="btn btn-gold btn-lg" href="catalog.html">Shop now${FS.icon('arrow', 18)}</a>`;
+    });
+    document.getElementById('cta-title').textContent = placed ? 'Plan your next order' : 'Start your first order';
+    document.getElementById('cta-text').textContent = placed
+      ? `You have placed ${placed} ${placed === 1 ? 'order' : 'orders'} with us. Thank you!`
+      : 'Pick your flowers, choose a delivery day and time, and leave the rest to us.';
+  };
 
-  // Draws every part of the page that depends on the shop data.
-  function render() {
+  // Draws every part that depends on the flowers: the numbers, the Indian favourites and the 8 flowers we have most of.
+  const render = () => {
     const flowers = FS.getFlowers();
-    document.getElementById('flower-kinds').textContent = kindsText(flowers.length);
-    setHTML('shop-today', todayHTML(flowers));
-    setHTML('season', seasonHTML(flowers));
-    renderCta();
-  }
+    const isIndian = (f) => f.category === 'Indian favourites';
+    const season = flowers.filter((f) => !isIndian(f) && f.stock > 0).sort((a, b) => b.stock - a.stock).slice(0, 8);
+    document.getElementById('today').innerHTML = todayHTML(flowers);
+    document.getElementById('indian').innerHTML = flowers.filter(isIndian).map(indianHTML).join('');
+    document.getElementById('season').innerHTML = season.map(tileHTML).join('') || '<p class="muted">Everything is sold out right now. Please check back soon.</p>';
+  };
 
-  addIcons();
-  showDashboardButtons();
-  setAllFlowersLink();
+  // Icons: data-icon="name" puts that icon before the text, and every .link-arrow gets an arrow after it.
+  document.querySelectorAll('[data-icon]').forEach((el) => el.insertAdjacentHTML('afterbegin', FS.icon(el.dataset.icon, 16)));
+  document.querySelectorAll('.link-arrow').forEach((a) => a.insertAdjacentHTML('beforeend', FS.icon('arrow', 16)));
+  document.querySelectorAll('.quote').forEach((q) => q.insertAdjacentHTML('afterbegin', starsSVG(Number(q.dataset.rating))));
+  if (user) showCustomerButtons();
   render();
-  window.addEventListener('fs:change', render);      // data changed here or in another tab
+  window.addEventListener('fs:change', render);     // stock changed here or in another tab
 });
