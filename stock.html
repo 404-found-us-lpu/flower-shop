@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal - stock.html - Made by: Satyam -->
+<html lang="en" data-page="stock" data-roles="florist,owner">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Add flowers, change prices and keep the stock counts of Bloom &amp; Petal right.">
+  <title>Stock · Bloom &amp; Petal</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Stock page only: a few small pieces that css/style.css does not have. */
+    .stock-adjust { display: inline-flex; align-items: center; gap: 6px; }
+    .stock-adjust .btn-icon { width: 32px; height: 32px; }
+    .stock-adjust .badge { min-width: 112px; justify-content: center; }
+    .btn-icon:disabled, .btn-icon:disabled:hover { opacity: .4; cursor: not-allowed; background: var(--cream-50); color: var(--ink-700); }
+    input::placeholder, textarea::placeholder { color: var(--ink-500); }   /* ink-400 is only 3.5:1 on white */
+    .cell-flower > div { min-width: 0; }
+    .one-line { max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .is-archived .cell-flower img, .is-archived .cell-flower .ph { opacity: .55; filter: grayscale(.7); }
+    /* photo picker in the add/edit dialog */
+    .photo-pick { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 20px; align-items: center; }
+    .photo-box { display: block; aspect-ratio: 4 / 3; border-radius: var(--r); overflow: hidden; border: 1px solid var(--line-strong); background: var(--cream-200); cursor: pointer; transition: border-color .2s; }
+    .photo-box:hover { border-color: var(--forest-500); }
+    .photo-box img, .photo-box .ph { width: 100%; height: 100%; object-fit: cover; }
+    .photo-empty { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: .86rem; font-weight: 600; }
+    .photo-side { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; }
+    input[type="file"] { max-width: 100%; }
+    input[type="file"]::file-selector-button {
+      margin-right: 12px; height: 38px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line-strong);
+      background: var(--cream-50); color: var(--ink-900); font: 600 .88rem var(--sans); cursor: pointer;
+    }
+    .link-btn { padding: 0; border: 0; background: none; color: var(--danger); font: 600 .9rem var(--sans); cursor: pointer; }
+    .link-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+    /* phones: each table row becomes a small card */
+    @media (max-width: 640px) {
+      .stock-table thead, .stock-table .col-type { display: none; }
+      .stock-table, .stock-table tbody { display: block; }
+      .stock-table tr { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; padding: 16px; border-bottom: 1px solid var(--line); }
+      .stock-table tr:last-child { border-bottom: 0; }
+      .stock-table td { padding: 0; border: 0; }
+      .stock-table td:first-child { grid-column: 1 / -1; }
+      .stock-table .right { text-align: left; }
+      .stock-table .col-stock, .stock-table .col-actions { justify-self: end; }
+    }
+    @media (max-width: 520px) {
+      .toolbar select { flex: 1 1 100%; }
+      .stock-tabs { display: grid; grid-template-columns: 1fr 1fr; width: 100%; border-radius: var(--r); }
+      .stock-tabs .tab { justify-content: center; }
+      .photo-pick { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <main id="main">
+    <section class="hero hero-sm">
+      <div class="wrap">
+        <div class="hero-row">
+          <div>
+            <h1>Stock</h1>
+            <p class="hero-sub">Add flowers, change prices and keep counts right.</p>
+          </div>
+          <button type="button" class="btn btn-gold" id="add-flower">
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            Add flower
+          </button>
+        </div>
+        <div class="chips" id="stock-chips"></div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="section stack">
+        <div class="card card-sm toolbar reveal">
+          <div class="input-icon grow">
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+            <label class="sr-only" for="stock-search">Search flowers by name</label>
+            <input type="search" id="stock-search" placeholder="Search by name" maxlength="60" autocomplete="off">
+          </div>
+          <label class="sr-only" for="stock-type">Type of flower</label>
+          <select id="stock-type">
+            <option value="">All types</option>
+          </select>
+          <div class="tabs stock-tabs" id="stock-tabs" role="group" aria-label="Show flowers">
+            <button type="button" class="tab active" data-tab="all" aria-pressed="true">All <span class="count">0</span></button>
+            <button type="button" class="tab" data-tab="low" aria-pressed="false">Low stock <span class="count">0</span></button>
+            <button type="button" class="tab" data-tab="out" aria-pressed="false">Out of stock <span class="count">0</span></button>
+            <button type="button" class="tab" data-tab="archived" aria-pressed="false">Archived <span class="count">0</span></button>
+          </div>
+        </div>
+
+        <div class="card card-flush reveal reveal-2" id="stock-list"></div>
+        <p class="sr-only" id="stock-live" aria-live="polite"></p>
+      </div>
+    </div>
+  </main>
+  <script src="js/pages/stock.js"></script>
+</body>
+</html>

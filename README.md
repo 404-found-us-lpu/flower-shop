@@ -1,82 +1,87 @@
-# Flower Shop Management System
+# Bloom & Petal - Flower Shop Management System
 
-A website for a flower shop, made with HTML, CSS and a little JavaScript.
-There is no server and no database, so the pages show example records.
+A role-based web app for a flower shop: customers order flowers, florists move orders through the
+workflow, and the owner manages stock, users and reports. Made with **HTML, CSS and JavaScript only**
+(no frameworks, no server). All data is saved in the browser with `localStorage`.
 
 * Subject: CSE326 - Internet Programming
 * Made by: Yash, Raghav and Satyam (Section K4P26GH)
+* Live website: https://project.lpu.lol
+* Code: https://github.com/yash-dhanda/flower-shop
 
 ## How to open it
 
-Live website: https://project.lpu.lol
+Live: https://project.lpu.lol
 
-On your own computer: double click `index.html`, or in VS Code right click it and choose *Open with Live Server*.
+On your own computer: open the folder in VS Code and use *Open with Live Server*, or run
+`python3 -m http.server` in the folder and open http://localhost:8000.
 
-## Login
+## Demo logins
 
-Any email and password will work. The email decides which side opens:
+| Role | Email | Password |
+|---|---|---|
+| Customer | neha@example.com | neha123 |
+| Florist | priya@bloompetal.in | florist123 |
+| Shop owner | meera@bloompetal.in | owner123 |
 
-| Email | Opens |
-|---|---|
-| meera@flowershop.com | Shop owner |
-| priya@flowershop.com | Florist |
-| any other email | Customer |
+The login page also has one-click demo buttons. "Reset demo data" in the account menu puts
+everything back to the start.
+
+## What each role can do
+
+| Customer | Florist | Shop owner |
+|---|---|---|
+| Register and log in | Log in | Log in |
+| Browse, search, filter and sort flowers | See today's work board | See sales, open orders and low stock |
+| Add to cart, change quantities | Move orders to the next stage | Everything a florist can do |
+| Check out with delivery date, time and payment | Add and edit flowers, change stock | Delete flowers |
+| Track orders and cancel early ones | See all orders, search and filter them | Add, edit and remove users |
+| Get notifications | Get notifications for new orders | Reports with charts and CSV download |
 
 ## Pages
 
-| Page | Who uses it | What it shows |
+| Page | Who | What it does |
 |---|---|---|
-| index.html | everyone | Login |
-| register.html | new customer | Registration form |
-| dashboard-customer.html | customer | Her orders |
-| catalog.html | customer | The six flowers with photos, and a search form |
-| cart.html | customer | Cart and delivery form |
-| dashboard-staff.html | florist | Open orders with a Next stage button, low stock |
-| dashboard-admin.html | shop owner | Totals and all orders |
-| orders.html | shop owner | All orders and the order stages |
-| flowers.html | shop owner | Stock list: add, edit and delete flowers |
-| reports.html | shop owner | Totals and a bar chart |
+| index.html | everyone | Front page of the shop |
+| login.html, register.html | visitors | Sign in, create a customer account |
+| home.html | customer | Dashboard: order on the way, shop by type, recent orders |
+| catalog.html | customer | All flowers with search, type tabs, sorting and add to cart |
+| cart.html | customer | Cart, delivery details, payment, place order |
+| orders.html | customer | My orders with tabs and cancel |
+| order.html | all logged in | One order: tracker, items, history, status buttons for the shop |
+| staff.html | florist | Work board with the four order stages |
+| manage-orders.html | florist, owner | Every order with search and filters |
+| stock.html | florist, owner | Add, edit, archive and delete flowers, change stock |
+| admin.html | owner | Sales, charts, recent orders, low stock |
+| reports.html | owner | Reports for a date range, CSV download, print |
+| users.html | owner | Add, edit and remove users and their roles |
+| profile.html | all logged in | Own details and password |
 
-## Where each requirement is
+## The order workflow
 
-| Requirement | Where |
+Pending -> Confirmed -> Preparing -> Out for delivery -> Delivered.
+An order can be cancelled before it is out for delivery (by the customer while it is Pending or
+Confirmed). Cancelling puts the flowers back in stock. Every change is written into the order's
+history and the customer gets a notification.
+
+## How the code is organised
+
+* `css/style.css` - the one stylesheet (colours, layout, every component)
+* `js/app.js` - shared code: data store, login and roles, cart, orders, notifications, header, dialogs
+* `js/pages/*.js` - one small script per page
+* `images/` - flower photos (credits in `images/CREDITS.md`), `fonts/` - the two web fonts
+
+## Who made what
+
+| Student | Files |
 |---|---|
-| Registration and login | register.html, index.html + `checkLogin()` |
-| Role based access | each role has its own pages and menu: customer, florist, shop owner |
-| Dashboard | dashboard-customer, dashboard-staff, dashboard-admin |
-| Add / view / edit / delete | flowers.html: Save, the table, Edit, Delete |
-| Search and filter | search forms on catalog, orders and flowers pages (design only) |
-| Order workflow | catalog -> cart -> delivery form -> Place order |
-| Status tracking | order stages on orders.html, Next stage button on the florist dashboard |
-| Validation | `required`, `type="email"`, phone `pattern="[0-9]{10}"`, password `minlength="6"`, number `min`/`max` |
-| Notifications and confirmations | messages after register, order and save; question before delete; low stock note |
-| Reports | reports.html: totals and sales by type bar chart |
-| Responsive | viewport tag, grids become 1 column below 700px, menu wraps, wide tables scroll |
+| Yash | `css/style.css`, `index`, `login`, `register`, `profile`, `users` pages |
+| Raghav | Customer side: `home`, `catalog`, `cart`, `orders`, `order` pages |
+| Satyam | Shop side: `staff`, `manage-orders`, `stock`, `admin`, `reports` pages |
+| All three | `js/app.js` (the shared data and login code) |
 
-## JavaScript used (`js/script.js`)
+## Limits
 
-* `checkLogin()` opens the right dashboard after login
-* `nextStage()` writes the next stage of an order on the florist dashboard
-* `editFlower()` fills the stock form with a flower's details
-* `deleteFlower()` asks first, then removes the flower's row
-* `alert()` after registering, placing an order and saving a flower
-* `history.back()` on the Back button
-
-## Not done yet
-
-* Nothing is saved, because there is no database. A deleted flower or a new stage comes back after a reload.
-* The search forms are only the design. Searching needs more JavaScript.
-
-## Photo credits
-
-The six flower photos come from Wikimedia Commons. They were cropped and made smaller.
-Each photo keeps its own licence.
-
-| Photo | By | Licence | Source |
-|---|---|---|---|
-| red-rose-bouquet.jpg | Karthika Manikandan | CC0 | https://commons.wikimedia.org/wiki/File:Bouquet_of_red_and_yellow_roses.jpg |
-| white-lily-bunch.jpg | George E. Koronaios | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:A_bunch_of_white_lilies_on_a_black_table.jpg |
-| sunflower-basket.jpg | Ukra.Inka.Roz | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Sunflowers_for_peace.jpg |
-| single-red-rose.jpg | Shixart1985 | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:A_single_red_rose_rests_on_scattered_pages.jpg |
-| money-plant-pot.jpg | Mokkie | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Money_Plant_(Epipremnum_aureum_%27Gold%27).jpg |
-| birthday-combo.jpg | Ronald Saunders | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Flickr_-_ronsaunders47_-_Birthday_bouquet..jpg |
+There is no server, so the data lives in each browser separately, and the login is a demo:
+passwords are only scrambled, not truly protected. A real shop would keep the data and check logins
+on a server.
