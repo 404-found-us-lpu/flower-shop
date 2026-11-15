@@ -183,7 +183,7 @@ var FS = (function () {
     let h = 0x811c9dc5;
     const s = 'bloom&petal:' + text;
     for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); }
-    return ('0000000' + (h >>> 0).toString(16)).slice(-8);
+    return (h >>> 0).toString(16).padStart(8, '0');
   }
 
   function publicUser(u) { if (!u) return null; const copy = clone(u); delete copy.pass; return copy; }
@@ -302,12 +302,11 @@ var FS = (function () {
   }
 
   /* ---------------------------------------------------------------- 5. Flowers (stock) */
-  function byName(a, b) { return a.name.localeCompare(b.name); }
   function findFlower(id) { return db.flowers.find(function (f) { return f.id === Number(id); }) || null; }
 
-  // Flowers on sale. Pass { all: true } to also get archived ones (stock page).
+  // Flowers on sale, A-Z. Pass { all: true } to also get archived ones (stock page).
   function getFlowers(opts) {
-    return clone(db.flowers.filter(function (f) { return (opts && opts.all) || f.active; }).sort(byName));
+    return clone(db.flowers.filter(function (f) { return (opts && opts.all) || f.active; }).sort(function (a, b) { return a.name.localeCompare(b.name); }));
   }
   function getFlower(id) { return clone(findFlower(id)); }
 
@@ -405,17 +404,15 @@ var FS = (function () {
     save();
     return { ok: true };
   }
-  function clearCart() { const me = rawUser(); if (me) { db.carts[me.id] = []; save(); } }
 
   /* ---------------------------------------------------------------- 7. Orders and the order workflow */
   function findOrder(id) { return db.orders.find(function (o) { return o.id === Number(id); }) || null; }
-  function newestFirst(a, b) { return b.id - a.id; }
 
-  // Shop team gets every order. A customer gets only their own.
+  // Shop team gets every order. A customer gets only their own. Newest first.
   function getOrders() {
     const me = rawUser();
     if (!me) return [];
-    return clone(db.orders.filter(function (o) { return isStaff(me) || o.userId === me.id; }).sort(newestFirst));
+    return clone(db.orders.filter(function (o) { return isStaff(me) || o.userId === me.id; }).sort(function (a, b) { return b.id - a.id; }));
   }
   function getOrder(id) {
     const me = rawUser();
@@ -513,12 +510,6 @@ var FS = (function () {
       .sort(function (a, b) { return (new Date(b.at) - new Date(a.at)) || (b.id - a.id); }));   // newest first
   }
   function unreadCount() { return myNotifications().filter(function (n) { return !n.read; }).length; }
-  function markAllRead() {
-    const me = rawUser();
-    if (!me) return;
-    db.notes.forEach(function (n) { if (n.userId === me.id) n.read = true; });
-    save();
-  }
 
   // Numbers for dashboards and reports (shop team only). opts = { from: 'YYYY-MM-DD', to: 'YYYY-MM-DD' }
   function stats(opts) {
@@ -545,18 +536,16 @@ var FS = (function () {
       if (!people[o.userId]) people[o.userId] = { name: o.customer, orders: 0, spent: 0 };
       people[o.userId].orders += 1; people[o.userId].spent += o.total;
     });
-    const list = function (obj) { return Object.keys(obj).map(function (k) { return obj[k]; }); };
     return {
       orders: all.length, paidOrders: good.length, cancelled: byStatus.Cancelled, revenue: revenue,
       average: good.length ? Math.round(revenue / good.length) : 0,
       open: all.filter(function (o) { return o.status !== 'Delivered' && o.status !== 'Cancelled'; }).length,
       byStatus: byStatus,
       byCategory: Object.keys(cat).map(function (k) { return { label: k, value: cat[k] }; }).sort(function (a, b) { return b.value - a.value; }),
-      topFlowers: list(top).sort(function (a, b) { return b.qty - a.qty || b.revenue - a.revenue; }),
-      byDay: list(days).sort(function (a, b) { return a.date < b.date ? -1 : 1; }),
-      topCustomers: list(people).sort(function (a, b) { return b.spent - a.spent; }),
+      topFlowers: Object.values(top).sort(function (a, b) { return b.qty - a.qty || b.revenue - a.revenue; }),
+      byDay: Object.values(days).sort(function (a, b) { return a.date < b.date ? -1 : 1; }),
+      topCustomers: Object.values(people).sort(function (a, b) { return b.spent - a.spent; }),
       customers: db.users.filter(function (u) { return u.role === 'customer'; }).length,
-      flowers: db.flowers.filter(function (f) { return f.active; }).length,
       lowStock: clone(db.flowers.filter(function (f) { return f.active && f.stock <= LOW_STOCK; }).sort(function (a, b) { return a.stock - b.stock; }))
     };
   }
@@ -578,9 +567,8 @@ var FS = (function () {
   const BRAND_MARK = '<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.3"/><circle cx="17.2" cy="10.4" r="3.3"/><circle cx="15.2" cy="16.4" r="3.3"/><circle cx="8.8" cy="16.4" r="3.3"/><circle cx="6.8" cy="10.4" r="3.3"/><circle class="core" cx="12" cy="12" r="2.4"/></svg></span>';
 
   function renderHeader() {
-    if (document.getElementById('fs-header')) return;
     const user = currentUser();
-    const page = document.documentElement.dataset.page || '';
+    const page = document.documentElement.dataset.page;
     let links = '', end = '', pops = '';
     if (user) {
       links = NAV[user.role].map(function (n) {
@@ -620,7 +608,10 @@ var FS = (function () {
     const toggle = function (button, show) { const wasOpen = button.getAttribute('aria-expanded') === 'true'; closeAll(); if (!wasOpen) { show(); button.setAttribute('aria-expanded', 'true'); } };
     bell.addEventListener('click', function (e) {
       e.stopPropagation();
-      toggle(bell, function () { notes.innerHTML = notesHTML(); notes.hidden = false; if (unreadCount()) markAllRead(); });
+      toggle(bell, function () {
+        notes.innerHTML = notesHTML(); notes.hidden = false;
+        if (unreadCount()) { db.notes.forEach(function (n) { if (n.userId === user.id) n.read = true; }); save(); }   // mark them all read
+      });
     });
     avatar.addEventListener('click', function (e) { e.stopPropagation(); toggle(avatar, function () { menu.hidden = false; }); });
     burger.addEventListener('click', function (e) { e.stopPropagation(); toggle(burger, function () { nav.classList.add('nav-open'); }); });
@@ -633,7 +624,7 @@ var FS = (function () {
       if (act.dataset.act === 'reset') {
         closeAll();
         confirmBox('All orders, flowers and users go back to the demo data. You will be logged out.', { title: 'Reset demo data?', okText: 'Reset', danger: true })
-          .then(function (yes) { if (yes) { resetDemo(); sessionStorage.removeItem(SESSION_KEY); location.href = 'index.html'; } });
+          .then(function (yes) { if (yes) { resetDemo(); logout(); } });
       }
     });
     document.addEventListener('click', closeAll);
@@ -651,14 +642,12 @@ var FS = (function () {
 
   // Keeps the cart number and the bell number in the header correct.
   function refreshHeader() {
-    if (typeof document === 'undefined' || !document.getElementById) return;
     const cart = document.getElementById('fs-cart-count'), bell = document.getElementById('fs-bell-count');
     if (cart) { const n = cartCount(); cart.textContent = n; cart.hidden = n === 0; }
     if (bell) { const n = unreadCount(); bell.textContent = n; bell.hidden = n === 0; }
   }
 
   function renderFooter() {
-    if (document.getElementById('fs-footer')) return;
     const footer = document.createElement('footer');
     footer.className = 'site-footer';
     footer.id = 'fs-footer';
@@ -672,7 +661,7 @@ var FS = (function () {
 
   // Small message in the corner. type: 'success' (default), 'error' or 'info'
   function toast(message, type) {
-    if (typeof document === 'undefined' || !document.body) return;
+    if (!document.body) return;
     let box = document.getElementById('fs-toasts');
     if (!box) { box = document.createElement('div'); box.id = 'fs-toasts'; box.className = 'toasts'; box.setAttribute('aria-live', 'polite'); document.body.append(box); }
     const kind = type || 'success';
@@ -806,21 +795,15 @@ var FS = (function () {
     calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
     edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
     trash: '<path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
-    lock: '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
     home: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h16"/>',
     image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
     alert: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
     refresh: '<path d="M1 4v6h6"/><path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10"/>',
     receipt: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>',
-    pin: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
     phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',
-    mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/>',
-    filter: '<path d="M22 3H2l8 9.5V19l4 2v-8.5z"/>',
-    chevron: '<path d="m6 9 6 6 6-6"/>',
     flower: '<circle cx="12" cy="12" r="2.5"/><path d="M12 9.5a3.5 3.5 0 1 0-3-5.3M14.5 12a3.5 3.5 0 1 0 5.3-3M12 14.5a3.5 3.5 0 1 0 3 5.3M9.5 12a3.5 3.5 0 1 0-5.3 3M9 4.2a3.5 3.5 0 0 0-4.8 4.8M19.8 9a3.5 3.5 0 0 0-4.8-4.8M15 19.8a3.5 3.5 0 0 0 4.8-4.8M4.2 15A3.5 3.5 0 0 0 9 19.8"/>',
     gift: '<path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>',
-    star: '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8-6.2-3.3-6.2 3.3 1.2-6.8-5-4.9 6.9-1z"/>',
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
     eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'
   };
@@ -930,11 +913,9 @@ var FS = (function () {
   // It runs after the page guard passed and the header exists.
   function ready(fn) { if (!blocked) whenDom(function () { fn(currentUser()); }); }
 
-  if (typeof document !== 'undefined' && document.documentElement) {
-    guard();
-    // <html data-bare> (login and register pages) gets no header and footer.
-    if (!blocked && !document.documentElement.hasAttribute('data-bare')) whenDom(function () { renderHeader(); renderFooter(); refreshHeader(); });
-  }
+  guard();
+  // <html data-bare> (login and register pages) gets no header and footer.
+  if (!blocked && !document.documentElement.hasAttribute('data-bare')) whenDom(function () { renderHeader(); renderFooter(); refreshHeader(); });
 
   return {
     // settings
@@ -944,15 +925,15 @@ var FS = (function () {
     ready: ready, resetDemo: resetDemo,
     // login and users
     currentUser: currentUser, login: login, logout: logout, register: register, getUsers: getUsers, saveUser: saveUser, deleteUser: deleteUser,
-    updateProfile: updateProfile, changePassword: changePassword, isEmail: isEmail, isPhone: isPhone,
+    updateProfile: updateProfile, changePassword: changePassword,
     // flowers
     getFlowers: getFlowers, getFlower: getFlower, saveFlower: saveFlower, deleteFlower: deleteFlower,
     // cart
-    getCart: getCart, cartCount: cartCount, cartTotals: cartTotals, addToCart: addToCart, setCartQty: setCartQty, removeFromCart: removeFromCart, clearCart: clearCart,
+    getCart: getCart, cartCount: cartCount, cartTotals: cartTotals, addToCart: addToCart, setCartQty: setCartQty, removeFromCart: removeFromCart,
     // orders
     getOrders: getOrders, getOrder: getOrder, placeOrder: placeOrder, nextStatuses: nextStatuses, canCancel: canCancel, setOrderStatus: setOrderStatus,
-    // notifications and numbers
-    myNotifications: myNotifications, unreadCount: unreadCount, markAllRead: markAllRead, stats: stats, dailySales: dailySales,
+    // report numbers
+    stats: stats, dailySales: dailySales,
     // page pieces
     toast: toast, openModal: openModal, confirm: confirmBox, formData: formData, showErrors: showErrors, clearErrors: clearErrors,
     esc: esc, money: money, initials: initials, params: params, today: dayFromNow, fmtDate: fmtDate, fmtTime: fmtTime, fmtDateTime: fmtDateTime, timeAgo: timeAgo,
