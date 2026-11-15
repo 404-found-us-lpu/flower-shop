@@ -1,52 +1,129 @@
 <!DOCTYPE html>
-<!-- Flower Shop Management System - cart.html (cart and delivery form) - CSE326 - Made by: Raghav -->
-<html lang="en">
+<!-- Bloom & Petal - cart.html - Made by: Raghav -->
+<html lang="en" data-page="cart" data-roles="customer">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Cart - Flower Shop Management System</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your Bloom &amp; Petal cart: change quantities, add the delivery details and place your order.">
+  <title>Your cart · Bloom &amp; Petal</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js"></script>
 </head>
 <body>
-    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Customer - Neha Sharma</div> </header>
-    <nav class="menu"> <a href="dashboard-customer.html">Dashboard</a> <a href="catalog.html">Flowers</a> <a class="active" href="cart.html">Cart</a> <a href="index.html">Logout</a> </nav>
-    <main class="container">
-        <p><button type="button" class="btn btn-small" onclick="history.back()">Back</button></p>
-        <h1>My cart</h1>
-        <p>Check the flowers in your cart and fill in the delivery details.</p>
-        <div class="card">
-            <h2>Flowers in the cart</h2>
-            <table>
-                <tr><th>Flower</th><th>Price</th><th>Quantity</th><th>Total</th></tr>
-                <tr><td>Red Rose Bouquet</td><td>Rs 800</td><td>1</td><td>Rs 800</td></tr>
-                <tr><td>Single Red Rose</td><td>Rs 100</td><td>2</td><td>Rs 200</td></tr>
-                <tfoot>
-                    <tr><td colspan="3">Items total</td><td>Rs 1,000</td></tr>
-                    <tr><td colspan="3">Delivery charge</td><td>Rs 0</td></tr>
-                    <tr><td colspan="3">To pay</td><td>Rs 1,000</td></tr>
-                </tfoot>
-            </table>
-            <p class="small-note">Delivery is Rs 50. It is free on orders above Rs 999.</p>
-        </div>
-        <div class="card">
-            <h2>Delivery details</h2>
-            <!-- alert() shows a message box. Then the form opens the dashboard again. -->
-            <form action="dashboard-customer.html" method="get" onsubmit="alert('Thank you! Your order has been placed.')">
-                <label for="rname">Receiver name</label>
-                <input type="text" id="rname" placeholder="Who will receive the flowers" required>
-                <label for="rphone">Phone</label>
-                <input type="tel" id="rphone" pattern="[0-9]{10}" maxlength="10" placeholder="10 digit number" required>
-                <label for="raddress">Full address</label>
-                <textarea id="raddress" placeholder="House number, street, city" required></textarea>
-                <label for="rdate">Delivery date</label>
-                <input type="date" id="rdate" required>
-                <label for="rpayment">Payment</label>
-                <select id="rpayment"> <option>Cash on delivery</option> <option>UPI</option> <option>Card</option> </select>
-                <button type="submit" class="btn btn-main">Place order</button>
+  <main id="main">
+    <section class="hero hero-sm">
+      <div class="wrap">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="home.html">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="catalog.html">Flowers</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Cart</span>
+        </nav>
+        <h1>Your cart</h1>
+        <p class="hero-sub" id="cart-sub">Check your flowers, then tell us where and when to deliver.</p>
+        <div class="chips" id="hero-chips"></div>
+      </div>
+    </section>
+
+    <div class="wrap section">
+      <!-- Two columns while the cart has flowers (js/pages/cart.js removes "split" when it is empty) -->
+      <div class="split" id="layout">
+        <div class="stack-lg">
+          <!-- The flowers in the cart (rows filled by js/pages/cart.js) -->
+          <section class="card reveal" aria-labelledby="cart-title">
+            <div class="card-head">
+              <h2 class="card-title" id="cart-title">In your cart</h2>
+              <span class="chip chip-gold" id="cart-chip" hidden></span>
+            </div>
+            <ul class="list" id="cart-list" aria-label="Flowers in your cart"></ul>
+            <div id="cart-empty" hidden></div>
+            <div id="cart-foot">
+              <hr class="divider">
+              <a class="link-arrow" href="catalog.html">Continue shopping <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </section>
+
+          <!-- Who gets the flowers, where and when. The "Place order" button in the summary submits this form. -->
+          <section class="card reveal reveal-2" id="delivery-card" aria-labelledby="delivery-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="delivery-title">Delivery details</h2>
+                <p class="muted mb-0">Who gets the flowers, where and when.</p>
+              </div>
+            </div>
+            <form class="form-grid" id="delivery-form">
+              <label class="check full">
+                <input type="checkbox" id="to-me" checked>
+                <span>Send it to me <span class="muted small">(your own name, number and address)</span></span>
+              </label>
+
+              <div class="field">
+                <label for="d-name">Receiver's name</label>
+                <input type="text" id="d-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
+                <p class="error"></p>
+              </div>
+
+              <div class="field">
+                <label for="d-phone">Mobile number</label>
+                <input type="tel" id="d-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric" autocomplete="tel-national" aria-describedby="d-phone-hint" title="10 digits, starting with 6, 7, 8 or 9">
+                <p class="hint" id="d-phone-hint">10 digits, starting with 6, 7, 8 or 9.</p>
+                <p class="error"></p>
+              </div>
+
+              <div class="field full">
+                <label for="d-address">Delivery address</label>
+                <textarea id="d-address" name="address" required minlength="10" maxlength="200" rows="3" autocomplete="street-address" aria-describedby="d-address-hint"></textarea>
+                <p class="hint" id="d-address-hint">House number, street, area and city.</p>
+                <p class="error"></p>
+              </div>
+
+              <div class="field">
+                <label for="d-date">Delivery date</label>
+                <input type="date" id="d-date" name="deliveryDate" required>
+                <p class="hint">Any day from today to 60 days ahead.</p>
+                <p class="error"></p>
+              </div>
+
+              <div class="field full" role="radiogroup" aria-labelledby="slot-label">
+                <span class="label" id="slot-label">Delivery time</span>
+                <div class="segmented" id="slot-options"></div>
+                <p class="error"></p>
+              </div>
+
+              <div class="field full" role="radiogroup" aria-labelledby="pay-label">
+                <span class="label" id="pay-label">Payment</span>
+                <div class="segmented" id="pay-options"></div>
+                <p class="error"></p>
+              </div>
+
+              <div class="field full">
+                <div class="label-row">
+                  <label class="label" for="d-note">Card message <span class="muted">(optional)</span></label>
+                  <span class="tiny muted num" id="note-count">0/120</span>
+                </div>
+                <textarea id="d-note" name="note" maxlength="120" rows="3" aria-describedby="note-count"></textarea>
+                <p class="error"></p>
+              </div>
             </form>
-            <p><a href="catalog.html">Add more flowers</a></p>
+          </section>
         </div>
-    </main>
-    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
+
+        <!-- Totals and the button that places the order (stays in view while scrolling on big screens) -->
+        <aside class="card stack reveal reveal-3" id="summary" aria-labelledby="summary-title" style="position: sticky; top: 96px;">
+          <h2 class="card-title" id="summary-title">Order summary</h2>
+          <div class="summary" id="summary-lines"></div>
+          <div>
+            <div class="progress" id="free-bar" role="progressbar" aria-label="Progress to free delivery" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span style="width: 0%;"></span></div>
+            <p class="small muted mb-0" id="free-text" style="margin-top: 8px;"></p>
+          </div>
+          <button type="submit" form="delivery-form" class="btn btn-primary btn-lg btn-block" id="place-btn">Place order</button>
+          <p class="tiny muted center mb-0" id="pay-note"></p>
+        </aside>
+      </div>
+    </div>
+  </main>
+  <script src="js/pages/cart.js"></script>
 </body>
 </html>
