@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal - users.html - Made by: Yash -->
+<html lang="en" data-page="users" data-roles="owner">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The shop owner's list of customers, florists and owners, with search, add, edit and remove.">
+  <title>Users · Bloom &amp; Petal</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <main id="main">
+    <section class="hero hero-sm">
+      <div class="wrap">
+        <div class="hero-row">
+          <div>
+            <h1>Users</h1>
+            <p class="hero-sub">Customers and the shop team.</p>
+            <div class="chips" id="role-chips"></div>
+          </div>
+          <button type="button" class="btn btn-gold" id="add-user">
+            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            Add user
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap section stack">
+      <div class="toolbar">
+        <div class="input-icon grow">
+          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+          <label class="sr-only" for="user-search">Search users</label>
+          <input type="search" id="user-search" placeholder="Search by name, email or phone" autocomplete="off">
+        </div>
+        <div class="tabs" id="role-tabs" role="group" aria-label="Show users by role">
+          <button type="button" class="tab active" data-role="all" aria-pressed="true">All <span class="count">0</span></button>
+          <button type="button" class="tab" data-role="customer" aria-pressed="false">Customers <span class="count">0</span></button>
+          <button type="button" class="tab" data-role="florist" aria-pressed="false">Florists <span class="count">0</span></button>
+          <button type="button" class="tab" data-role="owner" aria-pressed="false">Owners <span class="count">0</span></button>
+        </div>
+      </div>
+
+      <div class="card card-flush">
+        <div class="table-wrap" id="users-table">
+          <table class="table" aria-label="Users">
+            <thead>
+              <tr>
+                <th scope="col">User</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Role</th>
+                <th scope="col" class="right">Orders</th>
+                <th scope="col">Joined</th>
+                <th scope="col" class="right"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody id="user-rows"></tbody>
+          </table>
+        </div>
+        <div class="empty" id="users-empty" hidden></div>
+      </div>
+    </div>
+  </main>
+  <script src="js/pages/users.js"></script>
+</body>
+</html>

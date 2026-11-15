@@ -1,44 +1,132 @@
 <!DOCTYPE html>
-<!-- Flower Shop Management System - index.html (login page) - CSE326 - Made by: Yash -->
-<html lang="en">
+<!-- Bloom & Petal - index.html - Made by: Yash -->
+<html lang="en" data-page="index" data-roles="public">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Flower Shop Management System</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Bloom &amp; Petal keeps flower orders, stock and deliveries in one place for customers, florists and the shop owner.">
+  <title>Welcome · Bloom &amp; Petal</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js"></script>
 </head>
 <body>
-    <header class="topbar"> <div class="logo">Bloom &amp; Petal</div> <div>Flower Shop Management System</div> </header>
-    <main class="container">
-        <h1>Login</h1>
-        <p>Please enter your email and password to open your account.</p>
-        <div class="card">This is a college project made with HTML, CSS and a little JavaScript. The pages show example records. Any email and password will work. Use the emails below to open each side.</div>
-        <div class="card">
-            <!-- the browser first checks "required" and type="email", then checkLogin() in js/script.js opens the right page -->
-            <form onsubmit="return checkLogin()">
-                <label for="email">Email</label>
-                <input type="email" id="email" placeholder="neha@example.com" required>
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Your password" required>
-                <button type="submit" class="btn btn-main">Login</button>
-            </form>
+  <main id="main">
+    <section class="hero hero-tall">
+      <div class="wrap reveal">
+        <p class="hero-eyebrow">Flower shop management</p>
+        <h1>Fresh flowers,<br> managed beautifully.</h1>
+        <p class="hero-sub">Orders, stock and deliveries in one place, for the customers who send flowers, the florists who make them and the owner who runs the shop.</p>
+        <!-- Signed-in visitors get "Go to my dashboard" here instead (js/pages/index.js) -->
+        <div class="hero-actions" data-actions>
+          <a class="btn btn-gold btn-lg" href="register.html">Create an account</a>
+          <a class="btn btn-outline-light btn-lg" href="login.html">Sign in</a>
         </div>
-        <div class="card">
-            <h2>New customer?</h2>
-            <p>If you do not have an account, please fill the registration form.</p>
-            <p><a class="btn btn-main" href="register.html">Create an account</a></p>
+        <div class="chips">
+          <span class="chip chip-gold" data-icon="flower" data-size="16"><span id="flower-kinds">12 kinds of flowers</span></span>
+          <span class="chip" data-icon="truck" data-size="16">Same-day delivery in Jalandhar</span>
+          <span class="chip" data-icon="users" data-size="16">3 roles, one shop</span>
         </div>
-        <div class="card">
-            <h2>Example emails</h2>
-            <table>
-                <tr><th>Who</th><th>Email</th></tr>
-                <tr><td>Shop owner</td><td>meera@flowershop.com</td></tr>
-                <tr><td>Florist</td><td>priya@flowershop.com</td></tr>
-                <tr><td>Customer</td><td>any other email</td></tr>
-            </table>
+      </div>
+    </section>
+
+    <!-- The dark card that slides up over the hero: live numbers about the flowers on sale -->
+    <div class="wrap hero-pull">
+      <section class="card-dark reveal reveal-2" aria-label="The shop today">
+        <div class="stats" id="shop-today"></div>
+      </section>
+    </div>
+
+    <div class="wrap section stack-lg">
+      <section class="card reveal reveal-3" aria-labelledby="season-title">
+        <div class="card-head">
+          <div>
+            <h2 class="card-title" id="season-title">In season</h2>
+            <p class="muted mb-0">Picked from what our florists have the most of right now.</p>
+          </div>
+          <a class="link-arrow" id="all-flowers" href="login.html?next=catalog.html">See all flowers</a>
         </div>
-    </main>
-    <footer class="foot"> Flower Shop Management System - CSE326 Internet Programming - Project<br> Made by Yash, Raghav and Satyam - Section K4P26GH </footer>
-    <script src="js/script.js"></script>
+        <div id="season"></div>
+      </section>
+
+      <div class="grid-2 reveal reveal-4">
+        <section class="card" aria-labelledby="how-title">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title" id="how-title">How it works</h2>
+              <p class="muted mb-0">From the first flower to the front door.</p>
+            </div>
+          </div>
+          <div class="stack-lg">
+            <ol class="steps-list">
+              <li class="active">
+                <span class="step-num">1</span>
+                <div>
+                  <strong>Pick your flowers</strong>
+                  <p>Browse bouquets, single stems, plants and gifts, then add what you like to your cart.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">2</span>
+                <div>
+                  <strong>Choose a delivery time</strong>
+                  <p>Pick a day in the next two months and a morning, afternoon or evening slot. Pay by cash, UPI or card.</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">3</span>
+                <div>
+                  <strong>Track it to the door</strong>
+                  <p>Watch it move from confirmed to delivered, with a notification at every step.</p>
+                </div>
+              </li>
+            </ol>
+            <div class="callout" data-icon="clock"><span>Changed your mind? You can cancel an order until the florist starts preparing it.</span></div>
+          </div>
+        </section>
+
+        <section class="card" aria-labelledby="roles-title">
+          <div class="card-head">
+            <div>
+              <h2 class="card-title" id="roles-title">One shop, three roles</h2>
+              <p class="muted mb-0">Everyone signs in to a space made for their job.</p>
+            </div>
+          </div>
+          <div class="stack-lg">
+            <div class="feature">
+              <span class="feature-icon" data-icon="bag" data-size="22"></span>
+              <h3>Customer</h3>
+              <p>Orders flowers for any day and tracks every delivery to the door.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-icon" data-icon="flower" data-size="22"></span>
+              <h3>Florist</h3>
+              <p>Confirms and prepares orders, and keeps the flower stock up to date.</p>
+            </div>
+            <div class="feature">
+              <span class="feature-icon" data-icon="chart" data-size="22"></span>
+              <h3>Shop owner</h3>
+              <p>Reads the sales reports and manages staff and customer accounts.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card-dark reveal" aria-labelledby="cta-title">
+        <div class="row between">
+          <div>
+            <p class="hero-eyebrow">Ready when you are</p>
+            <h2 id="cta-title">Start your first order</h2>
+            <p class="muted mb-0" id="cta-text">Create a free account in a minute. Your cart, orders and delivery updates stay in one place.</p>
+          </div>
+          <div class="row" data-actions>
+            <a class="btn btn-gold btn-lg" href="register.html">Create an account</a>
+            <a class="btn btn-outline-light btn-lg" href="login.html">Sign in</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="js/pages/index.js"></script>
 </body>
 </html>
