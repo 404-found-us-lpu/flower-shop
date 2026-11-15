@@ -346,9 +346,7 @@ FS.ready(function (user) {
       const data = FS.formData(form);
       data.id = editId;
       data.image = image;
-      saveBtn.disabled = true;
       const r = FS.saveFlower(data);
-      saveBtn.disabled = false;
       if (r.ok) {
         FS.toast(f ? `Saved the changes to ${r.flower.name}.` : `${r.flower.name} is now in the shop.`);
         modal.close(true);
@@ -377,7 +375,7 @@ FS.ready(function (user) {
 
   // stock.html?tab=low opens straight on that tab (handy for links from the dashboards).
   const startTab = FS.params().get('tab');
-  if (TABS.indexOf(startTab) !== -1) state.tab = startTab;
+  if (TABS.includes(startTab)) state.tab = startTab;
 
   els.add.addEventListener('click', function () { openEditor(null); });
   els.search.addEventListener('input', function () { state.q = els.search.value.trim().toLowerCase(); refilter(); });

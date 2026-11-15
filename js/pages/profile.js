@@ -109,10 +109,7 @@ FS.ready(function (user) {
   // Save name, mobile number and address
   detailsForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    const button = detailsForm.querySelector('[type="submit"]');
-    button.disabled = true;
     const r = FS.updateProfile(FS.formData(detailsForm));
-    button.disabled = false;
     if (!r.ok) { FS.showErrors(detailsForm, r.errors); return; }
     FS.clearErrors(detailsForm);
     fillDetails(r.user);
@@ -123,10 +120,7 @@ FS.ready(function (user) {
   passwordForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const data = FS.formData(passwordForm);
-    const button = passwordForm.querySelector('[type="submit"]');
-    button.disabled = true;
     const r = FS.changePassword(data.current, data.next, data.confirm);
-    button.disabled = false;
     if (!r.ok) { FS.showErrors(passwordForm, r.errors); return; }
     passwordForm.reset();
     FS.clearErrors(passwordForm);

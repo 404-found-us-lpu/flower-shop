@@ -9,16 +9,10 @@ FS.ready(function () {
   const cartLink = document.getElementById('cart-link');
   const recent = document.getElementById('recent');
   const picked = document.getElementById('picked');
-  const WEEKDAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   // "1 order" or "3 orders"
   function plural(n, word) {
     return n + ' ' + word + (n === 1 ? '' : 's');
-  }
-
-  // An order is open until it is delivered or cancelled.
-  function isOpen(order) {
-    return order.status !== 'Delivered' && order.status !== 'Cancelled';
   }
 
   // "Today", "Tomorrow" or the day of the week for a 'YYYY-MM-DD' date.
@@ -26,7 +20,7 @@ FS.ready(function () {
     if (ymd === FS.today(0)) return 'Today';
     if (ymd === FS.today(1)) return 'Tomorrow';
     const p = ymd.split('-').map(Number);
-    return WEEKDAYS[new Date(p[0], p[1] - 1, p[2]).getDay()];
+    return new Date(p[0], p[1] - 1, p[2]).toLocaleDateString('en-GB', { weekday: 'long' });
   }
 
   // Hero: "Welcome, Neha" and the two chips under it.
@@ -41,7 +35,7 @@ FS.ready(function () {
 
   // The dark card: the newest order that is still on its way, or a nudge to go shopping.
   function renderCurrent(orders) {
-    const open = orders.filter(isOpen);
+    const open = orders.filter(o => o.status !== 'Delivered' && o.status !== 'Cancelled');   // still on its way
     const o = open[0];                                   // FS.getOrders() gives the newest first
     if (!o) {
       current.innerHTML = `

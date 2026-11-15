@@ -58,12 +58,6 @@ FS.ready(function (user) {
     return FS.esc(count) + (count === 1 ? ' item' : ' items');
   }
 
-  // The history entry that set the present status (who did it and when).
-  function lastStep(order) {
-    const step = order.history.filter(function (h) { return h.status === order.status; }).pop();
-    return step || { at: order.createdAt, by: order.customer };
-  }
-
   // The big line on the dark card.
   function headline(order) {
     const first = order.recipient.name.split(' ')[0];
@@ -74,7 +68,8 @@ FS.ready(function (user) {
 
   // "Arriving tomorrow, Morning (9 am - 12 pm)." or when it was delivered or cancelled.
   function deliveryLine(order) {
-    const step = lastStep(order);
+    const step = order.history.filter(function (h) { return h.status === order.status; }).pop()   // who set the present status, and when
+      || { at: order.createdAt, by: order.customer };
     if (order.status === 'Delivered') return FS.icon('check', 18) + ' Delivered on ' + FS.fmtDateTime(step.at) + '.';
     if (order.status === 'Cancelled') return FS.icon('x', 18) + ' Cancelled on ' + FS.fmtDateTime(step.at) + ' by ' + FS.esc(step.by) + '.';
     const late = order.deliveryDate < FS.today(0);
@@ -301,10 +296,7 @@ FS.ready(function (user) {
   function changeStatus(status) {
     const order = FS.getOrder(id);
     if (!order) return;
-    if (status !== 'Cancelled') {
-      saveStatus(status);
-      return;
-    }
+    if (status !== 'Cancelled') { saveStatus(status); return; }
     const first = order.customer.split(' ')[0];
     FS.confirm('Order #' + order.id + ' for ' + order.customer + ' will be cancelled and its flowers go back into stock. ' +
       first + ' will get a notification. This cannot be undone.',

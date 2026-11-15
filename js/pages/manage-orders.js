@@ -8,7 +8,7 @@ FS.ready(function () {
   const tabs = document.getElementById('tabs');
   const results = document.getElementById('results');
   const asked = FS.params().get('status');            // manage-orders.html?status=Pending opens that tab
-  let status = TABS.indexOf(asked) !== -1 ? asked : 'All';
+  let status = TABS.includes(asked) ? asked : 'All';
 
   // "Today", "Tomorrow" or a date such as "17 Nov 2026".
   function dayLabel(date) {
@@ -39,8 +39,7 @@ FS.ready(function () {
 
   // True when the search text is in the order number, the customer's name or the receiver's name.
   function matches(order, text) {
-    if (!text) return true;
-    return ('#' + order.id + ' ' + order.customer + ' ' + order.recipient.name).toLowerCase().indexOf(text) !== -1;
+    return ('#' + order.id + ' ' + order.customer + ' ' + order.recipient.name).toLowerCase().includes(text);
   }
 
   // The buttons at the end of a row: move on, cancel (when allowed) and view.
@@ -143,7 +142,6 @@ FS.ready(function () {
   tabs.innerHTML = TABS.map(function (s) {
     return `<button type="button" class="tab" data-status="${FS.esc(s)}" aria-pressed="false">${FS.esc(s)}<span class="count">0</span></button>`;
   }).join('');
-  document.getElementById('search-box').insertAdjacentHTML('afterbegin', FS.icon('search', 18));
 
   search.addEventListener('input', render);
   when.addEventListener('change', render);

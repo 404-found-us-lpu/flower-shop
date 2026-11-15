@@ -3,7 +3,6 @@
 FS.ready(function (me) {
   const ROLES = ['customer', 'florist', 'owner'];
   const ROLE_ORDER = { owner: 0, florist: 1, customer: 2 };
-  const WORDS = { customer: ['customer', 'customers'], florist: ['florist', 'florists'], owner: ['owner', 'owners'] };
   const CHIP_ICON = { customer: 'user', florist: 'flower', owner: 'shield' };
 
   const search = document.getElementById('user-search');
@@ -13,18 +12,6 @@ FS.ready(function (me) {
   const rows = document.getElementById('user-rows');
   const empty = document.getElementById('users-empty');
   let activeRole = 'all';   // the open tab: 'all' or one role
-
-  // "1 florist" or "3 florists"
-  function countText(n, role) {
-    return n + ' ' + WORDS[role][n === 1 ? 0 : 1];
-  }
-
-  // How many people have each role: { all, customer, florist, owner }
-  function countRoles(users) {
-    const counts = { all: users.length, customer: 0, florist: 0, owner: 0 };
-    users.forEach(function (u) { counts[u.role] += 1; });
-    return counts;
-  }
 
   // People who match the search box and the open tab: owners, then florists, then customers, each A-Z
   function visibleUsers(users) {
@@ -76,7 +63,7 @@ FS.ready(function (me) {
         <button type="button" class="btn btn-ghost" data-act="clear">Clear search</button>`;
     }
     return `<span class="empty-icon">${FS.icon('users', 28)}</span>
-      <h3>No ${activeRole === 'all' ? 'users' : WORDS[activeRole][1]} yet</h3>
+      <h3>No ${activeRole === 'all' ? 'users' : activeRole + 's'} yet</h3>
       <p>Add someone and they can log in straight away.</p>
       <button type="button" class="btn btn-primary" data-act="add">${FS.icon('plus', 18)}Add user</button>`;
   }
@@ -84,9 +71,10 @@ FS.ready(function (me) {
   // Draw the hero chips, the tab counts and the table from the saved data
   function render() {
     const users = FS.getUsers();
-    const counts = countRoles(users);
-    chips.innerHTML = ROLES.map(function (r) {
-      return `<span class="chip">${FS.icon(CHIP_ICON[r], 16)}${countText(counts[r], r)}</span>`;
+    const counts = { all: users.length, customer: 0, florist: 0, owner: 0 };   // how many people have each role
+    users.forEach(function (u) { counts[u.role] += 1; });
+    chips.innerHTML = ROLES.map(function (r) {                                 // "1 florist" or "3 florists"
+      return `<span class="chip">${FS.icon(CHIP_ICON[r], 16)}${counts[r]} ${r}${counts[r] === 1 ? '' : 's'}</span>`;
     }).join('');
     tabs.querySelectorAll('.tab').forEach(function (tab) {
       const on = tab.dataset.role === activeRole;
@@ -110,35 +98,29 @@ FS.ready(function (me) {
       <div class="field">
         <label for="u-name">Full name</label>
         <input id="u-name" name="name" type="text" value="${FS.esc(u.name)}" required minlength="2" maxlength="60" autocomplete="off">
-        <p class="error"></p>
       </div>
       <div class="field">
         <label for="u-email">Email</label>
         <input id="u-email" name="email" type="email" value="${FS.esc(u.email)}" required maxlength="80" autocomplete="off">
-        <p class="error"></p>
       </div>
       <div class="field">
         <label for="u-phone">Mobile number</label>
         <input id="u-phone" name="phone" type="tel" value="${FS.esc(u.phone)}" required pattern="[6-9][0-9]{9}" maxlength="10"
           title="10 digits, starting with 6, 7, 8 or 9" autocomplete="off">
-        <p class="error"></p>
       </div>
       <div class="field">
         <label for="u-role">Role</label>
         <select id="u-role" name="role" required${isMe ? ' disabled' : ''}>${options}</select>
         ${isMe ? '<p class="hint">You cannot change your own role.</p>' : ''}
-        <p class="error"></p>
       </div>
       <div class="field full">
         <label for="u-password">${editing ? 'New password' : 'Password'}</label>
         <input id="u-password" name="password" type="password" minlength="6" maxlength="64" autocomplete="new-password"${editing ? '' : ' required'}>
         <p class="hint">${editing ? 'Leave empty to keep it.' : 'At least 6 characters. Share it with them so they can log in.'}</p>
-        <p class="error"></p>
       </div>
       <div class="field full">
         <label for="u-address">Address <span class="muted">(optional)</span></label>
         <textarea id="u-address" name="address" rows="3" maxlength="200" autocomplete="off">${FS.esc(u.address)}</textarea>
-        <p class="error"></p>
       </div>
       <div class="modal-actions full">
         <button type="button" class="btn btn-ghost" data-act="cancel">Cancel</button>
@@ -159,10 +141,7 @@ FS.ready(function (me) {
       e.preventDefault();
       const data = FS.formData(form);
       if (editing) data.id = user.id;
-      const button = form.querySelector('[type="submit"]');
-      button.disabled = true;
       const r = FS.saveUser(data);
-      button.disabled = false;
       if (!r.ok) { FS.showErrors(form, r.errors); return; }
       FS.toast(editing ? 'Saved the changes for ' + r.user.name + '.' : r.user.name + ' was added and can log in now.');
       modal.close();

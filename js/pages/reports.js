@@ -6,9 +6,7 @@ FS.ready(function () {
   const toInput = byId('to');
   let chosen = { key: '30' };     // a preset key ('7', '30', 'year', 'all') or { key: 'custom', from, to }
 
-  addIcons();
-  fromInput.max = FS.today();
-  toInput.max = FS.today();
+  fromInput.max = toInput.max = FS.today();
   choosePreset('30');
   window.addEventListener('fs:change', render);   // data changed here or in another tab: draw again
 
@@ -98,12 +96,11 @@ FS.ready(function () {
 
   // The four numbers at the top
   function renderStats(s) {
-    const share = s.orders ? Math.round(s.cancelled / s.orders * 100) : 0;
     byId('stats').innerHTML =
       stat('receipt', 'Sales', FS.money(s.revenue), 'Cancelled orders not counted') +
       stat('bag', 'Orders', s.orders, plural(s.open, 'order') + ' still open') +
       stat('chart', 'Average order', FS.money(s.average), 'Across ' + plural(s.paidOrders, 'order')) +
-      stat('x', 'Cancelled', s.cancelled, s.orders ? share + '% of all orders' : 'Nothing cancelled');
+      stat('x', 'Cancelled', s.cancelled, s.orders ? Math.round(s.cancelled / s.orders * 100) + '% of all orders' : 'Nothing cancelled');
   }
 
   // One number box
@@ -274,10 +271,4 @@ FS.ready(function () {
 
   // "1 order", "3 orders"
   function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
-
-  // Puts the icon named in data-icon at the start of an element
-  function addIcons() {
-    document.querySelectorAll('#main [data-icon]').forEach(el =>
-      el.insertAdjacentHTML('afterbegin', FS.icon(el.dataset.icon, Number(el.dataset.size) || 18)));
-  }
 });

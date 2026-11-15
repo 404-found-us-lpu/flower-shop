@@ -4,7 +4,8 @@ FS.ready(function () {
   // Today's date above the greeting, for example "Sunday, 15 November"
   byId('today').innerHTML = FS.icon('calendar', 16) +
     FS.esc(new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' }));
-  addIcons();
+  // Small arrow after each "link-arrow" text link
+  document.querySelectorAll('#main .link-arrow').forEach(el => el.insertAdjacentHTML('beforeend', FS.icon('arrow', 16)));
   render();
   window.addEventListener('fs:change', render);   // data changed here or in another tab: draw again
 
@@ -125,12 +126,5 @@ FS.ready(function () {
   function emptyHTML(icon, title, text, button) {
     return `<div class="empty"><div class="empty-icon">${FS.icon(icon, 26)}</div><h3>${FS.esc(title)}</h3>` +
       `<p>${FS.esc(text)}</p>${button || ''}</div>`;
-  }
-
-  // Puts the icon named in data-icon at the start of an element, and an arrow after each "link-arrow"
-  function addIcons() {
-    document.querySelectorAll('#main [data-icon]').forEach(el =>
-      el.insertAdjacentHTML('afterbegin', FS.icon(el.dataset.icon, Number(el.dataset.size) || 18)));
-    document.querySelectorAll('#main .link-arrow').forEach(el => el.insertAdjacentHTML('beforeend', FS.icon('arrow', 16)));
   }
 });

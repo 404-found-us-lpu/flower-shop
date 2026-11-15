@@ -47,11 +47,6 @@ FS.ready(function (user) {
     return FS.fmtDate(date);
   }
 
-  // How many flowers are in an order (2 roses and 1 lily = 3).
-  function itemCount(o) {
-    return o.items.reduce(function (sum, item) { return sum + item.qty; }, 0);
-  }
-
   // When the order reached the status it has now.
   function changedAt(o) {
     const step = o.history.filter(function (h) { return h.status === o.status; }).pop();
@@ -87,7 +82,7 @@ FS.ready(function (user) {
   // One order as a card: number, total, status, photos, tracker (while active) and buttons.
   function orderCard(o) {
     const id = FS.esc(o.id);
-    const count = itemCount(o);
+    const count = o.items.reduce(function (sum, item) { return sum + item.qty; }, 0);   // 2 roses and 1 lily = 3
     const receiver = o.recipient.name === user.name ? 'you' : o.recipient.name;
     const cancel = FS.canCancel(o)
       ? `<button type="button" class="btn btn-soft-danger btn-sm" data-cancel="${id}">Cancel</button>`

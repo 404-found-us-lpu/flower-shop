@@ -2,7 +2,6 @@
 /* Bloom & Petal - js/pages/cart.js - the cart page: change quantities, fill in the delivery details, place the order. */
 FS.ready(function () {
   const sub = document.getElementById('cart-sub');
-  const heroChips = document.getElementById('hero-chips');
   const layout = document.getElementById('layout');
   const countChip = document.getElementById('cart-chip');
   const list = document.getElementById('cart-list');
@@ -21,7 +20,6 @@ FS.ready(function () {
   const summaryLines = document.getElementById('summary-lines');
   const freeBar = document.getElementById('free-bar');
   const freeText = document.getElementById('free-text');
-  const placeButton = document.getElementById('place-btn');
   const payNote = document.getElementById('pay-note');
   const PAY_WORDS = { 'Cash on delivery': 'in cash', 'UPI': 'by UPI', 'Card': 'by card' };
 
@@ -127,9 +125,7 @@ FS.ready(function () {
 
   // The small line under the button: nothing is charged now, the customer pays when the flowers arrive.
   function renderPayNote() {
-    const picked = form.querySelector('input[name="payment"]:checked');
-    const way = picked ? picked.value : FS.PAYMENTS[0];
-    payNote.textContent = 'Nothing is charged now. You pay ' + (PAY_WORDS[way] || 'by ' + way) + ' when the flowers arrive.';
+    payNote.textContent = 'Nothing is charged now. You pay ' + PAY_WORDS[FS.formData(form).payment] + ' when the flowers arrive.';
   }
 
   /* ---------------------------------------------------------------- The whole page */
@@ -265,9 +261,7 @@ FS.ready(function () {
   // cart problems (errors.cart, e.g. too few in stock) have no field, so FS.showErrors shows them as a toast.
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    placeButton.disabled = true;
     const result = FS.placeOrder(FS.formData(form));
-    placeButton.disabled = false;
     if (!result.ok) {
       FS.showErrors(form, result.errors);
       if (result.errors.cart && Object.keys(result.errors).length === 1) list.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -283,7 +277,7 @@ FS.ready(function () {
   /* ---------------------------------------------------------------- Start */
   document.getElementById('slot-options').innerHTML = pillsHTML('slot', FS.SLOTS);
   document.getElementById('pay-options').innerHTML = pillsHTML('payment', FS.PAYMENTS);
-  heroChips.innerHTML =
+  document.getElementById('hero-chips').innerHTML =
     `<span class="chip chip-gold">${FS.icon('truck', 16)}Free delivery from ${FS.money(FS.FREE_DELIVERY_FROM)}</span>` +
     `<span class="chip">${FS.icon('shield', 16)}Pay when the flowers arrive</span>`;
   resetForm();

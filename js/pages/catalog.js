@@ -9,8 +9,6 @@ FS.ready(function () {
     'price-desc': function (a, b) { return b.price - a.price; },
     name: function (a, b) { return a.name.localeCompare(b.name); }
   };
-  // Keeps a long description on one line in a card (the pop-up shows all of it).
-  const ONE_LINE = 'white-space: nowrap; overflow: hidden; text-overflow: ellipsis;';
 
   const form = document.getElementById('filters');
   const search = document.getElementById('q');
@@ -27,17 +25,11 @@ FS.ready(function () {
   const params = FS.params();
   const state = {
     q: params.get('q') || '',
-    cat: findCategory(params.get('cat')),
+    cat: FS.CATEGORIES.find(c => c.toLowerCase() === (params.get('cat') || '').toLowerCase()) || '',   // capitals do not matter, '' = all types
     sort: Object.keys(SORTS).indexOf(params.get('sort')) !== -1 ? params.get('sort') : 'popular',
     inStock: params.get('instock') === '1'
   };
   let drawnFlowers = '';   // the flower data now on screen, so a cart-only change does not redraw the cards
-
-  // The category named in the address bar (capitals do not matter). '' means all types.
-  function findCategory(value) {
-    const wanted = String(value || '').toLowerCase();
-    return FS.CATEGORIES.find(function (c) { return c.toLowerCase() === wanted; }) || '';
-  }
 
   // "1 flower", "5 flowers"
   function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
@@ -82,7 +74,7 @@ FS.ready(function () {
       </div>`;
   }
 
-  // One flower card. The photo and the name both open the pop-up.
+  // One flower card. The photo and the name both open the pop-up. The description stays on one line (the pop-up shows all of it).
   function cardHTML(f) {
     const id = FS.esc(f.id);
     const name = FS.esc(f.name);
@@ -91,7 +83,7 @@ FS.ready(function () {
       <div class="product-body">
         <span class="product-cat">${FS.esc(f.category)}</span>
         <h3 class="product-name"><a href="catalog.html?flower=${id}" data-open="${id}">${name}</a></h3>
-        <p class="product-desc" style="${ONE_LINE}">${FS.esc(f.description)}</p>
+        <p class="product-desc" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${FS.esc(f.description)}</p>
         <div class="product-foot">
           <span class="product-price">${FS.money(f.price)}</span>
           <div class="row">
