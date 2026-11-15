@@ -147,9 +147,9 @@ img { max-width: 100%; display: block; }
 .nav .nav-search input {
   width: 200px; height: 42px; padding: 0 16px 0 40px; border-radius: 999px;
   border: 1px solid var(--line); background: rgba(255, 255, 255, .7); font: inherit; color: var(--ink-900);
-  transition: width .25s, border-color .2s, background .2s;
+  transition: border-color .2s, background .2s;
 }
-.nav .nav-search input:focus { width: 250px; outline: none; border-color: var(--forest-500); background: #fff; }
+.nav .nav-search input:focus { outline: none; border-color: var(--forest-500); background: #fff; }
 .nav-icon {
   position: relative; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center;
   border: 0; background: transparent; color: var(--ink-700); cursor: pointer; transition: background .2s;
