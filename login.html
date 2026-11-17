@@ -1,90 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Bloom & Petal - login.html - Made by: Yash -->
-<html lang="en" data-page="login" data-roles="guest" data-bare>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Sign in to Bloom &amp; Petal to order fresh flowers and see your orders.">
-  <title>Sign in · Bloom &amp; Petal</title>
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=4">
-  <script src="js/app.js?v=4"></script>
-</head>
-<body>
-  <main id="main" class="auth">
+<html lang="en" data-page="login" data-roles="guest">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Sign in to Bloom &amp; Petal to order fresh flowers and see your orders." />
+    <title>Sign in · Bloom &amp; Petal</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css?v=6" />
+    <script src="js/app.js?v=6"></script>
+  </head>
+  <body>
+    <main id="main" class="auth">
+      <!-- Left: the green brand panel (the photos hide on small screens) -->
+      <section class="auth-art">
+        <div class="row">
+          <a class="brand" href="index.html" aria-label="Bloom &amp; Petal home">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="6.6" r="3.3" />
+                <circle cx="17.2" cy="10.4" r="3.3" />
+                <circle cx="15.2" cy="16.4" r="3.3" />
+                <circle cx="8.8" cy="16.4" r="3.3" />
+                <circle cx="6.8" cy="10.4" r="3.3" />
+                <circle class="core" cx="12" cy="12" r="2.4" />
+              </svg>
+            </span>
+            <span class="brand-name">Bloom &amp; Petal</span>
+          </a>
+        </div>
+        <div>
+          <h1>Fresh flowers, one sign-in away.</h1>
+          <p class="mb-0">Order bouquets, plants and Indian favourites, and pick the day and time they reach the door.</p>
+        </div>
+        <div class="auth-photos">
+          <img src="images/pink-tulips.jpg" alt="A bunch of pink tulips" loading="lazy" />
+          <img src="images/birthday-combo.jpg" alt="A mixed bouquet of roses and chrysanthemums" loading="lazy" />
+          <img src="images/single-sunflower.jpg" alt="A sunflower in full bloom" loading="lazy" />
+        </div>
+      </section>
 
-    <!-- Left: the green brand panel (the photos hide on small screens) -->
-    <section class="auth-art">
-      <div class="row">
-        <a class="brand" href="index.html" aria-label="Bloom &amp; Petal home">
-          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="3.3"/><circle cx="17.2" cy="10.4" r="3.3"/><circle cx="15.2" cy="16.4" r="3.3"/><circle cx="8.8" cy="16.4" r="3.3"/><circle cx="6.8" cy="10.4" r="3.3"/><circle class="core" cx="12" cy="12" r="2.4"/></svg></span>
-          <span class="brand-name">Bloom &amp; Petal</span>
-        </a>
-      </div>
-      <div>
-        <h1>Fresh flowers, one sign-in away.</h1>
-        <p class="mb-0">Order bouquets, plants and Indian favourites, and pick the day and time they reach the door.</p>
-      </div>
-      <div class="auth-photos">
-        <img src="images/pink-tulips.jpg" alt="A bunch of pink tulips" loading="lazy">
-        <img src="images/birthday-combo.jpg" alt="A mixed bouquet of roses and chrysanthemums" loading="lazy">
-        <img src="images/single-sunflower.jpg" alt="A sunflower in full bloom" loading="lazy">
-      </div>
-    </section>
+      <!-- Right: the sign-in form -->
+      <section class="auth-side" aria-labelledby="login-title">
+        <div class="auth-card">
+          <h2 id="login-title">Welcome back</h2>
+          <p class="muted">Sign in to order flowers and see your orders.</p>
 
-    <!-- Right: the sign-in form -->
-    <section class="auth-side" aria-labelledby="login-title">
-      <div class="auth-card">
-        <h2 id="login-title">Welcome back</h2>
-        <p class="muted">Sign in to order flowers and see your orders.</p>
+          <!-- Shown by js/pages/login.js when a page sent the visitor here first (?next=) -->
+          <p class="callout callout-info" id="next-note" hidden>
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            <span>Please sign in first. We will take you straight back to that page.</span>
+          </p>
 
-        <!-- Shown by js/pages/login.js when a page sent the visitor here first (?next=) -->
-        <p class="callout callout-info" id="next-note" hidden>
-          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          <span>Please sign in first. We will take you straight back to that page.</span>
-        </p>
-
-        <form class="form section" id="login-form">
-          <div class="field">
-            <label for="email">Email</label>
-            <div class="input-icon">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-              <input id="email" name="email" type="email" autocomplete="username" maxlength="100" required aria-describedby="email-error">
+          <form class="form section" id="login-form">
+            <div class="field">
+              <label for="email">Email</label>
+              <div class="input-icon">
+                <svg
+                  class="icon"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-10 6L2 7" />
+                </svg>
+                <input id="email" name="email" type="email" autocomplete="username" maxlength="100" required aria-describedby="email-error" />
+              </div>
+              <p class="error" id="email-error"></p>
             </div>
-            <p class="error" id="email-error"></p>
-          </div>
 
-          <div class="field">
-            <div class="label-row">
-              <label class="label" for="password">Password</label>
-              <button type="button" class="btn btn-ghost btn-sm" id="show-password" aria-controls="password" aria-label="Show password">Show</button>
+            <div class="field">
+              <label for="password">Password</label>
+              <div class="input-icon">
+                <svg
+                  class="icon"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="11" width="18" height="11" rx="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                <input id="password" name="password" type="password" autocomplete="current-password" required aria-describedby="password-error" />
+              </div>
+              <p class="error" id="password-error"></p>
             </div>
-            <div class="input-icon">
-              <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <input id="password" name="password" type="password" autocomplete="current-password" required aria-describedby="password-error">
-            </div>
-            <p class="error" id="password-error"></p>
-          </div>
 
-          <p class="hint">Tip: press <kbd>Enter</kbd> in either box to sign in.</p>
-          <button type="submit" class="btn btn-primary btn-block btn-lg">
-            Sign in
-            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <p class="hint">
+              Tip: press
+              <kbd>Enter</kbd>
+              in either box to sign in.
+            </p>
+            <button type="submit" class="btn btn-primary btn-block btn-lg">
+              Sign in
+              <svg
+                class="icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+          </form>
+
+          <p class="or">or try the demo account</p>
+          <!-- Fills the form from FS.DEMO and signs in at once (js/pages/login.js) -->
+          <button type="button" class="demo-login btn-block" id="demo-login">
+            <strong>Neha Sharma, demo customer</strong>
+            <span>neha@example.com</span>
           </button>
-        </form>
 
-        <p class="or">or try the demo account</p>
-        <!-- Fills the form from FS.DEMO and signs in at once -->
-        <button type="button" class="demo-login btn-block" id="demo-login">
-          <strong>Neha Sharma, demo customer</strong>
-          <span>neha@example.com</span>
-        </button>
-
-        <p class="auth-foot">New here? <a href="register.html">Create an account</a></p>
-      </div>
-    </section>
-
-  </main>
-  <script src="js/pages/login.js?v=4"></script>
-</body>
+          <p class="auth-foot">
+            New here?
+            <a href="register.html">Create an account</a>
+          </p>
+        </div>
+      </section>
+    </main>
+    <script src="js/pages/login.js?v=6"></script>
+  </body>
 </html>

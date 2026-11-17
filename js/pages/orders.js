@@ -22,11 +22,11 @@ FS.ready(() => {
   // Draws the header numbers, the table rows and the total (or the empty message when there are no orders).
   const render = () => {
     const orders = FS.getOrders();
-    const spent = orders.reduce((sum, { total }) => sum + total, 0);
-    byId('summary').innerHTML = `<span class="chip chip-gold">${FS.icon('receipt', 16)}${orders.length} ${orders.length === 1 ? 'order' : 'orders'}</span>
-      <span class="chip">${FS.icon('bag', 16)}${FS.money(spent)} spent</span>`;
+    const spent = FS.money(orders.reduce((sum, { total }) => sum + total, 0));
+    byId('count').textContent = `${orders.length} ${orders.length === 1 ? 'order' : 'orders'}`;
+    byId('spent-top').textContent = spent;
+    byId('spent').textContent = spent;
     byId('rows').innerHTML = orders.map(rowHTML).join('');
-    byId('spent').textContent = FS.money(spent);
     byId('table-box').hidden = !orders.length;
     byId('empty').hidden = orders.length > 0;
   };

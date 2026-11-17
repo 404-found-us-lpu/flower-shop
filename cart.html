@@ -1,121 +1,302 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Bloom & Petal - cart.html - Made by: Satyam -->
 <html lang="en" data-page="cart" data-roles="customer">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Your Bloom &amp; Petal cart: change quantities, say who gets the flowers and when, and place the order.">
-  <title>Your cart · Bloom &amp; Petal</title>
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=4">
-  <script src="js/app.js?v=4"></script>
-</head>
-<body>
-  <main id="main">
-    <header class="hero hero-sm">
-      <div class="wrap">
-        <h1>Your cart</h1>
-        <p class="hero-sub" id="cart-sub">Check your flowers, then tell us who gets them and when.</p>
-      </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your Bloom &amp; Petal cart: change quantities, say who gets the flowers and when, and place the order." />
+    <title>Your cart · Bloom &amp; Petal</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css?v=6" />
+    <script src="js/app.js?v=6"></script>
+  </head>
+  <body>
+    <header class="nav-wrap">
+      <nav class="nav" aria-label="Main">
+        <a class="brand" href="home.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <span class="brand-name">Bloom &amp; Petal</span>
+        </a>
+        <div class="nav-links">
+          <a href="home.html">Home</a>
+          <a href="catalog.html">Flowers</a>
+          <a href="orders.html">My orders</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-end">
+          <form class="nav-search" action="catalog.html" role="search">
+            <svg
+              class="icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.6-3.6" />
+            </svg>
+            <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
+          </form>
+          <a class="nav-icon" href="cart.html" aria-label="Cart">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="nav-count" id="cart-count" hidden></span>
+          </a>
+          <details class="nav-account">
+            <summary class="nav-avatar" aria-label="Account menu">
+              <svg
+                class="icon"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </summary>
+            <menu class="nav-pop nav-menu">
+              <li><a href="profile.html">My profile</a></li>
+              <li><button type="button" data-act="reset">Reset demo data</button></li>
+              <li><button type="button" data-act="logout">Log out</button></li>
+            </menu>
+          </details>
+        </div>
+      </nav>
     </header>
+    <main id="main">
+      <header class="hero hero-sm">
+        <div class="wrap">
+          <h1>Your cart</h1>
+          <p class="hero-sub" id="cart-sub">Check your flowers, then tell us who gets them and when.</p>
+        </div>
+      </header>
 
-    <!-- Shown while the cart has flowers (js/pages/cart.js hides it when the cart is empty) -->
-    <div class="wrap section split" id="cart-full">
-      <div class="stack-lg">
-        <section class="card" aria-labelledby="lines-title">
-          <h2 class="card-title" id="lines-title">In your cart</h2>
-          <ul class="list" id="cart-list"></ul>
-        </section>
+      <!-- Shown while the cart has flowers (js/pages/cart.js hides it when the cart is empty) -->
+      <div class="wrap section split" id="cart-full">
+        <div class="stack-lg">
+          <section class="card" aria-labelledby="lines-title">
+            <h2 class="card-title" id="lines-title">In your cart</h2>
+            <ul class="list" id="cart-list"></ul>
+          </section>
 
-        <form class="card form" id="checkout" aria-labelledby="checkout-title">
-          <h2 class="card-title" id="checkout-title">Delivery details</h2>
+          <form class="card form" id="checkout" aria-labelledby="checkout-title">
+            <h2 class="card-title" id="checkout-title">Delivery details</h2>
 
-          <fieldset>
-            <legend>Who receives it</legend>
-            <div class="form-grid">
-              <div class="field">
-                <label for="c-name">Name</label>
-                <input type="text" id="c-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
-              </div>
-              <div class="field">
-                <label for="c-phone">Mobile number</label>
-                <input type="tel" id="c-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric"
-                       autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
-              </div>
-              <div class="field full">
-                <label for="c-address">Address</label>
-                <textarea id="c-address" name="address" required minlength="10" maxlength="200" rows="3"
-                          placeholder="House number, street, area and city"></textarea>
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>When</legend>
-            <div class="stack">
-              <div class="field">
-                <label for="c-date">Delivery day</label>
-                <input type="date" id="c-date" name="deliveryDate" required>
-                <p class="hint">Any day from today up to 60 days ahead.</p>
-              </div>
-              <div class="field">
-                <span class="label" id="slot-label">Time</span>
-                <div class="segmented" role="radiogroup" aria-labelledby="slot-label">
-                  <label><input type="radio" name="slot" value="Morning (9 am - 12 pm)" required checked><span>Morning (9 am - 12 pm)</span></label>
-                  <label><input type="radio" name="slot" value="Afternoon (12 pm - 4 pm)"><span>Afternoon (12 pm - 4 pm)</span></label>
-                  <label><input type="radio" name="slot" value="Evening (4 pm - 8 pm)"><span>Evening (4 pm - 8 pm)</span></label>
+            <fieldset>
+              <legend>Who receives it</legend>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="c-name">Name</label>
+                  <input type="text" id="c-name" name="name" required minlength="2" maxlength="60" autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label for="c-phone">Mobile number</label>
+                  <input
+                    type="tel"
+                    id="c-phone"
+                    name="phone"
+                    required
+                    pattern="[6-9][0-9]{9}"
+                    maxlength="10"
+                    inputmode="numeric"
+                    autocomplete="tel-national"
+                    title="10 digits, starting with 6, 7, 8 or 9"
+                  />
+                </div>
+                <div class="field full">
+                  <label for="c-address">Address</label>
+                  <textarea
+                    id="c-address"
+                    name="address"
+                    required
+                    minlength="10"
+                    maxlength="200"
+                    rows="3"
+                    placeholder="House number, street, area and city"
+                  ></textarea>
                 </div>
               </div>
-            </div>
-          </fieldset>
+            </fieldset>
 
-          <fieldset>
-            <legend>Payment and card</legend>
-            <div class="stack">
-              <div class="field">
-                <span class="label" id="pay-label">Pay by</span>
-                <div class="segmented" role="radiogroup" aria-labelledby="pay-label">
-                  <label><input type="radio" name="payment" value="Cash on delivery" required checked><span><abbr title="Cash on delivery">COD</abbr></span></label>
-                  <label><input type="radio" name="payment" value="UPI"><span><abbr title="Unified Payments Interface">UPI</abbr></span></label>
-                  <label><input type="radio" name="payment" value="Card"><span>Card</span></label>
+            <fieldset>
+              <legend>When</legend>
+              <div class="stack">
+                <div class="field">
+                  <label for="c-date">Delivery day</label>
+                  <input type="date" id="c-date" name="deliveryDate" required />
+                  <p class="hint">Any day from today up to 60 days ahead.</p>
                 </div>
-                <p class="hint">Nothing is charged now. You pay when the flowers arrive.</p>
+                <div class="field">
+                  <span class="label" id="slot-label">Time</span>
+                  <div class="segmented" role="radiogroup" aria-labelledby="slot-label">
+                    <label>
+                      <input type="radio" name="slot" value="Morning (9 am - 12 pm)" required checked />
+                      <span>Morning (9 am - 12 pm)</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="slot" value="Afternoon (12 pm - 4 pm)" />
+                      <span>Afternoon (12 pm - 4 pm)</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="slot" value="Evening (4 pm - 8 pm)" />
+                      <span>Evening (4 pm - 8 pm)</span>
+                    </label>
+                  </div>
+                </div>
               </div>
-              <div class="field">
-                <label for="c-note">Card message <small>(optional)</small></label>
-                <input type="text" id="c-note" name="note" list="card-notes" maxlength="120" placeholder="Pick one or write your own">
-                <datalist id="card-notes">
-                  <option value="Happy birthday!">
-                  <option value="Happy anniversary, with all my love.">
-                  <option value="Get well soon.">
-                  <option value="Congratulations on your big day!">
-                  <option value="Thank you for everything.">
-                </datalist>
+            </fieldset>
+
+            <fieldset>
+              <legend>Payment and card</legend>
+              <div class="stack">
+                <div class="field">
+                  <span class="label" id="pay-label">Pay by</span>
+                  <div class="segmented" role="radiogroup" aria-labelledby="pay-label">
+                    <label>
+                      <input type="radio" name="payment" value="Cash on delivery" required checked />
+                      <span><abbr title="Cash on delivery">COD</abbr></span>
+                    </label>
+                    <label>
+                      <input type="radio" name="payment" value="UPI" />
+                      <span><abbr title="Unified Payments Interface">UPI</abbr></span>
+                    </label>
+                    <label>
+                      <input type="radio" name="payment" value="Card" />
+                      <span>Card</span>
+                    </label>
+                  </div>
+                  <p class="hint">Nothing is charged now. You pay when the flowers arrive.</p>
+                </div>
+                <div class="field">
+                  <label for="c-note">
+                    Card message
+                    <small>(optional)</small>
+                  </label>
+                  <input type="text" id="c-note" name="note" list="card-notes" maxlength="120" placeholder="Pick one or write your own" />
+                  <datalist id="card-notes">
+                    <option value="Happy birthday!"></option>
+                    <option value="Happy anniversary, with all my love."></option>
+                    <option value="Get well soon."></option>
+                    <option value="Congratulations on your big day!"></option>
+                    <option value="Thank you for everything."></option>
+                  </datalist>
+                </div>
               </div>
-            </div>
-          </fieldset>
-        </form>
+            </fieldset>
+          </form>
+        </div>
+
+        <!-- Totals, the free-delivery bar and the button that submits the form above (form="checkout") -->
+        <aside class="card stack" aria-labelledby="sum-title" style="position: sticky; top: 96px">
+          <h2 class="card-title" id="sum-title">Order summary</h2>
+          <div class="summary" id="summary"></div>
+          <div class="progress" aria-hidden="true"><span id="free-fill"></span></div>
+          <p class="small muted mb-0" id="free-text"></p>
+          <button type="submit" form="checkout" class="btn btn-primary btn-lg btn-block">Place order</button>
+        </aside>
       </div>
 
-      <!-- Totals, the free-delivery bar and the button that submits the form above (form="checkout") -->
-      <aside class="card stack" aria-labelledby="sum-title" style="position: sticky; top: 96px;">
-        <h2 class="card-title" id="sum-title">Order summary</h2>
-        <div class="summary" id="summary"></div>
-        <div class="progress" aria-hidden="true"><span id="free-fill"></span></div>
-        <p class="small muted mb-0" id="free-text"></p>
-        <button type="submit" form="checkout" class="btn btn-primary btn-lg btn-block">Place order</button>
-      </aside>
-    </div>
+      <!-- Shown after an order is placed (js/pages/cart.js fills the order number and link) -->
+      <section class="wrap section card empty" id="cart-done" tabindex="-1" aria-labelledby="done-title" hidden>
+        <h2 id="done-title">Order placed!</h2>
+        <p>
+          Thank you. Order
+          <strong id="done-id"></strong>
+          comes on the day and in the time slot you chose.
+        </p>
+        <div class="row">
+          <a class="btn btn-ghost" href="catalog.html">Flowers</a>
+          <a class="btn btn-primary" id="done-link" href="orders.html">See the order</a>
+        </div>
+      </section>
 
-    <section class="wrap section card empty" id="cart-empty" hidden>
-      <h2>Your cart is empty</h2>
-      <p>Add a bouquet, a pot of mogra or a single red rose, and it waits for you here.</p>
-      <a class="btn btn-primary" href="catalog.html">Browse flowers</a>
-    </section>
+      <section class="wrap section card empty" id="cart-empty" hidden>
+        <h2>Your cart is empty</h2>
+        <p>Add a bouquet, a pot of mogra or a single red rose, and it waits for you here.</p>
+        <a class="btn btn-primary" href="catalog.html">Browse flowers</a>
+      </section>
 
-    <!-- A short sound after an order is placed (no controls: js/pages/cart.js plays it) -->
-    <audio id="chime" src="media/chime.mp3" preload="auto">Your browser cannot play the order chime.</audio>
-  </main>
-  <script src="js/pages/cart.js?v=4"></script>
-</body>
+      <!-- A short sound after an order is placed (no controls: js/pages/cart.js plays it) -->
+      <audio id="chime" src="media/chime.mp3" preload="auto">Your browser cannot play the order chime.</audio>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <div>
+            <strong>Bloom &amp; Petal</strong>
+            <p>Fresh flowers, delivered across Jalandhar.</p>
+          </div>
+        </div>
+        <div>
+          <h2>Visit or call</h2>
+          <address>
+            Shop 12, Model Town Market
+            <br />
+            Jalandhar, Punjab 144003
+            <br />
+            <a href="tel:+919876501234">+91 98765 01234</a>
+            <br />
+            <a href="mailto:hello@bloompetal.in">
+              hello@
+              <wbr />
+              bloompetal.in
+            </a>
+          </address>
+        </div>
+        <div>
+          <h2>Owners</h2>
+          <p>Yash, Satyam, Raghav</p>
+          <p><small>Open every day, 9 am to 8 pm</small></p>
+        </div>
+      </div>
+      <p class="wrap footer-note">
+        <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
+      </p>
+    </footer>
+    <script src="js/pages/cart.js?v=6"></script>
+  </body>
 </html>

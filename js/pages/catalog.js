@@ -1,27 +1,41 @@
 /* Made by: Raghav */
-/* Bloom & Petal - js/pages/catalog.js - the flowers page: search, type tabs, sort, flower pop-up and add to cart. */
+/* Bloom & Petal - js/pages/catalog.js - the flowers page: search, type tabs, sort and add to cart.
+   (The search suggestions and the tab buttons are plain HTML in catalog.html.) */
 FS.ready(() => {
   const byId = (id) => document.getElementById(id);
   const search = byId('q');
-  const sortBox = byId('sort');
-  const tabs = byId('tabs');
   const grid = byId('grid');
 
   // Hindi names of the Indian flowers, found by the first word of the flower's name.
-  const HINDI = { Mogra: 'मोगरा', Marigold: 'गेंदा', Aprajita: 'अपराजिता', Guldaudi: 'गुलदाउदी', Madhumalti: 'मधुमालती' };
+  const HINDI = {
+    Mogra: 'मोगरा',
+    Marigold: 'गेंदा',
+    Aprajita: 'अपराजिता',
+    Guldaudi: 'गुलदाउदी',
+    Madhumalti: 'मधुमालती',
+    Rajnigandha: 'रजनीगंधा',
+    Champa: 'चंपा',
+    Gudhal: 'गुड़हल',
+    Kamal: 'कमल',
+    Raat: 'रात की रानी',
+    Parijat: 'पारिजात',
+    Sadabahar: 'सदाबहार',
+    Rangan: 'रंगन',
+  };
 
   // How each sort choice orders two flowers a and b.
   const SORTS = {
     'price-asc': (a, b) => a.price - b.price,
     'price-desc': (a, b) => b.price - a.price,
     name: (a, b) => a.name.localeCompare(b.name),
-    stock: (a, b) => b.stock - a.stock
+    stock: (a, b) => b.stock - a.stock,
   };
 
-  // Start from the address bar, for example catalog.html?q=rose&type=Plants
+  // Start once from the address bar, for example catalog.html?q=rose&type=Plants
   const params = FS.params();
-  let q = (params.get('q') || '').trim();
+  let q = '';
   let type = FS.CATEGORIES.find((t) => t.toLowerCase() === (params.get('type') || '').toLowerCase()) || 'All';
+  search.value = params.get('q') || '';
 
   // The Hindi name of an Indian flower ('' for the others).
   const hindi = ({ name }) => HINDI[name.split(' ')[0]] || '';
@@ -45,91 +59,34 @@ FS.ready(() => {
   };
 
   // One flower card: photo with its stock pill, name, botanical name, price and Add (off when sold out).
-  const cardHTML = (f) => {
-    const id = FS.esc(f.id);
-    return `<article class="product">
-      <button type="button" class="product-media" data-open="${id}" tabindex="-1">${FS.flowerImg(f)}<span class="stock-pill">${FS.stockBadge(f)}</span></button>
+  const cardHTML = (f) => `<article class="product">
+      <div class="product-media">${FS.flowerImg(f)}<span class="stock-pill">${FS.stockBadge(f)}</span></div>
       <div class="product-body">
         <span class="product-cat">${FS.esc(f.category)}</span>
-        <h2 class="product-name"><a href="catalog.html?flower=${id}" data-open="${id}">${markName(f.name)}</a>${hindiTag(f)}</h2>
+        <h2 class="product-name">${markName(f.name)}${hindiTag(f)}</h2>
         ${f.botanical ? `<i class="small muted">${FS.esc(f.botanical)}</i>` : ''}
         <p class="product-desc">${FS.esc(f.description)}</p>
         <div class="product-foot">
           <span class="product-price">${FS.money(f.price)}</span>
-          <button type="button" class="btn btn-primary btn-sm" data-add="${id}" aria-label="Add ${FS.esc(f.name)} to cart"${f.stock < 1 ? ' disabled' : ''}>${FS.icon('plus', 16)}Add</button>
+          <button type="button" class="btn btn-primary btn-sm" data-add="${FS.esc(f.id)}" aria-label="Add ${FS.esc(f.name)} to cart"${f.stock < 1 ? ' disabled' : ''}>${FS.icon('plus', 16)}Add</button>
         </div>
       </div>
     </article>`;
+
+  // Adds one flower to the cart. Saving redraws the cards, so the focus goes back to the same Add button.
+  const addFlower = (id) => {
+    const { ok, error } = FS.addToCart(id);
+    FS.toast(ok ? `${FS.getFlower(id).name} added to your cart.` : error, ok ? 'success' : 'error');
+    grid.querySelector(`[data-add="${id}"]`).focus();
   };
 
-  // A care tip with <sub> and <sup>: pots get a sun-and-water tip, cut flowers a vase tip.
-  const careTip = ({ name }) => (name.includes('Pot')
-    ? 'Give it 4 to 6 hours of sun and water it every 3<sup>rd</sup> day. In daylight its leaves turn CO<sub>2</sub> into fresh O<sub>2</sub>.'
-    : 'Trim 2 cm off the stems and change the H<sub>2</sub>O every 2<sup>nd</sup> day.');
-
-  // The pop-up: the photo in a <figure> captioned with the names and description, then the tip, quantity and Add to cart.
-  const modalHTML = (f) => {
-    const off = f.stock < 1 ? ' disabled' : '';
-    return `<div class="grid-2">
-      <figure>
-        <div class="tile">${FS.flowerImg(f)}<span class="stock-pill">${FS.stockBadge(f)}</span></div>
-        <figcaption><strong>${FS.esc(f.name)}</strong>${hindiTag(f)}${f.botanical ? `<br><i>${FS.esc(f.botanical)}</i>` : ''}<br>${FS.esc(f.description)}</figcaption>
-      </figure>
-      <div class="stack">
-        <span class="product-cat">${FS.esc(f.category)}</span>
-        <p class="callout mb-0">${FS.icon('flower', 18)}<span>${careTip(f)}</span></p>
-        <p class="product-price mb-0">${FS.money(f.price)}</p>
-        <div class="row">
-          <label class="label" for="qty">Quantity</label>
-          <div class="qty">
-            <button type="button" data-step="-1" aria-label="One less"${off}>${FS.icon('minus', 16)}</button>
-            <input type="number" id="qty" value="1" min="1" max="${FS.esc(f.stock)}" step="1"${off}>
-            <button type="button" data-step="1" aria-label="One more"${off}>${FS.icon('plus', 16)}</button>
-          </div>
-        </div>
-        <button type="button" class="btn btn-primary" data-add="${FS.esc(f.id)}"${off}>${FS.icon('bag', 18)}Add to cart</button>
-      </div>
-    </div>`;
-  };
-
-  // Opens the pop-up for one flower. When it closes, the focus goes back to that flower's card.
-  const openFlower = (id) => {
-    const f = FS.getFlower(id);
-    if (!f) return;
-    FS.openModal({ title: f.name, html: modalHTML(f), wide: true }).closed
-      .then(() => grid.querySelector(`a[data-open="${f.id}"]`)?.focus());
-  };
-
-  // Keeps a quantity box a whole number from 1 to its max (the stock).
-  const readQty = (input) => {
-    const n = Math.min(Math.max(Math.floor(Number(input.value)) || 1, 1), Number(input.max));
-    input.value = n;
-    return n;
-  };
-
-  // [-] and [+] change the quantity by one.
-  const stepQty = (button) => {
-    const input = button.parentElement.querySelector('input');
-    input.value = Number(input.value) + Number(button.dataset.step);
-    readQty(input);
-  };
-
-  // Adds to the cart: 1 from a card, the chosen number from the pop-up.
-  const addFlower = (button) => {
-    const id = button.dataset.add;
-    const modal = button.closest('.modal');
-    const qty = modal ? readQty(modal.querySelector('input')) : 1;
-    const { ok, error } = FS.addToCart(id, qty);   // saving fires fs:change, which redraws the cards
-    FS.toast(ok ? `${qty} × ${FS.getFlower(id).name} added to your cart.` : error, ok ? 'success' : 'error');
-    if (!modal) grid.querySelector(`[data-add="${id}"]`).focus();   // keep the focus on the same Add button
-  };
-
-  // Draws the tab counts, the cards (or the empty message) and the result line.
+  // Reads the search box, then draws the tab counts, the cards (or the empty message) and the result line.
   const render = () => {
+    q = search.value.trim();
     const all = FS.getFlowers();
     const found = all.filter(matches);
-    const shown = found.filter((f) => inType(f, type)).sort(SORTS[sortBox.value]);
-    tabs.querySelectorAll('.tab').forEach((tab) => {
+    const shown = found.filter((f) => inType(f, type)).sort(SORTS[byId('sort').value]);
+    document.querySelectorAll('#tabs .tab').forEach((tab) => {
       const t = tab.dataset.type;
       tab.classList.toggle('active', t === type);
       tab.setAttribute('aria-pressed', t === type);
@@ -137,44 +94,34 @@ FS.ready(() => {
     });
     grid.innerHTML = shown.map(cardHTML).join('');
     byId('empty').hidden = shown.length > 0;
-    byId('result').textContent = `Showing ${shown.length} of ${all.length} flowers` +
-      (q ? ` for "${q}"` : '') + (type === 'All' ? '' : ` in ${type}`);
+    byId('result').textContent =
+      `Showing ${shown.length} of ${all.length} flowers` +
+      (q ? ` for "${q}"` : '') +
+      (type === 'All' ? '' : ` in ${type}`);
   };
 
-  // A filter changed: draw again and keep ?q= and ?type= in the address bar, so a refresh or a shared link shows the same flowers.
-  const update = () => {
-    render();
-    const p = new URLSearchParams();
-    if (q) p.set('q', q);
-    if (type !== 'All') p.set('type', type);
-    history.replaceState(null, '', p.toString() ? `?${p}` : location.pathname);
-  };
+  byId('filters').addEventListener('input', render); // typing a search or picking a sort
+  byId('filters').addEventListener('submit', (e) => {
+    e.preventDefault();
+    search.blur();
+  }); // Enter: stay here, close the phone keyboard
 
-  // Build the tabs once ("All" and the five types) and the search suggestions.
-  tabs.innerHTML = ['All', ...FS.CATEGORIES].map((t) =>
-    `<button type="button" class="tab" data-type="${FS.esc(t)}">${FS.esc(t)} <span class="count"></span></button>`).join('');
-  byId('flower-names').innerHTML = FS.getFlowers().map(({ name }) => `<option value="${FS.esc(name)}">`).join('');
-  search.value = q;
-
-  search.addEventListener('input', () => { q = search.value.trim(); update(); });
-  byId('filters').addEventListener('submit', (e) => { e.preventDefault(); search.blur(); });   // Enter: stay here, close the phone keyboard
-  sortBox.addEventListener('change', render);
-  document.addEventListener('change', (e) => { if (e.target.id === 'qty') readQty(e.target); });
-
-  // One click handler for the tabs, the cards and the pop-up (the pop-up sits outside the grid).
+  // One click handler for the type tabs, the Add buttons and Clear search.
   document.addEventListener('click', (e) => {
     const tab = e.target.closest('[data-type]');
-    const open = e.target.closest('[data-open]');
     const add = e.target.closest('[data-add]');
-    const step = e.target.closest('[data-step]');
-    if (tab) { type = tab.dataset.type; update(); }
-    else if (open) { e.preventDefault(); openFlower(open.dataset.open); }
-    else if (add) addFlower(add);
-    else if (step) stepQty(step);
-    else if (e.target.closest('[data-clear]')) { q = ''; type = 'All'; search.value = ''; update(); search.focus(); }
+    if (tab) {
+      type = tab.dataset.type;
+      render();
+    } else if (add) addFlower(add.dataset.add);
+    else if (e.target.closest('[data-clear]')) {
+      search.value = '';
+      type = 'All';
+      render();
+      search.focus();
+    }
   });
 
   window.addEventListener('fs:change', render);
-  update();
-  if (params.get('flower')) openFlower(params.get('flower'));
+  render();
 });

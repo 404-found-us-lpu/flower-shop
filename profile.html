@@ -1,112 +1,266 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Bloom & Petal - profile.html - Made by: Yash -->
 <html lang="en" data-page="profile" data-roles="customer">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Your Bloom &amp; Petal profile: your details, your password and a chart of your orders.">
-  <title>My profile · Bloom &amp; Petal</title>
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=4">
-  <script src="js/app.js?v=4"></script>
-</head>
-<body>
-  <main id="main">
-    <header class="hero hero-tall">
-      <div class="wrap">
-        <p class="hero-eyebrow">My profile</p>
-        <div class="row">
-          <span class="avatar avatar-lg" id="p-avatar" aria-hidden="true"></span>
-          <div>
-            <h1 id="p-name">My profile</h1>
-            <p class="hero-sub">Your details, your password and your orders.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Your Bloom &amp; Petal profile: your details and your password." />
+    <title>My profile · Bloom &amp; Petal</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css?v=6" />
+    <script src="js/app.js?v=6"></script>
+  </head>
+  <body>
+    <header class="nav-wrap">
+      <nav class="nav" aria-label="Main">
+        <a class="brand" href="home.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <span class="brand-name">Bloom &amp; Petal</span>
+        </a>
+        <div class="nav-links">
+          <a href="home.html">Home</a>
+          <a href="catalog.html">Flowers</a>
+          <a href="orders.html">My orders</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-end">
+          <form class="nav-search" action="catalog.html" role="search">
+            <svg
+              class="icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.6-3.6" />
+            </svg>
+            <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
+          </form>
+          <a class="nav-icon" href="cart.html" aria-label="Cart">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="nav-count" id="cart-count" hidden></span>
+          </a>
+          <details class="nav-account">
+            <summary class="nav-avatar" aria-label="Account menu">
+              <svg
+                class="icon"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </summary>
+            <menu class="nav-pop nav-menu">
+              <li><a href="profile.html">My profile</a></li>
+              <li><button type="button" data-act="reset">Reset demo data</button></li>
+              <li><button type="button" data-act="logout">Log out</button></li>
+            </menu>
+          </details>
+        </div>
+      </nav>
+    </header>
+    <main id="main">
+      <header class="hero hero-tall">
+        <div class="wrap">
+          <p class="hero-eyebrow">My profile</p>
+          <div class="row">
+            <span class="avatar avatar-lg" id="p-avatar" aria-hidden="true"></span>
+            <div>
+              <h1 data-me="name">My profile</h1>
+              <p class="hero-sub">Your details and your password.</p>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
 
-    <div class="wrap hero-pull">
-      <div class="grid-2">
+      <div class="wrap hero-pull">
         <section class="card" aria-labelledby="details-title">
           <div class="card-head">
             <h2 class="card-title" id="details-title">Your details</h2>
           </div>
-          <!-- Filled by js/pages/profile.js -->
-          <dl id="p-details"></dl>
-        </section>
-
-        <section class="card" aria-labelledby="orders-title">
-          <div class="card-head">
-            <h2 class="card-title" id="orders-title">Your orders</h2>
-            <a class="link-arrow" href="orders.html">All orders<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-          </div>
-          <!-- An inline SVG line chart of your order totals, drawn by js/pages/profile.js -->
-          <div id="p-orders"></div>
-        </section>
-      </div>
-    </div>
-
-    <div class="wrap section">
-      <div class="grid-2">
-        <section class="card" aria-labelledby="edit-title">
-          <div class="card-head">
-            <div>
-              <h2 class="card-title" id="edit-title">Edit details</h2>
-              <p class="muted small mb-0">Keep your name, number and address up to date.</p>
-            </div>
-          </div>
-          <form class="form" id="details-form">
-            <div class="field">
-              <label for="d-name">Full name</label>
-              <input id="d-name" name="name" type="text" required minlength="2" maxlength="60" autocomplete="name">
-            </div>
-            <div class="field">
-              <label for="d-phone">Mobile number</label>
-              <input id="d-phone" name="phone" type="tel" required pattern="[6-9][0-9]{9}" maxlength="10"
-                title="10 digits, starting with 6, 7, 8 or 9" autocomplete="tel-national">
-            </div>
-            <div class="field">
-              <label for="d-address">Address</label>
-              <textarea id="d-address" name="address" rows="3" maxlength="200" autocomplete="street-address" placeholder="House, street, area and city"></textarea>
-            </div>
-            <div>
-              <button type="submit" class="btn btn-primary">Save details</button>
-            </div>
-          </form>
-        </section>
-
-        <section class="card" aria-labelledby="password-title">
-          <div class="card-head">
-            <div>
-              <h2 class="card-title" id="password-title">Password</h2>
-              <p class="muted small mb-0">You stay signed in after changing it.</p>
-            </div>
-          </div>
-          <form class="form" id="password-form">
-            <fieldset class="form">
-              <legend>Change your password</legend>
-              <div class="field">
-                <label for="pw-current">Current password</label>
-                <input id="pw-current" name="current" type="password" required autocomplete="current-password">
-              </div>
-              <div class="field">
-                <label for="pw-next">New password</label>
-                <input id="pw-next" name="next" type="password" required minlength="6" maxlength="64" autocomplete="new-password" aria-describedby="pw-next-hint">
-                <p class="hint" id="pw-next-hint">At least 6 characters.</p>
-              </div>
-              <div class="field">
-                <label for="pw-confirm">Confirm new password</label>
-                <input id="pw-confirm" name="confirm" type="password" required minlength="6" maxlength="64" autocomplete="new-password">
-              </div>
-            </fieldset>
-            <div>
-              <button type="submit" class="btn btn-primary">Change password</button>
-            </div>
-          </form>
+          <!-- The labels are plain HTML; js/pages/profile.js writes your saved details into each [data-me] box -->
+          <dl>
+            <dt>Name</dt>
+            <dd data-me="name"></dd>
+            <dt>Email</dt>
+            <dd data-me="email" style="overflow-wrap: anywhere"></dd>
+            <dt>Mobile</dt>
+            <dd data-me="phone"></dd>
+            <dt>Address</dt>
+            <dd data-me="address"></dd>
+            <dt>Member since</dt>
+            <dd><time id="p-joined"></time></dd>
+          </dl>
         </section>
       </div>
-    </div>
-  </main>
-  <script src="js/pages/profile.js?v=4"></script>
-</body>
+
+      <div class="wrap section">
+        <div class="grid-2">
+          <section class="card" aria-labelledby="edit-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="edit-title">Edit details</h2>
+                <p class="muted small mb-0">Keep your name, number and address up to date.</p>
+              </div>
+            </div>
+            <form class="form" id="details-form">
+              <div class="field">
+                <label for="d-name">Full name</label>
+                <input id="d-name" name="name" type="text" required minlength="2" maxlength="60" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="d-phone">Mobile number</label>
+                <input
+                  id="d-phone"
+                  name="phone"
+                  type="tel"
+                  required
+                  pattern="[6-9][0-9]{9}"
+                  maxlength="10"
+                  title="10 digits, starting with 6, 7, 8 or 9"
+                  autocomplete="tel-national"
+                />
+              </div>
+              <div class="field">
+                <label for="d-address">Address</label>
+                <textarea
+                  id="d-address"
+                  name="address"
+                  rows="3"
+                  maxlength="200"
+                  autocomplete="street-address"
+                  placeholder="House, street, area and city"
+                ></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary">Save details</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="card" aria-labelledby="password-title">
+            <div class="card-head">
+              <div>
+                <h2 class="card-title" id="password-title">Password</h2>
+                <p class="muted small mb-0">You stay signed in after changing it.</p>
+              </div>
+            </div>
+            <form class="form" id="password-form">
+              <fieldset class="form">
+                <legend>Change your password</legend>
+                <div class="field">
+                  <label for="pw-current">Current password</label>
+                  <input id="pw-current" name="current" type="password" required autocomplete="current-password" />
+                </div>
+                <div class="field">
+                  <label for="pw-next">New password</label>
+                  <input
+                    id="pw-next"
+                    name="next"
+                    type="password"
+                    required
+                    minlength="6"
+                    maxlength="64"
+                    autocomplete="new-password"
+                    aria-describedby="pw-next-hint"
+                  />
+                  <p class="hint" id="pw-next-hint">At least 6 characters.</p>
+                </div>
+                <div class="field">
+                  <label for="pw-confirm">Confirm new password</label>
+                  <input id="pw-confirm" name="confirm" type="password" required minlength="6" maxlength="64" autocomplete="new-password" />
+                </div>
+              </fieldset>
+              <div>
+                <button type="submit" class="btn btn-primary">Change password</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <div>
+            <strong>Bloom &amp; Petal</strong>
+            <p>Fresh flowers, delivered across Jalandhar.</p>
+          </div>
+        </div>
+        <div>
+          <h2>Visit or call</h2>
+          <address>
+            Shop 12, Model Town Market
+            <br />
+            Jalandhar, Punjab 144003
+            <br />
+            <a href="tel:+919876501234">+91 98765 01234</a>
+            <br />
+            <a href="mailto:hello@bloompetal.in">
+              hello@
+              <wbr />
+              bloompetal.in
+            </a>
+          </address>
+        </div>
+        <div>
+          <h2>Owners</h2>
+          <p>Yash, Satyam, Raghav</p>
+          <p><small>Open every day, 9 am to 8 pm</small></p>
+        </div>
+      </div>
+      <p class="wrap footer-note">
+        <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
+      </p>
+    </footer>
+    <script src="js/pages/profile.js?v=6"></script>
+  </body>
 </html>

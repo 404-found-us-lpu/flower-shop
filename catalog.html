@@ -1,68 +1,345 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Bloom & Petal - catalog.html - Made by: Raghav -->
 <html lang="en" data-page="catalog" data-roles="customer">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Browse every flower at Bloom &amp; Petal, from mogra and marigold to roses and orchids: search, pick a type, sort and add to your cart.">
-  <title>Flowers · Bloom &amp; Petal</title>
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=4">
-  <script src="js/app.js?v=4"></script>
-</head>
-<body>
-  <main id="main">
-    <section class="hero hero-sm">
-      <div class="wrap">
-        <nav class="crumbs" aria-label="Breadcrumb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Browse every flower at Bloom &amp; Petal, from mogra and marigold to roses and orchids: search, pick a type, sort and add to your cart."
+    />
+    <title>Flowers · Bloom &amp; Petal</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css?v=6" />
+    <script src="js/app.js?v=6"></script>
+  </head>
+  <body>
+    <header class="nav-wrap">
+      <nav class="nav" aria-label="Main">
+        <a class="brand" href="home.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <span class="brand-name">Bloom &amp; Petal</span>
+        </a>
+        <div class="nav-links">
           <a href="home.html">Home</a>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">Flowers</span>
-        </nav>
-        <h1>Our flowers</h1>
-        <p class="hero-sub">Fresh every morning, from mogra and genda to roses and orchids. Delivered across Jalandhar.</p>
-      </div>
-    </section>
-
-    <div class="wrap section stack-lg">
-      <!-- <search> marks the part of the page used to search and filter (it works like role="search") -->
-      <search class="card card-sm stack reveal" aria-label="Find flowers">
-        <form class="toolbar" id="filters">
-          <div class="input-icon grow">
-            <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
-            <input type="search" id="q" name="q" list="flower-names" placeholder="Search mogra, roses, plants..." maxlength="60" autocomplete="off" aria-label="Search flowers">
-            <!-- Suggestions while typing: every flower name (filled by js/pages/catalog.js) -->
-            <datalist id="flower-names"></datalist>
-          </div>
-          <select id="sort" name="sort" aria-label="Sort flowers">
-            <optgroup label="Price">
-              <option value="price-asc">Price: low to high</option>
-              <option value="price-desc">Price: high to low</option>
-            </optgroup>
-            <optgroup label="Name">
-              <option value="name" selected>Name: A to Z</option>
-            </optgroup>
-            <optgroup label="Stock">
-              <option value="stock">Most in stock first</option>
-            </optgroup>
-          </select>
-        </form>
-        <!-- The 23px corners keep the tab group neat when it wraps onto two lines. -->
-        <div class="tabs" id="tabs" role="group" aria-label="Flower type" style="border-radius: 23px;"></div>
-      </search>
-
-      <section class="stack reveal reveal-2" aria-label="Flowers">
-        <p class="muted mb-0" id="result" aria-live="polite"></p>
-        <div class="product-grid" id="grid"></div>
-        <div class="card empty" id="empty" hidden>
-          <span class="empty-icon"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg></span>
-          <h2>No flowers match</h2>
-          <p>Try another word or another type, or clear the search to see every flower.</p>
-          <button type="button" class="btn btn-primary" data-clear>Clear search</button>
+          <a href="catalog.html" aria-current="page">Flowers</a>
+          <a href="orders.html">My orders</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-end">
+          <form class="nav-search" action="catalog.html" role="search">
+            <svg
+              class="icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.6-3.6" />
+            </svg>
+            <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
+          </form>
+          <a class="nav-icon" href="cart.html" aria-label="Cart">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="nav-count" id="cart-count" hidden></span>
+          </a>
+          <details class="nav-account">
+            <summary class="nav-avatar" aria-label="Account menu">
+              <svg
+                class="icon"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </summary>
+            <menu class="nav-pop nav-menu">
+              <li><a href="profile.html">My profile</a></li>
+              <li><button type="button" data-act="reset">Reset demo data</button></li>
+              <li><button type="button" data-act="logout">Log out</button></li>
+            </menu>
+          </details>
+        </div>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero hero-sm">
+        <div class="wrap">
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="home.html">Home</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">Flowers</span>
+          </nav>
+          <h1>Our flowers</h1>
+          <p class="hero-sub">Fresh every morning, from mogra and genda to roses and orchids. Delivered across Jalandhar.</p>
         </div>
       </section>
-    </div>
-  </main>
-  <script src="js/pages/catalog.js?v=4"></script>
-</body>
+
+      <div class="wrap section stack-lg">
+        <!-- <search> marks the part of the page used to search and filter (it works like role="search") -->
+        <search class="card card-sm stack reveal" aria-label="Find flowers">
+          <form class="toolbar" id="filters">
+            <div class="input-icon grow">
+              <svg
+                class="icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.6-3.6" />
+              </svg>
+              <input
+                type="search"
+                id="q"
+                name="q"
+                list="flower-names"
+                placeholder="Search mogra, roses, plants..."
+                maxlength="60"
+                autocomplete="off"
+                aria-label="Search flowers"
+              />
+              <!-- Suggestions while typing: every flower name -->
+              <datalist id="flower-names">
+                <option value="Alstroemeria Bunch"></option>
+                <option value="Anthurium Pot"></option>
+                <option value="Aprajita Pot"></option>
+                <option value="Birthday Combo"></option>
+                <option value="Bleeding Heart Vine Pot"></option>
+                <option value="Bougainvillea Pot"></option>
+                <option value="Calla Lily Bunch"></option>
+                <option value="Carnation Bunch"></option>
+                <option value="Champa (Frangipani) Pot"></option>
+                <option value="Daisy Bunch"></option>
+                <option value="Flower Gift Box"></option>
+                <option value="Gerbera Mix"></option>
+                <option value="Gudhal (Hibiscus) Pot"></option>
+                <option value="Guldaudi (Chrysanthemum)"></option>
+                <option value="Hydrangea Bunch"></option>
+                <option value="Kamal (Lotus)"></option>
+                <option value="Lavender Bundle"></option>
+                <option value="Madhumalti Pot"></option>
+                <option value="Marigold (Genda)"></option>
+                <option value="Mixed Flower Basket"></option>
+                <option value="Mogra Pot"></option>
+                <option value="Money Plant Pot"></option>
+                <option value="Parijat Pot"></option>
+                <option value="Peace Lily Pot"></option>
+                <option value="Peony Bouquet"></option>
+                <option value="Pink Tulip Bunch"></option>
+                <option value="Purple Iris Bunch"></option>
+                <option value="Purple Orchid Pot"></option>
+                <option value="Raat Ki Rani Pot"></option>
+                <option value="Rajnigandha (Tuberose)"></option>
+                <option value="Rangan (Ixora) Pot"></option>
+                <option value="Red Rose Bouquet"></option>
+                <option value="Rose Plant Pot"></option>
+                <option value="Rose Varmala"></option>
+                <option value="Sadabahar Pot"></option>
+                <option value="Single Gerbera"></option>
+                <option value="Single Orchid Stem"></option>
+                <option value="Single Red Rose"></option>
+                <option value="Single Sunflower"></option>
+                <option value="Single White Lily"></option>
+                <option value="Snake Plant Pot"></option>
+                <option value="Succulent Pot"></option>
+                <option value="Sunflower Basket"></option>
+                <option value="White Lily Bunch"></option>
+                <option value="Yellow Rose Bouquet"></option>
+              </datalist>
+            </div>
+            <select id="sort" name="sort" aria-label="Sort flowers">
+              <optgroup label="Price">
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+              </optgroup>
+              <optgroup label="Name">
+                <option value="name" selected>Name: A to Z</option>
+              </optgroup>
+              <optgroup label="Stock">
+                <option value="stock">Most in stock first</option>
+              </optgroup>
+            </select>
+          </form>
+          <!-- The 23px corners keep the tab group neat when it wraps onto two lines. js/pages/catalog.js fills each count. -->
+          <div class="tabs" id="tabs" role="group" aria-label="Flower type" style="border-radius: 23px">
+            <button type="button" class="tab active" data-type="All" aria-pressed="true">
+              All
+              <span class="count"></span>
+            </button>
+            <button type="button" class="tab" data-type="Bouquets" aria-pressed="false">
+              Bouquets
+              <span class="count"></span>
+            </button>
+            <button type="button" class="tab" data-type="Indian favourites" aria-pressed="false">
+              Indian favourites
+              <span class="count"></span>
+            </button>
+            <button type="button" class="tab" data-type="Single stems" aria-pressed="false">
+              Single stems
+              <span class="count"></span>
+            </button>
+            <button type="button" class="tab" data-type="Plants" aria-pressed="false">
+              Plants
+              <span class="count"></span>
+            </button>
+            <button type="button" class="tab" data-type="Gifts" aria-pressed="false">
+              Gifts
+              <span class="count"></span>
+            </button>
+          </div>
+        </search>
+
+        <section class="stack reveal reveal-2" aria-label="Flowers">
+          <p class="muted mb-0" id="result" aria-live="polite"></p>
+          <div class="product-grid" id="grid"></div>
+          <div class="card empty" id="empty" hidden>
+            <span class="empty-icon">
+              <svg
+                class="icon"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.6-3.6" />
+              </svg>
+            </span>
+            <h2>No flowers match</h2>
+            <p>Try another word or another type, or clear the search to see every flower.</p>
+            <button type="button" class="btn btn-primary" data-clear>Clear search</button>
+          </div>
+          <!-- <sub> and <sup>: H2O and CO2 need subscripts, 2nd and 3rd need superscripts -->
+          <p class="callout mb-0">
+            <svg
+              class="icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="2.5" />
+              <path
+                d="M12 9.5a3.5 3.5 0 1 0-3-5.3M14.5 12a3.5 3.5 0 1 0 5.3-3M12 14.5a3.5 3.5 0 1 0 3 5.3M9.5 12a3.5 3.5 0 1 0-5.3 3M9 4.2a3.5 3.5 0 0 0-4.8 4.8M19.8 9a3.5 3.5 0 0 0-4.8-4.8M15 19.8a3.5 3.5 0 0 0 4.8-4.8M4.2 15A3.5 3.5 0 0 0 9 19.8"
+              />
+            </svg>
+            <span>
+              <strong>Care tip:</strong>
+              trim 2 cm off cut stems and change the H
+              <sub>2</sub>
+              O every 2
+              <sup>nd</sup>
+              day. Give pots 4 to 6 hours of sun and water them every 3
+              <sup>rd</sup>
+              day; in daylight their leaves turn CO
+              <sub>2</sub>
+              into fresh O
+              <sub>2</sub>
+              .
+            </span>
+          </p>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <div>
+            <strong>Bloom &amp; Petal</strong>
+            <p>Fresh flowers, delivered across Jalandhar.</p>
+          </div>
+        </div>
+        <div>
+          <h2>Visit or call</h2>
+          <address>
+            Shop 12, Model Town Market
+            <br />
+            Jalandhar, Punjab 144003
+            <br />
+            <a href="tel:+919876501234">+91 98765 01234</a>
+            <br />
+            <a href="mailto:hello@bloompetal.in">
+              hello@
+              <wbr />
+              bloompetal.in
+            </a>
+          </address>
+        </div>
+        <div>
+          <h2>Owners</h2>
+          <p>Yash, Satyam, Raghav</p>
+          <p><small>Open every day, 9 am to 8 pm</small></p>
+        </div>
+      </div>
+      <p class="wrap footer-note">
+        <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
+      </p>
+    </footer>
+    <script src="js/pages/catalog.js?v=6"></script>
+  </body>
 </html>

@@ -35,7 +35,7 @@ FS.ready((user) => {
     const focused = [...list.querySelectorAll('button')].indexOf(document.activeElement);
 
     byId('cart-full').hidden = lines.length === 0;
-    byId('cart-empty').hidden = lines.length > 0;
+    byId('cart-empty').hidden = lines.length > 0 || !byId('cart-done').hidden; // after an order the thank-you shows instead
     byId('cart-sub').textContent = lines.length
       ? `${count} ${count === 1 ? 'flower' : 'flowers'} in your cart. Check them, then tell us who gets them and when.`
       : 'Nothing here yet. The flowers you add will wait for you here.';
@@ -46,38 +46,41 @@ FS.ready((user) => {
       <div class="summary-line"><span class="muted">Flowers (${count})</span><span>${FS.money(subtotal)}</span></div>
       <div class="summary-line"><span class="muted">Delivery</span><span>${fee}</span></div>
       <div class="summary-total"><span>Total</span><span class="serif">${FS.money(total)}</span></div>`;
-    byId('free-fill').style.width = `${Math.min(100, subtotal / freeFrom * 100)}%`;
-    byId('free-text').textContent = toFree > 0 ? `Add ${FS.money(toFree)} more for free delivery.` : 'Delivery is free on this order.';
+    byId('free-fill').style.width = `${Math.min(100, (subtotal / freeFrom) * 100)}%`;
+    byId('free-text').textContent =
+      toFree > 0 ? `Add ${FS.money(toFree)} more for free delivery.` : 'Delivery is free on this order.';
 
-    const again = list.querySelectorAll('button')[focused];   // keyboard users keep their place
+    const again = list.querySelectorAll('button')[focused]; // keyboard users keep their place
     if (again) again.focus();
   };
 
   // Saves a new quantity (0 removes the flower). When it is more than the stock, shows why and puts the old number back.
   const setQty = (id, qty) => {
     const { ok, error } = FS.setCartQty(id, qty);
-    if (!ok) { FS.toast(error, 'error'); render(); }
+    if (!ok) {
+      FS.toast(error, 'error');
+      render();
+    }
   };
 
   // Fresh form: the logged-in customer as the receiver, delivery tomorrow (any day from today to 60 days ahead).
   const resetForm = () => {
     form.reset();
     FS.clearErrors(form);
-    ['name', 'phone', 'address'].forEach((key) => { form.elements[key].value = user[key] || ''; });
+    ['name', 'phone', 'address'].forEach((key) => {
+      form.elements[key].value = user[key] || '';
+    });
     Object.assign(form.elements.deliveryDate, { min: FS.today(0), max: FS.today(60), value: FS.today(1) });
   };
 
-  // Thank-you dialog with the order number and where to go next.
-  const showSuccess = ({ id, deliveryDate, slot }) => FS.openModal({
-    title: 'Order placed!',
-    html: `
-      <p>Thank you, ${FS.esc(user.name.split(' ')[0])}. Order <strong>#${id}</strong> arrives on
-        <time datetime="${FS.esc(deliveryDate)}">${FS.fmtDate(deliveryDate)}</time>, ${FS.esc(slot)}.</p>
-      <div class="modal-actions">
-        <a class="btn btn-ghost" href="catalog.html">Flowers</a>
-        <a class="btn btn-primary" href="order.html?id=${id}">See order #${id}</a>
-      </div>`
-  });
+  // Un-hides the thank-you section (plain HTML in cart.html) with the new order's number and link.
+  const showSuccess = ({ id }) => {
+    byId('done-id').textContent = `#${id}`;
+    byId('done-link').href = `order.html?id=${id}`;
+    byId('cart-done').hidden = false;
+    render();
+    byId('cart-done').focus();
+  };
 
   // The -, + and remove buttons of every line (one listener for the whole list).
   list.addEventListener('click', (e) => {
@@ -88,15 +91,21 @@ FS.ready((user) => {
   // A number typed in a quantity box. An empty box or 0 puts the old number back (the bin button removes).
   list.addEventListener('change', (e) => {
     const { value, dataset } = e.target;
-    if (value >= 1) setQty(dataset.id, value); else render();
+    if (value >= 1) setQty(dataset.id, value);
+    else render();
   });
 
   // Place order: FS.placeOrder checks everything again. Field problems show under the fields, cart problems as a toast.
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const { ok, errors, order } = FS.placeOrder(FS.formData(form));
-    if (!ok) { FS.showErrors(form, errors); return; }
-    byId('chime').play().catch(() => {});   // no sound file or sound blocked: the order is placed anyway
+    if (!ok) {
+      FS.showErrors(form, errors);
+      return;
+    }
+    byId('chime')
+      .play()
+      .catch(() => {}); // no sound file or sound blocked: the order is placed anyway
     resetForm();
     showSuccess(order);
   });

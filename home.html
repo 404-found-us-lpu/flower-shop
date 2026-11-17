@@ -1,63 +1,335 @@
-<!DOCTYPE html>
+<!doctype html>
 <!-- Bloom & Petal - home.html - Made by: Raghav -->
 <html lang="en" data-page="home" data-roles="customer">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Your Bloom &amp; Petal home: your next delivery, Indian favourites, flowers by type, recent orders and a flower-care tip for today.">
-  <title>Home · Bloom &amp; Petal</title>
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=4">
-  <script src="js/app.js?v=4"></script>
-</head>
-<body>
-  <main id="main">
-    <section class="hero hero-tall">
-      <div class="wrap">
-        <h1 id="hello">Welcome</h1>
-        <p class="hero-sub">Fresh flowers for the people you love, delivered across Jalandhar.</p>
-      </div>
-    </section>
-
-    <!-- The dark card over the hero: the next order to arrive (filled by js/pages/home.js) -->
-    <div class="wrap hero-pull">
-      <section class="card-dark stack-lg reveal" id="next" aria-labelledby="next-title"></section>
-    </div>
-
-    <div class="wrap section stack-lg">
-      <section class="card reveal reveal-2" aria-labelledby="indian-title">
-        <div class="card-head">
-          <h2 class="card-title" id="indian-title">Indian favourites</h2>
-          <a class="link-arrow" href="catalog.html?type=Indian%20favourites">See all <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Your Bloom &amp; Petal home: your next delivery, Indian favourites, flowers by type, recent orders and a flower-care tip for today."
+    />
+    <title>Home · Bloom &amp; Petal</title>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css?v=6" />
+    <script src="js/app.js?v=6"></script>
+  </head>
+  <body>
+    <header class="nav-wrap">
+      <nav class="nav" aria-label="Main">
+        <a class="brand" href="home.html">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <span class="brand-name">Bloom &amp; Petal</span>
+        </a>
+        <div class="nav-links">
+          <a href="home.html" aria-current="page">Home</a>
+          <a href="catalog.html">Flowers</a>
+          <a href="orders.html">My orders</a>
+          <a href="contact.html">Contact</a>
         </div>
-        <div class="tiles" id="indian"></div>
+        <div class="nav-end">
+          <form class="nav-search" action="catalog.html" role="search">
+            <svg
+              class="icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.6-3.6" />
+            </svg>
+            <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
+          </form>
+          <a class="nav-icon" href="cart.html" aria-label="Cart">
+            <svg
+              class="icon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span class="nav-count" id="cart-count" hidden></span>
+          </a>
+          <details class="nav-account">
+            <summary class="nav-avatar" aria-label="Account menu">
+              <svg
+                class="icon"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </summary>
+            <menu class="nav-pop nav-menu">
+              <li><a href="profile.html">My profile</a></li>
+              <li><button type="button" data-act="reset">Reset demo data</button></li>
+              <li><button type="button" data-act="logout">Log out</button></li>
+            </menu>
+          </details>
+        </div>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero hero-tall">
+        <div class="wrap">
+          <h1 id="hello">Welcome</h1>
+          <p class="hero-sub">Fresh flowers for the people you love, delivered across Jalandhar.</p>
+        </div>
       </section>
 
-      <div class="split">
-        <section class="card reveal reveal-3" aria-labelledby="types-title">
+      <!-- The dark card over the hero: the next order to arrive (filled by js/pages/home.js) -->
+      <div class="wrap hero-pull">
+        <section class="card-dark stack-lg reveal" id="next" aria-labelledby="next-title"></section>
+      </div>
+
+      <div class="wrap section stack-lg">
+        <section class="card reveal reveal-2" aria-labelledby="indian-title">
           <div class="card-head">
-            <h2 class="card-title" id="types-title">Shop by type</h2>
-            <a class="link-arrow" href="catalog.html">All flowers <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <h2 class="card-title" id="indian-title">Indian favourites</h2>
+            <a class="link-arrow" href="catalog.html?type=Indian%20favourites">
+              See all
+              <svg
+                class="icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
           </div>
-          <ul class="list" id="types"></ul>
+          <!-- Each tile searches the shop for that flower. app.js writes the stock into every data-stock span. -->
+          <div class="tiles">
+            <a class="tile" href="catalog.html?q=Aprajita%20Pot">
+              <img src="images/aprajita-pot.jpg" alt="" loading="lazy" />
+              <span class="tile-name">Aprajita Pot</span>
+              <span class="stock-pill" data-stock="15"></span>
+              <span class="price-pill">₹300</span>
+            </a>
+            <a class="tile" href="catalog.html?q=Bleeding%20Heart%20Vine%20Pot">
+              <img src="images/bleeding-heart-pot.jpg" alt="" loading="lazy" />
+              <span class="tile-name">Bleeding Heart Vine Pot</span>
+              <span class="stock-pill" data-stock="16"></span>
+              <span class="price-pill">₹550</span>
+            </a>
+            <a class="tile" href="catalog.html?q=Guldaudi%20(Chrysanthemum)">
+              <img src="images/guldaudi.jpg" alt="" loading="lazy" />
+              <span class="tile-name">Guldaudi (Chrysanthemum)</span>
+              <span class="stock-pill" data-stock="17"></span>
+              <span class="price-pill">₹450</span>
+            </a>
+            <a class="tile" href="catalog.html?q=Madhumalti%20Pot">
+              <img src="images/madhumalti-pot.jpg" alt="" loading="lazy" />
+              <span class="tile-name">Madhumalti Pot</span>
+              <span class="stock-pill" data-stock="18"></span>
+              <span class="price-pill">₹500</span>
+            </a>
+            <a class="tile" href="catalog.html?q=Marigold%20(Genda)">
+              <img src="images/marigold.jpg" alt="" loading="lazy" />
+              <span class="tile-name">Marigold (Genda)</span>
+              <span class="stock-pill" data-stock="14"></span>
+              <span class="price-pill">₹250</span>
+            </a>
+            <a class="tile" href="catalog.html?q=Mogra%20Pot">
+              <img src="images/mogra-pot.jpg" alt="" loading="lazy" />
+              <span class="tile-name">Mogra Pot</span>
+              <span class="stock-pill" data-stock="13"></span>
+              <span class="price-pill">₹350</span>
+            </a>
+          </div>
         </section>
 
-        <!-- <aside>: a side note that goes with the page but is not its main content -->
-        <aside class="card reveal reveal-4" aria-labelledby="tip-title">
-          <h2 class="card-title" id="tip-title"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.5"/><path d="M12 9.5a3.5 3.5 0 1 0-3-5.3M14.5 12a3.5 3.5 0 1 0 5.3-3M12 14.5a3.5 3.5 0 1 0 3 5.3M9.5 12a3.5 3.5 0 1 0-5.3 3"/></svg> Tip of the day</h2>
-          <p id="tip"></p>
-        </aside>
-      </div>
+        <div class="split">
+          <section class="card reveal reveal-3" aria-labelledby="types-title">
+            <div class="card-head">
+              <h2 class="card-title" id="types-title">Shop by type</h2>
+              <a class="link-arrow" href="catalog.html">
+                All flowers
+                <svg
+                  class="icon"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+            <ul class="list">
+              <li>
+                <a class="cell-flower" href="catalog.html?type=Bouquets">
+                  <img src="images/gerbera-mix.jpg" alt="" loading="lazy" />
+                  <strong>Bouquets</strong>
+                </a>
+                <span class="chip chip-light">14 flowers</span>
+              </li>
+              <li>
+                <a class="cell-flower" href="catalog.html?type=Indian%20favourites">
+                  <img src="images/aprajita-pot.jpg" alt="" loading="lazy" />
+                  <strong>Indian favourites</strong>
+                </a>
+                <span class="chip chip-light">15 flowers</span>
+              </li>
+              <li>
+                <a class="cell-flower" href="catalog.html?type=Single%20stems">
+                  <img src="images/single-red-rose.jpg" alt="" loading="lazy" />
+                  <strong>Single stems</strong>
+                </a>
+                <span class="chip chip-light">5 flowers</span>
+              </li>
+              <li>
+                <a class="cell-flower" href="catalog.html?type=Plants">
+                  <img src="images/money-plant-pot.jpg" alt="" loading="lazy" />
+                  <strong>Plants</strong>
+                </a>
+                <span class="chip chip-light">7 flowers</span>
+              </li>
+              <li>
+                <a class="cell-flower" href="catalog.html?type=Gifts">
+                  <img src="images/birthday-combo.jpg" alt="" loading="lazy" />
+                  <strong>Gifts</strong>
+                </a>
+                <span class="chip chip-light">4 flowers</span>
+              </li>
+            </ul>
+          </section>
 
-      <section class="card" aria-labelledby="recent-title">
-        <div class="card-head">
-          <h2 class="card-title" id="recent-title">Recent orders</h2>
-          <a class="link-arrow" href="orders.html">All orders <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <!-- <aside>: a side note that goes with the page but is not its main content -->
+          <aside class="card reveal reveal-4" aria-labelledby="tip-title">
+            <h2 class="card-title" id="tip-title">
+              <svg
+                class="icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="2.5" />
+                <path d="M12 9.5a3.5 3.5 0 1 0-3-5.3M14.5 12a3.5 3.5 0 1 0 5.3-3M12 14.5a3.5 3.5 0 1 0 3 5.3M9.5 12a3.5 3.5 0 1 0-5.3 3" />
+              </svg>
+              Tip of the day
+            </h2>
+            <p id="tip"></p>
+          </aside>
         </div>
-        <div class="stack" id="recent"></div>
-      </section>
-    </div>
-  </main>
-  <script src="js/pages/home.js?v=4"></script>
-</body>
+
+        <section class="card" aria-labelledby="recent-title">
+          <div class="card-head">
+            <h2 class="card-title" id="recent-title">Recent orders</h2>
+            <a class="link-arrow" href="orders.html">
+              All orders
+              <svg
+                class="icon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+          <div class="stack" id="recent"></div>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
+              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
+              <circle class="core" cx="12" cy="12" r="2.4" />
+            </svg>
+          </span>
+          <div>
+            <strong>Bloom &amp; Petal</strong>
+            <p>Fresh flowers, delivered across Jalandhar.</p>
+          </div>
+        </div>
+        <div>
+          <h2>Visit or call</h2>
+          <address>
+            Shop 12, Model Town Market
+            <br />
+            Jalandhar, Punjab 144003
+            <br />
+            <a href="tel:+919876501234">+91 98765 01234</a>
+            <br />
+            <a href="mailto:hello@bloompetal.in">
+              hello@
+              <wbr />
+              bloompetal.in
+            </a>
+          </address>
+        </div>
+        <div>
+          <h2>Owners</h2>
+          <p>Yash, Satyam, Raghav</p>
+          <p><small>Open every day, 9 am to 8 pm</small></p>
+        </div>
+      </div>
+      <p class="wrap footer-note">
+        <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
+      </p>
+    </footer>
+    <script src="js/pages/home.js?v=6"></script>
+  </body>
 </html>

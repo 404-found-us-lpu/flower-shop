@@ -1,5 +1,5 @@
 /* Made by: Satyam */
-/* Bloom & Petal - js/pages/order.js - one of your orders: flowers, delivery details and a receipt to print. */
+/* Bloom & Petal - js/pages/order.js - one of your orders: flowers, delivery details and a Print button. */
 FS.ready(() => {
   // Short name for document.getElementById.
   const byId = (id) => document.getElementById(id);
@@ -7,7 +7,7 @@ FS.ready(() => {
   // Short forms shown with <abbr>; the title gives the full name.
   const PAY = {
     'Cash on delivery': '<abbr title="Cash on delivery">COD</abbr>',
-    'UPI': '<abbr title="Unified Payments Interface">UPI</abbr>'
+    UPI: '<abbr title="Unified Payments Interface">UPI</abbr>',
   };
 
   // One table row: photo and name, quantity, price each and the amount.
@@ -39,28 +39,6 @@ FS.ready(() => {
       <dd>${note ? `<blockquote>${FS.esc(note)}</blockquote>` : 'No card note'}</dd>
     </dl>`;
 
-  // Plain-text receipt, 40 letters wide: padEnd and padStart line the columns up, repeat draws the lines.
-  const receiptText = ({ id, items, subtotal, delivery, total, createdAt, deliveryDate, payment, recipient }) => {
-    const rs = (n) => FS.money(n).replace('₹', 'Rs. ');            // ₹ is not in every typewriter font
-    const row = (left, right) => left.padEnd(24) + right.padStart(16);
-    return [
-      'BLOOM & PETAL'.padStart(26),
-      '='.repeat(40),
-      row(`Order #${id}`, FS.fmtDate(createdAt)),
-      row('Deliver on', FS.fmtDate(deliveryDate)),
-      `To: ${recipient.name.toUpperCase()}`,
-      '-'.repeat(40),
-      ...items.map(({ name, qty, price }) => name.slice(0, 24).padEnd(25) + `x${qty}`.padStart(4) + rs(price * qty).padStart(11)),
-      '-'.repeat(40),
-      row('Subtotal', rs(subtotal)),
-      row('Delivery', delivery ? rs(delivery) : 'FREE'),
-      row('TOTAL', rs(total)),
-      '='.repeat(40),
-      row('Payment', payment),
-      'Thank you for shopping with us!'.padStart(35)
-    ].join('\n');
-  };
-
   // Fills the page from the order in ?id=, or shows "not found". Runs at the start and on every fs:change.
   const render = () => {
     const order = FS.getOrder(FS.params().get('id'));
@@ -74,13 +52,14 @@ FS.ready(() => {
     const { id, createdAt, items } = order;
     document.title = `Order #${id} · Bloom & Petal`;
     byId('order-title').textContent = `Order #${id}`;
-    byId('order-sub').innerHTML = `Placed <time datetime="${FS.esc(createdAt)}">${FS.fmtDate(createdAt)} at ${FS.fmtTime(createdAt)}</time>`;
+    byId('order-sub').innerHTML =
+      `Placed <time datetime="${FS.esc(createdAt)}">${FS.fmtDate(createdAt)} at ${FS.fmtTime(createdAt)}</time>`;
     byId('order-items').innerHTML = items.map(itemRow).join('');
     byId('order-totals').innerHTML = totalsHTML(order);
     byId('order-delivery').innerHTML = deliveryHTML(order);
-    byId('receipt').textContent = receiptText(order);
   };
 
+  // Print: the browser prints this page (style.css hides the menu, footer and buttons).
   byId('print').addEventListener('click', () => window.print());
   render();
   window.addEventListener('fs:change', render);
