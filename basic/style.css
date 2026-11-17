@@ -1105,7 +1105,8 @@ fieldset {
   gap: 14px 18px;
 }
 
-/* Anything that is not a single field (radio pills, an inner group, a note) takes the full row */
+/* Anything that is not a single field (radio pills, an inner group, a note) takes the full row:
+   from line 1 to line -1 (the last line) */
 .form fieldset > :not(.field),
 .form .field:has(textarea) {
   grid-column: 1 / -1;
