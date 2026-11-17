@@ -379,6 +379,7 @@ video {
   height: auto;
   border-radius: var(--radius);
   background: var(--forest);
+  color: var(--on-dark);
 }
 
 iframe {
