@@ -54,7 +54,7 @@
   --ink: #17231c;
   --ink-soft: #5d6a61;
   --on-dark: #f3efe4;
-  --on-dark-soft: rgb(243 239 228 / 75%);
+  --on-dark-soft: rgb(243 239 228 / 88%);
 
   /* lines, warnings and the "in stock" green */
   --line: #e2d8c6;
@@ -1174,7 +1174,7 @@ textarea {
 }
 
 ::placeholder {
-  color: #9aa39d;
+  color: #6b756e;
 }
 
 /* The box you are typing in: green border and a soft green glow */
