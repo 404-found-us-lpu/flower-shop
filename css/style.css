@@ -247,8 +247,6 @@ q::after {
 /* Long quotes */
 blockquote {
   margin: 0;
-  padding-left: 16px;
-  border-left: 3px solid var(--gold);
   font-family: var(--serif);
   font-size: 1.1rem;
   font-style: italic;
@@ -706,10 +704,14 @@ tfoot th {
 }
 
 /* Small pill above the heading */
+/* On the green band the tag is plain small gold text, not a pill */
 .hero .tag {
-  border: 1px solid rgb(234 215 164 / 40%);
-  background: rgb(234 215 164 / 12%);
+  padding: 0;
+  border-radius: 0;
+  background: none;
   color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* A plain .btn on the green band is an outline button */
