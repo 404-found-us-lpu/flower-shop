@@ -12,21 +12,20 @@ FS.ready(() => {
     event.preventDefault(); // stop the browser from reloading the page
 
     // Read what the user typed
-    const { name, email, phone } = FS.formData(form);
+    const { name, email } = FS.formData(form);
 
-    // HTML already checked the fields; check them again and keep one message per wrong field
+    // HTML already checked the fields (the phone pattern too). JS catches what HTML lets through:
+    // a name of only spaces and an email with no dot after the @. One message per wrong field.
     const errors = {};
 
     if (!name) errors.name = 'Please enter your name.';
     if (!FS.isEmail(email)) errors.email = 'Please enter a correct email address.';
-    if (!FS.isPhone(phone)) errors.phone = 'Enter a 10 digit mobile number starting with 6, 7, 8 or 9.';
 
     // showErrors puts the messages under the fields and returns true if there was any error
     if (FS.showErrors(form, errors)) return;
 
     // Everything is correct: thank the user by first name and empty the form
-    const firstName = name.split(' ')[0];
-    FS.toast(`Thanks, ${firstName}! We will call you back within a day.`);
+    FS.toast(`Thanks, ${name.split(' ')[0]}! We will call you back within a day.`);
 
     form.reset();
   });

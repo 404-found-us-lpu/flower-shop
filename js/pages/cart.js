@@ -52,17 +52,14 @@ FS.ready((user) => {
     const { subtotal, delivery, total, freeFrom, toFree } = FS.cartTotals();
 
     // Remember which button had keyboard focus, so we can put it back after redrawing.
-    const oldButtons = [...list.querySelectorAll('button')];
-    const focusedIndex = oldButtons.indexOf(document.activeElement);
+    const focusedIndex = [...list.querySelectorAll('button')].indexOf(document.activeElement);
 
     // Show the full cart, or the "empty" message (after an order the thank-you shows instead).
     byId('cart-full').hidden = lines.length === 0;
     byId('cart-empty').hidden = lines.length > 0 || !byId('cart-done').hidden;
 
-    const flowerWord = count === 1 ? 'flower' : 'flowers';
-
     byId('cart-sub').textContent = lines.length
-      ? `${count} ${flowerWord} in your cart. Check them, then tell us who gets them and when.`
+      ? `${count} ${count === 1 ? 'flower' : 'flowers'} in your cart. Check them, then tell us who gets them and when.`
       : 'Nothing here yet. The flowers you add will wait for you here.';
 
     list.innerHTML = lines.map(lineHTML).join('');
@@ -114,10 +111,9 @@ FS.ready((user) => {
   // (any day from today to 60 days ahead can be picked).
   const resetForm = () => {
     form.reset();
-    FS.clearErrors(form);
 
     ['name', 'phone', 'address'].forEach((key) => {
-      form.elements[key].value = user[key] || '';
+      form.elements[key].value = user[key];
     });
 
     Object.assign(form.elements.deliveryDate, {
@@ -125,16 +121,6 @@ FS.ready((user) => {
       max: FS.today(60),
       value: FS.today(1),
     });
-  };
-
-  // Un-hides the thank-you section (plain HTML in cart.html) with the new order's number and link.
-  const showSuccess = ({ id }) => {
-    byId('done-id').textContent = `#${id}`;
-    byId('done-link').href = `order.html?id=${id}`;
-    byId('cart-done').hidden = false;
-
-    render();
-    byId('cart-done').focus();
   };
 
   // ---------- Events ----------
@@ -155,22 +141,24 @@ FS.ready((user) => {
   });
 
   // Place order: FS.placeOrder checks everything again.
-  // Field problems show under the fields, cart problems as a toast.
+  // Field problems show under the fields, cart problems as a toast (showErrors returns true if there were any).
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const { ok, errors, order } = FS.placeOrder(FS.formData(form));
-
-    if (!ok) {
-      FS.showErrors(form, errors);
-      return;
-    }
+    const { errors, order } = FS.placeOrder(FS.formData(form));
+    if (FS.showErrors(form, errors)) return;
 
     // Play a chime. If there is no sound file or sound is blocked, the order is placed anyway.
     byId('chime').play().catch(() => {});
 
     resetForm();
-    showSuccess(order);
+
+    // Show the thank-you section (plain HTML in cart.html) with the new order's number and link; render() then hides the empty-cart box.
+    byId('done-id').textContent = `#${order.id}`;
+    byId('done-link').href = `order.html?id=${order.id}`;
+    byId('cart-done').hidden = false;
+    render();
+    byId('cart-done').focus();
   });
 
   // ---------- Start ----------

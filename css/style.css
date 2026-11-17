@@ -7,7 +7,7 @@
     2. Base page                        12. Flower cards and photo tiles
     3. Plain HTML elements              13. Lists, steps and small pieces
     4. Layout helpers                   14. Contact, FAQ, reviews, tour, receipt, chart
-    5. Top navigation                   15. Modal and toasts
+    5. Top navigation                   15. Toasts
     6. Hero (green band)                16. Login and register pages
     7. Buttons                          17. Footer
     8. Cards and stats                  18. Small screens
@@ -225,7 +225,7 @@ img {
 
 /* ---------------------------------------------------------------- 3. Plain HTML elements (the Unit 1 and 2 tags)
    Unit 3: type selectors style a tag everywhere. Attribute selectors - abbr[title], details[open].
-   Child combinator - details[open] > summary, dd > :last-child, :not(pre) > code.
+   Child combinator - details[open] > summary, dd > :last-child.
    :last-child - the last <col> (the money column) gets a soft gold tint.
    Pseudo-elements - ::marker colours list bullets, ::after draws the + on <summary> (turned into x
    when open), ::before/::after are the quote marks of <q>. em units grow with the text around them. */
@@ -346,17 +346,13 @@ pre {
   overflow-x: auto;
 }
 
-:not(pre) > code,
 kbd {
   padding: 0.1em 0.4em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 3px;
   border-radius: 6px;
   background: var(--cream-200);
   font-size: 0.9em;
-}
-
-kbd {
-  border: 1px solid var(--line-strong);
-  border-bottom-width: 3px;
 }
 
 /* Old price (del) and new price (ins) */
@@ -967,15 +963,6 @@ sub {
   background: var(--gold-100);
 }
 
-.btn-danger {
-  background: var(--danger);
-  color: #fff;
-}
-
-.btn-danger:hover {
-  background: #962f2f;
-}
-
 /* Size versions */
 .btn-sm {
   height: 36px;
@@ -1068,8 +1055,7 @@ sub {
   flex-wrap: wrap;
 }
 
-.card-head h2,
-.card-head h3 {
+.card-head h2 {
   margin: 0;
 }
 
@@ -1114,10 +1100,6 @@ sub {
 
 .card-dark .muted {
   color: var(--on-dark-soft);
-}
-
-.card-dark a:not(.btn) {
-  color: var(--gold-200);
 }
 
 /* Big number with a small unit after it */
@@ -1315,7 +1297,7 @@ sub {
 }
 
 /* ---------------------------------------------------------------- 10. Forms
-   Unit 3: attribute selectors pick inputs by their type (input[type="email"], input[readonly]).
+   Unit 3: attribute selectors pick inputs by their type (input[type="email"]).
    Form states - :focus, :user-invalid (red only after the user has typed or tried to send, unlike
    :invalid which is red at once), :checked with the + combinator (the <span> right after a ticked
    radio), :focus-visible, ::placeholder. */
@@ -1401,7 +1383,7 @@ select {
     no-repeat right 16px center;
 }
 
-/* Focus and read-only states */
+/* Focus state and placeholder text */
 input:focus,
 select:focus,
 textarea:focus {
@@ -1412,11 +1394,6 @@ textarea:focus {
 }
 
 ::placeholder {
-  color: var(--ink-500);
-}
-
-input[readonly] {
-  background: var(--cream-200);
   color: var(--ink-500);
 }
 
@@ -2076,11 +2053,6 @@ textarea:user-invalid {
   margin-bottom: 8px;
 }
 
-.empty h3 {
-  color: var(--ink-900);
-  margin: 0;
-}
-
 .empty p {
   margin: 0 0 8px;
   max-width: 45ch;
@@ -2271,74 +2243,9 @@ textarea:user-invalid {
   height: auto;
 }
 
-/* ---------------------------------------------------------------- 15. Modal and toasts (built by js/app.js)
-   Unit 3: position: fixed pins the dark backdrop and the toasts to the window, so they stay put
-   while the page scrolls; z-index puts them above everything else. */
-
-/* Dark layer that covers the page */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  background: rgb(10 22 15 / 0.55);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  animation: fade 0.2s ease;
-}
-
-/* The pop-up box and its parts */
-.modal {
-  width: min(480px, 100%);
-  max-height: calc(100vh - 40px);
-  overflow-y: auto;
-  background: var(--cream-50);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  box-shadow: var(--shadow-lg);
-  animation: pop 0.22s ease-out;
-}
-
-.modal-wide {
-  width: min(760px, 100%);
-}
-
-.modal-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 22px 24px 0;
-}
-
-.modal-title {
-  font-size: 1.6rem;
-  margin: 0;
-}
-
-.modal-x {
-  border: 0;
-  background: transparent;
-}
-
-.modal-body {
-  padding: 18px 24px 24px;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 22px;
-  flex-wrap: wrap;
-}
-
-/* Stop the page scrolling behind an open modal */
-body.modal-open {
-  overflow: hidden;
-}
+/* ---------------------------------------------------------------- 15. Toasts (built by js/app.js)
+   Unit 3: position: fixed pins the toasts to the window, so they stay put while the page scrolls;
+   z-index puts them above everything else. */
 
 /* Short messages in the bottom right corner */
 .toasts {
@@ -2514,9 +2421,9 @@ body.modal-open {
   background: var(--line);
 }
 
-/* ---------------------------------------------------------------- 17. Footer (built by js/app.js)
+/* ---------------------------------------------------------------- 17. Footer (plain HTML in each page)
    Unit 3: grid - three columns in fr units; on tablets the brand block spans both columns
-   (grid-column: span 2). The column titles are <h4> (styled in section 2).
+   (grid-column: span 2). The column titles are <h2> (styled with h4 and h5 in section 2).
    Link states in LVHA order: :link, :visited, :hover, :active.
    Attribute selectors - a[href^="tel:"] and a[href^="mailto:"] (href starts with ...) keep a phone
    number or an email address on one line. */
@@ -2764,7 +2671,7 @@ a[href^='mailto:'] {
    motion off for people who asked their computer for less movement. @media print hides the bar,
    footer and buttons when a page (like the receipt) is printed. */
 
-/* Pop in (menus and the modal) */
+/* Pop in (the account menu) */
 @keyframes pop {
   from {
     opacity: 0;
@@ -2774,17 +2681,6 @@ a[href^='mailto:'] {
   to {
     opacity: 1;
     transform: none;
-  }
-}
-
-/* Fade in (modal backdrop) */
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
   }
 }
 

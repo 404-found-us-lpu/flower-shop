@@ -9,16 +9,14 @@ FS.ready((user) => {
   /* ---------- Small helpers ---------- */
 
   // Turns the flowers of one order into short text, like "Rose Bouquet × 2, Single Lily".
-  const itemsText = (items) => {
-    const parts = items.map(({ name, qty }) => (qty > 1 ? `${name} × ${qty}` : name));
-    return parts.join(', ');
-  };
+  const itemsText = (items) => items
+    .map(({ name, qty }) => (qty > 1 ? `${name} × ${qty}` : name))
+    .join(', ');
 
   // Gives "Today", "Tomorrow" or the weekday name for a 'YYYY-MM-DD' date.
   const dayWord = (ymd) => {
     if (ymd === FS.today()) return 'Today';
-    else if (ymd === FS.today(1)) return 'Tomorrow';
-
+    if (ymd === FS.today(1)) return 'Tomorrow';
     return new Date(`${ymd}T00:00`).toLocaleDateString('en-IN', { weekday: 'long' });
   };
 

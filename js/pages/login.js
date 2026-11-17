@@ -15,8 +15,13 @@ FS.ready(() => {
   // Only a page of this shop ("name.html", maybe with ?...) is followed, never another website.
   const next = /^[\w-]+\.html(\?.*)?$/.test(asked) ? asked : 'home.html';
 
-  // Signs in with the email and password in the form, then opens the next page.
-  const signIn = () => {
+  // --- Connect everything to the page ---
+  // Show the "please sign in first" note only when another page sent the user here.
+  document.getElementById('next-note').hidden = !asked;
+
+  // Pressing "Sign in" (or Enter) signs in without reloading the page, then opens the next page.
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
     const result = FS.login(email.value, password.value);
 
     if (result.ok) {
@@ -25,24 +30,12 @@ FS.ready(() => {
       FS.showErrors(form, result.errors);
       password.select(); // typing again replaces the wrong password
     }
-  };
-
-  // Demo button: fills in Neha's email and password from FS.DEMO, then signs in.
-  const tryDemo = () => {
-    email.value = FS.DEMO.email;
-    password.value = FS.DEMO.password;
-    signIn();
-  };
-
-  // --- Connect everything to the page ---
-  // Show the "please sign in first" note only when another page sent the user here.
-  document.getElementById('next-note').hidden = !asked;
-
-  // Pressing "Sign in" (or Enter) signs in without reloading the page.
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    signIn();
   });
 
-  document.getElementById('demo-login').addEventListener('click', tryDemo);
+  // Demo button: fills in Neha's email and password from FS.DEMO, then sends the form.
+  document.getElementById('demo-login').addEventListener('click', () => {
+    email.value = FS.DEMO.email;
+    password.value = FS.DEMO.password;
+    form.querySelector('[type="submit"]').click(); // works in every browser, unlike requestSubmit()
+  });
 });

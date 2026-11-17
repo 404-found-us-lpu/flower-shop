@@ -35,34 +35,23 @@ const FS = (() => {
   /* ------------------------------------------------------------ 2. Data store */
   // (db itself is loaded in section 10, after every helper below exists.)
 
-  // Reads the shop data from localStorage, or starts with the demo data.
+  // Reads the saved shop data from localStorage (null when there is none or it is broken).
   function loadDb() {
     try {
-      const raw = localStorage.getItem(DB_KEY);
-      if (raw) return JSON.parse(raw);
+      return JSON.parse(localStorage.getItem(DB_KEY));
     } catch (err) {
-      // Saved data is broken: start again from the demo data.
+      return null;
     }
-
-    const fresh = seedData();
-    try {
-      localStorage.setItem(DB_KEY, JSON.stringify(fresh));
-    } catch (err) {
-      // Storage is blocked (private window): the shop still works, it just forgets on reload.
-    }
-    return fresh;
   }
 
-  // Saves all shop data. Returns false if the browser storage is full.
+  // Saves all shop data (with a warning if the browser storage is full), then tells the page.
   function save() {
     try {
       localStorage.setItem(DB_KEY, JSON.stringify(db));
     } catch (err) {
       toast('Browser storage is full, so the last change was not saved.', 'error');
-      return false;
     }
     changed();
-    return true;
   }
 
   // Tells the page that data changed.
@@ -76,25 +65,18 @@ const FS = (() => {
   // Another tab saved something: load it, so every open tab stays in step.
   window.addEventListener('storage', (e) => {
     if (e.key !== DB_KEY || !e.newValue) return;
-    try {
-      db = JSON.parse(e.newValue);
-      changed();
-    } catch (err) {
-      // The other tab wrote broken data: keep what we already have.
-    }
+    db = JSON.parse(e.newValue);
+    changed();
   });
 
   // Puts every flower, order and account back to the demo data.
   const resetDemo = () => {
     db = seedData();
-    return save();
+    save();
   };
 
-  // Gives the next free id number for 'user' or 'order'.
-  const nextId = (kind) => db.seq[kind]++;
-
   // A deep copy, so pages cannot change the saved data by mistake.
-  const clone = (value) => (value == null ? null : JSON.parse(JSON.stringify(value)));
+  const clone = (value) => JSON.parse(JSON.stringify(value));
 
   // The "failed" answer: { ok: false, errors, error } where error is the first message.
   const fail = (errors) => ({ ok: false, errors, error: Object.values(errors)[0] });
@@ -238,7 +220,7 @@ const FS = (() => {
   const publicUser = (u) => {
     if (!u) return null;
     const { pass, ...rest } = u;
-    return clone(rest);
+    return rest;
   };
 
   // The real saved user who is logged in in this tab (or null).
@@ -251,15 +233,15 @@ const FS = (() => {
   const currentUser = () => publicUser(rawUser());
 
   // Simple checks for an email address and a 10 digit Indian mobile number.
-  const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(s || '').trim());
-  const isPhone = (s) => /^[6-9][0-9]{9}$/.test(String(s || '').trim());
+  // (FS.formData has already trimmed the values.)
+  const isEmail = (s) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s);
+  const isPhone = (s) => /^[6-9][0-9]{9}$/.test(s);
 
   // Logs in with email and password. Returns { ok, user } or { ok:false, errors, error }.
   function login(email, password) {
-    const mail = String(email || '').trim().toLowerCase();
-    const u = db.users.find((x) => x.email === mail);
+    const u = db.users.find((x) => x.email === email.trim().toLowerCase());
 
-    if (!u || u.pass !== hashPassword(String(password || ''))) {
+    if (!u || u.pass !== hashPassword(password)) {
       return fail({ password: 'Wrong email or password.' });
     }
 
@@ -276,30 +258,27 @@ const FS = (() => {
   // Makes a new account and logs it in. Returns { ok, user } or { ok:false, errors, error }.
   function register(data) {
     const errors = {};
-    const name = String(data.name || '').trim();
-    const mail = String(data.email || '').trim().toLowerCase();
+    const mail = data.email.toLowerCase();
 
-    if (name.length < 2) errors.name = 'Please enter the full name.';
+    if (data.name.length < 2) errors.name = 'Please enter the full name.';
 
     if (!isEmail(mail)) errors.email = 'Please enter a correct email address.';
     else if (db.users.some((u) => u.email === mail)) errors.email = 'This email is already registered.';
 
     if (!isPhone(data.phone)) errors.phone = 'Enter a 10 digit mobile number starting with 6, 7, 8 or 9.';
 
-    if (String(data.password || '').length < 6) errors.password = 'Use at least 6 characters.';
-    else if (data.confirm !== undefined && data.confirm !== data.password) {
-      errors.confirm = 'The two passwords are not the same.';
-    }
+    if (data.password.length < 6) errors.password = 'Use at least 6 characters.';
+    else if (data.confirm !== data.password) errors.confirm = 'The two passwords are not the same.';
 
     if (Object.keys(errors).length) return fail(errors);
 
     const u = {
-      id: nextId('user'),
-      name,
+      id: db.seq.user++,
+      name: data.name,
       email: mail,
-      phone: data.phone.trim(),
+      phone: data.phone,
       pass: hashPassword(data.password),
-      address: String(data.address || '').trim(),
+      address: data.address,
       joined: new Date().toISOString(),
     };
     db.users.push(u);
@@ -314,13 +293,13 @@ const FS = (() => {
     if (!me) return fail({ name: 'Please log in again.' });
 
     const errors = {};
-    if (String(data.name || '').trim().length < 2) errors.name = 'Please enter your full name.';
+    if (data.name.length < 2) errors.name = 'Please enter your full name.';
     if (!isPhone(data.phone)) errors.phone = 'Enter a 10 digit mobile number starting with 6, 7, 8 or 9.';
     if (Object.keys(errors).length) return fail(errors);
 
-    me.name = data.name.trim();
-    me.phone = data.phone.trim();
-    me.address = String(data.address || '').trim();
+    me.name = data.name;
+    me.phone = data.phone;
+    me.address = data.address;
     save();
     return { ok: true, user: publicUser(me) };
   }
@@ -330,9 +309,9 @@ const FS = (() => {
     const me = rawUser();
     if (!me) return fail({ current: 'Please log in again.' });
 
-    if (me.pass !== hashPassword(String(current || ''))) return fail({ current: 'Your present password is wrong.' });
-    if (String(next || '').length < 6) return fail({ next: 'Use at least 6 characters.' });
-    if (confirm !== undefined && confirm !== next) return fail({ confirm: 'The two passwords are not the same.' });
+    if (me.pass !== hashPassword(current)) return fail({ current: 'Your present password is wrong.' });
+    if (next.length < 6) return fail({ next: 'Use at least 6 characters.' });
+    if (confirm !== next) return fail({ confirm: 'The two passwords are not the same.' });
 
     me.pass = hashPassword(next);
     save();
@@ -358,14 +337,12 @@ const FS = (() => {
     return db.carts[me.id];
   }
 
-  // The cart for pages: [{ flower, qty, lineTotal }]. Flowers no longer on sale are left out.
+  // The cart for pages: [{ flower, qty, lineTotal }]
   function getCart() {
-    return cartRows()
-      .map(({ flowerId, qty }) => {
-        const f = findFlower(flowerId);
-        return f ? { flower: clone(f), qty, lineTotal: f.price * qty } : null;
-      })
-      .filter(Boolean);
+    return cartRows().map(({ flowerId, qty }) => {
+      const f = findFlower(flowerId);
+      return { flower: clone(f), qty, lineTotal: f.price * qty };
+    });
   }
 
   // How many flowers are in the cart in total.
@@ -384,43 +361,35 @@ const FS = (() => {
     };
   }
 
-  // Adds qty of a flower to the cart (never more than the stock).
-  function addToCart(flowerId, qty = 1) {
+  // Adds one of a flower to the cart (never more than the stock).
+  function addToCart(flowerId) {
     const f = findFlower(flowerId);
     if (!rawUser()) return fail({ cart: 'Please log in to order flowers.' });
-    if (!f) return fail({ cart: 'This flower is not on sale any more.' });
     if (f.stock < 1) return fail({ cart: `${f.name} is out of stock.` });
 
     const rows = cartRows();
     const row = rows.find((r) => r.flowerId === f.id);
-    const want = (row ? row.qty : 0) + (Number(qty) || 1);
+    const want = (row ? row.qty : 0) + 1;
     if (want > f.stock) return fail({ cart: `Only ${f.stock} of ${f.name} in stock.` });
 
     if (row) row.qty = want;
     else rows.push({ flowerId: f.id, qty: want });
     save();
-    return { ok: true, qty: want, count: cartCount() };
+    return { ok: true };
   }
 
-  // Sets the quantity of a cart row. 0 or less removes the row.
+  // Sets the quantity of a cart row. 0 or less (or not a number) removes the row.
   function setCartQty(flowerId, qty) {
     const f = findFlower(flowerId);
-    const row = cartRows().find((r) => r.flowerId === Number(flowerId));
-    const want = Math.floor(Number(qty));
+    const rows = cartRows();
+    const row = rows.find((r) => r.flowerId === Number(flowerId));
+    const want = Math.floor(qty);
 
-    if (!row || !f) return fail({ cart: 'This flower is not in your cart.' });
-    if (!(want >= 1)) return removeFromCart(flowerId);
+    if (!row) return fail({ cart: 'This flower is not in your cart.' });
     if (want > f.stock) return fail({ cart: `Only ${f.stock} of ${f.name} in stock.` });
 
-    row.qty = want;
-    save();
-    return { ok: true, qty: want };
-  }
-
-  // Takes one flower out of the cart.
-  function removeFromCart(flowerId) {
-    const me = rawUser();
-    if (me) db.carts[me.id] = cartRows().filter((r) => r.flowerId !== Number(flowerId));
+    if (want >= 1) row.qty = want;
+    else rows.splice(rows.indexOf(row), 1);
     save();
     return { ok: true };
   }
@@ -452,11 +421,12 @@ const FS = (() => {
       if (qty > flower.stock) errors.cart = `Only ${flower.stock} of ${flower.name} left. Please change the quantity.`;
     });
 
-    if (String(details.name || '').trim().length < 2) errors.name = "Please enter the receiver's name.";
+    if (details.name.length < 2) errors.name = "Please enter the receiver's name.";
     if (!isPhone(details.phone)) errors.phone = 'Enter a 10 digit mobile number starting with 6, 7, 8 or 9.';
-    if (String(details.address || '').trim().length < 10) errors.address = 'Please write the full delivery address.';
+    if (details.address.length < 10) errors.address = 'Please write the full delivery address.';
 
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(details.deliveryDate || '')) {
+    // A date box gives "" or "YYYY-MM-DD", so plain text comparison works.
+    if (!details.deliveryDate) {
       errors.deliveryDate = 'Please choose a delivery date.';
     } else if (details.deliveryDate < dayFromNow(0)) {
       errors.deliveryDate = 'The delivery date cannot be in the past.';
@@ -472,27 +442,18 @@ const FS = (() => {
     // Everything is fine: build the order.
     const { subtotal, delivery, total } = cartTotals();
     const order = {
-      id: nextId('order'),
+      id: db.seq.order++,
       userId: me.id,
       customer: me.name,
-      items: lines.map(({ flower, qty }) => ({
-        flowerId: flower.id,
-        name: flower.name,
-        price: flower.price,
-        qty,
-      })),
+      items: lines.map(({ flower, qty }) => ({ flowerId: flower.id, name: flower.name, price: flower.price, qty })),
       subtotal,
       delivery,
       total,
-      recipient: {
-        name: details.name.trim(),
-        phone: details.phone.trim(),
-        address: details.address.trim(),
-      },
+      recipient: { name: details.name, phone: details.phone, address: details.address },
       deliveryDate: details.deliveryDate,
       slot: details.slot,
       payment: details.payment,
-      note: String(details.note || '').trim(),
+      note: details.note,
       createdAt: new Date().toISOString(),
     };
 
@@ -531,52 +492,34 @@ const FS = (() => {
   // The account menu buttons: Log out, and Reset demo data.
   // Reset asks first with the browser's own confirm box.
   document.addEventListener('click', (e) => {
-    const act = e.target.closest('[data-act]');
-    if (!act) return;
+    const act = e.target.closest('[data-act]')?.dataset.act;
 
-    if (act.dataset.act === 'logout') logout();
+    if (act === 'logout') logout();
 
-    if (act.dataset.act === 'reset') {
-      const sure = confirm('Put every flower, order and account back to the demo data? You will be logged out.');
-      if (sure) {
-        resetDemo();
-        logout();
-      }
+    if (act === 'reset' && confirm('Put every flower, order and account back to the demo data? You will be logged out.')) {
+      resetDemo();
+      logout();
     }
   });
 
   /* ------------------------------------------------------------ 8. Toasts and form errors */
 
-  // Shows a small message in the corner. type: 'success' (default), 'error' or 'info'
+  // Shows a small message in the corner. type: 'success' (default) or 'error'
   function toast(message, type = 'success') {
-    if (!document.body) return;
+    if (!document.body) return; // a failed save during start-up, before the page exists
 
     // Make the toast box the first time it is needed.
-    let box = document.getElementById('fs-toasts');
+    let box = document.querySelector('.toasts');
     if (!box) {
       box = document.createElement('div');
-      box.id = 'fs-toasts';
       box.className = 'toasts';
       box.setAttribute('aria-live', 'polite');
       document.body.append(box);
     }
 
-    // Pick the icon for this type of message.
-    let symbol;
-    switch (type) {
-      case 'error':
-        symbol = 'alert';
-        break;
-      case 'info':
-        symbol = 'clock';
-        break;
-      default:
-        symbol = 'check';
-    }
-
     const item = document.createElement('div');
     item.className = `toast toast-${type}`;
-    item.innerHTML = `${icon(symbol, 18)}<span>${esc(message)}</span>`;
+    item.innerHTML = `${icon(type === 'error' ? 'alert' : 'check', 18)}<span>${esc(message)}</span>`;
     box.append(item);
 
     // Fade out after 3.4 seconds, then remove it.
@@ -586,20 +529,12 @@ const FS = (() => {
     }, 3400);
   }
 
-  // Reads a form into { fieldName: 'trimmed value' } for every input, select and textarea with a name.
-  // Passwords are not trimmed.
+  // Reads a form into { fieldName: 'trimmed value' } with the browser's FormData
+  // (only the ticked radio button of a group is in it). Passwords are not trimmed.
   function formData(form) {
     const out = {};
-    for (const el of form.elements) {
-      if (!el.name) continue;
-
-      if (el.type === 'checkbox') {
-        out[el.name] = el.checked;
-      } else if (el.type === 'radio') {
-        if (el.checked) out[el.name] = el.value;
-      } else {
-        out[el.name] = el.type === 'password' ? el.value : el.value.trim();
-      }
+    for (const [name, value] of new FormData(form)) {
+      out[name] = form.elements[name].type === 'password' ? value : value.trim();
     }
     return out;
   }
@@ -613,7 +548,7 @@ const FS = (() => {
 
     Object.entries(errors).forEach(([name, message]) => {
       const input = form.querySelector(`[name="${name}"]`);
-      const field = input ? input.closest('.field') : null;
+      const field = input?.closest('.field');
       if (!field) {
         loose.push(message);
         return;
@@ -652,40 +587,28 @@ const FS = (() => {
   const esc = (value) => String(value == null ? '' : value).replace(/[&<>"']/g, (ch) => SAFE_CHARS[ch]);
 
   // 1250 -> "₹1,250"
-  const money = (n) => '₹' + Number(n || 0).toLocaleString('en-IN');
+  const money = (n) => '₹' + n.toLocaleString('en-IN');
 
   // "Neha Sharma" -> "NS"
-  const initials = (name) =>
-    String(name || '?')
-      .trim()
-      .split(/\s+/)
-      .slice(0, 2)
-      .map((w) => w[0].toUpperCase())
-      .join('');
+  const initials = (name) => name.trim().split(/\s+/).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
 
   // The ?key=value part of the page address.
   const params = () => new URLSearchParams(location.search);
 
   // Turns "2026-11-17" (or any date text) into a Date. "YYYY-MM-DD" is read as a local day.
   function toDate(value) {
-    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value || '');
-    return m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : new Date(value);
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+    return m ? new Date(m[1], m[2] - 1, m[3]) : new Date(value);
   }
 
   // 7 -> "07"
   const pad = (n) => String(n).padStart(2, '0');
 
-  // A date as "YYYY-MM-DD" in local time.
-  const localDay = (value) => {
-    const d = toDate(value);
-    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-  };
-
-  // The day that is `days` days from today, as "YYYY-MM-DD" (0 = today).
+  // The day that is `days` days from today, as "YYYY-MM-DD" in local time (0 = today).
   function dayFromNow(days = 0) {
     const d = new Date();
     d.setDate(d.getDate() + days);
-    return localDay(d);
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
   }
 
   const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -693,7 +616,7 @@ const FS = (() => {
   // "17 Nov 2026"
   const fmtDate = (value) => {
     const d = toDate(value);
-    return isNaN(d) ? '' : `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+    return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
   };
 
   // "4:05 pm"
@@ -712,21 +635,19 @@ const FS = (() => {
 
   // The drawing (SVG path) for each icon.
   const ICONS = {
-    bag: '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>',
     plus: '<path d="M12 5v14M5 12h14"/>',
     minus: '<path d="M5 12h14"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
     check: '<path d="m20 6-11 11-5-5"/>',
-    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     trash: '<path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
     alert: '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/>',
     flower:
       '<circle cx="12" cy="12" r="2.5"/><path d="M12 9.5a3.5 3.5 0 1 0-3-5.3M14.5 12a3.5 3.5 0 1 0 5.3-3M12 14.5a3.5 3.5 0 1 0 3 5.3M9.5 12a3.5 3.5 0 1 0-5.3 3M9 4.2a3.5 3.5 0 0 0-4.8 4.8M19.8 9a3.5 3.5 0 0 0-4.8-4.8M15 19.8a3.5 3.5 0 0 0 4.8-4.8M4.2 15A3.5 3.5 0 0 0 9 19.8"/>',
   };
 
-  // The <svg> HTML for an icon: icon('bag') or icon('bag', 18). Names: see ICONS above.
+  // The <svg> HTML for an icon: icon('plus') or icon('plus', 16). Names: see ICONS above.
   const icon = (name, size = 20) =>
-    `<svg class="icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ''}</svg>`;
+    `<svg class="icon" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name]}</svg>`;
 
   // How many are left: "23 in stock", "Only 3 left" or "Out of stock".
   function stockBadge({ stock }) {
@@ -735,13 +656,8 @@ const FS = (() => {
     return `<span class="badge badge-ok">${stock} in stock</span>`;
   }
 
-  // <img> for a flower, with a soft placeholder when there is no photo. cls = extra class names
-  function flowerImg(f, cls = '') {
-    if (!f || !f.image) {
-      return `<span class="ph ${cls}" role="img" aria-label="${esc(f ? f.name : 'Flower')}">${icon('flower', 30)}</span>`;
-    }
-    return `<img class="${cls}" src="${esc(f.image)}" alt="${esc(f.name)}" loading="lazy" onerror="FS.imgError(this)">`;
-  }
+  // <img> for a flower. If the photo fails to load, imgError below swaps in a placeholder.
+  const flowerImg = (f) => `<img src="${esc(f.image)}" alt="${esc(f.name)}" loading="lazy" onerror="FS.imgError(this)">`;
 
   // A photo failed to load: swap it for the placeholder.
   function imgError(img) {
@@ -754,20 +670,8 @@ const FS = (() => {
   /* ------------------------------------------------------------ 10. Start-up: page guard and FS.ready */
 
   let db = loadDb(); // all shop data: users, flowers, orders, carts
+  if (!db) resetDemo(); // first visit (or broken data): start with the demo data
   let blocked = false; // true when the page guard is sending the visitor away
-
-  // <html data-roles="..."> says who may open the page:
-  //   public = anyone, guest = only logged-out visitors, customer = only logged-in customers
-  function guard() {
-    const need = document.documentElement.dataset.roles || 'public';
-    const user = rawUser();
-    if (need === 'guest' && user) {
-      leave('home.html');
-    } else if (need === 'customer' && !user) {
-      const here = location.pathname.split('/').pop() + location.search;
-      leave('login.html?next=' + encodeURIComponent(here));
-    }
-  }
 
   // Hides the page and goes to another one.
   function leave(url) {
@@ -788,13 +692,15 @@ const FS = (() => {
     if (!blocked) whenDom(() => fn(currentUser()));
   }
 
-  guard();
-  if (!blocked) {
-    whenDom(() => {
-      refreshHeader();
-      fillStock();
-    });
-  }
+  // The page guard. <html data-roles="..."> says who may open the page:
+  //   public = anyone, guest = only logged-out visitors, customer = only logged-in customers
+  const need = document.documentElement.dataset.roles;
+  const user = rawUser();
+  if (need === 'guest' && user) leave('home.html');
+  if (need === 'customer' && !user) leave('login.html?next=' + encodeURIComponent(location.pathname.split('/').pop() + location.search));
+
+  // Once the HTML has loaded, fill in the cart count and the stock badges.
+  whenDom(changed);
 
   // Everything the pages can use as FS.something
   return {

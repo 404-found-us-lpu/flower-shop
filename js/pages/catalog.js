@@ -53,9 +53,6 @@ FS.ready(() => {
   // The Hindi name of an Indian flower ('' for the others).
   const hindi = ({ name }) => HINDI[name.split(' ')[0]] || '';
 
-  // The Hindi name in a small <span lang="hi">, so it is read out in Hindi.
-  const hindiTag = (f) => (hindi(f) ? ` <span class="hindi" lang="hi">${hindi(f)}</span>` : '');
-
   // True when the search words are in the flower's name, botanical name, Hindi name or type.
   const matches = (f) => {
     const text = `${f.name} ${f.botanical} ${hindi(f)} ${f.category}`;
@@ -81,12 +78,13 @@ FS.ready(() => {
 
   // ---------- One flower card ----------
 
-  // Photo with its stock pill, name, botanical name, price and Add (off when sold out).
+  // Photo with its stock pill, name, Hindi name (lang="hi" so it is read out in Hindi),
+  // botanical name, price and Add (off when sold out).
   const cardHTML = (f) => `<article class="product">
     <div class="product-media">${FS.flowerImg(f)}<span class="stock-pill">${FS.stockBadge(f)}</span></div>
     <div class="product-body">
       <span class="product-cat">${FS.esc(f.category)}</span>
-      <h2 class="product-name">${markName(f.name)}${hindiTag(f)}</h2>
+      <h2 class="product-name">${markName(f.name)}${hindi(f) ? ` <span class="hindi" lang="hi">${hindi(f)}</span>` : ''}</h2>
       ${f.botanical ? `<i class="small muted">${FS.esc(f.botanical)}</i>` : ''}
       <p class="product-desc">${FS.esc(f.description)}</p>
       <div class="product-foot">
@@ -98,17 +96,6 @@ FS.ready(() => {
       </div>
     </div>
   </article>`;
-
-  // ---------- Add to cart ----------
-
-  // Adds one flower to the cart. Saving redraws the cards, so the focus goes back to the same Add button.
-  const addFlower = (id) => {
-    const { ok, error } = FS.addToCart(id);
-    const message = ok ? `${FS.getFlower(id).name} added to your cart.` : error;
-
-    FS.toast(message, ok ? 'success' : 'error');
-    grid.querySelector(`[data-add="${id}"]`).focus();
-  };
 
   // ---------- Draw the page ----------
 
@@ -159,7 +146,11 @@ FS.ready(() => {
       type = tab.dataset.type;
       render();
     } else if (add) {
-      addFlower(add.dataset.add);
+      // Saving redraws the cards, so put the focus back on the new Add button.
+      const id = add.dataset.add;
+      const { ok, error } = FS.addToCart(id);
+      FS.toast(ok ? `${FS.getFlower(id).name} added to your cart.` : error, ok ? 'success' : 'error');
+      grid.querySelector(`[data-add="${id}"]`).focus();
     } else if (e.target.closest('[data-clear]')) {
       search.value = '';
       type = 'All';

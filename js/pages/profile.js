@@ -7,15 +7,6 @@ FS.ready((user) => {
   const detailsForm = document.getElementById('details-form');
   const passwordForm = document.getElementById('password-form');
 
-  // Puts the saved name, mobile number and address into the edit form.
-  const fillForm = ({ name, phone, address }) => {
-    const { elements } = detailsForm;
-
-    elements.name.value = name;
-    elements.phone.value = phone;
-    elements.address.value = address || '';
-  };
-
   // Writes the saved details into the page: each [data-me] box, the initials and the joining date.
   const render = () => {
     const me = FS.currentUser();
@@ -36,19 +27,21 @@ FS.ready((user) => {
   };
 
   // Saves name, mobile number and address (FS.updateProfile checks them).
-  const saveDetails = (event) => {
+  detailsForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const result = FS.updateProfile(FS.formData(detailsForm));
     if (!result.ok) return FS.showErrors(detailsForm, result.errors);
 
+    // Show the saved (trimmed) text back in the boxes. Phone cannot hold spaces, so it is skipped.
     FS.clearErrors(detailsForm);
-    fillForm(result.user);
+    detailsForm.elements.name.value = result.user.name;
+    detailsForm.elements.address.value = result.user.address;
     FS.toast('Your details are saved.');
-  };
+  });
 
   // Changes the password: the present one, then the new one twice.
-  const savePassword = (event) => {
+  passwordForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const { current, next, confirm } = FS.formData(passwordForm);
@@ -58,16 +51,14 @@ FS.ready((user) => {
     passwordForm.reset();
     FS.clearErrors(passwordForm);
     FS.toast('Password changed. Use the new one next time you sign in.');
-  };
-
-  // Connect the forms to their functions.
-  detailsForm.addEventListener('submit', saveDetails);
-  passwordForm.addEventListener('submit', savePassword);
+  });
 
   // Redraw when the saved data changes, here or in another tab.
   window.addEventListener('fs:change', render);
 
-  // First fill of the form and the page.
-  fillForm(user);
+  // First fill: the saved name, mobile number and address go into the edit form, then the page is drawn.
+  detailsForm.elements.name.value = user.name;
+  detailsForm.elements.phone.value = user.phone;
+  detailsForm.elements.address.value = user.address;
   render();
 });

@@ -2,7 +2,6 @@
 /* Bloom & Petal - js/pages/orders.js - shows the customer's orders in one table, with the total spent. */
 
 FS.ready(() => {
-
   // Short helper: find an element by its id.
   const byId = (id) => document.getElementById(id);
 
@@ -32,8 +31,7 @@ FS.ready(() => {
     const spent = FS.money(orders.reduce((sum, { total }) => sum + total, 0));
 
     // Numbers at the top of the page and under the table
-    const word = orders.length === 1 ? 'order' : 'orders';
-    byId('count').textContent = `${orders.length} ${word}`;
+    byId('count').textContent = `${orders.length} ${orders.length === 1 ? 'order' : 'orders'}`;
     byId('spent-top').textContent = spent;
     byId('spent').textContent = spent;
 
@@ -48,5 +46,4 @@ FS.ready(() => {
   // Draw once now, and again whenever the saved data changes.
   render();
   window.addEventListener('fs:change', render);
-
 });

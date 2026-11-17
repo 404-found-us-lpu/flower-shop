@@ -20,7 +20,7 @@ FS.ready(() => {
     <tr>
       <td>
         <div class="cell-flower">
-          ${FS.flowerImg(FS.getFlower(flowerId) || { name })}
+          ${FS.flowerImg(FS.getFlower(flowerId))}
           <span class="cell-main">${FS.esc(name)}</span>
         </div>
       </td>
