@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal (simple version) - flowers.html - Made by: Raghav -->
+<!-- One line: all 45 flowers of the shop in five groups, each with its photo, price and stock. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="All 45 flowers at Bloom & Petal, Jalandhar: bouquets, Indian favourites, single stems, plants and gifts, with prices and stock.">
+  <title>Flowers · Bloom &amp; Petal</title>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="brand" href="index.html">Bloom &amp; Petal</a>
+      <a href="index.html">Home</a>
+      <a href="flowers.html" aria-current="page">Flowers</a>
+      <a href="order.html">Order</a>
+      <a href="contact.html">Contact</a>
+      <a href="calculator.html">Price calculator</a>
+      <a class="switch" href="../index.html">Full shop &rarr;</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Page title and a short introduction -->
+    <section class="section">
+      <h1>Our flowers</h1>
+      <p class="lead">All <strong>45 flowers</strong> we sell, in five groups. Prices are in
+        <abbr title="Indian rupees">Rs</abbr> for one item. Delivery is Rs 50, and <mark>free when your
+        flowers cost Rs 999 or more</mark>.</p>
+      <p class="note">A card that says <em>Only 3 left</em> is almost sold out. Stock is counted every morning.</p>
+    </section>
+
+    <!-- Jump links: each one scrolls down to a group on this same page -->
+    <nav class="jump" aria-label="Flower types">
+      <a href="#bouquets">Bouquets (14)</a>
+      <a href="#indian-favourites">Indian favourites (15)</a>
+      <a href="#single-stems">Single stems (5)</a>
+      <a href="#plants">Plants (7)</a>
+      <a href="#gifts">Gifts (4)</a>
+    </nav>
+
+    <!-- Group 1: Bouquets (14 flowers) -->
+    <section id="bouquets" class="section">
+      <h2>Bouquets</h2>
+      <p>Hand-tied bunches, ready to go into a vase.</p>
+
+      <div class="grid">
+        <article class="flower">
+          <img src="../images/red-rose-bouquet.jpg" alt="Red Rose Bouquet" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Red Rose Bouquet</h3>
+            <p><i lang="la">Rosa</i></p>
+            <p>Twelve fresh red roses, hand tied with eucalyptus.</p>
+            <p><span class="price">Rs 349</span> <span class="stock">20 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Red Rose Bouquet">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/white-lily-bunch.jpg" alt="White Lily Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>White Lily Bunch</h3>
+            <p><i lang="la">Lilium</i></p>
+            <p>Six stems of white oriental lilies, ready for a vase.</p>
+            <p><span class="price">Rs 299</span> <span class="stock">15 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order White Lily Bunch">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/sunflower-basket.jpg" alt="Sunflower Basket" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Sunflower Basket</h3>
+            <p><i lang="la">Helianthus annuus</i></p>
+            <p>Bright sunflowers arranged in a woven cane basket.</p>
+            <p><span class="price">Rs 399</span> <span class="stock">8 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Sunflower Basket">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/pink-tulips.jpg" alt="Pink Tulip Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Pink Tulip Bunch</h3>
+            <p><i lang="la">Tulipa</i></p>
+            <p>Ten soft pink tulips wrapped in kraft paper.</p>
+            <p><span class="price">Rs 349</span> <span class="stock">12 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Pink Tulip Bunch">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/gerbera-mix.jpg" alt="Gerbera Mix" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Gerbera Mix</h3>
+            <p><i lang="la">Gerbera jamesonii</i></p>
+            <p>A cheerful mix of gerbera daisies in five colours.</p>
+            <p><span class="price">Rs 249</span> <span class="stock">18 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Gerbera Mix">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/lavender-bundle.jpg" alt="Lavender Bundle" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Lavender Bundle</h3>
+            <p><i lang="la">Lavandula</i></p>
+            <p>A fragrant bundle of lavender tied with twine.</p>
+            <p><span class="price">Rs 199</span> <span class="stock low">Only 4 left</span></p>
+            <a class="btn" href="order.html" aria-label="Order Lavender Bundle">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/yellow-rose-bouquet.jpg" alt="Yellow Rose Bouquet" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Yellow Rose Bouquet</h3>
+            <p><i lang="la">Rosa</i></p>
+            <p>Twelve sunny yellow roses for friendship and new starts.</p>
+            <p><span class="price">Rs 329</span> <span class="stock">16 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Yellow Rose Bouquet">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/carnation-bunch.jpg" alt="Carnation Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Carnation Bunch</h3>
+            <p><i lang="la">Dianthus caryophyllus</i></p>
+            <p>Ruffled carnations that stay fresh for up to two weeks.</p>
+            <p><span class="price">Rs 199</span> <span class="stock">22 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Carnation Bunch">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/daisy-bunch.jpg" alt="Daisy Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Daisy Bunch</h3>
+            <p><i lang="la">Leucanthemum vulgare</i></p>
+            <p>A happy bunch of white daisies with yellow centres.</p>
+            <p><span class="price">Rs 149</span> <span class="stock">25 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Daisy Bunch">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/hydrangea-bunch.jpg" alt="Hydrangea Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Hydrangea Bunch</h3>
+            <p><i lang="la">Hydrangea macrophylla</i></p>
+            <p>Big, soft balls of blue and pink hydrangea.</p>
+            <p><span class="price">Rs 399</span> <span class="stock">6 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Hydrangea Bunch">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/peony-bouquet.jpg" alt="Peony Bouquet" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Peony Bouquet</h3>
+            <p><i lang="la">Paeonia lactiflora</i></p>
+            <p>Lush pink peonies, the queen of wedding flowers.</p>
+            <p><span class="price">Rs 499</span> <span class="stock low">Only 4 left</span></p>
+            <a class="btn" href="order.html" aria-label="Order Peony Bouquet">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/iris-bunch.jpg" alt="Purple Iris Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Purple Iris Bunch</h3>
+            <p><i lang="la">Iris germanica</i></p>
+            <p>Tall purple irises with a touch of yellow.</p>
+            <p><span class="price">Rs 249</span> <span class="stock">10 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Purple Iris Bunch">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/calla-lily-bunch.jpg" alt="Calla Lily Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Calla Lily Bunch</h3>
+            <p><i lang="la">Zantedeschia aethiopica</i></p>
+            <p>Elegant white calla lilies on long stems.</p>
+            <p><span class="price">Rs 449</span> <span class="stock">8 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Calla Lily Bunch">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/alstroemeria-bunch.jpg" alt="Alstroemeria Bunch" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Alstroemeria Bunch</h3>
+            <p><i lang="la">Alstroemeria</i></p>
+            <p>Striped, long-lasting blooms in mixed colours.</p>
+            <p><span class="price">Rs 199</span> <span class="stock">20 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Alstroemeria Bunch">Order</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Group 2: Indian favourites (15 flowers) -->
+    <section id="indian-favourites" class="section">
+      <h2>Indian favourites</h2>
+      <p>Flowers and pot plants loved in Indian homes, temples and weddings.</p>
+
+      <div class="grid">
+        <article class="flower">
+          <img src="../images/mogra-pot.jpg" alt="Mogra Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Mogra Pot</h3>
+            <p class="hindi" lang="hi">मोगरा</p>
+            <p><i lang="la">Jasminum sambac</i></p>
+            <p>Sweet-smelling white mogra that flowers all summer.</p>
+            <p><span class="price">Rs 149</span> <span class="stock">14 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Mogra Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/marigold.jpg" alt="Marigold (Genda)" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Marigold (Genda)</h3>
+            <p class="hindi" lang="hi">गेंदा</p>
+            <p><i lang="la">Tagetes erecta</i></p>
+            <p>Bright orange genda flowers for pooja, weddings and festivals.</p>
+            <p><span class="price">Rs 49</span> <span class="stock">40 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Marigold (Genda)">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/aprajita-pot.jpg" alt="Aprajita Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Aprajita Pot</h3>
+            <p class="hindi" lang="hi">अपराजिता</p>
+            <p><i lang="la">Clitoria ternatea</i></p>
+            <p>A climbing creeper with deep blue butterfly-pea flowers.</p>
+            <p><span class="price">Rs 129</span> <span class="stock">10 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Aprajita Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/bleeding-heart-pot.jpg" alt="Bleeding Heart Vine Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Bleeding Heart Vine Pot</h3>
+            <p><i lang="la">Clerodendrum thomsoniae</i></p>
+            <p>White flowers with bright red hearts, for a sunny balcony.</p>
+            <p><span class="price">Rs 199</span> <span class="stock">7 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Bleeding Heart Vine Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/guldaudi.jpg" alt="Guldaudi (Chrysanthemum)" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Guldaudi (Chrysanthemum)</h3>
+            <p class="hindi" lang="hi">गुलदाउदी</p>
+            <p><i lang="la">Chrysanthemum</i></p>
+            <p>Big, colourful winter blooms that last for weeks.</p>
+            <p><span class="price">Rs 179</span> <span class="stock">9 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Guldaudi (Chrysanthemum)">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/madhumalti-pot.jpg" alt="Madhumalti Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Madhumalti Pot</h3>
+            <p class="hindi" lang="hi">मधुमालती</p>
+            <p><i lang="la">Combretum indicum</i></p>
+            <p>A creeper with clusters that turn from white to pink to red.</p>
+            <p><span class="price">Rs 199</span> <span class="stock">6 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Madhumalti Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/rajnigandha.jpg" alt="Rajnigandha (Tuberose)" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Rajnigandha (Tuberose)</h3>
+            <p class="hindi" lang="hi">रजनीगंधा</p>
+            <p><i lang="la">Polianthes tuberosa</i></p>
+            <p>Sweet-smelling white stems for weddings and pooja.</p>
+            <p><span class="price">Rs 99</span> <span class="stock">30 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Rajnigandha (Tuberose)">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/champa-pot.jpg" alt="Champa (Frangipani) Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Champa (Frangipani) Pot</h3>
+            <p class="hindi" lang="hi">चंपा</p>
+            <p><i lang="la">Plumeria rubra</i></p>
+            <p>A temple tree with waxy, fragrant flowers.</p>
+            <p><span class="price">Rs 249</span> <span class="stock">8 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Champa (Frangipani) Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/gudhal-pot.jpg" alt="Gudhal (Hibiscus) Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Gudhal (Hibiscus) Pot</h3>
+            <p class="hindi" lang="hi">गुड़हल</p>
+            <p><i lang="la">Hibiscus rosa-sinensis</i></p>
+            <p>Bright red hibiscus, a favourite flower for pooja.</p>
+            <p><span class="price">Rs 129</span> <span class="stock">15 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Gudhal (Hibiscus) Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/kamal-lotus.jpg" alt="Kamal (Lotus)" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Kamal (Lotus)</h3>
+            <p class="hindi" lang="hi">कमल</p>
+            <p><i lang="la">Nelumbo nucifera</i></p>
+            <p>Pink lotus flowers, the national flower of India.</p>
+            <p><span class="price">Rs 79</span> <span class="stock">12 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Kamal (Lotus)">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/raat-ki-rani-pot.jpg" alt="Raat Ki Rani Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Raat Ki Rani Pot</h3>
+            <p class="hindi" lang="hi">रात की रानी</p>
+            <p><i lang="la">Cestrum nocturnum</i></p>
+            <p>Tiny flowers that fill the night air with scent.</p>
+            <p><span class="price">Rs 149</span> <span class="stock">9 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Raat Ki Rani Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/parijat-pot.jpg" alt="Parijat Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Parijat Pot</h3>
+            <p class="hindi" lang="hi">पारिजात</p>
+            <p><i lang="la">Nyctanthes arbor-tristis</i></p>
+            <p>Night jasmine with white petals and orange stems.</p>
+            <p><span class="price">Rs 169</span> <span class="stock">7 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Parijat Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/sadabahar-pot.jpg" alt="Sadabahar Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Sadabahar Pot</h3>
+            <p class="hindi" lang="hi">सदाबहार</p>
+            <p><i lang="la">Catharanthus roseus</i></p>
+            <p>The always-in-bloom periwinkle, easy for beginners.</p>
+            <p><span class="price">Rs 79</span> <span class="stock">20 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Sadabahar Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/bougainvillea-pot.jpg" alt="Bougainvillea Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Bougainvillea Pot</h3>
+            <p><i lang="la">Bougainvillea glabra</i></p>
+            <p>Paper-thin magenta flowers for a sunny wall or gate.</p>
+            <p><span class="price">Rs 199</span> <span class="stock">10 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Bougainvillea Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/rangan-pot.jpg" alt="Rangan (Ixora) Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Rangan (Ixora) Pot</h3>
+            <p class="hindi" lang="hi">रंगन</p>
+            <p><i lang="la">Ixora coccinea</i></p>
+            <p>Round red flower clusters that butterflies love.</p>
+            <p><span class="price">Rs 149</span> <span class="stock">11 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Rangan (Ixora) Pot">Order</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Group 3: Single stems (5 flowers) -->
+    <section id="single-stems" class="section">
+      <h2>Single stems</h2>
+      <p>One flower, wrapped with a ribbon. The cheapest way to say something nice.</p>
+
+      <div class="grid">
+        <article class="flower">
+          <img src="../images/single-red-rose.jpg" alt="Single Red Rose" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Single Red Rose</h3>
+            <p><i lang="la">Rosa</i></p>
+            <p>One long-stem red rose with a small note card.</p>
+            <p><span class="price">Rs 29</span> <span class="stock">50 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Single Red Rose">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/single-sunflower.jpg" alt="Single Sunflower" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Single Sunflower</h3>
+            <p><i lang="la">Helianthus annuus</i></p>
+            <p>One tall sunflower stem, wrapped and ribboned.</p>
+            <p><span class="price">Rs 39</span> <span class="stock">30 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Single Sunflower">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/single-gerbera.jpg" alt="Single Gerbera" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Single Gerbera</h3>
+            <p><i lang="la">Gerbera jamesonii</i></p>
+            <p>One bright gerbera daisy, wrapped with a ribbon.</p>
+            <p><span class="price">Rs 25</span> <span class="stock">40 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Single Gerbera">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/single-white-lily.jpg" alt="Single White Lily" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Single White Lily</h3>
+            <p><i lang="la">Lilium longiflorum</i></p>
+            <p>One tall white lily stem with buds still to open.</p>
+            <p><span class="price">Rs 49</span> <span class="stock">25 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Single White Lily">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/single-orchid-stem.jpg" alt="Single Orchid Stem" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Single Orchid Stem</h3>
+            <p><i lang="la">Cymbidium</i></p>
+            <p>A long orchid spray that lasts up to a month in a vase.</p>
+            <p><span class="price">Rs 129</span> <span class="stock">12 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Single Orchid Stem">Order</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Group 4: Plants (7 flowers) -->
+    <section id="plants" class="section">
+      <h2>Plants</h2>
+      <p>Potted plants that keep growing long after the day you buy them.</p>
+
+      <div class="grid">
+        <article class="flower">
+          <img src="../images/money-plant-pot.jpg" alt="Money Plant Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Money Plant Pot</h3>
+            <p><i lang="la">Epipremnum aureum</i></p>
+            <p>An easy indoor money plant in a ceramic pot.</p>
+            <p><span class="price">Rs 149</span> <span class="stock">12 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Money Plant Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/orchid-pot.jpg" alt="Purple Orchid Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Purple Orchid Pot</h3>
+            <p><i lang="la">Phalaenopsis</i></p>
+            <p>A flowering moth orchid that blooms for weeks.</p>
+            <p><span class="price">Rs 499</span> <span class="stock">6 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Purple Orchid Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/succulent-pot.jpg" alt="Succulent Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Succulent Pot</h3>
+            <p><i lang="la">Echeveria</i></p>
+            <p>A small succulent that needs water once a week.</p>
+            <p><span class="price">Rs 99</span> <span class="stock low">Only 3 left</span></p>
+            <a class="btn" href="order.html" aria-label="Order Succulent Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/peace-lily-pot.jpg" alt="Peace Lily Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Peace Lily Pot</h3>
+            <p><i lang="la">Spathiphyllum wallisii</i></p>
+            <p>White flowers and glossy leaves, happy in shade.</p>
+            <p><span class="price">Rs 249</span> <span class="stock">10 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Peace Lily Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/anthurium-pot.jpg" alt="Anthurium Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Anthurium Pot</h3>
+            <p><i lang="la">Anthurium andraeanum</i></p>
+            <p>Shiny red heart-shaped flowers that last for months.</p>
+            <p><span class="price">Rs 349</span> <span class="stock">8 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Anthurium Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/rose-plant-pot.jpg" alt="Rose Plant Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Rose Plant Pot</h3>
+            <p><i lang="la">Rosa</i></p>
+            <p>A rose bush in a pot for your balcony.</p>
+            <p><span class="price">Rs 199</span> <span class="stock">14 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Rose Plant Pot">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/snake-plant-pot.jpg" alt="Snake Plant Pot" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Snake Plant Pot</h3>
+            <p><i lang="la">Dracaena trifasciata</i></p>
+            <p>A tough indoor plant that needs very little water.</p>
+            <p><span class="price">Rs 229</span> <span class="stock">12 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Snake Plant Pot">Order</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Group 5: Gifts (4 flowers) -->
+    <section id="gifts" class="section">
+      <h2>Gifts</h2>
+      <p>Ready-made gifts: flowers with a basket, a box, a card or a garland.</p>
+
+      <div class="grid">
+        <article class="flower">
+          <img src="../images/birthday-combo.jpg" alt="Birthday Combo" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Birthday Combo</h3>
+            <p>A mixed bouquet with a greeting card and candles.</p>
+            <p><span class="price">Rs 599</span> <span class="stock low">Only 5 left</span></p>
+            <a class="btn" href="order.html" aria-label="Order Birthday Combo">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/flower-basket.jpg" alt="Mixed Flower Basket" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Mixed Flower Basket</h3>
+            <p>A cane basket of seasonal flowers, ready to gift.</p>
+            <p><span class="price">Rs 699</span> <span class="stock low">Only 5 left</span></p>
+            <a class="btn" href="order.html" aria-label="Order Mixed Flower Basket">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/rose-varmala.jpg" alt="Rose Varmala" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Rose Varmala</h3>
+            <p><i lang="la">Rosa</i></p>
+            <p>A rose garland for weddings and welcomes.</p>
+            <p><span class="price">Rs 549</span> <span class="stock low">Only 4 left</span></p>
+            <a class="btn" href="order.html" aria-label="Order Rose Varmala">Order</a>
+          </div>
+        </article>
+
+        <article class="flower">
+          <img src="../images/flower-gift-box.jpg" alt="Flower Gift Box" width="900" height="600" loading="lazy">
+          <div>
+            <h3>Flower Gift Box</h3>
+            <p>Roses and fillers arranged in a keepsake box.</p>
+            <p><span class="price">Rs 649</span> <span class="stock">6 in stock</span></p>
+            <a class="btn" href="order.html" aria-label="Order Flower Gift Box">Order</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
+        <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
+      <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
+      <p><small>Simple version made with HTML and CSS only (Units 1-4). <a href="../index.html">Open the full shop</a>.</small></p>
+    </div>
+  </footer>
+</body>
+</html>
