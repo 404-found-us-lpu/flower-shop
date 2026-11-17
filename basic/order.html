@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal (simple version) - order.html - Made by: Satyam -->
+<!-- The order form (checked by the browser only) and the table of delivery charges. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Order fresh flowers from Bloom &amp; Petal in Jalandhar: pick a flower, the receiver, the day and the slot.">
+  <title>Order · Bloom &amp; Petal</title>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Site header: the same menu on every page -->
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="brand" href="index.html">Bloom &amp; Petal</a>
+      <a href="index.html">Home</a>
+      <a href="flowers.html">Flowers</a>
+      <a href="order.html" aria-current="page">Order</a>
+      <a href="contact.html">Contact</a>
+      <a href="calculator.html">Price calculator</a>
+      <a class="switch" href="../index.html">Full shop &rarr;</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Top band: page title and one line about ordering -->
+    <section class="hero">
+      <h1>Order flowers</h1>
+      <p class="lead">Pick a flower, tell us who gets it and when. Delivery is <strong>Rs 50</strong>, and <mark>free from Rs 999</mark>.</p>
+    </section>
+
+    <!-- The order form: four groups of fields (fieldsets) -->
+    <section class="section" aria-labelledby="form-title">
+      <h2 id="form-title">Your order</h2>
+      <p>Not sure of the total? Work it out first in the <a href="calculator.html">price calculator</a>, or browse <a href="flowers.html">all 45 flowers</a>.</p>
+
+      <form class="form card" action="thanks.html">
+
+        <!-- 1. Who gets the flowers -->
+        <fieldset>
+          <legend>Receiver</legend>
+
+          <div class="field">
+            <label for="o-name">Receiver's name</label>
+            <input type="text" id="o-name" required minlength="2" maxlength="60" autocomplete="name">
+          </div>
+
+          <!-- Indian mobile number: 10 digits, the first one 6, 7, 8 or 9 -->
+          <div class="field">
+            <label for="o-phone">Mobile number</label>
+            <input type="tel" id="o-phone" required pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
+          </div>
+
+          <div class="field">
+            <label for="o-address">Delivery address</label>
+            <textarea id="o-address" rows="3" required minlength="10" maxlength="200" autocomplete="street-address"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 2. Which flower and how many; <optgroup> puts the 45 flowers under their 5 types -->
+        <fieldset>
+          <legend>Flowers</legend>
+
+          <div class="field">
+            <label for="o-flower">Flower</label>
+            <select id="o-flower" required>
+              <option value="">Choose a flower</option>
+              <optgroup label="Bouquets">
+                <option value="1">Red Rose Bouquet - Rs 349</option>
+                <option value="2">White Lily Bunch - Rs 299</option>
+                <option value="3">Sunflower Basket - Rs 399</option>
+                <option value="4">Pink Tulip Bunch - Rs 349</option>
+                <option value="5">Gerbera Mix - Rs 249</option>
+                <option value="6">Lavender Bundle - Rs 199</option>
+                <option value="19">Yellow Rose Bouquet - Rs 329</option>
+                <option value="20">Carnation Bunch - Rs 199</option>
+                <option value="21">Daisy Bunch - Rs 149</option>
+                <option value="22">Hydrangea Bunch - Rs 399</option>
+                <option value="23">Peony Bouquet - Rs 499</option>
+                <option value="24">Purple Iris Bunch - Rs 249</option>
+                <option value="25">Calla Lily Bunch - Rs 449</option>
+                <option value="26">Alstroemeria Bunch - Rs 199</option>
+              </optgroup>
+              <optgroup label="Indian favourites">
+                <option value="13">Mogra Pot - Rs 149</option>
+                <option value="14">Marigold (Genda) - Rs 49</option>
+                <option value="15">Aprajita Pot - Rs 129</option>
+                <option value="16">Bleeding Heart Vine Pot - Rs 199</option>
+                <option value="17">Guldaudi (Chrysanthemum) - Rs 179</option>
+                <option value="18">Madhumalti Pot - Rs 199</option>
+                <option value="27">Rajnigandha (Tuberose) - Rs 99</option>
+                <option value="28">Champa (Frangipani) Pot - Rs 249</option>
+                <option value="29">Gudhal (Hibiscus) Pot - Rs 129</option>
+                <option value="30">Kamal (Lotus) - Rs 79</option>
+                <option value="31">Raat Ki Rani Pot - Rs 149</option>
+                <option value="32">Parijat Pot - Rs 169</option>
+                <option value="33">Sadabahar Pot - Rs 79</option>
+                <option value="34">Bougainvillea Pot - Rs 199</option>
+                <option value="35">Rangan (Ixora) Pot - Rs 149</option>
+              </optgroup>
+              <optgroup label="Single stems">
+                <option value="7">Single Red Rose - Rs 29</option>
+                <option value="8">Single Sunflower - Rs 39</option>
+                <option value="36">Single Gerbera - Rs 25</option>
+                <option value="37">Single White Lily - Rs 49</option>
+                <option value="38">Single Orchid Stem - Rs 129</option>
+              </optgroup>
+              <optgroup label="Plants">
+                <option value="9">Money Plant Pot - Rs 149</option>
+                <option value="10">Purple Orchid Pot - Rs 499</option>
+                <option value="11">Succulent Pot - Rs 99</option>
+                <option value="39">Peace Lily Pot - Rs 249</option>
+                <option value="40">Anthurium Pot - Rs 349</option>
+                <option value="41">Rose Plant Pot - Rs 199</option>
+                <option value="42">Snake Plant Pot - Rs 229</option>
+              </optgroup>
+              <optgroup label="Gifts">
+                <option value="12">Birthday Combo - Rs 599</option>
+                <option value="43">Mixed Flower Basket - Rs 699</option>
+                <option value="44">Rose Varmala - Rs 549</option>
+                <option value="45">Flower Gift Box - Rs 649</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="o-qty">Quantity (1 to 10)</label>
+            <input type="number" id="o-qty" min="1" max="10" value="1" required>
+          </div>
+        </fieldset>
+
+        <!-- 3. When: the day and one of three time slots -->
+        <fieldset>
+          <legend>When</legend>
+
+          <div class="field">
+            <label for="o-date">Delivery date</label>
+            <input type="date" id="o-date" required>
+          </div>
+
+          <fieldset>
+            <legend>Time slot</legend>
+            <div class="choices">
+              <label for="slot-morning"><input type="radio" id="slot-morning"> Morning (9 am - 12 pm)</label>
+              <label for="slot-afternoon"><input type="radio" id="slot-afternoon"> Afternoon (12 pm - 4 pm)</label>
+              <label for="slot-evening"><input type="radio" id="slot-evening"> Evening (4 pm - 8 pm)</label>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- 4. Payment and the message on the card; the datalist suggests 5 messages -->
+        <fieldset>
+          <legend>Payment and card</legend>
+
+          <fieldset>
+            <legend>Pay when the flowers arrive</legend>
+            <div class="choices">
+              <label for="pay-cod"><input type="radio" id="pay-cod"> <abbr title="Cash on delivery">COD</abbr></label>
+              <label for="pay-upi"><input type="radio" id="pay-upi"> <abbr title="Unified Payments Interface">UPI</abbr></label>
+              <label for="pay-card"><input type="radio" id="pay-card"> Card</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="o-message">Message on the card <small>(optional)</small></label>
+            <input type="text" id="o-message" list="card-messages" maxlength="80">
+            <datalist id="card-messages">
+              <option value="Happy birthday!"></option>
+              <option value="Happy anniversary!"></option>
+              <option value="Get well soon."></option>
+              <option value="Congratulations!"></option>
+              <option value="Shubh Deepavali!"></option>
+            </datalist>
+          </div>
+        </fieldset>
+
+        <!-- Buttons: submit checks the form and opens thanks.html; reset clears it -->
+        <p>
+          <button type="submit" class="btn">Place order</button>
+          <button type="reset" class="btn btn-light">Clear form</button>
+        </p>
+
+        <!-- Small note: why nothing leaves this page -->
+        <p class="note">Nothing is sent anywhere. These fields have no <code>name</code> attribute, so the browser only checks them (required, pattern, min and max) and then opens the thank-you page. Nothing is saved.</p>
+      </form>
+    </section>
+
+    <!-- Delivery charges: a table with caption, colgroup, thead, tbody and tfoot -->
+    <section class="section" aria-labelledby="charges-title">
+      <h2 id="charges-title">Delivery charges</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Delivery slots and what they cost</caption>
+          <colgroup>
+            <col>
+            <col>
+            <col span="2">
+          </colgroup>
+
+          <thead>
+            <tr>
+              <th scope="col">Slot</th>
+              <th scope="col">Time</th>
+              <th scope="col">Order below Rs 999</th>
+              <th scope="col">Order of Rs 999 or more</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Morning</th>
+              <td><time datetime="09:00">9 am</time> - <time datetime="12:00">12 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <th scope="row">Afternoon</th>
+              <td><time datetime="12:00">12 pm</time> - <time datetime="16:00">4 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <th scope="row">Evening</th>
+              <td><time datetime="16:00">4 pm</time> - <time datetime="20:00">8 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="4">Example: 1 Red Rose Bouquet is Rs 349 + Rs 50 delivery = <strong>Rs 399</strong>. 3 of them are Rs 1,047, so delivery is <strong>free</strong>.</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Site footer: address, owners and a link to the full shop -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
+        <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
+      <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
+      <p><small>Simple version made with HTML and CSS only (Units 1-4). <a href="../index.html">Open the full shop</a>.</small></p>
+    </div>
+  </footer>
+
+</body>
+</html>
