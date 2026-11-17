@@ -1,239 +1,220 @@
-<!doctype html>
-<!-- Bloom & Petal - order.html - Made by: Satyam -->
-<!-- Order details page: shows one order (flowers, totals, delivery) and lets the customer print a receipt. -->
-<!-- data-roles="customer": js/app.js checks it, so only a logged-in customer can open this page -->
-<html lang="en" data-page="order" data-roles="customer">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="One of your Bloom &amp; Petal orders: delivery day, receiver, the flowers in it, ready to print." />
-    <title>Order details · Bloom &amp; Petal</title>
+<!DOCTYPE html>
+<!-- Bloom & Petal (simple version) - order.html - Made by: Satyam -->
+<!-- The cart (built by js/order.js from the saved cart), the checkout form and the table of delivery charges. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your Bloom &amp; Petal cart: check the flowers, then tell us the receiver, the day and the slot.">
+  <title>Cart · Bloom &amp; Petal</title>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-    <!-- Page icon, shared styles and the shared script (FS helpers) -->
-    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="css/style.css?v=7" />
-    <script src="js/app.js?v=7"></script>
-  </head>
+  <!-- Site header: the same menu on every page -->
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="brand" href="index.html">Bloom &amp; Petal</a>
+      <a href="index.html">Home</a>
+      <a href="flowers.html">Flowers</a>
+      <a href="order.html" aria-current="page">Cart (<span id="cart-count">0</span>)</a>
+      <a href="orders.html">My orders</a>
+      <a href="contact.html">Contact</a>
+      <a href="signin.html" id="account-link">Sign in</a>
+      <a class="switch" href="../index.html">Full shop &rarr;</a>
+    </nav>
+  </header>
 
-  <body>
-    <!-- Top bar: logo, page links, search, cart and account menu -->
-    <header class="nav-wrap">
-      <nav class="nav" aria-label="Main">
+  <main class="wrap">
 
-        <!-- Logo: five petals drawn with SVG ellipses -->
-        <a class="brand" href="home.html">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
-              <circle class="core" cx="12" cy="12" r="2.4" />
-            </svg>
-          </span>
-          <span class="brand-name">Bloom &amp; Petal</span>
-        </a>
+    <!-- Top band: page title and one line about ordering -->
+    <section class="hero">
+      <h1>Your cart</h1>
+      <p class="lead">Check your flowers, then tell us who gets them and when. Delivery is <strong>Rs 50</strong>, and <mark>free from Rs 999</mark>.</p>
+    </section>
 
-        <!-- Page links ("My orders" is marked as the current section) -->
-        <div class="nav-links">
-          <a href="home.html">Home</a>
-          <a href="catalog.html">Flowers</a>
-          <a href="orders.html" aria-current="page">My orders</a>
-          <a href="contact.html">Contact</a>
-        </div>
+    <!-- The cart: js/order.js fills the table body and footer from the saved cart -->
+    <section class="section" aria-labelledby="cart-title">
+      <h2 id="cart-title">Flowers in your cart</h2>
+      <p id="cart-msg" class="msg" role="status">Loading your cart...</p>
 
-        <!-- Right side of the bar: search, cart and account -->
-        <div class="nav-end">
-          <!-- Search box: sends ?q=... to the catalog page -->
-          <form class="nav-search" action="catalog.html" role="search">
-            <svg
-              class="icon"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <circle cx="11" cy="11" r="7" />
-              <path d="m20 20-3.6-3.6" />
-            </svg>
-            <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
-          </form>
+      <p id="cart-empty" hidden>Your cart is empty. <a href="flowers.html">Pick some flowers</a> first.</p>
 
-          <!-- Cart icon with the item count (filled in by js/app.js) -->
-          <a class="nav-icon" href="cart.html" aria-label="Cart">
-            <svg
-              class="icon"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <path d="M3 6h18" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
-            <span class="nav-count" id="cart-count" hidden></span>
-          </a>
+      <div class="table-wrap" id="cart-table" hidden>
+        <table>
+          <caption>Your flowers, the quantity of each and the total</caption>
+          <thead>
+            <tr>
+              <th scope="col">Flower</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody id="cart-rows"></tbody>
+          <tfoot id="cart-totals"></tfoot>
+        </table>
+      </div>
+    </section>
 
-          <!-- Account menu: opens and closes with <details> -->
-          <details class="nav-account">
-            <summary class="nav-avatar" aria-label="Account menu">
-              <svg
-                class="icon"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </summary>
-            <menu class="nav-pop nav-menu">
-              <li><a href="profile.html">My profile</a></li>
-              <li><button type="button" data-act="reset">Reset demo data</button></li>
-              <li><button type="button" data-act="logout">Log out</button></li>
-            </menu>
-          </details>
-        </div>
+    <!-- Checkout: shown when the cart has flowers. Signed-in customers get the form, everyone else a sign-in link -->
+    <section class="section" id="checkout" aria-labelledby="form-title" hidden>
+      <h2 id="form-title">Checkout</h2>
 
-      </nav>
-    </header>
+      <p id="signin-first" class="card" hidden>Please <a href="signin.html?next=order.html">sign in</a> to place your order. Your cart stays here while you do.</p>
 
-    <main>
-      <!-- Page title; js/pages/order.js puts the order number and date here -->
-      <header class="hero hero-sm">
-        <div class="wrap">
-          <nav class="crumbs no-print" aria-label="Breadcrumb">
-            <a href="orders.html">My orders</a>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">Order</span>
-          </nav>
-          <h1 id="order-title">Order</h1>
-          <p class="hero-sub" id="order-sub"></p>
-        </div>
-      </header>
+      <form class="form card" id="order-form" hidden>
 
-      <!-- Shown when ?id= is one of your orders (js/pages/order.js fills it) -->
-      <div class="wrap section split" id="order-found" hidden>
-        <div class="stack-lg">
+        <!-- 1. Who gets the flowers -->
+        <fieldset>
+          <legend>Receiver</legend>
 
-          <!-- Flowers table: rows and totals are added by the script -->
-          <section class="card" aria-labelledby="items-title">
-            <h2 class="card-title" id="items-title">Flowers</h2>
-            <div class="table-wrap">
-              <table class="table">
-                <caption>The flowers in this order, how many and what they cost.</caption>
-                <!-- One <col> per column group, so columns can be styled together -->
-                <colgroup>
-                  <col /> <!-- the flower -->
-                  <col span="3" /> <!-- the numbers: quantity, price each, amount -->
-                </colgroup>
-                <thead>
-                  <tr>
-                    <th scope="col">Flower</th>
-                    <th scope="col" class="right">Qty</th>
-                    <th scope="col" class="right">Price</th>
-                    <th scope="col" class="right">Amount</th>
-                  </tr>
-                </thead>
-                <tbody id="order-items"></tbody>
-                <tfoot id="order-totals"></tfoot>
-              </table>
+          <div class="field">
+            <label for="o-name">Receiver's name</label>
+            <input type="text" id="o-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
+          </div>
+
+          <!-- Indian mobile number: 10 digits, the first one 6, 7, 8 or 9 -->
+          <div class="field">
+            <label for="o-phone">Mobile number</label>
+            <input type="tel" id="o-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
+          </div>
+
+          <div class="field">
+            <label for="o-address">Delivery address</label>
+            <textarea id="o-address" name="address" rows="3" required minlength="10" maxlength="200" autocomplete="street-address"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 2. When: the day (min, max and value are set by js/order.js) and one of three time slots -->
+        <fieldset>
+          <legend>When</legend>
+
+          <div class="field">
+            <label for="o-date">Delivery date</label>
+            <input type="date" id="o-date" name="date" required>
+          </div>
+
+          <fieldset>
+            <legend>Time slot</legend>
+            <div class="choices">
+              <label for="slot-morning"><input type="radio" id="slot-morning" name="slot" value="morning" required> Morning (9 am - 12 pm)</label>
+              <label for="slot-afternoon"><input type="radio" id="slot-afternoon" name="slot" value="afternoon"> Afternoon (12 pm - 4 pm)</label>
+              <label for="slot-evening"><input type="radio" id="slot-evening" name="slot" value="evening"> Evening (4 pm - 8 pm)</label>
             </div>
-          </section>
+          </fieldset>
+        </fieldset>
 
-          <!-- Delivery details: day, receiver and address (filled by the script) -->
-          <section class="card" aria-labelledby="delivery-title">
-            <h2 class="card-title" id="delivery-title">Delivery</h2>
-            <div id="order-delivery"></div>
-          </section>
+        <!-- 3. Payment and the message on the card; the datalist suggests 5 messages -->
+        <fieldset>
+          <legend>Payment and card</legend>
 
-        </div>
+          <fieldset>
+            <legend>Pay when the flowers arrive</legend>
+            <div class="choices">
+              <label for="pay-cod"><input type="radio" id="pay-cod" name="payment" value="cod" required> <abbr title="Cash on delivery">COD</abbr></label>
+              <label for="pay-upi"><input type="radio" id="pay-upi" name="payment" value="upi"> <abbr title="Unified Payments Interface">UPI</abbr></label>
+              <label for="pay-card"><input type="radio" id="pay-card" name="payment" value="card"> Card</label>
+            </div>
+          </fieldset>
 
-        <!-- Receipt box: print button (hidden on the printed page) -->
-        <section class="card stack no-print" aria-labelledby="receipt-title">
-          <h2 class="card-title" id="receipt-title">Receipt</h2>
-          <p class="mb-0">Print this page to keep the order on paper, or save it as a PDF.</p>
-          <div class="row">
-            <button type="button" class="btn btn-primary" id="print">Print receipt</button>
-            <a class="btn btn-ghost" href="orders.html">Back to My orders</a>
+          <div class="field">
+            <label for="o-message">Message on the card <small>(optional)</small></label>
+            <input type="text" id="o-message" name="note" list="card-messages" maxlength="80">
+            <datalist id="card-messages">
+              <option value="Happy birthday!"></option>
+              <option value="Happy anniversary!"></option>
+              <option value="Get well soon."></option>
+              <option value="Congratulations!"></option>
+              <option value="Shubh Deepavali!"></option>
+            </datalist>
           </div>
-        </section>
+        </fieldset>
+
+        <!-- Errors and "order placed" show here -->
+        <p id="order-msg" class="msg" role="status"></p>
+
+        <!-- Buttons: submit runs the checks in js/order.js; reset clears the form -->
+        <p>
+          <button type="submit" class="btn">Place order</button>
+          <button type="reset" class="btn btn-light">Clear form</button>
+        </p>
+
+        <!-- Small note: where the order goes -->
+        <p class="note">The browser checks the fields first (required, pattern, min and max), then js/order.js checks them again. The order is saved in this browser only (localStorage) and shows on <a href="orders.html">My orders</a>. Nothing is sent to a server and no money is taken.</p>
+      </form>
+
+      <!-- A short chime plays when the order is placed -->
+      <audio id="chime" src="../media/chime.mp3" preload="auto"></audio>
+    </section>
+
+    <!-- Delivery charges: a table with caption, colgroup, thead, tbody and tfoot -->
+    <section class="section" aria-labelledby="charges-title">
+      <h2 id="charges-title">Delivery charges</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Delivery slots and what they cost</caption>
+          <colgroup>
+            <col>
+            <col>
+            <col span="2">
+          </colgroup>
+
+          <thead>
+            <tr>
+              <th scope="col">Slot</th>
+              <th scope="col">Time</th>
+              <th scope="col">Order below Rs 999</th>
+              <th scope="col">Order of Rs 999 or more</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Morning</th>
+              <td><time datetime="09:00">9 am</time> - <time datetime="12:00">12 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <th scope="row">Afternoon</th>
+              <td><time datetime="12:00">12 pm</time> - <time datetime="16:00">4 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <th scope="row">Evening</th>
+              <td><time datetime="16:00">4 pm</time> - <time datetime="20:00">8 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="4">Example: 1 Red Rose Bouquet is Rs 349 + Rs 50 delivery = <strong>Rs 399</strong>. 3 of them are Rs 1,047, so delivery is <strong>free</strong>.</td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
+    </section>
 
-      <!-- Shown instead when the order is not found or is not yours -->
-      <section class="wrap section card empty" id="order-missing" hidden>
-        <h2>We could not find this order</h2>
-        <p>The link may be old, or the order belongs to another account. All your own orders are on My orders.</p>
-        <a class="btn btn-primary" href="orders.html">Go to My orders</a>
-      </section>
-    </main>
+  </main>
 
-    <!-- Footer: shop info, address, owners and copyright -->
-    <footer class="site-footer">
-      <div class="wrap footer-inner">
+  <!-- Site footer: address, owners and a link to the full shop -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
+        <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
+      <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
+      <p><small>Simple version made with HTML, CSS and JavaScript from Units 1-5. <a href="../index.html">Open the full shop</a>.</small></p>
+    </div>
+  </footer>
 
-        <!-- Logo and one line about the shop -->
-        <div class="footer-brand">
-          <span class="brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(72 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(144 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(216 12 12)" />
-              <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(288 12 12)" />
-              <circle class="core" cx="12" cy="12" r="2.4" />
-            </svg>
-          </span>
-          <div>
-            <strong>Bloom &amp; Petal</strong>
-            <p>Fresh flowers, delivered across Jalandhar.</p>
-          </div>
-        </div>
-
-        <!-- Shop address, phone and email -->
-        <div>
-          <h2>Visit or call</h2>
-          <address>
-            Shop 12, Model Town Market<br />
-            Jalandhar, Punjab 144003<br />
-            <a href="tel:+919876501234">+91 98765 01234</a><br />
-            <!-- <wbr> lets the long email address wrap after the @ on small screens -->
-            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
-          </address>
-        </div>
-
-        <!-- Who runs the shop and when it is open -->
-        <div>
-          <h2>Owners</h2>
-          <p>Yash, Satyam, Raghav</p>
-          <p><small>Open every day, 9 am to 8 pm</small></p>
-        </div>
-
-      </div>
-      <p class="wrap footer-note">
-        <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser. <a href="basic/index.html">Open the simple HTML and CSS version</a>.</small>
-      </p>
-    </footer>
-
-    <!-- This page's own script: finds the order from ?id= and fills the page -->
-    <script src="js/pages/order.js?v=7"></script>
-  </body>
+  <script src="js/shop.js"></script>
+  <script src="js/order.js"></script>
+</body>
 </html>

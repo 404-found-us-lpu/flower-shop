@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Bloom & Petal (simple version) - thanks.html - Made by: Satyam -->
+<!-- Bloom & Petal - thanks.html - Made by: Satyam -->
 <!-- The page order.html opens after an order is placed: thanks.html?order=1001. js/thanks.js reads the number. -->
 <html lang="en">
 <head>
@@ -7,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Thank you: your Bloom &amp; Petal order is placed.">
   <title>Thank you · Bloom &amp; Petal</title>
-  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -22,7 +22,6 @@
       <a href="orders.html">My orders</a>
       <a href="contact.html">Contact</a>
       <a href="signin.html" id="account-link">Sign in</a>
-      <a class="switch" href="../index.html">Full shop &rarr;</a>
     </nav>
   </header>
 
@@ -34,28 +33,8 @@
         <circle cx="32" cy="32" r="30" fill="#ead7a4" />
         <polyline points="18,33 28,43 46,22" fill="none" stroke="#152a1f" stroke-width="6" />
       </svg>
-      <h1 id="thanks-title">Thank you for your order</h1>
-      <p class="lead">You can see it, with the day and the slot, on <a href="orders.html">My orders</a>.</p>
-    </section>
-
-    <!-- Two cards side by side: what really happened, and what a real shop does next -->
-    <section class="section split">
-
-      <article class="card">
-        <h2>What happened just now</h2>
-        <p>This is the <em>simple version</em> of Bloom &amp; Petal, made with HTML, CSS and JavaScript.</p>
-        <p>JavaScript checked the form, saved the order <strong>in this browser only</strong> (localStorage) and emptied your cart. Nothing was sent to a server and no money was taken.</p>
-      </article>
-
-      <article class="card">
-        <h2>In a real shop, next we would</h2>
-        <ol>
-          <li>Satyam checks the order and calls the receiver's number.</li>
-          <li>Raghav picks fresh flowers at the mandi in the morning.</li>
-          <li>Our van brings them in the slot you chose. You pay by <abbr title="Cash on delivery">COD</abbr>, <abbr title="Unified Payments Interface">UPI</abbr> or card.</li>
-        </ol>
-      </article>
-
+      <h1>Your order is placed</h1>
+      <p class="lead">Thank you for shopping with Bloom &amp; Petal.</p>
     </section>
 
     <!-- Links back to the rest of the site -->
@@ -71,17 +50,16 @@
 
   </main>
 
-  <!-- Site footer: address, owners and a link to the full shop -->
+  <!-- Site footer: address and owners -->
   <footer class="site-footer">
     <div class="wrap">
       <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
         <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
       <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
-      <p><small>Simple version made with HTML, CSS and JavaScript from Units 1-5. <a href="../index.html">Open the full shop</a>.</small></p>
+      <p><small>Made with HTML, CSS and JavaScript (CSE326 Units 1-5) by Yash, Satyam and Raghav.</small></p>
     </div>
   </footer>
 
   <script src="js/shop.js"></script>
-  <script src="js/thanks.js"></script>
 </body>
 </html>

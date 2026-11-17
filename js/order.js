@@ -1,5 +1,5 @@
 /* Made by: Satyam */
-/* basic/js/order.js - the cart and the checkout on order.html.
+/* js/order.js - the cart and the checkout on order.html.
    Unit 5 topics: Fetch API + JSON (getFlowers), higher-order functions (map, filter, find, reduce),
    dynamic content (the cart table), event handling (change, click, submit), form validation with
    regular expressions, dates, Web Storage (saveOrder) and audio events (the chime). */
@@ -90,9 +90,9 @@ function nextOrderId() {
   return load(KEYS.orders, []).reduce((biggest, order) => Math.max(biggest, order.id), 1000) + 1;
 }
 
-// Open the thank-you page for this order.
-function goToThanks(id) {
-  location.href = `thanks.html?order=${id}`;
+// Open the thank-you page.
+function goToThanks() {
+  location.href = 'thanks.html';
 }
 
 // Place the order: check the fields again, save the order, play the chime, open thanks.html.
@@ -138,8 +138,8 @@ form.addEventListener('submit', (event) => {
   showMessage('order-msg', `Order #${id} is placed!`);
 
   // Audio events: open thanks.html when the chime ends, or right away if it cannot play
-  chime.addEventListener('ended', () => goToThanks(id));
-  chime.play().catch(() => goToThanks(id));
+  chime.addEventListener('ended', goToThanks);
+  chime.play().catch(goToThanks);
 });
 
 // Delivery date: from today to 60 days ahead, tomorrow picked to start with.
