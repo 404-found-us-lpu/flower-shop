@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Bloom & Petal - index.html - Made by: Yash -->
-<!-- Home page: welcomes visitors and shows today's facts, Indian favourites, how to order and reviews.
+<!-- Home page: welcomes visitors and shows today's facts, Indian favourites and how to order.
      js/index.js greets a signed-in customer by name and runs the "Add to cart" buttons. -->
 <html lang="en">
 <head>
@@ -172,11 +172,8 @@
       <p><a href="flowers.html">See all 45 flowers &rarr;</a></p>
     </section>
 
-    <!-- Two cards side by side: how to order, and what customers say -->
-    <div class="section split">
-
-      <!-- How to order: three numbered steps in an ordered list -->
-      <section class="card" aria-labelledby="how-title">
+    <!-- How to order: three numbered steps in an ordered list -->
+    <section class="section card" aria-labelledby="how-title">
         <h2 id="how-title">How to order</h2>
         <ol>
           <li><strong>Pick your flowers</strong> on the <a href="flowers.html">flowers page</a>.
@@ -190,57 +187,6 @@
         <p class="note">Your cart and your orders are saved in this browser, so they are still there next time.
           <a href="signin.html">Sign in</a> to see your past orders on <a href="orders.html">My orders</a>.</p>
       </section>
-
-      <!-- Reviews: each figure has five SVG polygon stars, the quote and who said it -->
-      <section class="card" aria-labelledby="reviews-title">
-        <h2 id="reviews-title">What customers say</h2>
-
-        <figure class="quote">
-          <svg class="stars" viewBox="0 0 116 19" width="116" height="19" role="img" aria-label="5 out of 5 stars">
-            <polygon points="10,0 12.4,6.8 19.5,6.9 13.8,11.2 15.9,18.1 10,14 4.1,18.1 6.2,11.2 0.5,6.9 7.6,6.8" />
-            <polygon points="34,0 36.4,6.8 43.5,6.9 37.8,11.2 39.9,18.1 34,14 28.1,18.1 30.2,11.2 24.5,6.9 31.6,6.8" />
-            <polygon points="58,0 60.4,6.8 67.5,6.9 61.8,11.2 63.9,18.1 58,14 52.1,18.1 54.2,11.2 48.5,6.9 55.6,6.8" />
-            <polygon points="82,0 84.4,6.8 91.5,6.9 85.8,11.2 87.9,18.1 82,14 76.1,18.1 78.2,11.2 72.5,6.9 79.6,6.8" />
-            <polygon points="106,0 108.4,6.8 115.5,6.9 109.8,11.2 111.9,18.1 106,14 100.1,18.1 102.2,11.2 96.5,6.9 103.6,6.8" />
-          </svg>
-          <blockquote>
-            <p>The marigolds for our Diwali pooja came early in the morning, fresh and bright.
-              The mogra pot is still flowering on my balcony.</p>
-          </blockquote>
-          <figcaption><cite>Neha Sharma</cite>, Model Town, Jalandhar</figcaption>
-        </figure>
-
-        <figure class="quote">
-          <svg class="stars" viewBox="0 0 116 19" width="116" height="19" role="img" aria-label="5 out of 5 stars">
-            <polygon points="10,0 12.4,6.8 19.5,6.9 13.8,11.2 15.9,18.1 10,14 4.1,18.1 6.2,11.2 0.5,6.9 7.6,6.8" />
-            <polygon points="34,0 36.4,6.8 43.5,6.9 37.8,11.2 39.9,18.1 34,14 28.1,18.1 30.2,11.2 24.5,6.9 31.6,6.8" />
-            <polygon points="58,0 60.4,6.8 67.5,6.9 61.8,11.2 63.9,18.1 58,14 52.1,18.1 54.2,11.2 48.5,6.9 55.6,6.8" />
-            <polygon points="82,0 84.4,6.8 91.5,6.9 85.8,11.2 87.9,18.1 82,14 76.1,18.1 78.2,11.2 72.5,6.9 79.6,6.8" />
-            <polygon points="106,0 108.4,6.8 115.5,6.9 109.8,11.2 111.9,18.1 106,14 100.1,18.1 102.2,11.2 96.5,6.9 103.6,6.8" />
-          </svg>
-          <blockquote>
-            <p>I sent the birthday combo to my sister. It reached in the evening slot, just as I had picked.</p>
-          </blockquote>
-          <figcaption><cite>Aman Verma</cite>, Ludhiana</figcaption>
-        </figure>
-
-        <!-- Four stars: the fifth polygon has its own pale fill, so it looks empty -->
-        <figure class="quote">
-          <svg class="stars" viewBox="0 0 116 19" width="116" height="19" role="img" aria-label="4 out of 5 stars">
-            <polygon points="10,0 12.4,6.8 19.5,6.9 13.8,11.2 15.9,18.1 10,14 4.1,18.1 6.2,11.2 0.5,6.9 7.6,6.8" />
-            <polygon points="34,0 36.4,6.8 43.5,6.9 37.8,11.2 39.9,18.1 34,14 28.1,18.1 30.2,11.2 24.5,6.9 31.6,6.8" />
-            <polygon points="58,0 60.4,6.8 67.5,6.9 61.8,11.2 63.9,18.1 58,14 52.1,18.1 54.2,11.2 48.5,6.9 55.6,6.8" />
-            <polygon points="82,0 84.4,6.8 91.5,6.9 85.8,11.2 87.9,18.1 82,14 76.1,18.1 78.2,11.2 72.5,6.9 79.6,6.8" />
-            <polygon points="106,0 108.4,6.8 115.5,6.9 109.8,11.2 111.9,18.1 106,14 100.1,18.1 102.2,11.2 96.5,6.9 103.6,6.8" fill="#e2d8c6" />
-          </svg>
-          <blockquote>
-            <p>A lovely sunflower basket and a healthy money plant. I only wish there were more succulents in stock.</p>
-          </blockquote>
-          <figcaption><cite>Simran Kaur</cite>, Phagwara</figcaption>
-        </figure>
-      </section>
-
-    </div>
 
   </main>
 
