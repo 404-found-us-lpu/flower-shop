@@ -20,6 +20,15 @@ On your own computer: open the folder in VS Code and use *Open with Live Server*
 Demo login: **neha@example.com / neha123** (the login page has a one-click demo button). "Reset demo data"
 in the account menu puts every flower, order and account back to the start.
 
+## Two versions
+
+| Version | Address | What it is |
+|---|---|---|
+| Simple | https://project.lpu.lol/basic/ (the main address opens it) | Only what Units 1-4 teach: HTML pages, Unit 3 CSS, and Unit 4 JavaScript only in the price calculator (run in the browser Console). Nothing is saved; forms are checked by the browser and open a thank-you page. Files in `basic/`. |
+| Full shop | https://project.lpu.lol/index.html | Login, cart, orders and live stock, using page and storage code from Unit V. Files in the main folder. |
+
+Each version links to the other. 45 flowers (15 Indian favourites), prices from Rs 25 to Rs 699.
+
 ## Pages
 
 | Page | Who can open it | What it does |
@@ -28,7 +37,7 @@ in the account menu puts every flower, order and account back to the start.
 | contact.html | everyone | Address, phone, email, opening hours, the three owners, a message form and a map |
 | login.html, register.html | visitors | Sign in, create an account |
 | home.html | logged in | Greeting, next delivery, Indian favourites, shop by type, recent orders, tip of the day |
-| catalog.html | logged in | All 18 flowers with search, type tabs, sorting, stock counts and add to cart |
+| catalog.html | logged in | All 45 flowers with search, type tabs, sorting, stock counts and add to cart |
 | cart.html | logged in | Cart, free-delivery bar, delivery details, day and time, payment, place order |
 | orders.html | logged in | Table of my orders with the total spent |
 | order.html | logged in | One order: items, receiver, delivery day, printable receipt |
