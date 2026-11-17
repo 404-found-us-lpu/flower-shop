@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal (simple version) - orders.html - Made by: Satyam -->
+<!-- My orders: the signed-in customer's saved orders in a table, built by js/orders.js. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your Bloom &amp; Petal orders: what you ordered, when it comes and what it cost.">
+  <title>My orders · Bloom &amp; Petal</title>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Site header: the same menu on every page -->
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="brand" href="index.html">Bloom &amp; Petal</a>
+      <a href="index.html">Home</a>
+      <a href="flowers.html">Flowers</a>
+      <a href="order.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="orders.html" aria-current="page">My orders</a>
+      <a href="contact.html">Contact</a>
+      <a href="signin.html" id="account-link">Sign in</a>
+      <a class="switch" href="../index.html">Full shop &rarr;</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Top band: page title and one line about it -->
+    <section class="hero">
+      <h1>My orders</h1>
+      <p class="lead">Every order you placed in this browser, newest first.</p>
+    </section>
+
+    <!-- The orders: js/orders.js shows the table, the empty message or the sign-in message -->
+    <section class="section" aria-labelledby="orders-title">
+      <h2 id="orders-title">Your orders</h2>
+
+      <p id="orders-signin" class="card" hidden>Please <a href="signin.html?next=orders.html">sign in</a> to see your orders.</p>
+
+      <p id="orders-empty" class="card" hidden>No orders yet. <a href="flowers.html">Pick some flowers</a> and place your first one.</p>
+
+      <div class="table-wrap" id="orders-table" hidden>
+        <table>
+          <caption>Your orders, newest first</caption>
+          <thead>
+            <tr>
+              <th scope="col">Order</th>
+              <th scope="col">Placed on</th>
+              <th scope="col">Delivery</th>
+              <th scope="col">Flowers</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody id="orders-rows"></tbody>
+          <tfoot id="orders-total"></tfoot>
+        </table>
+      </div>
+
+      <p class="note">Orders are saved in this browser only (localStorage), so another computer will not show them.</p>
+    </section>
+
+  </main>
+
+  <!-- Site footer: address, owners and a link to the full shop -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
+        <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
+      <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
+      <p><small>Simple version made with HTML, CSS and JavaScript from Units 1-5. <a href="../index.html">Open the full shop</a>.</small></p>
+    </div>
+  </footer>
+
+  <script src="js/shop.js"></script>
+  <script src="js/orders.js"></script>
+</body>
+</html>

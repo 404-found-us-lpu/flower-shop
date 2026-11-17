@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- Bloom & Petal (simple version) - contact.html - Made by: Satyam -->
-<!-- Contact page: address and hours, the three owners, a message form, a map and the delivery slots. -->
+<!-- Contact page: address and hours, "how far is the shop" (Geolocation API), the three owners, a message form, a map and the delivery slots. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -18,9 +18,10 @@
       <a class="brand" href="index.html">Bloom &amp; Petal</a>
       <a href="index.html">Home</a>
       <a href="flowers.html">Flowers</a>
-      <a href="order.html">Order</a>
+      <a href="order.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="orders.html">My orders</a>
       <a href="contact.html" aria-current="page">Contact</a>
-      <a href="signin.html">Sign in</a>
+      <a href="signin.html" id="account-link">Sign in</a>
       <a class="switch" href="../index.html">Full shop &rarr;</a>
     </nav>
   </header>
@@ -49,10 +50,16 @@
         <h3>Opening hours</h3>
         <p>Every day, <time datetime="09:00">9 am</time> to <time datetime="20:00">8 pm</time>, for the shop, the phone and deliveries.</p>
         <p class="note">Open on Sundays and festivals too. Before Diwali and Valentine's Day, please order a day early.</p>
+
+        <!-- Distance to the shop: js/contact.js asks the browser for your location (Geolocation API) -->
+        <h3>How far are you?</h3>
+        <p><button type="button" class="btn btn-light" id="distance-btn">How far is our shop from me?</button></p>
+        <p id="distance-msg" class="msg" role="status"></p>
+        <p class="note">Your browser asks first. Your location stays on this page and is not sent or saved.</p>
       </section>
 
-      <!-- Form: a message to the shop, checked by the browser only -->
-      <form class="form card" action="thanks.html">
+      <!-- Form: a message to the shop, checked by the browser and again by js/contact.js -->
+      <form class="form card" id="contact-form">
         <h2>Write to us</h2>
 
         <fieldset>
@@ -60,24 +67,24 @@
 
           <div class="field">
             <label for="m-name">Your name</label>
-            <input type="text" id="m-name" required minlength="2" maxlength="60" autocomplete="name">
+            <input type="text" id="m-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
           </div>
 
           <div class="field">
             <label for="m-email">Email</label>
-            <input type="email" id="m-email" required maxlength="80" autocomplete="email">
+            <input type="email" id="m-email" name="email" required maxlength="80" autocomplete="email">
           </div>
 
           <!-- Indian mobile number: 10 digits, the first one 6, 7, 8 or 9 -->
           <div class="field">
             <label for="m-phone">Mobile number</label>
-            <input type="tel" id="m-phone" required pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
+            <input type="tel" id="m-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
           </div>
 
           <!-- Drop-down list; <optgroup> puts the topics under two headings -->
           <div class="field">
             <label for="m-topic">Topic</label>
-            <select id="m-topic" required>
+            <select id="m-topic" name="topic" required>
               <option value="">Choose a topic</option>
               <optgroup label="Orders">
                 <option>Change a delivery day</option>
@@ -92,14 +99,17 @@
 
           <div class="field">
             <label for="m-message">Message</label>
-            <textarea id="m-message" rows="5" required minlength="10" maxlength="500"></textarea>
+            <textarea id="m-message" name="message" rows="5" required minlength="10" maxlength="500"></textarea>
           </div>
         </fieldset>
+
+        <!-- Errors and the thank-you line show here -->
+        <p id="contact-msg" class="msg" role="status"></p>
 
         <p><button type="submit" class="btn">Send message</button></p>
 
         <!-- Small note: why nothing leaves this page -->
-        <p class="note">Nothing is sent anywhere. These fields have no <code>name</code> attribute, so the browser only checks them and then opens the thank-you page. Nothing is saved.</p>
+        <p class="note">Nothing is sent anywhere. js/contact.js checks the email and mobile number, thanks you on this page and clears the form. Nothing is saved; a real shop would send the message to its server.</p>
       </form>
 
       <!-- Map: OpenStreetMap shown inside an <iframe> -->
@@ -193,9 +203,11 @@ UPI ID      <code>bloompetal@upi</code></pre>
       <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
         <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
       <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
-      <p><small>Simple version made with HTML and CSS only (Units 1-4). <a href="../index.html">Open the full shop</a>.</small></p>
+      <p><small>Simple version made with HTML, CSS and JavaScript from Units 1-5. <a href="../index.html">Open the full shop</a>.</small></p>
     </div>
   </footer>
 
+  <script src="js/shop.js"></script>
+  <script src="js/contact.js"></script>
 </body>
 </html>

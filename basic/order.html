@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!-- Bloom & Petal (simple version) - order.html - Made by: Satyam -->
-<!-- The order form (checked by the browser only) and the table of delivery charges. -->
+<!-- The cart (built by js/order.js from the saved cart), the checkout form and the table of delivery charges. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Order fresh flowers from Bloom &amp; Petal in Jalandhar: pick a flower, the receiver, the day and the slot.">
-  <title>Order · Bloom &amp; Petal</title>
+  <meta name="description" content="Your Bloom &amp; Petal cart: check the flowers, then tell us the receiver, the day and the slot.">
+  <title>Cart · Bloom &amp; Petal</title>
   <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -18,9 +18,10 @@
       <a class="brand" href="index.html">Bloom &amp; Petal</a>
       <a href="index.html">Home</a>
       <a href="flowers.html">Flowers</a>
-      <a href="order.html" aria-current="page">Order</a>
+      <a href="order.html" aria-current="page">Cart (<span id="cart-count">0</span>)</a>
+      <a href="orders.html">My orders</a>
       <a href="contact.html">Contact</a>
-      <a href="signin.html">Sign in</a>
+      <a href="signin.html" id="account-link">Sign in</a>
       <a class="switch" href="../index.html">Full shop &rarr;</a>
     </nav>
   </header>
@@ -29,16 +30,42 @@
 
     <!-- Top band: page title and one line about ordering -->
     <section class="hero">
-      <h1>Order flowers</h1>
-      <p class="lead">Pick a flower, tell us who gets it and when. Delivery is <strong>Rs 50</strong>, and <mark>free from Rs 999</mark>.</p>
+      <h1>Your cart</h1>
+      <p class="lead">Check your flowers, then tell us who gets them and when. Delivery is <strong>Rs 50</strong>, and <mark>free from Rs 999</mark>.</p>
     </section>
 
-    <!-- The order form: four groups of fields (fieldsets) -->
-    <section class="section" aria-labelledby="form-title">
-      <h2 id="form-title">Your order</h2>
-      <p>Not sure what to pick? Browse <a href="flowers.html">all 45 flowers</a> first.</p>
+    <!-- The cart: js/order.js fills the table body and footer from the saved cart -->
+    <section class="section" aria-labelledby="cart-title">
+      <h2 id="cart-title">Flowers in your cart</h2>
+      <p id="cart-msg" class="msg" role="status">Loading your cart...</p>
 
-      <form class="form card" action="thanks.html">
+      <p id="cart-empty" hidden>Your cart is empty. <a href="flowers.html">Pick some flowers</a> first.</p>
+
+      <div class="table-wrap" id="cart-table" hidden>
+        <table>
+          <caption>Your flowers, the quantity of each and the total</caption>
+          <thead>
+            <tr>
+              <th scope="col">Flower</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody id="cart-rows"></tbody>
+          <tfoot id="cart-totals"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- Checkout: shown when the cart has flowers. Signed-in customers get the form, everyone else a sign-in link -->
+    <section class="section" id="checkout" aria-labelledby="form-title" hidden>
+      <h2 id="form-title">Checkout</h2>
+
+      <p id="signin-first" class="card" hidden>Please <a href="signin.html?next=order.html">sign in</a> to place your order. Your cart stays here while you do.</p>
+
+      <form class="form card" id="order-form" hidden>
 
         <!-- 1. Who gets the flowers -->
         <fieldset>
@@ -46,100 +73,28 @@
 
           <div class="field">
             <label for="o-name">Receiver's name</label>
-            <input type="text" id="o-name" required minlength="2" maxlength="60" autocomplete="name">
+            <input type="text" id="o-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
           </div>
 
           <!-- Indian mobile number: 10 digits, the first one 6, 7, 8 or 9 -->
           <div class="field">
             <label for="o-phone">Mobile number</label>
-            <input type="tel" id="o-phone" required pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
+            <input type="tel" id="o-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
           </div>
 
           <div class="field">
             <label for="o-address">Delivery address</label>
-            <textarea id="o-address" rows="3" required minlength="10" maxlength="200" autocomplete="street-address"></textarea>
+            <textarea id="o-address" name="address" rows="3" required minlength="10" maxlength="200" autocomplete="street-address"></textarea>
           </div>
         </fieldset>
 
-        <!-- 2. Which flower and how many; <optgroup> puts the 45 flowers under their 5 types -->
-        <fieldset>
-          <legend>Flowers</legend>
-
-          <div class="field">
-            <label for="o-flower">Flower</label>
-            <select id="o-flower" required>
-              <option value="">Choose a flower</option>
-              <optgroup label="Bouquets">
-                <option value="1">Red Rose Bouquet - Rs 349</option>
-                <option value="2">White Lily Bunch - Rs 299</option>
-                <option value="3">Sunflower Basket - Rs 399</option>
-                <option value="4">Pink Tulip Bunch - Rs 349</option>
-                <option value="5">Gerbera Mix - Rs 249</option>
-                <option value="6">Lavender Bundle - Rs 199</option>
-                <option value="19">Yellow Rose Bouquet - Rs 329</option>
-                <option value="20">Carnation Bunch - Rs 199</option>
-                <option value="21">Daisy Bunch - Rs 149</option>
-                <option value="22">Hydrangea Bunch - Rs 399</option>
-                <option value="23">Peony Bouquet - Rs 499</option>
-                <option value="24">Purple Iris Bunch - Rs 249</option>
-                <option value="25">Calla Lily Bunch - Rs 449</option>
-                <option value="26">Alstroemeria Bunch - Rs 199</option>
-              </optgroup>
-              <optgroup label="Indian favourites">
-                <option value="13">Mogra Pot - Rs 149</option>
-                <option value="14">Marigold (Genda) - Rs 49</option>
-                <option value="15">Aprajita Pot - Rs 129</option>
-                <option value="16">Bleeding Heart Vine Pot - Rs 199</option>
-                <option value="17">Guldaudi (Chrysanthemum) - Rs 179</option>
-                <option value="18">Madhumalti Pot - Rs 199</option>
-                <option value="27">Rajnigandha (Tuberose) - Rs 99</option>
-                <option value="28">Champa (Frangipani) Pot - Rs 249</option>
-                <option value="29">Gudhal (Hibiscus) Pot - Rs 129</option>
-                <option value="30">Kamal (Lotus) - Rs 79</option>
-                <option value="31">Raat Ki Rani Pot - Rs 149</option>
-                <option value="32">Parijat Pot - Rs 169</option>
-                <option value="33">Sadabahar Pot - Rs 79</option>
-                <option value="34">Bougainvillea Pot - Rs 199</option>
-                <option value="35">Rangan (Ixora) Pot - Rs 149</option>
-              </optgroup>
-              <optgroup label="Single stems">
-                <option value="7">Single Red Rose - Rs 29</option>
-                <option value="8">Single Sunflower - Rs 39</option>
-                <option value="36">Single Gerbera - Rs 25</option>
-                <option value="37">Single White Lily - Rs 49</option>
-                <option value="38">Single Orchid Stem - Rs 129</option>
-              </optgroup>
-              <optgroup label="Plants">
-                <option value="9">Money Plant Pot - Rs 149</option>
-                <option value="10">Purple Orchid Pot - Rs 499</option>
-                <option value="11">Succulent Pot - Rs 99</option>
-                <option value="39">Peace Lily Pot - Rs 249</option>
-                <option value="40">Anthurium Pot - Rs 349</option>
-                <option value="41">Rose Plant Pot - Rs 199</option>
-                <option value="42">Snake Plant Pot - Rs 229</option>
-              </optgroup>
-              <optgroup label="Gifts">
-                <option value="12">Birthday Combo - Rs 599</option>
-                <option value="43">Mixed Flower Basket - Rs 699</option>
-                <option value="44">Rose Varmala - Rs 549</option>
-                <option value="45">Flower Gift Box - Rs 649</option>
-              </optgroup>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="o-qty">Quantity (1 to 10)</label>
-            <input type="number" id="o-qty" min="1" max="10" value="1" required>
-          </div>
-        </fieldset>
-
-        <!-- 3. When: the day and one of three time slots -->
+        <!-- 2. When: the day (min, max and value are set by js/order.js) and one of three time slots -->
         <fieldset>
           <legend>When</legend>
 
           <div class="field">
             <label for="o-date">Delivery date</label>
-            <input type="date" id="o-date" required>
+            <input type="date" id="o-date" name="date" required>
           </div>
 
           <fieldset>
@@ -152,22 +107,22 @@
           </fieldset>
         </fieldset>
 
-        <!-- 4. Payment and the message on the card; the datalist suggests 5 messages -->
+        <!-- 3. Payment and the message on the card; the datalist suggests 5 messages -->
         <fieldset>
           <legend>Payment and card</legend>
 
           <fieldset>
             <legend>Pay when the flowers arrive</legend>
             <div class="choices">
-              <label for="pay-cod"><input type="radio" id="pay-cod" name="pay" value="cod" required> <abbr title="Cash on delivery">COD</abbr></label>
-              <label for="pay-upi"><input type="radio" id="pay-upi" name="pay" value="upi"> <abbr title="Unified Payments Interface">UPI</abbr></label>
-              <label for="pay-card"><input type="radio" id="pay-card" name="pay" value="card"> Card</label>
+              <label for="pay-cod"><input type="radio" id="pay-cod" name="payment" value="cod" required> <abbr title="Cash on delivery">COD</abbr></label>
+              <label for="pay-upi"><input type="radio" id="pay-upi" name="payment" value="upi"> <abbr title="Unified Payments Interface">UPI</abbr></label>
+              <label for="pay-card"><input type="radio" id="pay-card" name="payment" value="card"> Card</label>
             </div>
           </fieldset>
 
           <div class="field">
             <label for="o-message">Message on the card <small>(optional)</small></label>
-            <input type="text" id="o-message" list="card-messages" maxlength="80">
+            <input type="text" id="o-message" name="note" list="card-messages" maxlength="80">
             <datalist id="card-messages">
               <option value="Happy birthday!"></option>
               <option value="Happy anniversary!"></option>
@@ -178,15 +133,21 @@
           </div>
         </fieldset>
 
-        <!-- Buttons: submit checks the form and opens thanks.html; reset clears it -->
+        <!-- Errors and "order placed" show here -->
+        <p id="order-msg" class="msg" role="status"></p>
+
+        <!-- Buttons: submit runs the checks in js/order.js; reset clears the form -->
         <p>
           <button type="submit" class="btn">Place order</button>
           <button type="reset" class="btn btn-light">Clear form</button>
         </p>
 
-        <!-- Small note: why nothing leaves this page -->
-        <p class="note">Nothing you type is sent anywhere. The typed fields have no <code>name</code> attribute, so the browser only checks them (required, pattern, min and max) and then opens the thank-you page. Only the two radio groups have a <code>name</code>, because radio buttons need one shared name to work as one choice; their values (like <code>slot=morning</code>) show in the address bar. Nothing is saved.</p>
+        <!-- Small note: where the order goes -->
+        <p class="note">The browser checks the fields first (required, pattern, min and max), then js/order.js checks them again. The order is saved in this browser only (localStorage) and shows on <a href="orders.html">My orders</a>. Nothing is sent to a server and no money is taken.</p>
       </form>
+
+      <!-- A short chime plays when the order is placed -->
+      <audio id="chime" src="../media/chime.mp3" preload="auto"></audio>
     </section>
 
     <!-- Delivery charges: a table with caption, colgroup, thead, tbody and tfoot -->
@@ -249,9 +210,11 @@
       <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
         <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
       <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
-      <p><small>Simple version made with HTML and CSS only (Units 1-4). <a href="../index.html">Open the full shop</a>.</small></p>
+      <p><small>Simple version made with HTML, CSS and JavaScript from Units 1-5. <a href="../index.html">Open the full shop</a>.</small></p>
     </div>
   </footer>
 
+  <script src="js/shop.js"></script>
+  <script src="js/order.js"></script>
 </body>
 </html>

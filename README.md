@@ -24,7 +24,7 @@ in the account menu puts every flower, order and account back to the start.
 
 | Version | Address | What it is |
 |---|---|---|
-| Simple | https://project.lpu.lol/basic/ (the main address opens it) | Only what Units 1-3 teach: HTML pages and Unit 3 CSS, no JavaScript. Pages: home, flowers, order, contact, sign in, thank you. Nothing is saved; forms are checked by the browser and open a thank-you page. Files in `basic/`. |
+| Simple | https://project.lpu.lol/basic/ (the main address opens it) | Units 1-5 in small, plain steps: HTML pages, Unit 3 CSS, and Unit 5 JavaScript (DOM, events, localStorage, fetch + JSON, regular expressions, dates, audio and video events, Geolocation, Drag and Drop). Real sign in and register, a cart, checkout and My orders, flowers loaded from `basic/flowers.json`. Shared code in `basic/js/shop.js`, one small script per page. Nothing is saved; forms are checked by the browser and open a thank-you page. Files in `basic/`. |
 | Full shop | https://project.lpu.lol/index.html | Login, cart, orders and live stock, using page and storage code from Unit V. Files in the main folder. |
 
 Each version links to the other. 45 flowers (15 Indian favourites), prices from Rs 25 to Rs 699.
