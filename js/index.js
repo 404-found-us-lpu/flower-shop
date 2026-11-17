@@ -1,5 +1,5 @@
 /* Made by: Yash */
-/* basic/js/index.js - the home page.
+/* js/index.js - the home page.
    Unit 5 topics: DOM selection and changes (the greeting) and event handling (Add to cart). */
 
 // Greet the signed-in customer by first name in the green hero band.

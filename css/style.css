@@ -1,5 +1,5 @@
-/* Bloom & Petal (simple version) - style.css - Made by: Yash */
-/* The one stylesheet for every page in basic/. It uses only what Unit 3 (CSS) teaches. */
+/* Bloom & Petal - style.css - Made by: Yash */
+/* The one stylesheet for every page. It uses only what Unit 3 (CSS) teaches. */
 
 /* ===========================================================================
    Contents
@@ -23,6 +23,7 @@
    18. Footer
    19. Bigger screens (@media, mobile first)
    20. Motion (@keyframes, prefers-reduced-motion)
+   21. Messages from JavaScript, flowers page, cart and contact
    =========================================================================== */
 
 
@@ -474,8 +475,8 @@ tfoot th {
    9. Header and menu
    Unit 3 topics: flexbox (display: flex, flex-wrap, gap, align-items),
    margin-left: auto pushes items apart, attribute selector [aria-current="page"]
-   marks the page you are on, :not() skips the brand and the switch link.
-   position: sticky with z-index is turned on for bigger screens in section 20.
+   marks the page you are on, :not() skips the brand.
+   position: sticky with z-index is turned on for bigger screens in section 19.
    --------------------------------------------------------------------------- */
 
 .site-header {
@@ -519,8 +520,8 @@ tfoot th {
   color: #ffffff;
 }
 
-/* The page links (not the brand, not the switch) */
-.site-nav a:not(.brand, .switch) {
+/* The page links (not the brand) */
+.site-nav a:not(.brand) {
   padding-top: 4px;
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;
@@ -530,7 +531,7 @@ tfoot th {
   transition: color 0.2s, border-color 0.2s;
 }
 
-.site-nav a:not(.brand, .switch):hover {
+.site-nav a:not(.brand):hover {
   color: var(--on-dark);
 }
 
@@ -538,24 +539,6 @@ tfoot th {
 .site-nav a[aria-current="page"] {
   color: #ffffff;
   border-bottom-color: var(--gold);
-}
-
-/* Gold pill that links to the other version of the shop */
-.switch {
-  display: inline-block;
-  padding: 5px 14px;
-  border-radius: 999px;
-  background: var(--gold);
-  color: var(--forest);
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition: background-color 0.2s;
-}
-
-.switch:hover {
-  background: var(--gold-soft);
-  color: var(--forest);
 }
 
 
@@ -588,7 +571,7 @@ tfoot th {
   list-style: none;
 }
 
-/* Two columns on wide screens (set in section 20), one on phones */
+/* Two columns on wide screens (set in section 19), one on phones */
 .split {
   display: grid;
   gap: 24px;
@@ -660,7 +643,7 @@ tfoot th {
    Unit 3 topics: backgrounds - linear-gradient() and radial-gradient() layered,
    position: relative + absolute for the decoration rings drawn with ::after,
    box-shadow with spread, child combinator (.hero > *), :last-child,
-   animation (the @keyframes are in section 21).
+   animation (the @keyframes are in section 20).
    --------------------------------------------------------------------------- */
 
 .hero {
@@ -1002,7 +985,7 @@ p:has(> .btn + .btn) {
    validation with :user-invalid (only after the user has typed); ::placeholder;
    accent-color for radio buttons; :has(:checked) highlights the chosen pill;
    :not([type="radio"], [type="checkbox"]) keeps radios small; ::after adds
-   a red star to required fields; Grid puts short fields side by side (section 20).
+   a red star to required fields; Grid puts short fields side by side (section 19).
    --------------------------------------------------------------------------- */
 
 /* The form: a column of groups with space between them */

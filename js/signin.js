@@ -1,5 +1,5 @@
 /* Made by: Yash */
-/* basic/js/signin.js - the sign-in page.
+/* js/signin.js - the sign-in page.
    Unit 5 topics: DOM selection and changes, event handling (submit, click), form validation with a regular
    expression, Web Storage (signIn() in shop.js saves who is signed in), accessible JS (role="status", focus). */
 

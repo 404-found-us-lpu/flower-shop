@@ -8,7 +8,7 @@
     "botanical": "Rosa",
     "hindi": "",
     "description": "Twelve fresh red roses, hand tied with eucalyptus.",
-    "image": "../images/red-rose-bouquet.jpg"
+    "image": "images/red-rose-bouquet.jpg"
   },
   {
     "id": 2,
@@ -19,7 +19,7 @@
     "botanical": "Lilium",
     "hindi": "",
     "description": "Six stems of white oriental lilies, ready for a vase.",
-    "image": "../images/white-lily-bunch.jpg"
+    "image": "images/white-lily-bunch.jpg"
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "botanical": "Helianthus annuus",
     "hindi": "",
     "description": "Bright sunflowers arranged in a woven cane basket.",
-    "image": "../images/sunflower-basket.jpg"
+    "image": "images/sunflower-basket.jpg"
   },
   {
     "id": 4,
@@ -41,7 +41,7 @@
     "botanical": "Tulipa",
     "hindi": "",
     "description": "Ten soft pink tulips wrapped in kraft paper.",
-    "image": "../images/pink-tulips.jpg"
+    "image": "images/pink-tulips.jpg"
   },
   {
     "id": 5,
@@ -52,7 +52,7 @@
     "botanical": "Gerbera jamesonii",
     "hindi": "",
     "description": "A cheerful mix of gerbera daisies in five colours.",
-    "image": "../images/gerbera-mix.jpg"
+    "image": "images/gerbera-mix.jpg"
   },
   {
     "id": 6,
@@ -63,7 +63,7 @@
     "botanical": "Lavandula",
     "hindi": "",
     "description": "A fragrant bundle of lavender tied with twine.",
-    "image": "../images/lavender-bundle.jpg"
+    "image": "images/lavender-bundle.jpg"
   },
   {
     "id": 7,
@@ -74,7 +74,7 @@
     "botanical": "Rosa",
     "hindi": "",
     "description": "One long-stem red rose with a small note card.",
-    "image": "../images/single-red-rose.jpg"
+    "image": "images/single-red-rose.jpg"
   },
   {
     "id": 8,
@@ -85,7 +85,7 @@
     "botanical": "Helianthus annuus",
     "hindi": "",
     "description": "One tall sunflower stem, wrapped and ribboned.",
-    "image": "../images/single-sunflower.jpg"
+    "image": "images/single-sunflower.jpg"
   },
   {
     "id": 9,
@@ -96,7 +96,7 @@
     "botanical": "Epipremnum aureum",
     "hindi": "",
     "description": "An easy indoor money plant in a ceramic pot.",
-    "image": "../images/money-plant-pot.jpg"
+    "image": "images/money-plant-pot.jpg"
   },
   {
     "id": 10,
@@ -107,7 +107,7 @@
     "botanical": "Phalaenopsis",
     "hindi": "",
     "description": "A flowering moth orchid that blooms for weeks.",
-    "image": "../images/orchid-pot.jpg"
+    "image": "images/orchid-pot.jpg"
   },
   {
     "id": 11,
@@ -118,7 +118,7 @@
     "botanical": "Echeveria",
     "hindi": "",
     "description": "A small succulent that needs water once a week.",
-    "image": "../images/succulent-pot.jpg"
+    "image": "images/succulent-pot.jpg"
   },
   {
     "id": 12,
@@ -129,7 +129,7 @@
     "botanical": "",
     "hindi": "",
     "description": "A mixed bouquet with a greeting card and candles.",
-    "image": "../images/birthday-combo.jpg"
+    "image": "images/birthday-combo.jpg"
   },
   {
     "id": 13,
@@ -140,7 +140,7 @@
     "botanical": "Jasminum sambac",
     "hindi": "मोगरा",
     "description": "Sweet-smelling white mogra that flowers all summer.",
-    "image": "../images/mogra-pot.jpg"
+    "image": "images/mogra-pot.jpg"
   },
   {
     "id": 14,
@@ -151,7 +151,7 @@
     "botanical": "Tagetes erecta",
     "hindi": "गेंदा",
     "description": "Bright orange genda flowers for pooja, weddings and festivals.",
-    "image": "../images/marigold.jpg"
+    "image": "images/marigold.jpg"
   },
   {
     "id": 15,
@@ -162,7 +162,7 @@
     "botanical": "Clitoria ternatea",
     "hindi": "अपराजिता",
     "description": "A climbing creeper with deep blue butterfly-pea flowers.",
-    "image": "../images/aprajita-pot.jpg"
+    "image": "images/aprajita-pot.jpg"
   },
   {
     "id": 16,
@@ -173,7 +173,7 @@
     "botanical": "Clerodendrum thomsoniae",
     "hindi": "",
     "description": "White flowers with bright red hearts, for a sunny balcony.",
-    "image": "../images/bleeding-heart-pot.jpg"
+    "image": "images/bleeding-heart-pot.jpg"
   },
   {
     "id": 17,
@@ -184,7 +184,7 @@
     "botanical": "Chrysanthemum",
     "hindi": "गुलदाउदी",
     "description": "Big, colourful winter blooms that last for weeks.",
-    "image": "../images/guldaudi.jpg"
+    "image": "images/guldaudi.jpg"
   },
   {
     "id": 18,
@@ -195,7 +195,7 @@
     "botanical": "Combretum indicum",
     "hindi": "मधुमालती",
     "description": "A creeper with clusters that turn from white to pink to red.",
-    "image": "../images/madhumalti-pot.jpg"
+    "image": "images/madhumalti-pot.jpg"
   },
   {
     "id": 19,
@@ -206,7 +206,7 @@
     "botanical": "Rosa",
     "hindi": "",
     "description": "Twelve sunny yellow roses for friendship and new starts.",
-    "image": "../images/yellow-rose-bouquet.jpg"
+    "image": "images/yellow-rose-bouquet.jpg"
   },
   {
     "id": 20,
@@ -217,7 +217,7 @@
     "botanical": "Dianthus caryophyllus",
     "hindi": "",
     "description": "Ruffled carnations that stay fresh for up to two weeks.",
-    "image": "../images/carnation-bunch.jpg"
+    "image": "images/carnation-bunch.jpg"
   },
   {
     "id": 21,
@@ -228,7 +228,7 @@
     "botanical": "Leucanthemum vulgare",
     "hindi": "",
     "description": "A happy bunch of white daisies with yellow centres.",
-    "image": "../images/daisy-bunch.jpg"
+    "image": "images/daisy-bunch.jpg"
   },
   {
     "id": 22,
@@ -239,7 +239,7 @@
     "botanical": "Hydrangea macrophylla",
     "hindi": "",
     "description": "Big, soft balls of blue and pink hydrangea.",
-    "image": "../images/hydrangea-bunch.jpg"
+    "image": "images/hydrangea-bunch.jpg"
   },
   {
     "id": 23,
@@ -250,7 +250,7 @@
     "botanical": "Paeonia lactiflora",
     "hindi": "",
     "description": "Lush pink peonies, the queen of wedding flowers.",
-    "image": "../images/peony-bouquet.jpg"
+    "image": "images/peony-bouquet.jpg"
   },
   {
     "id": 24,
@@ -261,7 +261,7 @@
     "botanical": "Iris germanica",
     "hindi": "",
     "description": "Tall purple irises with a touch of yellow.",
-    "image": "../images/iris-bunch.jpg"
+    "image": "images/iris-bunch.jpg"
   },
   {
     "id": 25,
@@ -272,7 +272,7 @@
     "botanical": "Zantedeschia aethiopica",
     "hindi": "",
     "description": "Elegant white calla lilies on long stems.",
-    "image": "../images/calla-lily-bunch.jpg"
+    "image": "images/calla-lily-bunch.jpg"
   },
   {
     "id": 26,
@@ -283,7 +283,7 @@
     "botanical": "Alstroemeria",
     "hindi": "",
     "description": "Striped, long-lasting blooms in mixed colours.",
-    "image": "../images/alstroemeria-bunch.jpg"
+    "image": "images/alstroemeria-bunch.jpg"
   },
   {
     "id": 27,
@@ -294,7 +294,7 @@
     "botanical": "Polianthes tuberosa",
     "hindi": "रजनीगंधा",
     "description": "Sweet-smelling white stems for weddings and pooja.",
-    "image": "../images/rajnigandha.jpg"
+    "image": "images/rajnigandha.jpg"
   },
   {
     "id": 28,
@@ -305,7 +305,7 @@
     "botanical": "Plumeria rubra",
     "hindi": "चंपा",
     "description": "A temple tree with waxy, fragrant flowers.",
-    "image": "../images/champa-pot.jpg"
+    "image": "images/champa-pot.jpg"
   },
   {
     "id": 29,
@@ -316,7 +316,7 @@
     "botanical": "Hibiscus rosa-sinensis",
     "hindi": "गुड़हल",
     "description": "Bright red hibiscus, a favourite flower for pooja.",
-    "image": "../images/gudhal-pot.jpg"
+    "image": "images/gudhal-pot.jpg"
   },
   {
     "id": 30,
@@ -327,7 +327,7 @@
     "botanical": "Nelumbo nucifera",
     "hindi": "कमल",
     "description": "Pink lotus flowers, the national flower of India.",
-    "image": "../images/kamal-lotus.jpg"
+    "image": "images/kamal-lotus.jpg"
   },
   {
     "id": 31,
@@ -338,7 +338,7 @@
     "botanical": "Cestrum nocturnum",
     "hindi": "रात की रानी",
     "description": "Tiny flowers that fill the night air with scent.",
-    "image": "../images/raat-ki-rani-pot.jpg"
+    "image": "images/raat-ki-rani-pot.jpg"
   },
   {
     "id": 32,
@@ -349,7 +349,7 @@
     "botanical": "Nyctanthes arbor-tristis",
     "hindi": "पारिजात",
     "description": "Night jasmine with white petals and orange stems.",
-    "image": "../images/parijat-pot.jpg"
+    "image": "images/parijat-pot.jpg"
   },
   {
     "id": 33,
@@ -360,7 +360,7 @@
     "botanical": "Catharanthus roseus",
     "hindi": "सदाबहार",
     "description": "The always-in-bloom periwinkle, easy for beginners.",
-    "image": "../images/sadabahar-pot.jpg"
+    "image": "images/sadabahar-pot.jpg"
   },
   {
     "id": 34,
@@ -371,7 +371,7 @@
     "botanical": "Bougainvillea glabra",
     "hindi": "",
     "description": "Paper-thin magenta flowers for a sunny wall or gate.",
-    "image": "../images/bougainvillea-pot.jpg"
+    "image": "images/bougainvillea-pot.jpg"
   },
   {
     "id": 35,
@@ -382,7 +382,7 @@
     "botanical": "Ixora coccinea",
     "hindi": "रंगन",
     "description": "Round red flower clusters that butterflies love.",
-    "image": "../images/rangan-pot.jpg"
+    "image": "images/rangan-pot.jpg"
   },
   {
     "id": 36,
@@ -393,7 +393,7 @@
     "botanical": "Gerbera jamesonii",
     "hindi": "",
     "description": "One bright gerbera daisy, wrapped with a ribbon.",
-    "image": "../images/single-gerbera.jpg"
+    "image": "images/single-gerbera.jpg"
   },
   {
     "id": 37,
@@ -404,7 +404,7 @@
     "botanical": "Lilium longiflorum",
     "hindi": "",
     "description": "One tall white lily stem with buds still to open.",
-    "image": "../images/single-white-lily.jpg"
+    "image": "images/single-white-lily.jpg"
   },
   {
     "id": 38,
@@ -415,7 +415,7 @@
     "botanical": "Cymbidium",
     "hindi": "",
     "description": "A long orchid spray that lasts up to a month in a vase.",
-    "image": "../images/single-orchid-stem.jpg"
+    "image": "images/single-orchid-stem.jpg"
   },
   {
     "id": 39,
@@ -426,7 +426,7 @@
     "botanical": "Spathiphyllum wallisii",
     "hindi": "",
     "description": "White flowers and glossy leaves, happy in shade.",
-    "image": "../images/peace-lily-pot.jpg"
+    "image": "images/peace-lily-pot.jpg"
   },
   {
     "id": 40,
@@ -437,7 +437,7 @@
     "botanical": "Anthurium andraeanum",
     "hindi": "",
     "description": "Shiny red heart-shaped flowers that last for months.",
-    "image": "../images/anthurium-pot.jpg"
+    "image": "images/anthurium-pot.jpg"
   },
   {
     "id": 41,
@@ -448,7 +448,7 @@
     "botanical": "Rosa",
     "hindi": "",
     "description": "A rose bush in a pot for your balcony.",
-    "image": "../images/rose-plant-pot.jpg"
+    "image": "images/rose-plant-pot.jpg"
   },
   {
     "id": 42,
@@ -459,7 +459,7 @@
     "botanical": "Dracaena trifasciata",
     "hindi": "",
     "description": "A tough indoor plant that needs very little water.",
-    "image": "../images/snake-plant-pot.jpg"
+    "image": "images/snake-plant-pot.jpg"
   },
   {
     "id": 43,
@@ -470,7 +470,7 @@
     "botanical": "",
     "hindi": "",
     "description": "A cane basket of seasonal flowers, ready to gift.",
-    "image": "../images/flower-basket.jpg"
+    "image": "images/flower-basket.jpg"
   },
   {
     "id": 44,
@@ -481,7 +481,7 @@
     "botanical": "Rosa",
     "hindi": "",
     "description": "A rose garland for weddings and welcomes.",
-    "image": "../images/rose-varmala.jpg"
+    "image": "images/rose-varmala.jpg"
   },
   {
     "id": 45,
@@ -492,6 +492,6 @@
     "botanical": "",
     "hindi": "",
     "description": "Roses and fillers arranged in a keepsake box.",
-    "image": "../images/flower-gift-box.jpg"
+    "image": "images/flower-gift-box.jpg"
   }
 ]

@@ -1,5 +1,5 @@
 /* Made by: Satyam */
-/* basic/js/orders.js - the "My orders" table on orders.html.
+/* js/orders.js - the "My orders" table on orders.html.
    Unit 5 topics: Web Storage (getOrders reads localStorage), higher-order functions (map, reduce),
    dates (toLocaleDateString), dynamic content (the table rows) and safe() for typed text. */
 

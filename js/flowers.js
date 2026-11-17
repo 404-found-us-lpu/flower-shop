@@ -1,5 +1,5 @@
 /* Made by: Raghav */
-/* basic/js/flowers.js - the flowers page.
+/* js/flowers.js - the flowers page.
    Unit 5 topics: Fetch API + JSON (getFlowers), loops and higher-order functions (filter, map, forEach, find),
    template literals, DOM selection and changes, event handling (click, input) with event delegation,
    a case-insensitive search with toLowerCase().includes(), and the Drag and Drop API. */

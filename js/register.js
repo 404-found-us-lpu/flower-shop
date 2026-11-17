@@ -1,5 +1,5 @@
 /* Made by: Yash */
-/* basic/js/register.js - the "Create an account" page.
+/* js/register.js - the "Create an account" page.
    Unit 5 topics: form validation with regular expressions (EMAIL_RULE, PHONE_RULE from shop.js), a higher-order
    function (find with a callback), event handling (submit), Web Storage (register() in shop.js saves the account
    in localStorage), accessible JS (role="status" message and focus on the field that needs fixing). */

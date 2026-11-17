@@ -1,5 +1,5 @@
 /* Made by: Yash, Satyam and Raghav */
-/* basic/js/shop.js - the code every page of the simple version shares.
+/* js/shop.js - the code every page shares.
    Unit 5 topics: Web Storage (localStorage), JSON, the Fetch API, regular expressions, dates,
    DOM selection and changes, and event handling. Each page has its own small script as well. */
 
