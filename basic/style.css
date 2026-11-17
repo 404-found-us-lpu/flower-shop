@@ -112,7 +112,8 @@ body {
 /* main takes the spare height, so the footer stays at the bottom */
 main {
   flex: 1;
-  padding-block: 20px 8px;
+  padding-top: 20px;
+  padding-bottom: 8px;
 }
 
 
@@ -197,7 +198,7 @@ a:hover {
 .site-header :focus-visible,
 .hero :focus-visible,
 .site-footer :focus-visible {
-  outline-color: var(--gold);
+  outline: 3px solid var(--gold);
 }
 
 /* Selected text gets a gold background */
@@ -210,7 +211,7 @@ a:hover {
 /* ---------------------------------------------------------------------------
    5. Small text tags
    Unit 3 topics: type selectors style one tag everywhere; attribute selector
-   abbr[title]; text-decoration (dotted underline, line-through); ::before and
+   abbr[title]; text-decoration (none, line-through); ::before and
    ::after with content (the quote marks of <q>); em units grow with the text.
    --------------------------------------------------------------------------- */
 
@@ -227,9 +228,8 @@ mark {
   color: var(--forest);
 }
 
-/* Short forms like UPI and COD: a dotted line says "hover me" */
+/* Short forms like UPI and COD: the browser underlines them, the help cursor says "hover me" */
 abbr[title] {
-  text-decoration: underline dotted;
   cursor: help;
 }
 
@@ -442,7 +442,7 @@ summary:hover {
 
 summary::after {
   content: "+";
-  flex: none;
+  flex-shrink: 0;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -503,7 +503,6 @@ td {
   padding: 10px 14px;
   border-bottom: 1px solid var(--line);
   text-align: left;
-  vertical-align: top;
 }
 
 /* Header row: dark green with light text */
@@ -566,7 +565,8 @@ tfoot th {
   flex-wrap: wrap;
   align-items: center;
   gap: 6px 16px;
-  padding-block: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 /* The shop name, with a gold dot drawn by ::before */
@@ -595,7 +595,8 @@ tfoot th {
 
 /* The page links (not the brand, not the switch) */
 .site-nav a:not(.brand, .switch) {
-  padding-block: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
   border-bottom: 2px solid transparent;
   color: var(--on-dark-soft);
   font-size: 0.95rem;
@@ -647,7 +648,8 @@ tfoot th {
 
 /* Space above and below each part of a page */
 .section {
-  margin-block: 48px;
+  margin-top: 48px;
+  margin-bottom: 48px;
 }
 
 /* Card grid: as many 230px-or-wider columns as fit */
@@ -1250,7 +1252,7 @@ input[type="checkbox"] {
 /* ---------------------------------------------------------------------------
    18. Code, keys and the timetable
    Unit 3 topics: monospace font stack, white-space and overflow-x for <pre>,
-   border-bottom-width makes <kbd> look like a key, descendant selector
+   a thicker border-bottom makes <kbd> look like a key, descendant selector
    (pre code) undoes the inline code style inside a block.
    --------------------------------------------------------------------------- */
 
@@ -1272,7 +1274,7 @@ code {
 kbd {
   padding: 0.1em 0.45em;
   border: 1px solid var(--line-strong);
-  border-bottom-width: 3px;
+  border-bottom: 3px solid var(--line-strong);
   border-radius: 6px;
   background: #ffffff;
   font-size: 0.88em;
@@ -1313,7 +1315,7 @@ pre code {
 /* ---------------------------------------------------------------------------
    19. Footer
    Unit 3 topics: background colour on a full-width block, descendant
-   selectors (.site-footer a), margin-top: auto is not needed because main has flex: 1.
+   selectors (.site-footer a), :last-child for the small print at the bottom.
    --------------------------------------------------------------------------- */
 
 .site-footer {

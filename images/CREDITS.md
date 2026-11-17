@@ -43,3 +43,4 @@ All photos come from Wikimedia Commons. They were cropped and resized. Each keep
 | single-white-lily.jpg | David J. Stang | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Lilium_longiflorum_9zz.jpg |
 | single-orchid-stem.jpg | JLPC | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Cymbidium_rose_inflorescence_FR_2014.jpg |
 | peace-lily-pot.jpg | Killarnee | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Spathiphyllum_wallisii,_Peace_Lily,_Botanical_Garden_of_the_KIT_06.jpg |
+| anthurium-pot.jpg | Ramesh NG | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Red_Anthurium_from_Kerala.jpg |
