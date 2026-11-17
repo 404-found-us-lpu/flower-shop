@@ -23,7 +23,7 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 
 | Page | What it does |
 |---|---|
-| index.html | Home: flowers today, Indian favourites with Add to cart, how to order, reviews |
+| index.html | Home: flowers today, Indian favourites with Add to cart, how to order |
 | flowers.html | All 45 flowers from `flowers.json`: type buttons, search, Add to cart, drag a flower to the cart |
 | order.html | Cart (change quantity, remove) and checkout: receiver, day, time slot, payment, card message |
 | thanks.html | "Your order is placed" |
@@ -43,7 +43,7 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 
 | Unit | Where |
 |---|---|
-| 1 HTML fundamentals | headings, text tags (strong, em, b, i, mark, small, sub, abbr, q, blockquote, kbd, code, pre), lists, links (tel:, mailto:), images, inline SVG (rect, line, polyline, polygon, circle, text), audio, iframe |
+| 1 HTML fundamentals | headings, text tags (strong, em, b, i, mark, small, sub, abbr, q, kbd, code, pre), lists, links (tel:, mailto:), images, inline SVG (rect, line, polyline, circle, text), audio, iframe |
 | 2 Semantic HTML and forms | header, nav, main, section, article, footer, address, time, figure, forms with fieldset/legend, labels, input types, required, pattern, minlength, datalist, textarea, tables with caption, colgroup, thead, tbody, tfoot |
 | 3 CSS | variables, selectors, attribute selectors, combinators, colours, gradients, units, typography, box model, positioning, flexbox, grid with areas, pseudo-classes and pseudo-elements, form styling, transitions, keyframes, media queries |
 | 4 JavaScript fundamentals | const/let, template literals, functions and arrow functions, default parameters, if / else, arrays and objects, spread and destructuring |
@@ -62,4 +62,4 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 
 There is no server, so accounts, carts and orders live in each browser separately, and passwords are kept in the
 browser (fine for a class demo, never for a real shop). The contact form checks the message but does not send it.
-Contact details and reviews are made up for the project.
+Contact details are made up for the project.
