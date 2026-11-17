@@ -44,4 +44,8 @@ All photos come from Wikimedia Commons. They were cropped and resized. Each keep
 | single-orchid-stem.jpg | JLPC | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Cymbidium_rose_inflorescence_FR_2014.jpg |
 | peace-lily-pot.jpg | Killarnee | CC BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:Spathiphyllum_wallisii,_Peace_Lily,_Botanical_Garden_of_the_KIT_06.jpg |
 | anthurium-pot.jpg | Ramesh NG | CC BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Red_Anthurium_from_Kerala.jpg |
+| rose-plant-pot.jpg | Gnangarra | CC BY 2.5 AU | https://commons.wikimedia.org/wiki/File:Miniature_rose_gnangarra.jpg |
 | snake-plant-pot.jpg | Mokkie | CC BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Snake_Plant_(Sansevieria_trifasciata_%27Laurentii%27)_2.jpg |
+| flower-basket.jpg | JarroNevsbaru | CC0 | https://commons.wikimedia.org/wiki/File:Hanging_Flower_Basket_2.jpg |
+| rose-varmala.jpg | McKay Savage from London, UK | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:India_-_Colours_of_India_-_Flower_garlands_for_sale_2_(2508074680).jpg |
+| flower-gift-box.jpg | Ninix8 | CC BY 4.0 | https://commons.wikimedia.org/wiki/File:Bouquet_of_Red_Roses.jpg |
