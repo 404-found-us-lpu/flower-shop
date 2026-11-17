@@ -17,13 +17,12 @@
    12. Cards and flower cards (box model, shadows, transitions)
    13. Pills: price, stock, tag (border-radius)
    14. Buttons (transitions, :hover, :active)
-   15. Reviews and stars
-   16. Forms (form styling, :user-invalid, accent-color)
-   17. Code, keys and the timetable
-   18. Footer
-   19. Bigger screens (@media, mobile first)
-   20. Motion (@keyframes, prefers-reduced-motion)
-   21. Messages from JavaScript, flowers page, cart and contact
+   15. Forms (form styling, :user-invalid, accent-color)
+   16. Code, keys and the timetable
+   17. Footer
+   18. Bigger screens (@media, mobile first)
+   19. Motion (@keyframes, prefers-reduced-motion)
+   20. Messages from JavaScript, flowers page, cart and contact
    =========================================================================== */
 
 
@@ -47,7 +46,6 @@
   /* golds (hsl: same hue, only the lightness changes) */
   --gold: #ead7a4;
   --gold-soft: hsl(43 62% 90%);
-  --gold-star: hsl(40 75% 50%);
   --gold-deep: hsl(40 57% 31%);
 
   /* text colours */
@@ -242,25 +240,6 @@ q::before,
 q::after {
   color: var(--gold-deep);
   font-weight: 700;
-}
-
-/* Long quotes */
-blockquote {
-  margin: 0;
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  font-style: italic;
-}
-
-blockquote p:last-child {
-  margin-bottom: 0;
-}
-
-/* The name of the person or work being quoted */
-cite {
-  font-style: normal;
-  font-weight: 700;
-  color: var(--forest);
 }
 
 /* Old price (del) and new price (ins) */
@@ -474,7 +453,7 @@ tfoot th {
    Unit 3 topics: flexbox (display: flex, flex-wrap, gap, align-items),
    margin-left: auto pushes items apart, attribute selector [aria-current="page"]
    marks the page you are on, :not() skips the brand.
-   position: sticky with z-index is turned on for bigger screens in section 19.
+   position: sticky with z-index is turned on for bigger screens in section 18.
    --------------------------------------------------------------------------- */
 
 .site-header {
@@ -569,7 +548,7 @@ tfoot th {
   list-style: none;
 }
 
-/* Two columns on wide screens (set in section 19), one on phones */
+/* Two columns on wide screens (set in section 18), one on phones */
 .split {
   display: grid;
   gap: 24px;
@@ -641,7 +620,7 @@ tfoot th {
    Unit 3 topics: backgrounds - linear-gradient() and radial-gradient() layered,
    position: relative + absolute for the decoration rings drawn with ::after,
    box-shadow with spread, child combinator (.hero > *), :last-child,
-   animation (the @keyframes are in section 20).
+   animation (the @keyframes are in section 19).
    --------------------------------------------------------------------------- */
 
 .hero {
@@ -950,44 +929,12 @@ p:has(> .btn + .btn) {
 
 
 /* ---------------------------------------------------------------------------
-   15. Reviews and stars
-   Unit 3 topics: flexbox column with gap, adjacent sibling combinator
-   (.quote + .quote) draws a line between reviews, the SVG fill property set
-   from CSS (a polygon with its own fill attribute keeps it, so a missing star
-   stays faded).
-   --------------------------------------------------------------------------- */
-
-.quote {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
-}
-
-.quote + .quote {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--line);
-}
-
-.quote figcaption {
-  margin: 0;
-}
-
-.stars {
-  width: 116px;
-  height: 19px;
-  fill: var(--gold-star);
-}
-
-
-/* ---------------------------------------------------------------------------
-   16. Forms
+   15. Forms
    Unit 3 topics: form styling - inputs, labels and buttons; :focus states;
    validation with :user-invalid (only after the user has typed); ::placeholder;
    accent-color for radio buttons; :has(:checked) highlights the chosen pill;
    :not([type="radio"], [type="checkbox"]) keeps radios small; ::after adds
-   a red star to required fields; Grid puts short fields side by side (section 19).
+   a red star to required fields; Grid puts short fields side by side (section 18).
    --------------------------------------------------------------------------- */
 
 /* The form: a column of groups with space between them */
@@ -1161,7 +1108,7 @@ input[type="checkbox"] {
 
 
 /* ---------------------------------------------------------------------------
-   17. Code, keys and the timetable
+   16. Code, keys and the timetable
    Unit 3 topics: monospace font stack, white-space and overflow-x for <pre>,
    a thicker border-bottom makes <kbd> look like a key, descendant selector
    (pre code) undoes the inline code style inside a block.
@@ -1224,7 +1171,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   18. Footer
+   17. Footer
    Unit 3 topics: background colour on a full-width block, descendant
    selectors (.site-footer a), :last-child for the small print at the bottom.
    --------------------------------------------------------------------------- */
@@ -1258,7 +1205,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   19. Bigger screens
+   18. Bigger screens
    Unit 3 topics: responsive design, mobile first - the rules above are for
    phones, and @media (min-width: ...) adds to them for tablets and laptops.
    position: sticky with top: 0 keeps the menu bar on screen.
@@ -1319,7 +1266,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   20. Motion
+   19. Motion
    Unit 3 topics: @keyframes and the animation property (used by .hero > *),
    transform: translateY, the prefers-reduced-motion user preference.
    --------------------------------------------------------------------------- */
@@ -1390,7 +1337,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   21. Messages from JavaScript
+   20. Messages from JavaScript
    Unit 3 topics: the :empty pseudo-class hides a box with no text, two classes
    on one element (.msg.error). showMessage() in js/shop.js writes the text and
    adds the class "error" when something needs fixing.
