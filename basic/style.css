@@ -9,21 +9,20 @@
     4. Links and focus (pseudo-classes)
     5. Small text tags (type and attribute selectors)
     6. Lists (::marker)
-    7. Pictures, video and maps (fluid media)
-    8. Questions that open and close (details and summary)
-    9. Tables
-   10. Header and menu (sticky position, flexbox)
-   11. Layout helpers (width, sections, grid, split, contact grid)
-   12. Hero band (gradients, animation)
-   13. Cards and flower cards (box model, shadows, transitions)
-   14. Pills: price, stock, tag (border-radius)
-   15. Buttons (transitions, :hover, :active)
-   16. Reviews and stars
-   17. Forms (form styling, :user-invalid, accent-color)
-   18. Code, keys and the timetable
-   19. Footer
-   20. Bigger screens (@media, mobile first)
-   21. Motion (@keyframes, prefers-reduced-motion)
+    7. Pictures, audio and maps (fluid media)
+    8. Tables
+    9. Header and menu (sticky position, flexbox)
+   10. Layout helpers (width, sections, grid, split, contact grid)
+   11. Hero band (gradients, animation)
+   12. Cards and flower cards (box model, shadows, transitions)
+   13. Pills: price, stock, tag (border-radius)
+   14. Buttons (transitions, :hover, :active)
+   15. Reviews and stars
+   16. Forms (form styling, :user-invalid, accent-color)
+   17. Code, keys and the timetable
+   18. Footer
+   19. Bigger screens (@media, mobile first)
+   20. Motion (@keyframes, prefers-reduced-motion)
    =========================================================================== */
 
 
@@ -341,7 +340,7 @@ dd {
 
 
 /* ---------------------------------------------------------------------------
-   7. Pictures, video and maps
+   7. Pictures, audio and maps
    Unit 3 topics: fluid media (max-width: 100%; height: auto), display: block,
    object-fit: cover, aspect-ratio, overflow: hidden with border-radius.
    --------------------------------------------------------------------------- */
@@ -368,18 +367,10 @@ figcaption {
   color: var(--ink-soft);
 }
 
-/* Video and audio fill the width of their box */
-video,
+/* Audio fills the width of its box */
 audio {
   display: block;
   width: 100%;
-}
-
-video {
-  height: auto;
-  border-radius: var(--radius);
-  background: var(--forest);
-  color: var(--on-dark);
 }
 
 iframe {
@@ -412,73 +403,7 @@ iframe.map {
 
 
 /* ---------------------------------------------------------------------------
-   8. Questions that open and close (details and summary)
-   Unit 3 topics: ::after with content draws the + sign, the attribute selector
-   details[open] turns it into a minus, the adjacent sibling combinator
-   (details + details) draws a line between questions, transition.
-   --------------------------------------------------------------------------- */
-
-details {
-  padding: 14px 0;
-}
-
-details + details {
-  border-top: 1px solid var(--line);
-}
-
-/* The question line: text on the left, a round + on the right */
-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  list-style: none;
-}
-
-summary:hover {
-  color: var(--leaf);
-}
-
-summary::after {
-  content: "+";
-  flex-shrink: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--gold-soft);
-  color: var(--forest);
-  font-size: 1.2rem;
-  line-height: 30px;
-  text-align: center;
-  transition: background-color 0.2s;
-}
-
-/* When the question is open: a minus sign and a darker circle */
-details[open] > summary::after {
-  content: "\2212";
-  background: var(--gold);
-}
-
-/* The answer */
-details > :not(summary) {
-  margin: 10px 0 0;
-  color: var(--ink-soft);
-}
-
-/* The FAQ box around all the questions */
-.faq {
-  padding: 6px 22px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--cream-light);
-  box-shadow: var(--shadow);
-}
-
-
-/* ---------------------------------------------------------------------------
-   9. Tables
+   8. Tables
    Unit 3 topics: border-collapse, padding on cells, structural pseudo-class
    :nth-child(even) for zebra rows, :hover on rows, styling col and tfoot,
    overflow-x: auto so wide tables scroll inside their box on phones.
@@ -546,7 +471,7 @@ tfoot th {
 
 
 /* ---------------------------------------------------------------------------
-   10. Header and menu
+   9. Header and menu
    Unit 3 topics: flexbox (display: flex, flex-wrap, gap, align-items),
    margin-left: auto pushes items apart, attribute selector [aria-current="page"]
    marks the page you are on, :not() skips the brand and the switch link.
@@ -635,7 +560,7 @@ tfoot th {
 
 
 /* ---------------------------------------------------------------------------
-   11. Layout helpers
+   10. Layout helpers
    Unit 3 topics: min() for a fluid width, margin-inline: auto to centre,
    CSS Grid (repeat(), auto-fit, minmax(), fr), grid-template-areas,
    :has() picks a grid area by what a box contains, flexbox for rows of links.
@@ -731,7 +656,7 @@ tfoot th {
 
 
 /* ---------------------------------------------------------------------------
-   12. Hero band
+   11. Hero band
    Unit 3 topics: backgrounds - linear-gradient() and radial-gradient() layered,
    position: relative + absolute for the decoration rings drawn with ::after,
    box-shadow with spread, child combinator (.hero > *), :last-child,
@@ -817,7 +742,7 @@ tfoot th {
 
 
 /* ---------------------------------------------------------------------------
-   13. Cards and flower cards
+   12. Cards and flower cards
    Unit 3 topics: box model (padding, border, border-radius, box-shadow),
    flexbox column with flex: 1 and margin-top: auto (buttons line up at the
    bottom), aspect-ratio + object-fit for same-shape photos, transition and
@@ -930,7 +855,7 @@ dl.grid dt + dd {
 
 
 /* ---------------------------------------------------------------------------
-   14. Pills: price, stock, tag
+   13. Pills: price, stock, tag
    Unit 3 topics: display: inline-block, border-radius: 999px for pill shapes,
    two classes on one element (.stock.low) beat one class (specificity).
    --------------------------------------------------------------------------- */
@@ -976,7 +901,7 @@ dl.grid dt + dd {
 
 
 /* ---------------------------------------------------------------------------
-   15. Buttons
+   14. Buttons
    Unit 3 topics: styling buttons and links the same way, cursor: pointer,
    transition on background-color and transform, :hover and :active states,
    :has() with the adjacent sibling combinator spaces out a row of buttons.
@@ -1040,7 +965,7 @@ p:has(> .btn + .btn) {
 
 
 /* ---------------------------------------------------------------------------
-   16. Reviews and stars
+   15. Reviews and stars
    Unit 3 topics: flexbox column with gap, adjacent sibling combinator
    (.quote + .quote) draws a line between reviews, the SVG fill property set
    from CSS (a polygon with its own fill attribute keeps it, so a missing star
@@ -1072,7 +997,7 @@ p:has(> .btn + .btn) {
 
 
 /* ---------------------------------------------------------------------------
-   17. Forms
+   16. Forms
    Unit 3 topics: form styling - inputs, labels and buttons; :focus states;
    validation with :user-invalid (only after the user has typed); ::placeholder;
    accent-color for radio buttons; :has(:checked) highlights the chosen pill;
@@ -1251,7 +1176,7 @@ input[type="checkbox"] {
 
 
 /* ---------------------------------------------------------------------------
-   18. Code, keys and the timetable
+   17. Code, keys and the timetable
    Unit 3 topics: monospace font stack, white-space and overflow-x for <pre>,
    a thicker border-bottom makes <kbd> look like a key, descendant selector
    (pre code) undoes the inline code style inside a block.
@@ -1314,7 +1239,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   19. Footer
+   18. Footer
    Unit 3 topics: background colour on a full-width block, descendant
    selectors (.site-footer a), :last-child for the small print at the bottom.
    --------------------------------------------------------------------------- */
@@ -1348,7 +1273,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   20. Bigger screens
+   19. Bigger screens
    Unit 3 topics: responsive design, mobile first - the rules above are for
    phones, and @media (min-width: ...) adds to them for tablets and laptops.
    position: sticky with top: 0 keeps the menu bar on screen.
@@ -1409,7 +1334,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   21. Motion
+   20. Motion
    Unit 3 topics: @keyframes and the animation property (used by .hero > *),
    transform: translateY, the prefers-reduced-motion user preference.
    --------------------------------------------------------------------------- */
@@ -1480,7 +1405,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   22. Messages from JavaScript
+   21. Messages from JavaScript
    Unit 3 topics: the :empty pseudo-class hides a box with no text, two classes
    on one element (.msg.error). showMessage() in js/shop.js writes the text and
    adds the class "error" when something needs fixing.

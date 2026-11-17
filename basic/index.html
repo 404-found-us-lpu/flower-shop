@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Bloom & Petal (simple version) - index.html - Made by: Yash -->
-<!-- Home page: welcomes visitors and shows today's facts, Indian favourites, how to order, reviews, questions and a shop tour.
-     js/index.js greets a signed-in customer by name and listens to the shop-tour video's events. -->
+<!-- Home page: welcomes visitors and shows today's facts, Indian favourites, how to order and reviews.
+     js/index.js greets a signed-in customer by name and runs the "Add to cart" buttons. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -242,63 +242,6 @@
       </section>
 
     </div>
-
-    <!-- Questions and answers: each <details> opens and closes when its <summary> is clicked -->
-    <section class="section" aria-labelledby="faq-title">
-      <h2 id="faq-title">Questions and answers</h2>
-      <div class="faq">
-        <details open>
-          <summary>Where do you deliver, and what does it cost?</summary>
-          <p>We deliver across Jalandhar, Phagwara and Ludhiana. Delivery is Rs 50 per order and
-            <mark>free on orders of Rs 999 or more</mark>.</p>
-        </details>
-
-        <details>
-          <summary>How can I pay?</summary>
-          <p>Choose <abbr title="Unified Payments Interface">UPI</abbr>, card or
-            <abbr title="Cash on delivery">COD</abbr> on the <a href="order.html">order form</a>.
-            With COD you pay in cash when the flowers arrive.</p>
-        </details>
-
-        <details>
-          <summary>How do I keep my flowers fresh?</summary>
-          <p>Cut 2 cm off each stem at a slant and put them straight into clean, cool H<sub>2</sub>O.
-            Change the water every 2<sup>nd</sup> day and keep the vase out of direct sun.
-            <b>Keep cut flowers away from ripe fruit</b>, which makes them wilt faster.</p>
-        </details>
-
-        <details>
-          <summary>Is anything I type saved?</summary>
-          <p>Yes, but only in this browser. Your account, your cart and your orders are kept with
-            <code>localStorage</code>, so they are still there after you close the browser. Nothing is sent to a
-            server, so another phone or computer will not see them. This is a practice shop: please do not use a
-            real password.</p>
-        </details>
-      </div>
-    </section>
-
-    <!-- Shop tour: a short video with English captions (the <track>), and a few words next to it -->
-    <section class="section split" aria-labelledby="tour-title">
-      <figure>
-        <video id="tour-video" controls preload="metadata" poster="../media/shop-tour-poster.jpg" width="960" height="640">
-          <source src="../media/shop-tour.mp4" type="video/mp4">
-          <track kind="captions" src="../media/shop-tour.vtt" srclang="en" label="English">
-          Your browser cannot play this video.
-          <a href="../media/shop-tour.mp4">Download the shop tour</a> instead.
-        </video>
-        <figcaption>A short walk through the shop, with English captions.</figcaption>
-      </figure>
-
-      <div>
-        <h2 id="tour-title">Take a tour of the shop</h2>
-        <p class="lead">See where your flowers are kept cool, trimmed and wrapped before they leave for your door.</p>
-        <!-- js/index.js writes a thank-you here when the video ends -->
-        <p id="tour-msg" class="msg" role="status"></p>
-        <p>Shop 12, Model Town Market, Jalandhar. Open every day from
-          <time datetime="09:00">9 am</time> to <time datetime="20:00">8 pm</time>.</p>
-        <p><a class="btn" href="contact.html">Find the shop</a></p>
-      </div>
-    </section>
 
   </main>
 
