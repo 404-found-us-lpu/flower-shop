@@ -1,18 +1,30 @@
 <!doctype html>
 <!-- Bloom & Petal - cart.html - Made by: Satyam -->
+<!-- Cart page: the flowers in the cart, the delivery form and the order summary. -->
 <html lang="en" data-page="cart" data-roles="customer">
   <head>
+    <!-- Page info: text encoding, phone scaling, search description and tab title -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Your Bloom &amp; Petal cart: change quantities, say who gets the flowers and when, and place the order." />
+    <meta
+      name="description"
+      content="Your Bloom &amp; Petal cart: change quantities, say who gets the flowers and when, and place the order."
+    />
     <title>Your cart · Bloom &amp; Petal</title>
+
+    <!-- Tab icon and the shared stylesheet -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css?v=6" />
+
+    <!-- Shared code for every page (cart, login, top bar) -->
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
+    <!-- Top bar: logo, page links, search, cart and account menu -->
     <header class="nav-wrap">
       <nav class="nav" aria-label="Main">
+        <!-- Logo: five petals drawn with SVG -->
         <a class="brand" href="home.html">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -26,13 +38,17 @@
           </span>
           <span class="brand-name">Bloom &amp; Petal</span>
         </a>
+
+        <!-- Links to the main pages -->
         <div class="nav-links">
           <a href="home.html">Home</a>
           <a href="catalog.html">Flowers</a>
           <a href="orders.html">My orders</a>
           <a href="contact.html">Contact</a>
         </div>
+
         <div class="nav-end">
+          <!-- Search box: sends the words to catalog.html as ?q= -->
           <form class="nav-search" action="catalog.html" role="search">
             <svg
               class="icon"
@@ -51,6 +67,8 @@
             </svg>
             <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
           </form>
+
+          <!-- Cart icon with the number of items (js/app.js fills it) -->
           <a class="nav-icon" href="cart.html" aria-label="Cart">
             <svg
               class="icon"
@@ -70,6 +88,8 @@
             </svg>
             <span class="nav-count" id="cart-count" hidden></span>
           </a>
+
+          <!-- Account menu: opens and closes with <details> -->
           <details class="nav-account">
             <summary class="nav-avatar" aria-label="Account menu">
               <svg
@@ -97,7 +117,9 @@
         </div>
       </nav>
     </header>
+
     <main id="main">
+      <!-- Page title -->
       <header class="hero hero-sm">
         <div class="wrap">
           <h1>Your cart</h1>
@@ -108,21 +130,34 @@
       <!-- Shown while the cart has flowers (js/pages/cart.js hides it when the cart is empty) -->
       <div class="wrap section split" id="cart-full">
         <div class="stack-lg">
+          <!-- The list of flowers in the cart (js/pages/cart.js fills it) -->
           <section class="card" aria-labelledby="lines-title">
             <h2 class="card-title" id="lines-title">In your cart</h2>
             <ul class="list" id="cart-list"></ul>
           </section>
 
+          <!-- Delivery form: the button that sends it is in the summary box -->
           <form class="card form" id="checkout" aria-labelledby="checkout-title">
             <h2 class="card-title" id="checkout-title">Delivery details</h2>
 
+            <!-- Who gets the flowers -->
             <fieldset>
               <legend>Who receives it</legend>
               <div class="form-grid">
                 <div class="field">
                   <label for="c-name">Name</label>
-                  <input type="text" id="c-name" name="name" required minlength="2" maxlength="60" autocomplete="name" />
+                  <input
+                    type="text"
+                    id="c-name"
+                    name="name"
+                    required
+                    minlength="2"
+                    maxlength="60"
+                    autocomplete="name"
+                  />
                 </div>
+
+                <!-- Indian mobile number: 10 digits starting with 6 to 9 -->
                 <div class="field">
                   <label for="c-phone">Mobile number</label>
                   <input
@@ -137,6 +172,7 @@
                     title="10 digits, starting with 6, 7, 8 or 9"
                   />
                 </div>
+
                 <div class="field full">
                   <label for="c-address">Address</label>
                   <textarea
@@ -152,6 +188,7 @@
               </div>
             </fieldset>
 
+            <!-- Delivery day and time slot -->
             <fieldset>
               <legend>When</legend>
               <div class="stack">
@@ -160,6 +197,7 @@
                   <input type="date" id="c-date" name="deliveryDate" required />
                   <p class="hint">Any day from today up to 60 days ahead.</p>
                 </div>
+
                 <div class="field">
                   <span class="label" id="slot-label">Time</span>
                   <div class="segmented" role="radiogroup" aria-labelledby="slot-label">
@@ -180,6 +218,7 @@
               </div>
             </fieldset>
 
+            <!-- How to pay, and an optional message for the card -->
             <fieldset>
               <legend>Payment and card</legend>
               <div class="stack">
@@ -201,12 +240,18 @@
                   </div>
                   <p class="hint">Nothing is charged now. You pay when the flowers arrive.</p>
                 </div>
+
+                <!-- The <datalist> gives ready-made messages; the user can still type their own -->
                 <div class="field">
-                  <label for="c-note">
-                    Card message
-                    <small>(optional)</small>
-                  </label>
-                  <input type="text" id="c-note" name="note" list="card-notes" maxlength="120" placeholder="Pick one or write your own" />
+                  <label for="c-note">Card message <small>(optional)</small></label>
+                  <input
+                    type="text"
+                    id="c-note"
+                    name="note"
+                    list="card-notes"
+                    maxlength="120"
+                    placeholder="Pick one or write your own"
+                  />
                   <datalist id="card-notes">
                     <option value="Happy birthday!"></option>
                     <option value="Happy anniversary, with all my love."></option>
@@ -233,17 +278,14 @@
       <!-- Shown after an order is placed (js/pages/cart.js fills the order number and link) -->
       <section class="wrap section card empty" id="cart-done" tabindex="-1" aria-labelledby="done-title" hidden>
         <h2 id="done-title">Order placed!</h2>
-        <p>
-          Thank you. Order
-          <strong id="done-id"></strong>
-          comes on the day and in the time slot you chose.
-        </p>
+        <p>Thank you. Order <strong id="done-id"></strong> comes on the day and in the time slot you chose.</p>
         <div class="row">
           <a class="btn btn-ghost" href="catalog.html">Flowers</a>
           <a class="btn btn-primary" id="done-link" href="orders.html">See the order</a>
         </div>
       </section>
 
+      <!-- Shown when the cart has nothing in it -->
       <section class="wrap section card empty" id="cart-empty" hidden>
         <h2>Your cart is empty</h2>
         <p>Add a bouquet, a pot of mogra or a single red rose, and it waits for you here.</p>
@@ -253,8 +295,11 @@
       <!-- A short sound after an order is placed (no controls: js/pages/cart.js plays it) -->
       <audio id="chime" src="media/chime.mp3" preload="auto">Your browser cannot play the order chime.</audio>
     </main>
+
+    <!-- Footer: shop address, owners and opening hours -->
     <footer class="site-footer">
       <div class="wrap footer-inner">
+        <!-- Column 1: logo and shop name -->
         <div class="footer-brand">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -271,32 +316,36 @@
             <p>Fresh flowers, delivered across Jalandhar.</p>
           </div>
         </div>
+
+        <!-- Column 2: address, phone and email -->
         <div>
           <h2>Visit or call</h2>
+          <!-- <wbr> lets the long email address break onto a new line on small screens -->
           <address>
-            Shop 12, Model Town Market
-            <br />
-            Jalandhar, Punjab 144003
-            <br />
-            <a href="tel:+919876501234">+91 98765 01234</a>
-            <br />
-            <a href="mailto:hello@bloompetal.in">
-              hello@
-              <wbr />
-              bloompetal.in
-            </a>
+            Shop 12, Model Town Market<br />
+            Jalandhar, Punjab 144003<br />
+            <a href="tel:+919876501234">+91 98765 01234</a><br />
+            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
           </address>
         </div>
+
+        <!-- Column 3: owners and opening hours -->
         <div>
           <h2>Owners</h2>
           <p>Yash, Satyam, Raghav</p>
           <p><small>Open every day, 9 am to 8 pm</small></p>
         </div>
       </div>
+
       <p class="wrap footer-note">
-        <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
+        <small>
+          &copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH.
+          Demo data is saved only in this browser.
+        </small>
       </p>
     </footer>
+
+    <!-- Code for this page only: draws the cart, checks the form and places the order -->
     <script src="js/pages/cart.js?v=6"></script>
   </body>
 </html>

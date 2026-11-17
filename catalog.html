@@ -1,5 +1,6 @@
 <!doctype html>
 <!-- Bloom & Petal - catalog.html - Made by: Raghav -->
+<!-- The flowers page: search every flower, pick a type, sort the list and add flowers to the cart. -->
 <html lang="en" data-page="catalog" data-roles="customer">
   <head>
     <meta charset="UTF-8" />
@@ -8,14 +9,20 @@
       name="description"
       content="Browse every flower at Bloom &amp; Petal, from mogra and marigold to roses and orchids: search, pick a type, sort and add to your cart."
     />
+
     <title>Flowers · Bloom &amp; Petal</title>
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+
+    <!-- Shared styles and shared code (FS) used by every page -->
     <link rel="stylesheet" href="css/style.css?v=6" />
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
+    <!-- Top bar: logo, page links, quick search, cart and account menu -->
     <header class="nav-wrap">
       <nav class="nav" aria-label="Main">
+        <!-- Logo (five petals drawn in SVG) and shop name, links back to home -->
         <a class="brand" href="home.html">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -29,13 +36,18 @@
           </span>
           <span class="brand-name">Bloom &amp; Petal</span>
         </a>
+
+        <!-- Links to the other pages -->
         <div class="nav-links">
           <a href="home.html">Home</a>
           <a href="catalog.html" aria-current="page">Flowers</a>
           <a href="orders.html">My orders</a>
           <a href="contact.html">Contact</a>
         </div>
+
+        <!-- Right side of the bar -->
         <div class="nav-end">
+          <!-- Quick search: sends the word to this page as ?q= -->
           <form class="nav-search" action="catalog.html" role="search">
             <svg
               class="icon"
@@ -54,6 +66,8 @@
             </svg>
             <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
           </form>
+
+          <!-- Cart icon with the number of items (filled in by js/app.js) -->
           <a class="nav-icon" href="cart.html" aria-label="Cart">
             <svg
               class="icon"
@@ -73,6 +87,8 @@
             </svg>
             <span class="nav-count" id="cart-count" hidden></span>
           </a>
+
+          <!-- Account menu: <details> opens and closes it without any JS -->
           <details class="nav-account">
             <summary class="nav-avatar" aria-label="Account menu">
               <svg
@@ -91,6 +107,7 @@
                 <circle cx="12" cy="7" r="4" />
               </svg>
             </summary>
+
             <menu class="nav-pop nav-menu">
               <li><a href="profile.html">My profile</a></li>
               <li><button type="button" data-act="reset">Reset demo data</button></li>
@@ -100,7 +117,9 @@
         </div>
       </nav>
     </header>
+
     <main id="main">
+      <!-- Page title with a breadcrumb trail above it -->
       <section class="hero hero-sm">
         <div class="wrap">
           <nav class="crumbs" aria-label="Breadcrumb">
@@ -116,6 +135,7 @@
       <div class="wrap section stack-lg">
         <!-- <search> marks the part of the page used to search and filter (it works like role="search") -->
         <search class="card card-sm stack reveal" aria-label="Find flowers">
+          <!-- Search box and sort menu -->
           <form class="toolbar" id="filters">
             <div class="input-icon grow">
               <svg
@@ -143,6 +163,7 @@
                 autocomplete="off"
                 aria-label="Search flowers"
               />
+
               <!-- Suggestions while typing: every flower name -->
               <datalist id="flower-names">
                 <option value="Alstroemeria Bunch"></option>
@@ -192,6 +213,7 @@
                 <option value="Yellow Rose Bouquet"></option>
               </datalist>
             </div>
+
             <select id="sort" name="sort" aria-label="Sort flowers">
               <optgroup label="Price">
                 <option value="price-asc">Price: low to high</option>
@@ -205,7 +227,9 @@
               </optgroup>
             </select>
           </form>
-          <!-- The 23px corners keep the tab group neat when it wraps onto two lines. js/pages/catalog.js fills each count. -->
+
+          <!-- Type tabs: show only one type of flower. js/pages/catalog.js fills each count. -->
+          <!-- The 23px corners keep the tab group neat when it wraps onto two lines. -->
           <div class="tabs" id="tabs" role="group" aria-label="Flower type" style="border-radius: 23px">
             <button type="button" class="tab active" data-type="All" aria-pressed="true">
               All
@@ -234,9 +258,12 @@
           </div>
         </search>
 
+        <!-- Results: js/pages/catalog.js writes the result line and the flower cards here -->
         <section class="stack reveal reveal-2" aria-label="Flowers">
           <p class="muted mb-0" id="result" aria-live="polite"></p>
           <div class="product-grid" id="grid"></div>
+
+          <!-- Shown only when no flower matches the search -->
           <div class="card empty" id="empty" hidden>
             <span class="empty-icon">
               <svg
@@ -259,7 +286,8 @@
             <p>Try another word or another type, or clear the search to see every flower.</p>
             <button type="button" class="btn btn-primary" data-clear>Clear search</button>
           </div>
-          <!-- <sub> and <sup>: H2O and CO2 need subscripts, 2nd and 3rd need superscripts -->
+
+          <!-- Care tip. <sub> and <sup>: H2O and CO2 need subscripts, 2nd and 3rd need superscripts -->
           <p class="callout mb-0">
             <svg
               class="icon"
@@ -280,24 +308,19 @@
             </svg>
             <span>
               <strong>Care tip:</strong>
-              trim 2 cm off cut stems and change the H
-              <sub>2</sub>
-              O every 2
-              <sup>nd</sup>
-              day. Give pots 4 to 6 hours of sun and water them every 3
-              <sup>rd</sup>
-              day; in daylight their leaves turn CO
-              <sub>2</sub>
-              into fresh O
-              <sub>2</sub>
-              .
+              trim 2 cm off cut stems and change the H<sub>2</sub>O every 2<sup>nd</sup> day.
+              Give pots 4 to 6 hours of sun and water them every 3<sup>rd</sup> day;
+              in daylight their leaves turn CO<sub>2</sub> into fresh O<sub>2</sub>.
             </span>
           </p>
         </section>
       </div>
     </main>
+
+    <!-- Footer: about the shop, address and opening hours -->
     <footer class="site-footer">
       <div class="wrap footer-inner">
+        <!-- Column 1: logo and one line about the shop -->
         <div class="footer-brand">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -314,6 +337,8 @@
             <p>Fresh flowers, delivered across Jalandhar.</p>
           </div>
         </div>
+
+        <!-- Column 2: address, phone and email -->
         <div>
           <h2>Visit or call</h2>
           <address>
@@ -323,23 +348,25 @@
             <br />
             <a href="tel:+919876501234">+91 98765 01234</a>
             <br />
-            <a href="mailto:hello@bloompetal.in">
-              hello@
-              <wbr />
-              bloompetal.in
-            </a>
+            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
           </address>
         </div>
+
+        <!-- Column 3: owners and opening hours -->
         <div>
           <h2>Owners</h2>
           <p>Yash, Satyam, Raghav</p>
           <p><small>Open every day, 9 am to 8 pm</small></p>
         </div>
       </div>
+
+      <!-- Copyright line -->
       <p class="wrap footer-note">
         <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
       </p>
     </footer>
+
+    <!-- Page script: builds the flower cards and runs the search, tabs and sort -->
     <script src="js/pages/catalog.js?v=6"></script>
   </body>
 </html>

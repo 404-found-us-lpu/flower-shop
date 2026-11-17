@@ -1,19 +1,26 @@
 <!doctype html>
 <!-- Bloom & Petal - register.html - Made by: Yash -->
+<!-- Sign-up page: a new customer creates an account here (only guests can open it). -->
 <html lang="en" data-page="register" data-roles="guest">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Create a free Bloom &amp; Petal account to order fresh flowers for any day and time." />
     <title>Create account · Bloom &amp; Petal</title>
+
+    <!-- Site icon, shared styles and the shared helper script (FS) -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css?v=6" />
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
     <main id="main" class="auth">
+
       <!-- Left: the green brand panel (the photos hide on small screens) -->
       <section class="auth-art">
+
+        <!-- Logo that links back to the home page -->
         <div class="row">
           <a class="brand" href="index.html" aria-label="Bloom &amp; Petal home">
             <span class="brand-mark" aria-hidden="true">
@@ -29,15 +36,20 @@
             <span class="brand-name">Bloom &amp; Petal</span>
           </a>
         </div>
+
+        <!-- Welcome text -->
         <div>
           <h1>Join the shop in a minute.</h1>
           <p class="mb-0">Pick fresh flowers, choose a delivery day and time, and we bring them to the door.</p>
         </div>
+
+        <!-- Three flower photos -->
         <div class="auth-photos">
           <img src="images/white-lily-bunch.jpg" alt="White lilies with green leaves" loading="lazy" />
           <img src="images/gerbera-mix.jpg" alt="Gerbera daisies in pink, orange and white" loading="lazy" />
           <img src="images/single-red-rose.jpg" alt="A single red rose" loading="lazy" />
         </div>
+
       </section>
 
       <!-- Right: the sign-up form, in two groups (fieldset + legend) -->
@@ -46,9 +58,14 @@
           <h2 id="register-title">Create your account</h2>
           <p class="muted">It is free. You can add your delivery address now or later.</p>
 
+          <!-- register.js checks this form and saves the new user -->
           <form class="form section" id="register-form">
+
+            <!-- Group 1: name, phone, email and address -->
             <fieldset class="form-grid">
               <legend>Your details</legend>
+
+              <!-- Full name (person icon) -->
               <div class="field">
                 <label for="name">Full name</label>
                 <div class="input-icon">
@@ -82,6 +99,7 @@
                 <p class="error" id="name-error"></p>
               </div>
 
+              <!-- Mobile number: 10 digits starting with 6-9 (phone icon) -->
               <div class="field">
                 <label for="phone">Mobile number</label>
                 <div class="input-icon">
@@ -117,6 +135,7 @@
                 <p class="error" id="phone-error"></p>
               </div>
 
+              <!-- Email, used to sign in later (envelope icon) -->
               <div class="field full">
                 <label for="email">Email</label>
                 <div class="input-icon">
@@ -135,12 +154,21 @@
                     <rect x="2" y="4" width="20" height="16" rx="2" />
                     <path d="m22 7-10 6L2 7" />
                   </svg>
-                  <input id="email" name="email" type="email" autocomplete="email" maxlength="100" required aria-describedby="email-hint email-error" />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    maxlength="100"
+                    required
+                    aria-describedby="email-hint email-error"
+                  />
                 </div>
                 <p class="hint" id="email-hint">You will sign in with this email.</p>
                 <p class="error" id="email-error"></p>
               </div>
 
+              <!-- Delivery address (optional, can be added later) -->
               <div class="field full">
                 <div class="label-row">
                   <label class="label" for="address">Delivery address</label>
@@ -157,8 +185,11 @@
               </div>
             </fieldset>
 
+            <!-- Group 2: password, typed twice so we can check they match -->
             <fieldset class="form-grid">
               <legend>Choose a password</legend>
+
+              <!-- Password (lock icon) -->
               <div class="field full">
                 <label for="password">Password</label>
                 <div class="input-icon">
@@ -191,6 +222,7 @@
                 <p class="error" id="password-error"></p>
               </div>
 
+              <!-- Confirm password (lock icon) -->
               <div class="field full">
                 <label for="confirm">Confirm password</label>
                 <div class="input-icon">
@@ -209,17 +241,27 @@
                     <rect x="3" y="11" width="18" height="11" rx="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                   </svg>
-                  <input id="confirm" name="confirm" type="password" autocomplete="new-password" minlength="6" required aria-describedby="confirm-error" />
+                  <input
+                    id="confirm"
+                    name="confirm"
+                    type="password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                    aria-describedby="confirm-error"
+                  />
                 </div>
                 <p class="error" id="confirm-error"></p>
               </div>
             </fieldset>
 
+            <!-- The user must tick this before the form can be sent -->
             <label class="check">
               <input type="checkbox" name="agree" required />
               I understand this demo shop saves my details only in this browser
             </label>
 
+            <!-- Submit button (arrow icon) -->
             <button type="submit" class="btn btn-primary btn-block btn-lg">
               Create account
               <svg
@@ -237,15 +279,20 @@
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </button>
+
           </form>
 
+          <!-- Link for people who already have an account -->
           <p class="auth-foot">
             Already have an account?
             <a href="login.html">Sign in</a>
           </p>
         </div>
       </section>
+
     </main>
+
+    <!-- Page script: checks the form and creates the account -->
     <script src="js/pages/register.js?v=6"></script>
   </body>
 </html>

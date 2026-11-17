@@ -1,12 +1,18 @@
 /* Made by: Raghav */
-/* Bloom & Petal - js/pages/orders.js - the customer's orders in one table, with the total spent. */
+/* Bloom & Petal - js/pages/orders.js - shows the customer's orders in one table, with the total spent. */
+
 FS.ready(() => {
+
+  // Short helper: find an element by its id.
   const byId = (id) => document.getElementById(id);
 
-  // "Rose Bouquet × 2, Single Lily": the flowers of one order as short text.
-  const itemsText = (items) => items.map(({ name, qty }) => (qty > 1 ? `${name} × ${qty}` : name)).join(', ');
+  // Turns the flowers of one order into short text, e.g. "Rose Bouquet × 2, Single Lily".
+  const itemsText = (items) => items
+    .map(({ name, qty }) => (qty > 1 ? `${name} × ${qty}` : name))
+    .join(', ');
 
-  // One table row. A delivery today or later gets a small "Coming up" chip (worked out from the date only).
+  // Builds the HTML for one table row.
+  // A delivery today or later gets a small "Coming up" chip (checked by date only).
   const rowHTML = ({ id, createdAt, deliveryDate, slot, items, total }) => `<tr>
       <td><a class="cell-main" href="order.html?id=${FS.esc(id)}">#${FS.esc(id)}</a></td>
       <td><time datetime="${FS.esc(createdAt)}">${FS.esc(FS.fmtDate(createdAt))}</time></td>
@@ -19,18 +25,28 @@ FS.ready(() => {
       <td class="right num strong">${FS.money(total)}</td>
     </tr>`;
 
-  // Draws the header numbers, the table rows and the total (or the empty message when there are no orders).
+  // Draws the page: the order count, the total spent, the table rows,
+  // and the empty message when there are no orders.
   const render = () => {
     const orders = FS.getOrders();
     const spent = FS.money(orders.reduce((sum, { total }) => sum + total, 0));
-    byId('count').textContent = `${orders.length} ${orders.length === 1 ? 'order' : 'orders'}`;
+
+    // Numbers at the top of the page and under the table
+    const word = orders.length === 1 ? 'order' : 'orders';
+    byId('count').textContent = `${orders.length} ${word}`;
     byId('spent-top').textContent = spent;
     byId('spent').textContent = spent;
+
+    // Table rows
     byId('rows').innerHTML = orders.map(rowHTML).join('');
+
+    // Show the table if there are orders, otherwise show the empty message
     byId('table-box').hidden = !orders.length;
     byId('empty').hidden = orders.length > 0;
   };
 
+  // Draw once now, and again whenever the saved data changes.
   render();
   window.addEventListener('fs:change', render);
+
 });

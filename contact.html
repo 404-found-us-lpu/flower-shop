@@ -1,6 +1,9 @@
 <!doctype html>
 <!-- Bloom & Petal - contact.html - Made by: Satyam -->
+<!-- Contact page: the shop address and hours, who runs the shop, a message form, a map and the delivery slots. -->
 <html lang="en" data-page="contact" data-roles="public">
+
+  <!-- Page settings: tab title, icon, the stylesheet and the shared script (app.js) -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,10 +13,14 @@
     <link rel="stylesheet" href="css/style.css?v=6" />
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
+
+    <!-- Site header: logo, menu links and the sign-in buttons -->
     <header class="nav-wrap">
       <nav class="nav" aria-label="Main">
         <a class="brand" href="index.html">
+          <!-- Logo: five petals (ellipses) turned around the centre, plus a round middle -->
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
@@ -26,18 +33,23 @@
           </span>
           <span class="brand-name">Bloom &amp; Petal</span>
         </a>
+
         <div class="nav-links">
           <a href="index.html">Home</a>
           <a href="catalog.html">Flowers</a>
           <a href="contact.html" aria-current="page">Contact</a>
         </div>
+
         <div class="nav-end">
           <a class="btn btn-ghost btn-sm" href="login.html">Sign in</a>
           <a class="btn btn-primary btn-sm" href="register.html">Create account</a>
         </div>
       </nav>
     </header>
+
     <main id="main">
+
+      <!-- Hero: the page title and one line about it -->
       <header class="hero hero-sm">
         <div class="wrap">
           <h1>Contact us</h1>
@@ -45,31 +57,31 @@
         </div>
       </header>
 
+      <!-- Main grid: shop details on one side, the message form and the map on the other -->
       <div class="wrap section contact-grid">
         <div class="contact-info stack-lg">
+
+          <!-- Address, phone, email and opening hours -->
           <section class="card" aria-labelledby="visit-title">
             <h2 id="visit-title">Visit or call</h2>
             <address>
-              Shop 12, Model Town Market
-              <br />
-              Jalandhar, Punjab 144003
-              <br />
-              <a href="tel:+919876501234">+91 98765 01234</a>
-              <br />
+              Shop 12, Model Town Market<br />
+              Jalandhar, Punjab 144003<br />
+              <a href="tel:+919876501234">+91 98765 01234</a><br />
               <a href="mailto:hello@bloompetal.in">hello@bloompetal.in</a>
             </address>
+
             <h3>Opening hours</h3>
             <h4>Every day</h4>
             <p>
-              <time datetime="09:00">9 am</time>
-              to
-              <time datetime="20:00">8 pm</time>
-              , for the shop, the phone and deliveries.
+              <time datetime="09:00">9 am</time> to <time datetime="20:00">8 pm</time>, for the shop, the phone and deliveries.
             </p>
+
             <h5>Holidays</h5>
             <p class="mb-0">Open on Sundays and festivals too. Before Diwali and Valentine's Day, please order a day early.</p>
           </section>
 
+          <!-- The three owners, one card each -->
           <section class="card" aria-labelledby="owners-title">
             <h2 id="owners-title">Who runs the shop</h2>
             <div class="owners">
@@ -79,12 +91,14 @@
                 <h4>Website and design</h4>
                 <p>Builds the pages and picks every photo you see.</p>
               </article>
+
               <article class="owner">
                 <span class="avatar avatar-lg" aria-hidden="true">S</span>
                 <h3>Satyam</h3>
                 <h4>Orders and delivery</h4>
                 <p>Checks each order and plans the delivery rounds.</p>
               </article>
+
               <article class="owner">
                 <span class="avatar avatar-lg" aria-hidden="true">R</span>
                 <h3>Raghav</h3>
@@ -93,22 +107,28 @@
               </article>
             </div>
           </section>
+
         </div>
 
+        <!-- Message form. js/pages/contact.js checks it when it is sent; nothing is really sent anywhere. -->
         <section class="contact-form card" aria-labelledby="write-title">
           <h2 id="write-title">Write to us</h2>
           <form class="form" id="contact-form">
             <fieldset>
               <legend>Send us a message</legend>
               <div class="form-grid">
+
                 <div class="field">
                   <label for="m-name">Your name</label>
                   <input type="text" id="m-name" name="name" required minlength="2" maxlength="60" autocomplete="name" />
                 </div>
+
                 <div class="field">
                   <label for="m-email">Email</label>
                   <input type="email" id="m-email" name="email" required maxlength="80" autocomplete="email" />
                 </div>
+
+                <!-- Indian mobile number: 10 digits, first digit 6 to 9 (the pattern checks this) -->
                 <div class="field">
                   <label for="m-phone">Mobile number</label>
                   <input
@@ -123,6 +143,8 @@
                     title="10 digits, starting with 6, 7, 8 or 9"
                   />
                 </div>
+
+                <!-- Drop-down list; <optgroup> puts the topics under two headings -->
                 <div class="field">
                   <label for="m-topic">Topic</label>
                   <select id="m-topic" name="topic" required>
@@ -137,17 +159,21 @@
                     </optgroup>
                   </select>
                 </div>
+
                 <div class="field full">
                   <label for="m-message">Message</label>
                   <textarea id="m-message" name="message" required minlength="10" maxlength="500" rows="5"></textarea>
                 </div>
+
               </div>
             </fieldset>
+
             <button type="submit" class="btn btn-primary">Send message</button>
             <p class="hint"><small>This is a class project: the message is only checked, not sent anywhere.</small></p>
           </form>
         </section>
 
+        <!-- Map of the shop, shown from OpenStreetMap inside an <iframe> -->
         <section class="map card" aria-labelledby="map-title">
           <h2 id="map-title">Find the shop</h2>
           <iframe
@@ -155,29 +181,34 @@
             title="Map of Bloom &amp; Petal in Model Town, Jalandhar"
             loading="lazy"
           ></iframe>
-          <small>
-            Map ©
-            <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>
-          </small>
+          <small>Map © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a></small>
         </section>
       </div>
 
+      <!-- How we deliver: a route drawing and the table of delivery slots -->
       <section class="wrap section card" aria-labelledby="deliver-title">
         <h2 id="deliver-title">How we deliver</h2>
         <div class="grid-2">
+
           <!-- A drawing, not a real map: white roads, the green dashed route, the shop pin and your pin -->
           <figure class="chart">
             <svg viewBox="0 0 400 240" role="img" aria-labelledby="route-title">
               <title id="route-title">Drawing of a delivery route: from our shop in Model Town Market along the roads to your door</title>
               <rect width="400" height="240" rx="16" fill="#eee7d9" />
+
+              <!-- Roads: two across, three down -->
               <line x1="20" y1="80" x2="380" y2="80" stroke="#fff" stroke-width="12" stroke-linecap="round" />
               <line x1="20" y1="170" x2="380" y2="170" stroke="#fff" stroke-width="12" stroke-linecap="round" />
               <line x1="70" y1="30" x2="70" y2="220" stroke="#fff" stroke-width="12" stroke-linecap="round" />
               <line x1="200" y1="30" x2="200" y2="220" stroke="#fff" stroke-width="12" stroke-linecap="round" />
               <line x1="330" y1="30" x2="330" y2="220" stroke="#fff" stroke-width="12" stroke-linecap="round" />
+
+              <!-- The van's route, then the shop pin (dark) and your pin (gold) -->
               <polyline points="70,80 200,80 200,170 330,170" fill="none" stroke="#2d6a4b" stroke-width="4" stroke-dasharray="10 6" stroke-linejoin="round" />
               <circle cx="70" cy="80" r="11" fill="#1b3327" stroke="#fff" stroke-width="3" />
               <circle cx="330" cy="170" r="11" fill="#a9853d" stroke="#fff" stroke-width="3" />
+
+              <!-- Labels -->
               <text x="84" y="62" font-size="13" font-weight="600" fill="#17231c">Bloom &amp; Petal</text>
               <text x="316" y="198" font-size="13" font-weight="600" fill="#17231c" text-anchor="end">Your door</text>
               <text x="212" y="130" font-size="12" fill="#5d6a61">in the slot you pick</text>
@@ -187,6 +218,7 @@
 
           <div>
             <h3>Delivery slots</h3>
+            <!-- <pre> keeps every space, so the lines inside it must stay at the left edge -->
             <pre class="receipt">SLOT        TIME            DAYS
 Morning     9 am - 12 pm    Every day
 Afternoon   12 pm - 4 pm    Every day
@@ -196,9 +228,13 @@ Delivery    Rs. 50, free from Rs. 999
 UPI ID      <code>bloompetal@upi</code></pre>
             <p class="hint">Pick the day and the slot in your cart. Cash, UPI or card is paid when the flowers arrive.</p>
           </div>
+
         </div>
       </section>
+
     </main>
+
+    <!-- Site footer: logo, address, owners and the copyright line -->
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <div class="footer-brand">
@@ -217,32 +253,32 @@ UPI ID      <code>bloompetal@upi</code></pre>
             <p>Fresh flowers, delivered across Jalandhar.</p>
           </div>
         </div>
+
         <div>
           <h2>Visit or call</h2>
           <address>
-            Shop 12, Model Town Market
-            <br />
-            Jalandhar, Punjab 144003
-            <br />
-            <a href="tel:+919876501234">+91 98765 01234</a>
-            <br />
-            <a href="mailto:hello@bloompetal.in">
-              hello@
-              <wbr />
-              bloompetal.in
-            </a>
+            Shop 12, Model Town Market<br />
+            Jalandhar, Punjab 144003<br />
+            <a href="tel:+919876501234">+91 98765 01234</a><br />
+            <!-- <wbr> lets a long email address break onto the next line on small phones -->
+            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
           </address>
         </div>
+
         <div>
           <h2>Owners</h2>
           <p>Yash, Satyam, Raghav</p>
           <p><small>Open every day, 9 am to 8 pm</small></p>
         </div>
       </div>
+
       <p class="wrap footer-note">
         <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
       </p>
     </footer>
+
+    <!-- This page's own script: checks the message form -->
     <script src="js/pages/contact.js?v=6"></script>
+
   </body>
 </html>

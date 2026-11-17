@@ -1,5 +1,6 @@
 <!doctype html>
 <!-- Bloom & Petal - home.html - Made by: Raghav -->
+<!-- The customer's home page: next delivery, Indian favourites, flowers by type, tip of the day and recent orders. -->
 <html lang="en" data-page="home" data-roles="customer">
   <head>
     <meta charset="UTF-8" />
@@ -10,12 +11,17 @@
     />
     <title>Home · Bloom &amp; Petal</title>
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+
+    <!-- Shared styles, and app.js (the FS helpers every page uses) -->
     <link rel="stylesheet" href="css/style.css?v=6" />
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
+    <!-- Top bar: logo, page links, search, cart and account menu -->
     <header class="nav-wrap">
       <nav class="nav" aria-label="Main">
+        <!-- Logo: a small flower drawn with SVG, links back to this page -->
         <a class="brand" href="home.html">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -29,13 +35,17 @@
           </span>
           <span class="brand-name">Bloom &amp; Petal</span>
         </a>
+
+        <!-- Page links (aria-current marks the page we are on) -->
         <div class="nav-links">
           <a href="home.html" aria-current="page">Home</a>
           <a href="catalog.html">Flowers</a>
           <a href="orders.html">My orders</a>
           <a href="contact.html">Contact</a>
         </div>
+
         <div class="nav-end">
+          <!-- Search box: sends ?q=... to the flowers page -->
           <form class="nav-search" action="catalog.html" role="search">
             <svg
               class="icon"
@@ -54,6 +64,8 @@
             </svg>
             <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
           </form>
+
+          <!-- Cart icon: app.js writes the number of flowers in the cart into #cart-count -->
           <a class="nav-icon" href="cart.html" aria-label="Cart">
             <svg
               class="icon"
@@ -73,6 +85,8 @@
             </svg>
             <span class="nav-count" id="cart-count" hidden></span>
           </a>
+
+          <!-- Account menu: <details> opens and closes on click; app.js handles the data-act buttons -->
           <details class="nav-account">
             <summary class="nav-avatar" aria-label="Account menu">
               <svg
@@ -100,7 +114,9 @@
         </div>
       </nav>
     </header>
+
     <main id="main">
+      <!-- Hero: the big greeting (home.js puts the user's name into #hello) -->
       <section class="hero hero-tall">
         <div class="wrap">
           <h1 id="hello">Welcome</h1>
@@ -114,6 +130,7 @@
       </div>
 
       <div class="wrap section stack-lg">
+        <!-- Indian favourites: six flower tiles -->
         <section class="card reveal reveal-2" aria-labelledby="indian-title">
           <div class="card-head">
             <h2 class="card-title" id="indian-title">Indian favourites</h2>
@@ -135,6 +152,7 @@
               </svg>
             </a>
           </div>
+
           <!-- Each tile searches the shop for that flower. app.js writes the stock into every data-stock span. -->
           <div class="tiles">
             <a class="tile" href="catalog.html?q=Aprajita%20Pot">
@@ -176,7 +194,9 @@
           </div>
         </section>
 
+        <!-- Two cards side by side: Shop by type, and Tip of the day -->
         <div class="split">
+          <!-- Shop by type: one link per flower type -->
           <section class="card reveal reveal-3" aria-labelledby="types-title">
             <div class="card-head">
               <h2 class="card-title" id="types-title">Shop by type</h2>
@@ -198,6 +218,7 @@
                 </svg>
               </a>
             </div>
+
             <ul class="list">
               <li>
                 <a class="cell-flower" href="catalog.html?type=Bouquets">
@@ -237,7 +258,7 @@
             </ul>
           </section>
 
-          <!-- <aside>: a side note that goes with the page but is not its main content -->
+          <!-- <aside>: a side note that goes with the page but is not its main content. home.js fills #tip. -->
           <aside class="card reveal reveal-4" aria-labelledby="tip-title">
             <h2 class="card-title" id="tip-title">
               <svg
@@ -261,6 +282,7 @@
           </aside>
         </div>
 
+        <!-- Recent orders: home.js fills #recent -->
         <section class="card" aria-labelledby="recent-title">
           <div class="card-head">
             <h2 class="card-title" id="recent-title">Recent orders</h2>
@@ -282,10 +304,13 @@
               </svg>
             </a>
           </div>
+
           <div class="stack" id="recent"></div>
         </section>
       </div>
     </main>
+
+    <!-- Footer: shop name, address, owners and copyright -->
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <div class="footer-brand">
@@ -304,32 +329,31 @@
             <p>Fresh flowers, delivered across Jalandhar.</p>
           </div>
         </div>
+
+        <!-- <wbr> lets the long e-mail address break onto a new line on small screens -->
         <div>
           <h2>Visit or call</h2>
           <address>
-            Shop 12, Model Town Market
-            <br />
-            Jalandhar, Punjab 144003
-            <br />
-            <a href="tel:+919876501234">+91 98765 01234</a>
-            <br />
-            <a href="mailto:hello@bloompetal.in">
-              hello@
-              <wbr />
-              bloompetal.in
-            </a>
+            Shop 12, Model Town Market<br />
+            Jalandhar, Punjab 144003<br />
+            <a href="tel:+919876501234">+91 98765 01234</a><br />
+            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
           </address>
         </div>
+
         <div>
           <h2>Owners</h2>
           <p>Yash, Satyam, Raghav</p>
           <p><small>Open every day, 9 am to 8 pm</small></p>
         </div>
       </div>
+
       <p class="wrap footer-note">
         <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
       </p>
     </footer>
+
+    <!-- This page's own script -->
     <script src="js/pages/home.js?v=6"></script>
   </body>
 </html>

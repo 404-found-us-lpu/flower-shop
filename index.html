@@ -1,6 +1,8 @@
 <!doctype html>
 <!-- Bloom & Petal - index.html - Made by: Yash -->
+<!-- Home page: the first page a visitor sees. It shows the shop, some flowers, how ordering works, reviews and common questions. -->
 <html lang="en" data-page="index" data-roles="public">
+  <!-- Page settings: tab title, icon, the stylesheet and the shared script (app.js) -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,10 +12,13 @@
     <link rel="stylesheet" href="css/style.css?v=6" />
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
+    <!-- Site header: logo, menu links and the sign-in buttons -->
     <header class="nav-wrap">
       <nav class="nav" aria-label="Main">
         <a class="brand" href="index.html">
+          <!-- Logo: five petals (ellipses) turned around the centre, plus a round middle -->
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
               <ellipse cx="12" cy="6.4" rx="3.2" ry="4.4" transform="rotate(0 12 12)" />
@@ -26,89 +31,62 @@
           </span>
           <span class="brand-name">Bloom &amp; Petal</span>
         </a>
+
         <div class="nav-links">
           <a href="index.html" aria-current="page">Home</a>
           <a href="catalog.html">Flowers</a>
           <a href="contact.html">Contact</a>
         </div>
+
         <div class="nav-end">
           <a class="btn btn-ghost btn-sm" href="login.html">Sign in</a>
           <a class="btn btn-primary btn-sm" href="register.html">Create account</a>
         </div>
       </nav>
     </header>
+
     <main id="main">
-      <!-- The page's own header (the site header with the menu is the <header> above <main>) -->
+      <!-- Hero: the page's own big welcome banner (the site menu is the other <header>, above <main>) -->
       <header class="hero hero-tall">
         <div class="wrap reveal">
           <p class="hero-eyebrow">Flower shop in Jalandhar</p>
+
           <h1>
-            Fresh flowers,
-            <br />
+            Fresh flowers,<br />
             brought to your door.
           </h1>
+
           <p class="hero-sub">
-            Bouquets, plants and Indian favourites like mogra and genda, picked fresh
-            <em>every</em>
-            morning and delivered by our own team.
+            Bouquets, plants and Indian favourites like mogra and genda,
+            picked fresh <em>every</em> morning and delivered by our own team.
           </p>
+
           <div class="hero-actions">
             <a class="btn btn-gold btn-lg" href="register.html">Create an account</a>
             <a class="btn btn-outline-light btn-lg" href="login.html">Sign in</a>
           </div>
+
+          <!-- Small badges, each with an icon -->
           <div class="chips">
             <span class="chip chip-gold">
-              <svg
-                class="icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="2.5" />
-                <path
-                  d="M12 9.5a3.5 3.5 0 1 0-3-5.3M14.5 12a3.5 3.5 0 1 0 5.3-3M12 14.5a3.5 3.5 0 1 0 3 5.3M9.5 12a3.5 3.5 0 1 0-5.3 3M9 4.2a3.5 3.5 0 0 0-4.8 4.8M19.8 9a3.5 3.5 0 0 0-4.8-4.8M15 19.8a3.5 3.5 0 0 0 4.8-4.8M4.2 15A3.5 3.5 0 0 0 9 19.8"
-                />
+                <path d="M12 9.5a3.5 3.5 0 1 0-3-5.3M14.5 12a3.5 3.5 0 1 0 5.3-3M12 14.5a3.5 3.5 0 1 0 3 5.3M9.5 12a3.5 3.5 0 1 0-5.3 3M9 4.2a3.5 3.5 0 0 0-4.8 4.8M19.8 9a3.5 3.5 0 0 0-4.8-4.8M15 19.8a3.5 3.5 0 0 0 4.8-4.8M4.2 15A3.5 3.5 0 0 0 9 19.8" />
               </svg>
               Indian favourites are in
             </span>
+
             <span class="chip">
-              <svg
-                class="icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M1 4h15v12H1zM16 9h4l3 3v4h-7z" />
                 <circle cx="5.5" cy="18.5" r="2.5" />
                 <circle cx="18.5" cy="18.5" r="2.5" />
               </svg>
               Same-day delivery in Jalandhar
             </span>
+
             <span class="chip">
-              <svg
-                class="icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
               </svg>
               Free delivery from ₹999
@@ -123,25 +101,12 @@
           <div class="stats">
             <div>
               <p class="hero-eyebrow">Flowers today</p>
-              <div class="big-number">
-                45
-                <small>on sale</small>
-              </div>
+              <div class="big-number">45 <small>on sale</small></div>
             </div>
+
             <div class="stat stat-dark">
               <span class="stat-label">
-                <svg
-                  class="icon"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                   <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
                 </svg>
@@ -150,20 +115,10 @@
               <span class="stat-value">₹100</span>
               <span class="stat-note">Single Red Rose</span>
             </div>
+
             <div class="stat stat-dark">
               <span class="stat-label">
-                <svg
-                  class="icon"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M1 4h15v12H1zM16 9h4l3 3v4h-7z" />
                   <circle cx="5.5" cy="18.5" r="2.5" />
                   <circle cx="18.5" cy="18.5" r="2.5" />
@@ -173,20 +128,10 @@
               <span class="stat-value">₹999</span>
               <span class="stat-note">₹50 delivery below that</span>
             </div>
+
             <div class="stat stat-dark">
               <span class="stat-label">
-                <svg
-                  class="icon"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
+                <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="9" />
                   <path d="M12 7v5l3 2" />
                 </svg>
@@ -200,6 +145,7 @@
       </div>
 
       <div class="wrap section stack-lg">
+        <!-- Indian favourites: six flower cards that link to the catalog -->
         <section class="card reveal reveal-3" aria-labelledby="indian-title">
           <div class="card-head">
             <div>
@@ -208,50 +154,32 @@
             </div>
             <a class="link-arrow" href="catalog.html?type=Indian%20favourites">
               Shop Indian favourites
-              <svg
-                class="icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </a>
           </div>
-          <!-- js/app.js writes each flower's stock ("14 in stock") into its <span data-stock="flower id"> -->
+
+          <!-- js/app.js fills each <span data-stock="flower id"> with that flower's stock, like "14 in stock" -->
           <div class="product-grid">
             <article class="product">
               <a class="product-media" href="catalog.html?q=Aprajita%20Pot">
                 <img src="images/aprajita-pot.jpg" alt="Aprajita Pot" loading="lazy" onerror="FS.imgError(this)" />
                 <span class="stock-pill" data-stock="15"></span>
-                <span class="price-pill">
-                  300
-                  <small>INR</small>
-                </span>
+                <span class="price-pill">300 <small>INR</small></span>
               </a>
               <div class="product-body">
-                <h3 class="product-name">
-                  Aprajita Pot
-                  <span class="hindi" lang="hi">अपराजिता</span>
-                </h3>
+                <h3 class="product-name">Aprajita Pot <span class="hindi" lang="hi">अपराजिता</span></h3>
                 <p class="muted small mb-0"><i lang="la">Clitoria ternatea</i></p>
                 <p class="product-desc">A climbing creeper with deep blue butterfly-pea flowers.</p>
               </div>
             </article>
+
             <article class="product">
               <a class="product-media" href="catalog.html?q=Bleeding%20Heart%20Vine%20Pot">
                 <img src="images/bleeding-heart-pot.jpg" alt="Bleeding Heart Vine Pot" loading="lazy" onerror="FS.imgError(this)" />
                 <span class="stock-pill" data-stock="16"></span>
-                <span class="price-pill">
-                  550
-                  <small>INR</small>
-                </span>
+                <span class="price-pill">550 <small>INR</small></span>
               </a>
               <div class="product-body">
                 <h3 class="product-name">Bleeding Heart Vine Pot</h3>
@@ -259,74 +187,54 @@
                 <p class="product-desc">White flowers with bright red hearts, for a sunny balcony.</p>
               </div>
             </article>
+
             <article class="product">
               <a class="product-media" href="catalog.html?q=Guldaudi%20(Chrysanthemum)">
                 <img src="images/guldaudi.jpg" alt="Guldaudi (Chrysanthemum)" loading="lazy" onerror="FS.imgError(this)" />
                 <span class="stock-pill" data-stock="17"></span>
-                <span class="price-pill">
-                  450
-                  <small>INR</small>
-                </span>
+                <span class="price-pill">450 <small>INR</small></span>
               </a>
               <div class="product-body">
-                <h3 class="product-name">
-                  Guldaudi (Chrysanthemum)
-                  <span class="hindi" lang="hi">गुलदाउदी</span>
-                </h3>
+                <h3 class="product-name">Guldaudi (Chrysanthemum) <span class="hindi" lang="hi">गुलदाउदी</span></h3>
                 <p class="muted small mb-0"><i lang="la">Chrysanthemum</i></p>
                 <p class="product-desc">Big, colourful winter blooms that last for weeks.</p>
               </div>
             </article>
+
             <article class="product">
               <a class="product-media" href="catalog.html?q=Madhumalti%20Pot">
                 <img src="images/madhumalti-pot.jpg" alt="Madhumalti Pot" loading="lazy" onerror="FS.imgError(this)" />
                 <span class="stock-pill" data-stock="18"></span>
-                <span class="price-pill">
-                  500
-                  <small>INR</small>
-                </span>
+                <span class="price-pill">500 <small>INR</small></span>
               </a>
               <div class="product-body">
-                <h3 class="product-name">
-                  Madhumalti Pot
-                  <span class="hindi" lang="hi">मधुमालती</span>
-                </h3>
+                <h3 class="product-name">Madhumalti Pot <span class="hindi" lang="hi">मधुमालती</span></h3>
                 <p class="muted small mb-0"><i lang="la">Combretum indicum</i></p>
                 <p class="product-desc">A creeper with clusters that turn from white to pink to red.</p>
               </div>
             </article>
+
             <article class="product">
               <a class="product-media" href="catalog.html?q=Marigold%20(Genda)">
                 <img src="images/marigold.jpg" alt="Marigold (Genda)" loading="lazy" onerror="FS.imgError(this)" />
                 <span class="stock-pill" data-stock="14"></span>
-                <span class="price-pill">
-                  250
-                  <small>INR</small>
-                </span>
+                <span class="price-pill">250 <small>INR</small></span>
               </a>
               <div class="product-body">
-                <h3 class="product-name">
-                  Marigold (Genda)
-                  <span class="hindi" lang="hi">गेंदा</span>
-                </h3>
+                <h3 class="product-name">Marigold (Genda) <span class="hindi" lang="hi">गेंदा</span></h3>
                 <p class="muted small mb-0"><i lang="la">Tagetes erecta</i></p>
                 <p class="product-desc">Bright orange genda flowers for pooja, weddings and festivals.</p>
               </div>
             </article>
+
             <article class="product">
               <a class="product-media" href="catalog.html?q=Mogra%20Pot">
                 <img src="images/mogra-pot.jpg" alt="Mogra Pot" loading="lazy" onerror="FS.imgError(this)" />
                 <span class="stock-pill" data-stock="13"></span>
-                <span class="price-pill">
-                  350
-                  <small>INR</small>
-                </span>
+                <span class="price-pill">350 <small>INR</small></span>
               </a>
               <div class="product-body">
-                <h3 class="product-name">
-                  Mogra Pot
-                  <span class="hindi" lang="hi">मोगरा</span>
-                </h3>
+                <h3 class="product-name">Mogra Pot <span class="hindi" lang="hi">मोगरा</span></h3>
                 <p class="muted small mb-0"><i lang="la">Jasminum sambac</i></p>
                 <p class="product-desc">Sweet-smelling white mogra that flowers all summer.</p>
               </div>
@@ -334,35 +242,27 @@
           </div>
         </section>
 
-        <!-- Art direction: phones get a different (portrait-friendly) photo from the <source> -->
+        <!-- Festival banner. Art direction: phones get a different (portrait-friendly) photo from the <source> -->
         <article class="card-dark reveal" aria-labelledby="festival-title">
           <div class="grid-2">
             <picture>
               <source media="(max-width: 760px)" srcset="images/mogra-pot.jpg" />
-              <img
-                src="images/marigold.jpg"
-                alt="Festival flowers: orange marigold and white mogra"
-                width="720"
-                height="480"
-                loading="lazy"
-                onerror="FS.imgError(this)"
-              />
+              <img src="images/marigold.jpg" alt="Festival flowers: orange marigold and white mogra" width="720" height="480" loading="lazy" onerror="FS.imgError(this)" />
             </picture>
+
             <div class="stack">
               <p class="hero-eyebrow mb-0">Diwali, weddings and pooja</p>
               <h2 id="festival-title">Festival flowers: marigold and mogra</h2>
               <p class="muted">
-                Bright
-                <b>marigold</b>
-                (genda) for torans and garlands, and sweet-smelling
-                <b>mogra</b>
+                Bright <b>marigold</b> (genda) for torans and garlands, and sweet-smelling <b>mogra</b>
                 for the pooja thali and hair. Order a few days early in the festival season, when they sell fast.
               </p>
-              <div><a class="btn btn-gold" href="catalog.html?cat=Indian%20favourites">Order festival flowers</a></div>
+              <div><a class="btn btn-gold" href="catalog.html?type=Indian%20favourites">Order festival flowers</a></div>
             </div>
           </div>
         </article>
 
+        <!-- In season: eight photo tiles that link to the catalog -->
         <section class="card reveal" aria-labelledby="season-title">
           <div class="card-head">
             <div>
@@ -371,99 +271,73 @@
             </div>
             <a class="link-arrow" href="catalog.html">
               See all flowers
-              <svg
-                class="icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </a>
           </div>
+
           <div class="tiles">
             <a class="tile" href="catalog.html?q=Single%20Red%20Rose">
               <img src="images/single-red-rose.jpg" alt="Single Red Rose" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">Single Red Rose</span>
               <span class="stock-pill" data-stock="7"></span>
-              <span class="price-pill">
-                100
-                <small>INR</small>
-              </span>
+              <span class="price-pill">100 <small>INR</small></span>
             </a>
+
             <a class="tile" href="catalog.html?q=Single%20Sunflower">
               <img src="images/single-sunflower.jpg" alt="Single Sunflower" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">Single Sunflower</span>
               <span class="stock-pill" data-stock="8"></span>
-              <span class="price-pill">
-                120
-                <small>INR</small>
-              </span>
+              <span class="price-pill">120 <small>INR</small></span>
             </a>
+
             <a class="tile" href="catalog.html?q=Red%20Rose%20Bouquet">
               <img src="images/red-rose-bouquet.jpg" alt="Red Rose Bouquet" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">Red Rose Bouquet</span>
               <span class="stock-pill" data-stock="1"></span>
-              <span class="price-pill">
-                800
-                <small>INR</small>
-              </span>
+              <span class="price-pill">800 <small>INR</small></span>
             </a>
+
             <a class="tile" href="catalog.html?q=Gerbera%20Mix">
               <img src="images/gerbera-mix.jpg" alt="Gerbera Mix" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">Gerbera Mix</span>
               <span class="stock-pill" data-stock="5"></span>
-              <span class="price-pill">
-                550
-                <small>INR</small>
-              </span>
+              <span class="price-pill">550 <small>INR</small></span>
             </a>
+
             <a class="tile" href="catalog.html?q=White%20Lily%20Bunch">
               <img src="images/white-lily-bunch.jpg" alt="White Lily Bunch" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">White Lily Bunch</span>
               <span class="stock-pill" data-stock="2"></span>
-              <span class="price-pill">
-                650
-                <small>INR</small>
-              </span>
+              <span class="price-pill">650 <small>INR</small></span>
             </a>
+
             <a class="tile" href="catalog.html?q=Pink%20Tulip%20Bunch">
               <img src="images/pink-tulips.jpg" alt="Pink Tulip Bunch" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">Pink Tulip Bunch</span>
               <span class="stock-pill" data-stock="4"></span>
-              <span class="price-pill">
-                750
-                <small>INR</small>
-              </span>
+              <span class="price-pill">750 <small>INR</small></span>
             </a>
+
             <a class="tile" href="catalog.html?q=Money%20Plant%20Pot">
               <img src="images/money-plant-pot.jpg" alt="Money Plant Pot" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">Money Plant Pot</span>
               <span class="stock-pill" data-stock="9"></span>
-              <span class="price-pill">
-                400
-                <small>INR</small>
-              </span>
+              <span class="price-pill">400 <small>INR</small></span>
             </a>
+
             <a class="tile" href="catalog.html?q=Sunflower%20Basket">
               <img src="images/sunflower-basket.jpg" alt="Sunflower Basket" loading="lazy" onerror="FS.imgError(this)" />
               <span class="tile-name">Sunflower Basket</span>
               <span class="stock-pill" data-stock="3"></span>
-              <span class="price-pill">
-                900
-                <small>INR</small>
-              </span>
+              <span class="price-pill">900 <small>INR</small></span>
             </a>
           </div>
         </section>
 
         <div class="grid-2">
+          <!-- How it works: three numbered steps -->
           <section class="card" aria-labelledby="how-title">
             <div class="card-head">
               <div>
@@ -471,6 +345,7 @@
                 <p class="muted mb-0">From the first flower to the front door.</p>
               </div>
             </div>
+
             <ol class="steps-list">
               <li class="active">
                 <span class="step-num">1</span>
@@ -479,20 +354,18 @@
                   <p>Browse bouquets, Indian favourites, single stems, plants and gifts, and add what you like to your cart.</p>
                 </div>
               </li>
+
               <li>
                 <span class="step-num">2</span>
                 <div>
                   <strong>Choose a day, a time and how to pay</strong>
                   <p>
-                    Morning, afternoon or evening, paid by
-                    <abbr title="Unified Payments Interface">UPI</abbr>
-                    , card or
-                    <abbr title="Cash on delivery">COD</abbr>
-                    . Add a card message like
-                    <q>Happy birthday, Maa!</q>
+                    Morning, afternoon or evening, paid by <abbr title="Unified Payments Interface">UPI</abbr>,
+                    card or <abbr title="Cash on delivery">COD</abbr>. Add a card message like <q>Happy birthday, Maa!</q>
                   </p>
                 </div>
               </li>
+
               <li>
                 <span class="step-num">3</span>
                 <div>
@@ -503,9 +376,10 @@
             </ol>
           </section>
 
-          <!-- Each rating is an inline SVG: five <polygon> stars moved along with translate(), the ones above the rating faded -->
+          <!-- Customer reviews. Each rating is an SVG with five <polygon> stars moved along with translate(); a faded star is a missing star -->
           <section class="card stack" aria-labelledby="quotes-title">
             <h2 class="card-title" id="quotes-title">What customers say</h2>
+
             <figure class="quote">
               <svg class="stars" width="116" height="20" viewBox="0 0 116 20" fill="#a8843d" role="img" aria-label="5 out of 5 stars">
                 <polygon points="10,0 12.4,6.8 19.5,6.9 13.8,11.2 15.9,18.1 10,14 4.1,18.1 6.2,11.2 0.5,6.9 7.6,6.8" />
@@ -517,11 +391,9 @@
               <blockquote>
                 <p>The marigolds for our Diwali pooja came early in the morning, fresh and bright. The mogra pot is still flowering on my balcony.</p>
               </blockquote>
-              <figcaption>
-                <cite>Neha Sharma</cite>
-                , Model Town, Jalandhar
-              </figcaption>
+              <figcaption><cite>Neha Sharma</cite>, Model Town, Jalandhar</figcaption>
             </figure>
+
             <figure class="quote">
               <svg class="stars" width="116" height="20" viewBox="0 0 116 20" fill="#a8843d" role="img" aria-label="5 out of 5 stars">
                 <polygon points="10,0 12.4,6.8 19.5,6.9 13.8,11.2 15.9,18.1 10,14 4.1,18.1 6.2,11.2 0.5,6.9 7.6,6.8" />
@@ -533,11 +405,9 @@
               <blockquote>
                 <p>I sent the birthday combo to my sister. It reached in the evening slot, just as I had picked.</p>
               </blockquote>
-              <figcaption>
-                <cite>Aman Verma</cite>
-                , Ludhiana
-              </figcaption>
+              <figcaption><cite>Aman Verma</cite>, Ludhiana</figcaption>
             </figure>
+
             <figure class="quote">
               <svg class="stars" width="116" height="20" viewBox="0 0 116 20" fill="#a8843d" role="img" aria-label="4 out of 5 stars">
                 <polygon points="10,0 12.4,6.8 19.5,6.9 13.8,11.2 15.9,18.1 10,14 4.1,18.1 6.2,11.2 0.5,6.9 7.6,6.8" />
@@ -549,14 +419,12 @@
               <blockquote>
                 <p>A lovely sunflower basket and a healthy money plant. I only wish there were more succulents in stock.</p>
               </blockquote>
-              <figcaption>
-                <cite>Simran Kaur</cite>
-                , Phagwara
-              </figcaption>
+              <figcaption><cite>Simran Kaur</cite>, Phagwara</figcaption>
             </figure>
           </section>
         </div>
 
+        <!-- Shop tour: a short video with English captions (the <track>) -->
         <section class="card" aria-labelledby="tour-title">
           <div class="grid-2">
             <figure class="tour">
@@ -564,29 +432,18 @@
                 <source src="media/shop-tour.mp4" type="video/mp4" />
                 <track kind="captions" src="media/shop-tour.vtt" srclang="en" label="English" />
                 Your browser cannot play this video.
-                <a href="media/shop-tour.mp4">Download the shop tour</a>
-                instead.
+                <a href="media/shop-tour.mp4">Download the shop tour</a> instead.
               </video>
               <figcaption>A one-minute walk through the shop, with English captions.</figcaption>
             </figure>
+
             <div>
               <h2 class="card-title" id="tour-title">Take a tour of the shop</h2>
               <p class="muted">See where your flowers are kept cool, trimmed and wrapped before they leave for your door.</p>
               <p class="mb-0">
                 <a class="link-arrow" href="contact.html">
                   Find the shop
-                  <svg
-                    class="icon"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
+                  <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
                 </a>
@@ -595,74 +452,73 @@
           </div>
         </section>
 
+        <!-- Questions and answers: each <details> opens and closes when clicked -->
         <section class="card" aria-labelledby="faq-title">
           <div class="card-head">
             <h2 class="card-title" id="faq-title">Questions and answers</h2>
           </div>
+
           <div class="split">
             <div class="faq">
               <details open>
                 <summary>Where do you deliver, and what does it cost?</summary>
                 <p>
                   We deliver across Jalandhar, Phagwara and Ludhiana. Delivery is ₹50 per order and
-                  <mark>free on orders of ₹999 or more</mark>
-                  . You can order for today or
-                  <strong>any day in the next 60 days</strong>
-                  .
+                  <mark>free on orders of ₹999 or more</mark>. You can order for today or
+                  <strong>any day in the next 60 days</strong>.
                 </p>
               </details>
+
               <details>
                 <summary>How can I pay?</summary>
                 <p>Choose UPI, card or cash on delivery when you place the order. You see the full total, with delivery, before you confirm.</p>
               </details>
+
               <details>
                 <summary>How do I keep my flowers fresh?</summary>
                 <p>
-                  Cut 2 cm off each stem at a slant and put them straight into clean, cool H
-                  <sub>2</sub>
-                  O. Change the water every 2
-                  <sup>nd</sup>
-                  day and keep the vase out of direct sun.
-                  <strong>Keep cut flowers away from ripe fruit</strong>
-                  , which makes them wilt faster.
+                  Cut 2 cm off each stem at a slant and put them straight into clean, cool H<sub>2</sub>O.
+                  Change the water every 2<sup>nd</sup> day and keep the vase out of direct sun.
+                  <strong>Keep cut flowers away from ripe fruit</strong>, which makes them wilt faster.
                 </p>
               </details>
+
               <details>
                 <summary>How do I contact you?</summary>
                 <p>
                   Call, email or drop in at the shop. Our phone number, email and address are on the
-                  <a href="contact.html">contact page</a>
-                  .
+                  <a href="contact.html">contact page</a>.
                 </p>
               </details>
             </div>
 
+            <!-- Side box: delivery, payment and shop details -->
             <aside class="card card-sm" aria-labelledby="know-title">
               <h3 id="know-title">Good to know</h3>
               <dl>
                 <dt>Delivery</dt>
-                <dd>
-                  ₹50 per order, in a morning, afternoon or evening slot.
-                  <small>Free on orders of ₹999 or more.</small>
-                </dd>
+                <dd>₹50 per order, in a morning, afternoon or evening slot. <small>Free on orders of ₹999 or more.</small></dd>
+
                 <dt>Payment</dt>
                 <dd>UPI, card or cash on delivery</dd>
+
                 <dt>Areas we deliver to</dt>
                 <dd>All of Jalandhar, plus Phagwara and Ludhiana</dd>
               </dl>
+
               <hr class="divider" />
+
               <h4>Visit the shop</h4>
               <p class="mb-0">
-                Shop 12, Model Town Market
-                <br />
-                Jalandhar, Punjab 144003
-                <br />
+                Shop 12, Model Town Market<br />
+                Jalandhar, Punjab 144003<br />
                 <small>Open every day, 9 am to 8 pm</small>
               </p>
             </aside>
           </div>
         </section>
 
+        <!-- Last call to action: create an account or sign in -->
         <section class="card-dark reveal" aria-labelledby="cta-title">
           <div class="row between">
             <div>
@@ -678,6 +534,8 @@
         </section>
       </div>
     </main>
+
+    <!-- Site footer: logo, address, owners and the copyright line -->
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <div class="footer-brand">
@@ -696,28 +554,24 @@
             <p>Fresh flowers, delivered across Jalandhar.</p>
           </div>
         </div>
+
         <div>
           <h2>Visit or call</h2>
           <address>
-            Shop 12, Model Town Market
-            <br />
-            Jalandhar, Punjab 144003
-            <br />
-            <a href="tel:+919876501234">+91 98765 01234</a>
-            <br />
-            <a href="mailto:hello@bloompetal.in">
-              hello@
-              <wbr />
-              bloompetal.in
-            </a>
+            Shop 12, Model Town Market<br />
+            Jalandhar, Punjab 144003<br />
+            <a href="tel:+919876501234">+91 98765 01234</a><br />
+            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
           </address>
         </div>
+
         <div>
           <h2>Owners</h2>
           <p>Yash, Satyam, Raghav</p>
           <p><small>Open every day, 9 am to 8 pm</small></p>
         </div>
       </div>
+
       <p class="wrap footer-note">
         <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
       </p>

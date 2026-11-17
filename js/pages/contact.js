@@ -1,18 +1,34 @@
 /* Made by: Satyam */
-/* Bloom & Petal - js/pages/contact.js - the message form (the rest of the contact page is plain HTML). */
+/* Bloom & Petal - js/pages/contact.js - checks the message form on the contact page (the rest of the page is plain HTML). */
+
 FS.ready(() => {
+
+  // The message form on the contact page
   const form = document.getElementById('contact-form');
 
-  // Send: HTML has checked every field; FS checks email and phone again, then says thank you (nothing is sent anywhere).
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
+  // When the form is sent: check the fields, show any errors, or else say thank you.
+  // Nothing is really sent anywhere - this project runs only in the browser.
+  form.addEventListener('submit', (event) => {
+    event.preventDefault(); // stop the browser from reloading the page
+
+    // Read what the user typed
     const { name, email, phone } = FS.formData(form);
+
+    // HTML already checked the fields; check them again and keep one message per wrong field
     const errors = {};
+
     if (!name) errors.name = 'Please enter your name.';
     if (!FS.isEmail(email)) errors.email = 'Please enter a correct email address.';
     if (!FS.isPhone(phone)) errors.phone = 'Enter a 10 digit mobile number starting with 6, 7, 8 or 9.';
+
+    // showErrors puts the messages under the fields and returns true if there was any error
     if (FS.showErrors(form, errors)) return;
-    FS.toast(`Thanks, ${name.split(' ')[0]}! We will call you back within a day.`);
+
+    // Everything is correct: thank the user by first name and empty the form
+    const firstName = name.split(' ')[0];
+    FS.toast(`Thanks, ${firstName}! We will call you back within a day.`);
+
     form.reset();
   });
+
 });

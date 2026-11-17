@@ -1,5 +1,7 @@
 <!doctype html>
-<!-- Bloom & Petal - orders.html - Made by: Raghav -->
+<!-- Bloom & Petal - orders.html - the "My orders" page: a table of every order the customer has placed. Made by: Raghav -->
+
+<!-- data-page / data-roles: js/app.js checks these, so only a logged-in customer can open this page -->
 <html lang="en" data-page="orders" data-roles="customer">
   <head>
     <meta charset="UTF-8" />
@@ -9,13 +11,18 @@
       content="Your Bloom &amp; Petal orders in one table: when each was placed, its delivery day and time, the flowers and what you spent."
     />
     <title>My orders · Bloom &amp; Petal</title>
+
+    <!-- Icon, shared styles and the shared script (js/app.js) used by every page -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css?v=6" />
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
+    <!-- Top bar: logo, page links, search, cart and account menu -->
     <header class="nav-wrap">
       <nav class="nav" aria-label="Main">
+        <!-- Logo: five petals drawn with SVG, plus the shop name -->
         <a class="brand" href="home.html">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -29,64 +36,42 @@
           </span>
           <span class="brand-name">Bloom &amp; Petal</span>
         </a>
+
+        <!-- Page links (aria-current marks the page we are on) -->
         <div class="nav-links">
           <a href="home.html">Home</a>
           <a href="catalog.html">Flowers</a>
           <a href="orders.html" aria-current="page">My orders</a>
           <a href="contact.html">Contact</a>
         </div>
+
         <div class="nav-end">
+          <!-- Search box: sends the words to catalog.html as ?q=... -->
           <form class="nav-search" action="catalog.html" role="search">
-            <svg
-              class="icon"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
+            <svg class="icon" width="16" height="16" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="7" />
               <path d="m20 20-3.6-3.6" />
             </svg>
             <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
           </form>
+
+          <!-- Cart link with a small badge for the number of items (filled by js/app.js) -->
           <a class="nav-icon" href="cart.html" aria-label="Cart">
-            <svg
-              class="icon"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
+            <svg class="icon" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
               <path d="M3 6h18" />
               <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
             <span class="nav-count" id="cart-count" hidden></span>
           </a>
+
+          <!-- Account menu: opens on click (details/summary), the buttons are handled by js/app.js -->
           <details class="nav-account">
             <summary class="nav-avatar" aria-label="Account menu">
-              <svg
-                class="icon"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -100,50 +85,32 @@
         </div>
       </nav>
     </header>
+
     <main id="main">
+      <!-- Page title and two summary chips -->
       <header class="hero hero-sm">
         <div class="wrap">
           <h1>My orders</h1>
           <p class="hero-sub">Every bunch you have sent, with its delivery day and time.</p>
+
           <!-- How many orders and the total spent (the numbers are filled by js/pages/orders.js) -->
           <div class="chips">
             <span class="chip chip-gold">
-              <svg
-                class="icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                 <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
               </svg>
               <span id="count"></span>
             </span>
             <span class="chip">
-              <svg
-                class="icon"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                 <path d="M3 6h18" />
                 <path d="M16 10a4 4 0 0 1-8 0" />
               </svg>
-              <span id="spent-top"></span>
-              spent
+              <span id="spent-top"></span> spent
             </span>
           </div>
         </div>
@@ -151,19 +118,19 @@
 
       <div class="wrap section">
         <div class="card reveal">
+          <!-- Orders table: js/pages/orders.js puts one <tr> per order into <tbody id="rows"> -->
           <div class="table-wrap" id="table-box">
             <table class="table">
               <caption>Your orders, newest first</caption>
+
+              <!-- One <col> per column, so columns can be styled together -->
               <colgroup>
-                <col />
-                <!-- order number -->
-                <col span="2" />
-                <!-- the two dates: placed and delivery -->
-                <col />
-                <!-- items -->
-                <col />
-                <!-- total -->
+                <col /> <!-- order number -->
+                <col span="2" /> <!-- the two dates: placed and delivery -->
+                <col /> <!-- items -->
+                <col /> <!-- total -->
               </colgroup>
+
               <thead>
                 <tr>
                   <th scope="col">Order</th>
@@ -173,7 +140,9 @@
                   <th scope="col" class="right">Total</th>
                 </tr>
               </thead>
+
               <tbody id="rows"></tbody>
+
               <tfoot>
                 <tr>
                   <th scope="row" colspan="4">Total spent</th>
@@ -183,20 +152,11 @@
             </table>
           </div>
 
+          <!-- Shown instead of the table when there are no orders -->
           <div class="empty" id="empty" hidden>
             <span class="empty-icon">
-              <svg
-                class="icon"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
+              <svg class="icon" width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                 <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
               </svg>
@@ -208,6 +168,8 @@
         </div>
       </div>
     </main>
+
+    <!-- Footer: logo, address and owners -->
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <div class="footer-brand">
@@ -226,32 +188,31 @@
             <p>Fresh flowers, delivered across Jalandhar.</p>
           </div>
         </div>
+
         <div>
           <h2>Visit or call</h2>
+          <!-- <wbr> lets the long email address wrap after the @ on small screens -->
           <address>
-            Shop 12, Model Town Market
-            <br />
-            Jalandhar, Punjab 144003
-            <br />
-            <a href="tel:+919876501234">+91 98765 01234</a>
-            <br />
-            <a href="mailto:hello@bloompetal.in">
-              hello@
-              <wbr />
-              bloompetal.in
-            </a>
+            Shop 12, Model Town Market<br />
+            Jalandhar, Punjab 144003<br />
+            <a href="tel:+919876501234">+91 98765 01234</a><br />
+            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
           </address>
         </div>
+
         <div>
           <h2>Owners</h2>
           <p>Yash, Satyam, Raghav</p>
           <p><small>Open every day, 9 am to 8 pm</small></p>
         </div>
       </div>
+
       <p class="wrap footer-note">
         <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
       </p>
     </footer>
+
+    <!-- This page's own script: fills the table, the chips and the empty message -->
     <script src="js/pages/orders.js?v=6"></script>
   </body>
 </html>

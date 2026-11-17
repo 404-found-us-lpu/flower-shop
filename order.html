@@ -1,18 +1,26 @@
 <!doctype html>
 <!-- Bloom & Petal - order.html - Made by: Satyam -->
+<!-- Order details page: shows one order (flowers, totals, delivery) and lets the customer print a receipt. -->
+<!-- data-roles="customer": js/app.js checks it, so only a logged-in customer can open this page -->
 <html lang="en" data-page="order" data-roles="customer">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="One of your Bloom &amp; Petal orders: delivery day, receiver, the flowers in it, ready to print." />
     <title>Order details · Bloom &amp; Petal</title>
+
+    <!-- Page icon, shared styles and the shared script (FS helpers) -->
     <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/style.css?v=6" />
     <script src="js/app.js?v=6"></script>
   </head>
+
   <body>
+    <!-- Top bar: logo, page links, search, cart and account menu -->
     <header class="nav-wrap">
       <nav class="nav" aria-label="Main">
+
+        <!-- Logo: five petals drawn with SVG ellipses -->
         <a class="brand" href="home.html">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -26,13 +34,18 @@
           </span>
           <span class="brand-name">Bloom &amp; Petal</span>
         </a>
+
+        <!-- Page links ("My orders" is marked as the current section) -->
         <div class="nav-links">
           <a href="home.html">Home</a>
           <a href="catalog.html">Flowers</a>
           <a href="orders.html" aria-current="page">My orders</a>
           <a href="contact.html">Contact</a>
         </div>
+
+        <!-- Right side of the bar: search, cart and account -->
         <div class="nav-end">
+          <!-- Search box: sends ?q=... to the catalog page -->
           <form class="nav-search" action="catalog.html" role="search">
             <svg
               class="icon"
@@ -51,6 +64,8 @@
             </svg>
             <input type="search" name="q" placeholder="Search flowers" aria-label="Search flowers" />
           </form>
+
+          <!-- Cart icon with the item count (filled in by js/app.js) -->
           <a class="nav-icon" href="cart.html" aria-label="Cart">
             <svg
               class="icon"
@@ -70,6 +85,8 @@
             </svg>
             <span class="nav-count" id="cart-count" hidden></span>
           </a>
+
+          <!-- Account menu: opens and closes with <details> -->
           <details class="nav-account">
             <summary class="nav-avatar" aria-label="Account menu">
               <svg
@@ -95,9 +112,12 @@
             </menu>
           </details>
         </div>
+
       </nav>
     </header>
+
     <main id="main">
+      <!-- Page title; js/pages/order.js puts the order number and date here -->
       <header class="hero hero-sm">
         <div class="wrap">
           <nav class="crumbs no-print" aria-label="Breadcrumb">
@@ -113,16 +133,17 @@
       <!-- Shown when ?id= is one of your orders (js/pages/order.js fills it) -->
       <div class="wrap section split" id="order-found" hidden>
         <div class="stack-lg">
+
+          <!-- Flowers table: rows and totals are added by the script -->
           <section class="card" aria-labelledby="items-title">
             <h2 class="card-title" id="items-title">Flowers</h2>
             <div class="table-wrap">
               <table class="table">
                 <caption>The flowers in this order, how many and what they cost.</caption>
+                <!-- One <col> per column group, so columns can be styled together -->
                 <colgroup>
-                  <col />
-                  <!-- the flower -->
-                  <col span="3" />
-                  <!-- the numbers: quantity, price each, amount -->
+                  <col /> <!-- the flower -->
+                  <col span="3" /> <!-- the numbers: quantity, price each, amount -->
                 </colgroup>
                 <thead>
                   <tr>
@@ -138,12 +159,15 @@
             </div>
           </section>
 
+          <!-- Delivery details: day, receiver and address (filled by the script) -->
           <section class="card" aria-labelledby="delivery-title">
             <h2 class="card-title" id="delivery-title">Delivery</h2>
             <div id="order-delivery"></div>
           </section>
+
         </div>
 
+        <!-- Receipt box: print button (hidden on the printed page) -->
         <section class="card stack no-print" aria-labelledby="receipt-title">
           <h2 class="card-title" id="receipt-title">Receipt</h2>
           <p class="mb-0">Print this page to keep the order on paper, or save it as a PDF.</p>
@@ -154,14 +178,19 @@
         </section>
       </div>
 
+      <!-- Shown instead when the order is not found or is not yours -->
       <section class="wrap section card empty" id="order-missing" hidden>
         <h2>We could not find this order</h2>
         <p>The link may be old, or the order belongs to another account. All your own orders are on My orders.</p>
         <a class="btn btn-primary" href="orders.html">Go to My orders</a>
       </section>
     </main>
+
+    <!-- Footer: shop info, address, owners and copyright -->
     <footer class="site-footer">
       <div class="wrap footer-inner">
+
+        <!-- Logo and one line about the shop -->
         <div class="footer-brand">
           <span class="brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24">
@@ -178,32 +207,33 @@
             <p>Fresh flowers, delivered across Jalandhar.</p>
           </div>
         </div>
+
+        <!-- Shop address, phone and email -->
         <div>
           <h2>Visit or call</h2>
           <address>
-            Shop 12, Model Town Market
-            <br />
-            Jalandhar, Punjab 144003
-            <br />
-            <a href="tel:+919876501234">+91 98765 01234</a>
-            <br />
-            <a href="mailto:hello@bloompetal.in">
-              hello@
-              <wbr />
-              bloompetal.in
-            </a>
+            Shop 12, Model Town Market<br />
+            Jalandhar, Punjab 144003<br />
+            <a href="tel:+919876501234">+91 98765 01234</a><br />
+            <!-- <wbr> lets the long email address wrap after the @ on small screens -->
+            <a href="mailto:hello@bloompetal.in">hello@<wbr />bloompetal.in</a>
           </address>
         </div>
+
+        <!-- Who runs the shop and when it is open -->
         <div>
           <h2>Owners</h2>
           <p>Yash, Satyam, Raghav</p>
           <p><small>Open every day, 9 am to 8 pm</small></p>
         </div>
+
       </div>
       <p class="wrap footer-note">
         <small>&copy; 2026 Bloom &amp; Petal. CSE326 project by Yash, Satyam and Raghav, Section K4P26GH. Demo data is saved only in this browser.</small>
       </p>
     </footer>
+
+    <!-- This page's own script: finds the order from ?id= and fills the page -->
     <script src="js/pages/order.js?v=6"></script>
   </body>
 </html>
