@@ -1440,3 +1440,83 @@ pre code {
     transition: none !important;
   }
 }
+
+
+/* flowers page (Raghav) */
+/* Space between the search box and the "45 flowers" line */
+#count {
+  margin-top: 12px;
+}
+
+/* Drop zone: a dashed box that stays at the bottom of the screen while you scroll the cards */
+.drop-zone {
+  position: sticky;
+  bottom: 12px;
+  z-index: 1;
+  margin-top: 24px;
+  padding: 14px 18px;
+  border: 2px dashed var(--leaf);
+  border-radius: var(--radius);
+  background: var(--cream-light);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+  text-align: center;
+}
+
+.drop-zone p {
+  margin: 0;
+}
+
+/* Lit up while a card is dragged over it */
+.drop-zone.over {
+  border-style: solid;
+  background: var(--ok-soft);
+}
+
+/* A hand cursor shows the cards can be dragged */
+.flower[draggable="true"] {
+  cursor: grab;
+}
+
+
+/* ---------------------------------------------------------------------------
+   22. Messages from JavaScript
+   Unit 3 topics: the :empty pseudo-class hides a box with no text, two classes
+   on one element (.msg.error). showMessage() in js/shop.js writes the text and
+   adds the class "error" when something needs fixing.
+   --------------------------------------------------------------------------- */
+
+/* A message box: a green note, or nothing at all while it is empty */
+.msg {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--ok-soft);
+  color: var(--forest);
+  font-weight: 600;
+}
+
+.msg:empty {
+  display: none;
+}
+
+/* Something needs fixing: red text (on any box showMessage() writes into) */
+.error {
+  color: var(--danger);
+}
+
+.msg.error {
+  background: var(--danger-soft);
+}
+
+
+/* cart, orders, contact (Satyam) */
+/* hidden must win over display: grid (the checkout .form is a grid) */
+[hidden] {
+  display: none !important;
+}
+
+/* The quantity box in the cart table: just wide enough for "10" and its arrows */
+input.cart-qty {
+  width: 5.5rem;
+}

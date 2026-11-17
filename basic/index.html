@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <!-- Bloom & Petal (simple version) - index.html - Made by: Yash -->
-<!-- Home page: welcomes visitors and shows today's facts, Indian favourites, how to order, reviews, questions and a shop tour. -->
+<!-- Home page: welcomes visitors and shows today's facts, Indian favourites, how to order, reviews, questions and a shop tour.
+     js/index.js greets a signed-in customer by name and listens to the shop-tour video's events. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -16,18 +17,19 @@
       <a class="brand" href="index.html">Bloom &amp; Petal</a>
       <a href="index.html" aria-current="page">Home</a>
       <a href="flowers.html">Flowers</a>
-      <a href="order.html">Order</a>
+      <a href="order.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="orders.html">My orders</a>
       <a href="contact.html">Contact</a>
-      <a href="signin.html">Sign in</a>
+      <a href="signin.html" id="account-link">Sign in</a>
       <a class="switch" href="../index.html">Full shop &rarr;</a>
     </nav>
   </header>
 
   <main class="wrap">
 
-    <!-- Hero: the green welcome band at the top -->
+    <!-- Hero: the green welcome band at the top (js/index.js changes the tag to greet a signed-in customer) -->
     <section class="hero" aria-labelledby="hero-title">
-      <p class="tag">Flower shop in Jalandhar</p>
+      <p class="tag" id="hero-tag">Flower shop in Jalandhar</p>
       <h1 id="hero-title">Fresh flowers,<br> brought to your door.</h1>
       <p class="lead">Bouquets, plants and Indian favourites like mogra and genda, picked fresh
         <em>every</em> morning and delivered by our own team.</p>
@@ -78,7 +80,7 @@
             <p><i lang="la">Jasminum sambac</i></p>
             <p>Sweet-smelling white mogra that flowers all summer.</p>
             <p><span class="price">Rs 149</span> <span class="stock">14 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Mogra Pot">Order</a>
+            <button class="btn" type="button" data-add="13" aria-label="Add Mogra Pot to cart">Add to cart</button>
           </div>
         </article>
 
@@ -90,7 +92,7 @@
             <p><i lang="la">Tagetes erecta</i></p>
             <p>Bright orange genda flowers for pooja, weddings and festivals.</p>
             <p><span class="price">Rs 49</span> <span class="stock">40 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Marigold (Genda)">Order</a>
+            <button class="btn" type="button" data-add="14" aria-label="Add Marigold (Genda) to cart">Add to cart</button>
           </div>
         </article>
 
@@ -102,7 +104,7 @@
             <p><i lang="la">Clitoria ternatea</i></p>
             <p>A climbing creeper with deep blue butterfly-pea flowers.</p>
             <p><span class="price">Rs 129</span> <span class="stock">10 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Aprajita Pot">Order</a>
+            <button class="btn" type="button" data-add="15" aria-label="Add Aprajita Pot to cart">Add to cart</button>
           </div>
         </article>
 
@@ -114,7 +116,7 @@
             <p><i lang="la">Chrysanthemum</i></p>
             <p>Big, colourful winter blooms that last for weeks.</p>
             <p><span class="price">Rs 179</span> <span class="stock">9 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Guldaudi (Chrysanthemum)">Order</a>
+            <button class="btn" type="button" data-add="17" aria-label="Add Guldaudi (Chrysanthemum) to cart">Add to cart</button>
           </div>
         </article>
 
@@ -126,7 +128,7 @@
             <p><i lang="la">Combretum indicum</i></p>
             <p>A creeper with clusters that turn from white to pink to red.</p>
             <p><span class="price">Rs 199</span> <span class="stock">6 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Madhumalti Pot">Order</a>
+            <button class="btn" type="button" data-add="18" aria-label="Add Madhumalti Pot to cart">Add to cart</button>
           </div>
         </article>
 
@@ -138,7 +140,7 @@
             <p><i lang="la">Nelumbo nucifera</i></p>
             <p>Pink lotus flowers, the national flower of India.</p>
             <p><span class="price">Rs 79</span> <span class="stock">12 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Kamal (Lotus)">Order</a>
+            <button class="btn" type="button" data-add="30" aria-label="Add Kamal (Lotus) to cart">Add to cart</button>
           </div>
         </article>
 
@@ -150,7 +152,7 @@
             <p><i lang="la">Polianthes tuberosa</i></p>
             <p>Sweet-smelling white stems for weddings and pooja.</p>
             <p><span class="price">Rs 99</span> <span class="stock">30 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Rajnigandha (Tuberose)">Order</a>
+            <button class="btn" type="button" data-add="27" aria-label="Add Rajnigandha (Tuberose) to cart">Add to cart</button>
           </div>
         </article>
 
@@ -162,30 +164,32 @@
             <p><i lang="la">Hibiscus rosa-sinensis</i></p>
             <p>Bright red hibiscus, a favourite flower for pooja.</p>
             <p><span class="price">Rs 129</span> <span class="stock">15 in stock</span></p>
-            <a class="btn" href="order.html" aria-label="Order Gudhal (Hibiscus) Pot">Order</a>
+            <button class="btn" type="button" data-add="29" aria-label="Add Gudhal (Hibiscus) Pot to cart">Add to cart</button>
           </div>
         </article>
       </div>
 
+      <p id="add-msg" class="msg" role="status"></p>
       <p><a href="flowers.html">See all 45 flowers &rarr;</a></p>
     </section>
 
     <!-- Two cards side by side: how to order, and what customers say -->
     <div class="section split">
 
-      <!-- How to order: four numbered steps in an ordered list -->
+      <!-- How to order: three numbered steps in an ordered list -->
       <section class="card" aria-labelledby="how-title">
         <h2 id="how-title">How to order</h2>
         <ol>
           <li><strong>Pick your flowers</strong> on the <a href="flowers.html">flowers page</a>.
-            Each card shows the price and how many are in stock.</li>
-          <li><strong>Fill in the <a href="order.html">order form</a></strong>: who gets the flowers, the day,
-            a slot (morning, afternoon or evening) and how you pay:
+            Each card shows the price and how many are in stock. Add the ones you like to your cart.</li>
+          <li><strong>Open your <a href="order.html">cart</a></strong>, check how many of each, and fill in
+            the order form: who gets the flowers, the day, a slot (morning, afternoon or evening) and how you pay:
             <abbr title="Unified Payments Interface">UPI</abbr>, card or
             <abbr title="Cash on delivery">COD</abbr>. Add a card message like <q>Happy birthday, Maa!</q></li>
           <li><strong>We deliver</strong> fresh, wrapped flowers on the day and in the slot you chose.</li>
         </ol>
-        <p class="note">This simple version saves nothing. Your browser checks the form and then shows a thank-you page.</p>
+        <p class="note">Your cart and your orders are saved in this browser, so they are still there next time.
+          <a href="signin.html">Sign in</a> to see your past orders on <a href="orders.html">My orders</a>.</p>
       </section>
 
       <!-- Reviews: each figure has five SVG polygon stars, the quote and who said it -->
@@ -265,9 +269,10 @@
 
         <details>
           <summary>Is anything I type saved?</summary>
-          <p>No. This simple version uses only HTML and CSS. The form fields have no <code>name</code>
-            attribute, so nothing you type is sent or saved. For an account and a cart, open the
-            <a href="../index.html">full shop</a>.</p>
+          <p>Yes, but only in this browser. Your account, your cart and your orders are kept with
+            <code>localStorage</code>, so they are still there after you close the browser. Nothing is sent to a
+            server, so another phone or computer will not see them. This is a practice shop: please do not use a
+            real password.</p>
         </details>
       </div>
     </section>
@@ -275,7 +280,7 @@
     <!-- Shop tour: a short video with English captions (the <track>), and a few words next to it -->
     <section class="section split" aria-labelledby="tour-title">
       <figure>
-        <video controls preload="metadata" poster="../media/shop-tour-poster.jpg" width="960" height="640">
+        <video id="tour-video" controls preload="metadata" poster="../media/shop-tour-poster.jpg" width="960" height="640">
           <source src="../media/shop-tour.mp4" type="video/mp4">
           <track kind="captions" src="../media/shop-tour.vtt" srclang="en" label="English">
           Your browser cannot play this video.
@@ -287,6 +292,8 @@
       <div>
         <h2 id="tour-title">Take a tour of the shop</h2>
         <p class="lead">See where your flowers are kept cool, trimmed and wrapped before they leave for your door.</p>
+        <!-- js/index.js writes a thank-you here when the video ends -->
+        <p id="tour-msg" class="msg" role="status"></p>
         <p>Shop 12, Model Town Market, Jalandhar. Open every day from
           <time datetime="09:00">9 am</time> to <time datetime="20:00">8 pm</time>.</p>
         <p><a class="btn" href="contact.html">Find the shop</a></p>
@@ -300,8 +307,10 @@
       <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
         <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
       <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
-      <p><small>Simple version made with HTML and CSS only (Units 1-4). <a href="../index.html">Open the full shop</a>.</small></p>
+      <p><small>Simple version made with HTML, CSS and JavaScript from Units 1-5. <a href="../index.html">Open the full shop</a>.</small></p>
     </div>
   </footer>
+  <script src="js/shop.js"></script>
+  <script src="js/index.js"></script>
 </body>
 </html>

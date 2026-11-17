@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal (simple version) - register.html - Made by: Yash -->
+<!-- Make a new account. The browser checks the form, then js/register.js checks it again and saves the account. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create a Bloom &amp; Petal account to order flowers and see your orders.">
+  <title>Create an account · Bloom &amp; Petal</title>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Site header: the same menu on every page -->
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="brand" href="index.html">Bloom &amp; Petal</a>
+      <a href="index.html">Home</a>
+      <a href="flowers.html">Flowers</a>
+      <a href="order.html">Cart (<span id="cart-count">0</span>)</a>
+      <a href="orders.html">My orders</a>
+      <a href="contact.html">Contact</a>
+      <a href="signin.html" id="account-link">Sign in</a>
+      <a class="switch" href="../index.html">Full shop &rarr;</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Top band: page title -->
+    <section class="hero">
+      <h1>Create an account</h1>
+      <p class="lead">One account keeps your cart and your orders together.</p>
+    </section>
+
+    <!-- The form: two groups (about you, your password) and the "I agree" box -->
+    <section class="section" aria-labelledby="register-title">
+      <h2 id="register-title">Your details</h2>
+
+      <form class="form card" id="register-form" method="post">
+        <fieldset>
+          <legend>About you</legend>
+
+          <div class="field">
+            <label for="r-name">Full name</label>
+            <input type="text" id="r-name" name="fullname" required minlength="2" maxlength="60" autocomplete="name" placeholder="Neha Sharma">
+          </div>
+
+          <!-- type="email" makes the browser check for an @ and a domain -->
+          <div class="field">
+            <label for="r-email">Email</label>
+            <input type="email" id="r-email" name="email" required maxlength="80" autocomplete="email" placeholder="you@example.com">
+          </div>
+
+          <!-- pattern: 10 digits that start with 6, 7, 8 or 9 (an Indian mobile number) -->
+          <div class="field">
+            <label for="r-mobile">Mobile number</label>
+            <input type="tel" id="r-mobile" name="mobile" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric" autocomplete="tel-national" placeholder="9876501234">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your password</legend>
+
+          <!-- minlength: the password needs at least 6 characters -->
+          <div class="field">
+            <label for="r-password">Password</label>
+            <input type="password" id="r-password" name="password" required minlength="6" maxlength="64" autocomplete="new-password">
+          </div>
+
+          <div class="field">
+            <label for="r-confirm">Type the password again</label>
+            <input type="password" id="r-confirm" name="confirm" required minlength="6" maxlength="64" autocomplete="new-password">
+          </div>
+
+          <div class="field">
+            <label for="r-agree"><input type="checkbox" id="r-agree" name="agree" required> I agree that my account is
+              saved in this browser only (a practice shop: do not use a real password)</label>
+          </div>
+        </fieldset>
+
+        <!-- Messages from the script (role="status" makes screen readers read them out) -->
+        <p id="register-msg" class="msg" role="status"></p>
+
+        <p><button class="btn" type="submit">Create account</button></p>
+
+        <p class="note">Press <kbd>Enter</kbd> to create the account. Already have one?
+          <a href="signin.html">Sign in</a>.</p>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Site footer: address, owners and a link to the full shop -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
+        <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
+      <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
+      <p><small>Simple version made with HTML, CSS and JavaScript from Units 1-5. <a href="../index.html">Open the full shop</a>.</small></p>
+    </div>
+  </footer>
+
+  <script src="js/shop.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>
