@@ -1,5 +1,5 @@
 /* Made by: Satyam */
-/* js/contact.js - the contact page: "how far is the shop" and the message form.
+/* js/contact.js - the shop info part of the shop page: "how far is the shop" and the message form.
    Unit 5 topics: Geolocation API with success and error callbacks, Math (the haversine formula),
    event handling (click, submit), form validation with regular expressions (EMAIL_RULE, PHONE_RULE). */
 
