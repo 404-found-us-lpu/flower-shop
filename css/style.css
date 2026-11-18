@@ -1252,6 +1252,14 @@ pre code {
   font-weight: 600;
 }
 
+/* The price, before the - + buttons */
+.price {
+  flex-shrink: 0;
+  font-weight: 700;
+  color: var(--forest);
+  font-variant-numeric: tabular-nums;
+}
+
 /* "- 0 +": two round buttons with the quantity between them; it never shrinks */
 .stepper {
   flex-shrink: 0;

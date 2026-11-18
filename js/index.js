@@ -11,13 +11,14 @@ if (me) {
   document.getElementById('hero-tag').textContent = `Hello, ${me.name.split(' ')[0]}`;
 }
 
-// One row: serial number, photo, name, and the "- 0 +" control.
+// One row: serial number, photo, name, price, and the "- 0 +" control.
 function flowerRow(flower, index) {
   return `
     <li>
       <span class="serial">${index + 1}.</span>
       <img src="${flower.image}" alt="" width="96" height="64" loading="lazy">
       <span class="name">${safe(flower.name)}</span>
+      <span class="price">${rupees(flower.price)}</span>
       ${stepperHTML(flower.id, flower.name)}
     </li>`;
 }
