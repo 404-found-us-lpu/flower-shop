@@ -23,7 +23,7 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 
 | Page | What it does |
 |---|---|
-| index.html | The shop: welcome band, the numbered list of all 45 flowers (photo, name, price, - quantity +), then the shop info (address, hours, "How far is our shop from me?", message form, map, owners, delivery slots) |
+| index.html | The shop: welcome band, the numbered list of all 45 flowers (photo, name, price, - quantity +), then the shop info (address, hours, "How far is our shop from me?", message form, map, delivery slots) |
 | cart.html | The cart (- quantity +, totals), sign in or create an account, the checkout form, and "Your order is placed" |
 
 ## How the code is organised
