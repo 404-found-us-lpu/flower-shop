@@ -1,7 +1,7 @@
 # Bloom & Petal - online flower shop
 
-A flower shop website: browse 45 flowers (including Indian favourites like mogra, genda and aprajita), see how many of
-each are in stock, sign in, fill a cart, choose a delivery day and time, place the order and see it under My orders.
+A two-page flower shop website: pick from 45 flowers (including Indian favourites like mogra, genda and aprajita)
+with - and + buttons, sign in, choose a delivery day and time, and place the order.
 Made with **HTML, CSS and JavaScript only** (no frameworks, no server), using what CSE326 Units 1-5 teach. Accounts,
 the cart and orders are saved in the browser with `localStorage`.
 
@@ -23,20 +23,16 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 
 | Page | What it does |
 |---|---|
-| index.html | Home: flowers today, Indian favourites with Add to cart, how to order |
-| flowers.html | All 45 flowers from `flowers.json`: type buttons, search, Add to cart, drag a flower to the cart |
-| order.html | Cart (change quantity, remove) and checkout: receiver, day, time slot, payment, card message |
-| thanks.html | "Your order is placed" |
-| orders.html | My orders, with the total spent |
-| signin.html, register.html | Sign in, create an account |
-| contact.html | Address, phone, email, hours, the three owners, a message form, a map and "How far is our shop from me?" |
+| index.html | The shop: welcome band, the numbered list of all 45 flowers (photo, name, - quantity +), then the shop info (address, hours, "How far is our shop from me?", message form, map, owners, delivery slots) |
+| cart.html | The cart (- quantity +, totals), sign in or create an account, the checkout form, and "Your order is placed" |
 
 ## How the code is organised
 
 * `css/style.css` - the one stylesheet, with comments naming the Unit 3 topic of each part
 * `js/shop.js` - shared code: saved data (localStorage), accounts, loading the flowers (fetch + JSON), cart, orders,
   form rules (regular expressions), the header
-* `js/<page>.js` - one small script per page
+* `js/index.js` - the flower list on the shop page; `js/contact.js` - the shop info part; `js/cart.js` - the cart
+  and checkout; `js/account.js` - sign in and create an account
 * `flowers.json` - the 45 flowers; `images/` - photos (credits in `images/CREDITS.md`); `media/chime.mp3` - the order chime
 
 ## What we used from each unit
@@ -47,19 +43,19 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 | 2 Semantic HTML and forms | header, nav, main, section, article, footer, address, time, figure, forms with fieldset/legend, labels, input types, required, pattern, minlength, datalist, textarea, tables with caption, colgroup, thead, tbody, tfoot |
 | 3 CSS | variables, selectors, attribute selectors, combinators, colours, gradients, units, typography, box model, positioning, flexbox, grid with areas, pseudo-classes and pseudo-elements, form styling, transitions, keyframes, media queries |
 | 4 JavaScript fundamentals | const/let, template literals, functions and arrow functions, default parameters, if / else, arrays and objects, spread and destructuring |
-| 5 Interactive web | DOM selection and changes, events, event delegation, form validation with regular expressions, dates, localStorage / sessionStorage, fetch + JSON, audio events (the chime), Geolocation (distance to the shop), Drag and Drop (drag a flower to the cart) |
+| 5 Interactive web | DOM selection and changes, events, event delegation, form validation with regular expressions, dates, localStorage / sessionStorage, fetch + JSON, audio events (the chime), Geolocation (distance to the shop), the - and + buttons with event delegation |
 
 ## Who made what
 
 | Student | Files |
 |---|---|
-| Yash | `css/style.css`, `index`, `signin`, `register` pages and their scripts |
-| Raghav | `flowers.html`, `js/flowers.js`, `flowers.json` |
-| Satyam | `order`, `orders`, `thanks`, `contact` pages and their scripts |
+| Yash | `css/style.css`, `index.html`, `js/account.js` (sign in and create account) |
+| Raghav | `js/index.js` (the flower list), `flowers.json` |
+| Satyam | `cart.html`, `js/cart.js` (cart and checkout), `js/contact.js` (shop info) |
 | All three | `js/shop.js` (the shared code) |
 
 ## Limits
 
-There is no server, so accounts, carts and orders live in each browser separately, and passwords are kept in the
+There is no server, so accounts and carts live in each browser separately, and passwords are kept in the
 browser (fine for a class demo, never for a real shop). The contact form checks the message but does not send it.
 Contact details are made up for the project.

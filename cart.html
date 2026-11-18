@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!-- Bloom & Petal - cart.html - Made by: Satyam (the cart and checkout) and Yash (sign in and create account) -->
+<!-- The cart page: the flowers in your cart with - and + buttons, sign in or create an account, then the
+     checkout form. js/account.js runs sign in and create account; js/cart.js runs the cart and the checkout. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your Bloom &amp; Petal cart: check your flowers, sign in and place your order.">
+  <title>Your cart · Bloom &amp; Petal</title>
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="brand" href="index.html">Bloom &amp; Petal</a>
+      <a href="index.html#flowers">Flowers</a>
+      <a href="index.html#info">Shop info</a>
+      <a href="cart.html" aria-current="page">Cart (<span id="cart-count">0</span>)</a>
+      <a href="#account" id="account-link">Sign in</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+
+    <!-- Top band: page title and one line about ordering -->
+    <section class="hero">
+      <h1>Your cart</h1>
+      <p class="lead">Check your flowers, then tell us who gets them and when. Delivery is <strong>Rs 50</strong>, and <mark>free from Rs 999</mark>.</p>
+    </section>
+
+    <!-- The cart: js/order.js fills the table body and footer from the saved cart -->
+    <section class="section" aria-labelledby="cart-title">
+      <h2 id="cart-title">Flowers in your cart</h2>
+      <p id="cart-msg" class="msg" role="status">Loading your cart...</p>
+
+      <p id="cart-empty" hidden>Your cart is empty. <a href="index.html#flowers">Pick some flowers</a> first.</p>
+
+      <div class="table-wrap" id="cart-table" hidden>
+        <table>
+          <caption>Your flowers, the quantity of each and the total</caption>
+          <thead>
+            <tr>
+              <th scope="col">No.</th>
+              <th scope="col">Flower</th>
+              <th scope="col">Price</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody id="cart-rows"></tbody>
+          <tfoot id="cart-totals"></tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sign in or create an account (shown when nobody is signed in). js/account.js runs both forms -->
+    <section class="section" id="account" aria-labelledby="account-title" hidden>
+      <h2 id="account-title">Sign in to order</h2>
+
+      <form class="form card" id="signin-form" method="post">
+        <fieldset>
+          <legend>Your account</legend>
+
+          <!-- type="email" makes the browser check for an @ and a domain -->
+          <div class="field">
+            <label for="s-email">Email</label>
+            <input type="email" id="s-email" name="email" required maxlength="80" autocomplete="email" placeholder="you@example.com">
+          </div>
+
+          <!-- minlength: the password needs at least 6 characters -->
+          <div class="field">
+            <label for="s-password">Password</label>
+            <input type="password" id="s-password" name="password" required minlength="6" maxlength="64" autocomplete="current-password">
+          </div>
+        </fieldset>
+
+        <!-- Messages from the script (role="status" makes screen readers read them out) -->
+        <p id="signin-msg" class="msg" role="status"></p>
+
+        <p>
+          <button class="btn" type="submit">Sign in</button>
+          <button class="btn btn-light" type="button" id="demo-btn">Use the demo account</button>
+        </p>
+
+        <!-- Small note: where the account is kept -->
+        <p class="note">Press <kbd>Enter</kbd> to sign in. Accounts are now saved in this browser with
+          <code>localStorage</code>, so you stay signed in until you press Sign out. Nothing is sent to a server,
+          so use a practice password, not a real one.</p>
+      </form>
+
+      <!-- New customers open this to make an account -->
+      <details class="card">
+        <summary>New here? Create an account</summary>
+
+      <form class="form card" id="register-form" method="post">
+        <fieldset>
+          <legend>About you</legend>
+
+          <div class="field">
+            <label for="r-name">Full name</label>
+            <input type="text" id="r-name" name="fullname" required minlength="2" maxlength="60" autocomplete="name" placeholder="Neha Sharma">
+          </div>
+
+          <!-- type="email" makes the browser check for an @ and a domain -->
+          <div class="field">
+            <label for="r-email">Email</label>
+            <input type="email" id="r-email" name="email" required maxlength="80" autocomplete="email" placeholder="you@example.com">
+          </div>
+
+          <!-- pattern: 10 digits that start with 6, 7, 8 or 9 (an Indian mobile number) -->
+          <div class="field">
+            <label for="r-mobile">Mobile number</label>
+            <input type="tel" id="r-mobile" name="mobile" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric" autocomplete="tel-national" placeholder="9876501234">
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your password</legend>
+
+          <!-- minlength: the password needs at least 6 characters -->
+          <div class="field">
+            <label for="r-password">Password</label>
+            <input type="password" id="r-password" name="password" required minlength="6" maxlength="64" autocomplete="new-password">
+          </div>
+
+          <div class="field">
+            <label for="r-confirm">Type the password again</label>
+            <input type="password" id="r-confirm" name="confirm" required minlength="6" maxlength="64" autocomplete="new-password">
+          </div>
+
+          <div class="field">
+            <label for="r-agree"><input type="checkbox" id="r-agree" name="agree" required> I agree that my account is
+              saved in this browser only (a practice shop: do not use a real password)</label>
+          </div>
+        </fieldset>
+
+        <!-- Messages from the script (role="status" makes screen readers read them out) -->
+        <p id="register-msg" class="msg" role="status"></p>
+
+        <p><button class="btn" type="submit">Create account</button></p>
+
+      </form>
+      </details>
+    </section>
+
+    <!-- Checkout: shown when the cart has flowers and someone is signed in -->
+    <section class="section" id="checkout" aria-labelledby="form-title" hidden>
+      <h2 id="form-title">Checkout</h2>
+
+      <form class="form card" id="order-form">
+
+        <!-- 1. Who gets the flowers -->
+        <fieldset>
+          <legend>Receiver</legend>
+
+          <div class="field">
+            <label for="o-name">Receiver's name</label>
+            <input type="text" id="o-name" name="name" required minlength="2" maxlength="60" autocomplete="name">
+          </div>
+
+          <!-- Indian mobile number: 10 digits, the first one 6, 7, 8 or 9 -->
+          <div class="field">
+            <label for="o-phone">Mobile number</label>
+            <input type="tel" id="o-phone" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel-national" title="10 digits, starting with 6, 7, 8 or 9">
+          </div>
+
+          <div class="field">
+            <label for="o-address">Delivery address</label>
+            <textarea id="o-address" name="address" rows="3" required minlength="10" maxlength="200" autocomplete="street-address"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- 2. When: the day (min, max and value are set by js/order.js) and one of three time slots -->
+        <fieldset>
+          <legend>When</legend>
+
+          <div class="field">
+            <label for="o-date">Delivery date</label>
+            <input type="date" id="o-date" name="date" required>
+          </div>
+
+          <fieldset>
+            <legend>Time slot</legend>
+            <div class="choices">
+              <label for="slot-morning"><input type="radio" id="slot-morning" name="slot" value="morning" required> Morning (9 am - 12 pm)</label>
+              <label for="slot-afternoon"><input type="radio" id="slot-afternoon" name="slot" value="afternoon"> Afternoon (12 pm - 4 pm)</label>
+              <label for="slot-evening"><input type="radio" id="slot-evening" name="slot" value="evening"> Evening (4 pm - 8 pm)</label>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- 3. Payment and the message on the card; the datalist suggests 5 messages -->
+        <fieldset>
+          <legend>Payment and card</legend>
+
+          <fieldset>
+            <legend>Pay when the flowers arrive</legend>
+            <div class="choices">
+              <label for="pay-cod"><input type="radio" id="pay-cod" name="payment" value="cod" required> <abbr title="Cash on delivery">COD</abbr></label>
+              <label for="pay-upi"><input type="radio" id="pay-upi" name="payment" value="upi"> <abbr title="Unified Payments Interface">UPI</abbr></label>
+              <label for="pay-card"><input type="radio" id="pay-card" name="payment" value="card"> Card</label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="o-message">Message on the card <small>(optional)</small></label>
+            <input type="text" id="o-message" name="note" list="card-messages" maxlength="80">
+            <datalist id="card-messages">
+              <option value="Happy birthday!"></option>
+              <option value="Happy anniversary!"></option>
+              <option value="Get well soon."></option>
+              <option value="Congratulations!"></option>
+              <option value="Shubh Deepavali!"></option>
+            </datalist>
+          </div>
+        </fieldset>
+
+        <!-- Errors show here -->
+        <p id="order-msg" class="msg" role="status"></p>
+
+        <!-- Buttons: submit runs the checks in js/order.js; reset clears the form -->
+        <p>
+          <button type="submit" class="btn">Place order</button>
+          <button type="reset" class="btn btn-light">Clear form</button>
+        </p>
+
+        <!-- Small note: where the order goes -->
+        <p class="note">The browser checks the fields first (required, pattern, min and max), then js/cart.js checks them again. Nothing is sent to a server and no money is taken.</p>
+      </form>
+
+      <!-- A short chime plays when the order is placed -->
+      <audio id="chime" src="media/chime.mp3" preload="auto"></audio>
+    </section>
+
+    <!-- Shown after the order is placed -->
+    <section class="section card" id="order-done" aria-live="polite" hidden>
+      <h2>Your order is placed</h2>
+      <p>Thank you for shopping with Bloom &amp; Petal. <a href="index.html#flowers">Back to the flowers</a></p>
+    </section>
+
+    <!-- Delivery charges: a table with caption, colgroup, thead, tbody and tfoot -->
+    <section class="section" aria-labelledby="charges-title">
+      <h2 id="charges-title">Delivery charges</h2>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Delivery slots and what they cost</caption>
+          <colgroup>
+            <col>
+            <col>
+            <col span="2">
+          </colgroup>
+
+          <thead>
+            <tr>
+              <th scope="col">Slot</th>
+              <th scope="col">Time</th>
+              <th scope="col">Order below Rs 999</th>
+              <th scope="col">Order of Rs 999 or more</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Morning</th>
+              <td><time datetime="09:00">9 am</time> - <time datetime="12:00">12 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <th scope="row">Afternoon</th>
+              <td><time datetime="12:00">12 pm</time> - <time datetime="16:00">4 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+            <tr>
+              <th scope="row">Evening</th>
+              <td><time datetime="16:00">4 pm</time> - <time datetime="20:00">8 pm</time></td>
+              <td>Rs 50</td>
+              <td>Free</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td colspan="4">Example: 1 Red Rose Bouquet is Rs 349 + Rs 50 delivery = <strong>Rs 399</strong>. 3 of them are Rs 1,047, so delivery is <strong>free</strong>.</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <address>Shop 12, Model Town Market, Jalandhar, Punjab 144003<br>
+        <a href="tel:+919876501234">+91 98765 01234</a> · <a href="mailto:hello@bloompetal.in">hello@<wbr>bloompetal.in</a></address>
+      <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
+    </div>
+  </footer>
+  <script src="js/shop.js"></script>
+  <script src="js/account.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
