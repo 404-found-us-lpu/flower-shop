@@ -5,7 +5,7 @@
 
 // ---------------------------------------------------------------- Saved data (Web Storage API)
 // localStorage keeps data after the browser is closed. It only stores text, so lists are saved as JSON.
-const KEYS = { users: 'bp.users', me: 'bp.me', cart: 'bp.cart', orders: 'bp.orders' };
+const KEYS = { users: 'bp.users', me: 'bp.me', cart: 'bp.cart' };
 
 // Read a saved value, or give back `fallback` when nothing is saved yet.
 function load(key, fallback) {
@@ -22,7 +22,7 @@ function store(key, value) {
 // The demo customer is always there. Demo only: a real shop keeps passwords on a server, never in the browser.
 const DEMO_USER = { name: 'Neha Sharma', email: 'neha@example.com', password: 'neha123' };
 
-// Every account: the demo customer plus the ones made on register.html.
+// Every account: the demo customer plus the ones made with "Create an account".
 function getUsers() {
   return [DEMO_USER, ...load(KEYS.users, [])];
 }
@@ -60,27 +60,34 @@ function getFlowers() {
   return fetch('flowers.json').then((response) => response.json());
 }
 
-// ---------------------------------------------------------------- Cart and orders
+// ---------------------------------------------------------------- Cart
 // The cart is a list like [{ id: 13, qty: 2 }].
 function getCart() {
   return load(KEYS.cart, []);
 }
 
-// Add one of a flower to the cart (or one more if it is already there).
-function addToCart(id) {
-  const cart = getCart();
-  const line = cart.find((item) => item.id === id);
-  if (line) line.qty += 1;
-  else cart.push({ id, qty: 1 });
-  store(KEYS.cart, cart);
-  updateHeader();
+// How many of one flower are in the cart (0 when it is not there).
+function qtyInCart(id) {
+  const line = getCart().find((item) => item.id === id);
+  return line ? line.qty : 0;
 }
 
-// Change how many of a flower are in the cart. 0 removes it.
-function setQty(id, qty) {
-  const cart = getCart().map((item) => (item.id === id ? { id, qty } : item)).filter((item) => item.qty > 0);
-  store(KEYS.cart, cart);
+// The - and + buttons: change one flower's quantity by step (-1 or +1), from 0 to 10. 0 takes it out.
+function stepQty(id, step) {
+  const qty = Math.min(10, Math.max(0, qtyInCart(id) + step));
+  const others = getCart().filter((item) => item.id !== id);
+  store(KEYS.cart, qty > 0 ? [...others, { id, qty }] : others);
   updateHeader();
+  return qty;
+}
+
+// The "- 1 +" control used on both pages. The buttons carry the flower id and the step.
+function stepperHTML(id, name) {
+  return `<div class="stepper">
+      <button type="button" data-id="${id}" data-step="-1" aria-label="One less ${safe(name)}">&minus;</button>
+      <output>${qtyInCart(id)}</output>
+      <button type="button" data-id="${id}" data-step="1" aria-label="One more ${safe(name)}">+</button>
+    </div>`;
 }
 
 // How many flowers are in the cart in total.
@@ -93,17 +100,10 @@ function deliveryFor(subtotal) {
   return subtotal === 0 || subtotal >= 999 ? 0 : 50;
 }
 
-// Save a placed order for the signed-in customer and empty the cart.
-function saveOrder(order) {
-  store(KEYS.orders, [...load(KEYS.orders, []), order]);
+// The order is placed: empty the cart.
+function emptyCart() {
   store(KEYS.cart, []);
   updateHeader();
-}
-
-// This customer's orders, newest first.
-function getOrders() {
-  const me = currentUser();
-  return load(KEYS.orders, []).filter((order) => me && order.email === me.email).reverse();
 }
 
 // ---------------------------------------------------------------- Small helpers

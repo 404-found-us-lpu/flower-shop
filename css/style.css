@@ -14,15 +14,14 @@
     9. Header and menu (sticky position, flexbox)
    10. Layout helpers (width, sections, grid, split, contact grid)
    11. Hero band (gradients, animation)
-   12. Cards and flower cards (box model, shadows, transitions)
-   13. Pills: price, stock, tag (border-radius)
-   14. Buttons (transitions, :hover, :active)
-   15. Forms (form styling, :user-invalid, accent-color)
-   16. Code, keys and the timetable
-   17. Footer
-   18. Bigger screens (@media, mobile first)
-   19. Motion (@keyframes, prefers-reduced-motion)
-   20. Messages from JavaScript, flowers page, cart and contact
+   12. Cards, facts and the gold tag (box model, shadows)
+   13. Buttons (transitions, :hover, :active)
+   14. Forms (form styling, :user-invalid, accent-color)
+   15. Code, keys and the timetable
+   16. Footer
+   17. Bigger screens (@media, mobile first)
+   18. Motion (@keyframes, prefers-reduced-motion)
+   19. Messages from JavaScript, the flower list and the - + buttons
    =========================================================================== */
 
 
@@ -453,7 +452,7 @@ tfoot th {
    Unit 3 topics: flexbox (display: flex, flex-wrap, gap, align-items),
    margin-left: auto pushes items apart, attribute selector [aria-current="page"]
    marks the page you are on, :not() skips the brand.
-   position: sticky with z-index is turned on for bigger screens in section 18.
+   position: sticky with z-index is turned on for bigger screens in section 17.
    --------------------------------------------------------------------------- */
 
 .site-header {
@@ -548,7 +547,7 @@ tfoot th {
   list-style: none;
 }
 
-/* Two columns on wide screens (set in section 18), one on phones */
+/* Two columns on wide screens (set in section 17), one on phones */
 .split {
   display: grid;
   gap: 24px;
@@ -561,32 +560,6 @@ tfoot th {
   min-width: 0;
 }
 
-/* Row of in-page links that jump down to a part of the page */
-.jump {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 0 24px;
-  padding: 0;
-  list-style: none;
-}
-
-.jump a {
-  display: inline-block;
-  padding: 6px 16px;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: var(--cream-light);
-  color: var(--forest);
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.jump a:hover {
-  background: var(--forest);
-  color: var(--on-dark);
-}
 
 /* Contact page: named areas. Phones: one column, info then form then map */
 .contact-grid {
@@ -620,7 +593,7 @@ tfoot th {
    Unit 3 topics: backgrounds - linear-gradient() and radial-gradient() layered,
    position: relative + absolute for the decoration rings drawn with ::after,
    box-shadow with spread, child combinator (.hero > *), :last-child,
-   animation (the @keyframes are in section 19).
+   animation (the @keyframes are in section 18).
    --------------------------------------------------------------------------- */
 
 .hero {
@@ -706,16 +679,13 @@ tfoot th {
 
 
 /* ---------------------------------------------------------------------------
-   12. Cards and flower cards
-   Unit 3 topics: box model (padding, border, border-radius, box-shadow),
-   flexbox column with flex: 1 and margin-top: auto (buttons line up at the
-   bottom), aspect-ratio + object-fit for same-shape photos, transition and
-   transform on :hover, :has() to style a paragraph that holds a price.
+   12. Cards
+   Unit 3 topics: box model (padding, border, border-radius, box-shadow), the child
+   combinator (.card > :last-child), grid with auto-fit for the "flowers today" facts.
    --------------------------------------------------------------------------- */
 
 /* Cream box with a thin border and a soft shadow */
-.card,
-.flower {
+.card {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background-color: var(--cream-light);
@@ -730,70 +700,6 @@ tfoot th {
   margin-bottom: 0;
 }
 
-/* Flower card: photo on top, text under it */
-.flower {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.flower:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lift);
-}
-
-/* Every photo is 3:2 and fills its box without stretching */
-.flower img {
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  background: var(--cream-dark);
-  color: var(--ink-soft);
-  font-size: 0.85rem;
-}
-
-/* The text part grows, so every Order button sits at the bottom of its card */
-.flower > div {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 16px 18px 18px;
-}
-
-.flower h3 {
-  margin-bottom: 2px;
-}
-
-.flower p {
-  margin-bottom: 8px;
-}
-
-/* Botanical name in <i> */
-.flower i {
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-}
-
-/* Price on the left, stock pill on the right */
-.flower p:has(.price) {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.flower .btn {
-  margin-top: auto;
-}
-
-/* Hindi name */
-.hindi {
-  color: var(--gold-deep);
-  font-weight: 600;
-}
 
 /* "Flowers today" facts: a <dl class="grid">, two columns even on phones */
 dl.grid {
@@ -818,38 +724,6 @@ dl.grid dt + dd {
 }
 
 
-/* ---------------------------------------------------------------------------
-   13. Pills: price, stock, tag
-   Unit 3 topics: display: inline-block, border-radius: 999px for pill shapes,
-   two classes on one element (.stock.low) beat one class (specificity).
-   --------------------------------------------------------------------------- */
-
-.price {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--forest);
-  white-space: nowrap;
-}
-
-/* Green pill: "14 in stock" */
-.stock {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--ok-soft);
-  color: var(--leaf);
-  font-size: 0.8rem;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-/* Red pill when 5 or fewer are left */
-.stock.low {
-  background: var(--danger-soft);
-  color: var(--danger);
-}
-
 /* Small gold label */
 .tag {
   display: inline-block;
@@ -865,7 +739,7 @@ dl.grid dt + dd {
 
 
 /* ---------------------------------------------------------------------------
-   14. Buttons
+   13. Buttons
    Unit 3 topics: styling buttons and links the same way, cursor: pointer,
    transition on background-color and transform, :hover and :active states,
    :has() with the adjacent sibling combinator spaces out a row of buttons.
@@ -929,12 +803,12 @@ p:has(> .btn + .btn) {
 
 
 /* ---------------------------------------------------------------------------
-   15. Forms
+   14. Forms
    Unit 3 topics: form styling - inputs, labels and buttons; :focus states;
    validation with :user-invalid (only after the user has typed); ::placeholder;
    accent-color for radio buttons; :has(:checked) highlights the chosen pill;
    :not([type="radio"], [type="checkbox"]) keeps radios small; ::after adds
-   a red star to required fields; Grid puts short fields side by side (section 18).
+   a red star to required fields; Grid puts short fields side by side (section 17).
    --------------------------------------------------------------------------- */
 
 /* The form: a column of groups with space between them */
@@ -1108,7 +982,7 @@ input[type="checkbox"] {
 
 
 /* ---------------------------------------------------------------------------
-   16. Code, keys and the timetable
+   15. Code, keys and the timetable
    Unit 3 topics: monospace font stack, white-space and overflow-x for <pre>,
    a thicker border-bottom makes <kbd> look like a key, descendant selector
    (pre code) undoes the inline code style inside a block.
@@ -1171,7 +1045,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   17. Footer
+   16. Footer
    Unit 3 topics: background colour on a full-width block, descendant
    selectors (.site-footer a), :last-child for the small print at the bottom.
    --------------------------------------------------------------------------- */
@@ -1205,7 +1079,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   18. Bigger screens
+   17. Bigger screens
    Unit 3 topics: responsive design, mobile first - the rules above are for
    phones, and @media (min-width: ...) adds to them for tablets and laptops.
    position: sticky with top: 0 keeps the menu bar on screen.
@@ -1266,7 +1140,7 @@ pre code {
 
 
 /* ---------------------------------------------------------------------------
-   19. Motion
+   18. Motion
    Unit 3 topics: @keyframes and the animation property (used by .hero > *),
    transform: translateY, the prefers-reduced-motion user preference.
    --------------------------------------------------------------------------- */
@@ -1299,45 +1173,9 @@ pre code {
 }
 
 
-/* flowers page (Raghav) */
-/* Space between the search box and the "45 flowers" line */
-#count {
-  margin-top: 12px;
-}
-
-/* Drop zone: a dashed box that stays at the bottom of the screen while you scroll the cards */
-.drop-zone {
-  position: sticky;
-  bottom: 12px;
-  z-index: 1;
-  margin-top: 24px;
-  padding: 14px 18px;
-  border: 2px dashed var(--leaf);
-  border-radius: var(--radius);
-  background: var(--cream-light);
-  box-shadow: var(--shadow);
-  font-weight: 600;
-  text-align: center;
-}
-
-.drop-zone p {
-  margin: 0;
-}
-
-/* Lit up while a card is dragged over it */
-.drop-zone.over {
-  border-style: solid;
-  background: var(--ok-soft);
-}
-
-/* A hand cursor shows the cards can be dragged */
-.flower[draggable="true"] {
-  cursor: grab;
-}
-
 
 /* ---------------------------------------------------------------------------
-   20. Messages from JavaScript
+   19. Messages from JavaScript
    Unit 3 topics: the :empty pseudo-class hides a box with no text, two classes
    on one element (.msg.error). showMessage() in js/shop.js writes the text and
    adds the class "error" when something needs fixing.
@@ -1367,13 +1205,89 @@ pre code {
 }
 
 
-/* cart, orders, contact (Satyam) */
 /* hidden must win over display: grid (the checkout .form is a grid) */
 [hidden] {
   display: none !important;
 }
 
-/* The quantity box in the cart table: just wide enough for "10" and its arrows */
-input.cart-qty {
-  width: 5.5rem;
+
+/* The flower list on the shop page: one row each - number, photo, name, then "- 0 +" (flexbox) */
+.flower-list {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flower-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Every second row gets a light background (structural pseudo-class) */
+.flower-list li:nth-child(even) {
+  background: var(--cream-light);
+}
+
+.serial {
+  width: 2.2em;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.flower-list img {
+  width: 60px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* The name takes the free space (and wraps on phones), so the - + buttons line up on the right */
+.name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+}
+
+/* "- 0 +": two round buttons with the quantity between them; it never shrinks */
+.stepper {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stepper button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.stepper output {
+  min-width: 1.6em;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Small photo next to each flower in the cart table */
+th img {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 6px;
+}
+
+/* "New here? Create an account": a <details> that opens when its summary is clicked */
+summary {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+details[open] > summary {
+  margin-bottom: 14px;
 }
