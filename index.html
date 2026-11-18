@@ -9,7 +9,7 @@
   <meta name="description" content="Bloom &amp; Petal is a flower shop in Jalandhar that delivers fresh bouquets, plants and Indian favourites like mogra and marigold.">
   <title>Bloom &amp; Petal · Flower shop in Jalandhar</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=10">
 </head>
 <body>
   <header class="site-header">
@@ -87,12 +87,6 @@
         <h3>Opening hours</h3>
         <p>Every day, <time datetime="09:00">9 am</time> to <time datetime="20:00">8 pm</time>, for the shop, the phone and deliveries.</p>
         <p class="note">Open on Sundays and festivals too. Before Diwali and Valentine's Day, please order a day early.</p>
-
-        <!-- Distance to the shop: js/contact.js asks the browser for your location (Geolocation API) -->
-        <h3>How far are you?</h3>
-        <p><button type="button" class="btn btn-light" id="distance-btn">How far is our shop from me?</button></p>
-        <p id="distance-msg" class="msg" role="status"></p>
-        <p class="note">Your browser asks first. Your location stays on this page and is not sent or saved.</p>
       </section>
 
       <!-- Form: a message to the shop, checked by the browser and again by js/contact.js -->
@@ -215,8 +209,8 @@ UPI ID      <code>bloompetal@upi</code></pre>
       <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
     </div>
   </footer>
-  <script src="js/shop.js"></script>
-  <script src="js/index.js"></script>
-  <script src="js/contact.js"></script>
+  <script src="js/shop.js?v=10"></script>
+  <script src="js/index.js?v=10"></script>
+  <script src="js/contact.js?v=10"></script>
 </body>
 </html>
