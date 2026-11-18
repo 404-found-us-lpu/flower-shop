@@ -1252,11 +1252,11 @@ pre code {
   font-weight: 600;
 }
 
-/* The price, before the - + buttons */
+/* The price sits on its own line under the name */
 .price {
-  flex-shrink: 0;
-  font-weight: 700;
-  color: var(--forest);
+  display: block;
+  font-weight: 400;
+  color: var(--ink-soft);
   font-variant-numeric: tabular-nums;
 }
 

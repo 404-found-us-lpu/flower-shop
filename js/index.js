@@ -17,8 +17,7 @@ function flowerRow(flower, index) {
     <li>
       <span class="serial">${index + 1}.</span>
       <img src="${flower.image}" alt="" width="96" height="64" loading="lazy">
-      <span class="name">${safe(flower.name)}</span>
-      <span class="price">${rupees(flower.price)}</span>
+      <span class="name">${safe(flower.name)} <span class="price">${rupees(flower.price)}</span></span>
       ${stepperHTML(flower.id, flower.name)}
     </li>`;
 }
