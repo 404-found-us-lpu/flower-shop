@@ -1,15 +1,10 @@
 /* Made by: Raghav */
-/* js/index.js - the shop page: the numbered list of flowers with - and + buttons, and the greeting.
+/* js/index.js - the shop page: the numbered list of flowers with - and + buttons.
    Unit 5 topics: Fetch API + JSON (getFlowers), map and template literals to build the list,
    DOM changes, event handling with event delegation (one listener for every - and + button). */
 
 const list = document.getElementById('flower-list');
 
-// Greet the signed-in customer by first name in the green hero band.
-const me = currentUser();
-if (me) {
-  document.getElementById('hero-tag').textContent = `Hello, ${me.name.split(' ')[0]}`;
-}
 
 // One row: serial number, photo, name, price, and the "- 0 +" control.
 function flowerRow(flower, index) {

@@ -14,7 +14,7 @@
     9. Header and menu (sticky position, flexbox)
    10. Layout helpers (width, sections, grid, split, contact grid)
    11. Hero band (gradients, animation)
-   12. Cards, facts and the gold tag (box model, shadows)
+   12. Cards and facts (box model, shadows)
    13. Buttons (transitions, :hover, :active)
    14. Forms (form styling, :user-invalid, accent-color)
    15. Code, keys and the timetable
@@ -656,16 +656,6 @@ tfoot th {
 }
 
 /* Small pill above the heading */
-/* On the green band the tag is plain small gold text, not a pill */
-.hero .tag {
-  padding: 0;
-  border-radius: 0;
-  background: none;
-  color: var(--gold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 /* A plain .btn on the green band is an outline button */
 .hero .btn:not(.btn-light) {
   border-color: rgb(234 215 164 / 55%);
@@ -721,20 +711,6 @@ dl.grid dt + dd {
   font-size: 1.9rem;
   line-height: 1.1;
   color: var(--forest);
-}
-
-
-/* Small gold label */
-.tag {
-  display: inline-block;
-  padding: 3px 12px;
-  border-radius: 999px;
-  background: var(--gold-soft);
-  color: var(--gold-deep);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 
@@ -1171,7 +1147,6 @@ pre code {
     transition: none !important;
   }
 }
-
 
 
 /* ---------------------------------------------------------------------------
