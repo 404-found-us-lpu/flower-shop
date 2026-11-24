@@ -8,8 +8,8 @@
     3. Headings and text (typography)
     4. Links and focus (pseudo-classes)
     5. Small text tags (type and attribute selectors)
-    6. Lists (::marker)
-    7. Pictures and audio (fluid media)
+    6. Lists
+    7. Pictures (fluid media)
     8. Tables
     9. Header and menu (sticky position, flexbox)
    10. Layout helpers (width, sections, grid, split, contact grid)
@@ -40,9 +40,8 @@
   /* creams (hex) */
   --cream: #f6f1e6;
   --cream-light: #fbf9f4;
-  --cream-dark: #eee7d9;
 
-  /* golds (hsl: same hue, only the lightness changes) */
+  /* golds (one hex colour, two hsl colours of nearly the same hue) */
   --gold: #ead7a4;
   --gold-soft: hsl(43 62% 90%);
   --gold-deep: hsl(40 57% 31%);
@@ -53,7 +52,7 @@
   --on-dark: #f3efe4;
   --on-dark-soft: rgb(243 239 228 / 88%);
 
-  /* lines, warnings and the "in stock" green */
+  /* lines, the red for errors and the soft green for messages */
   --line: #e2d8c6;
   --line-strong: #d2c4a9;
   --danger: #ad3a3a;
@@ -86,7 +85,7 @@
   box-sizing: border-box;
 }
 
-/* Jump links (like #plants) scroll smoothly */
+/* Jump links (like #flowers) scroll smoothly */
 html {
   scroll-behavior: smooth;
 }
@@ -117,7 +116,7 @@ main {
 /* ---------------------------------------------------------------------------
    3. Headings and text
    Unit 3 topics: typography - font-family, font-size with rem and clamp(),
-   font-weight, line-height, letter-spacing, text-transform, max-width in ch.
+   font-weight, line-height, letter-spacing, max-width in ch.
    Grouping selectors (h1, h2, h3) share one rule.
    --------------------------------------------------------------------------- */
 
@@ -160,13 +159,6 @@ p {
 .note {
   font-size: 0.875rem;
   color: var(--ink-soft);
-}
-
-/* Thin line between parts of a page */
-hr {
-  margin: 32px 0;
-  border: 0;
-  border-top: 1px solid var(--line);
 }
 
 
@@ -230,38 +222,9 @@ abbr[title] {
   cursor: help;
 }
 
-/* Short quotes: the browser adds the quote marks, we colour them gold */
-q {
-  font-style: italic;
-}
-
-q::before,
-q::after {
-  color: var(--gold-deep);
-  font-weight: 700;
-}
-
-/* Old price (del) and new price (ins) */
-del {
-  color: var(--ink-soft);
-  text-decoration: line-through;
-}
-
-ins {
-  color: var(--leaf);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-/* Small, raised and lowered text */
+/* Small text */
 small {
   font-size: 0.85em;
-}
-
-sub,
-sup {
-  font-size: 0.75em;
-  line-height: 0;
 }
 
 /* Addresses are not italic, times never break across two lines */
@@ -291,16 +254,6 @@ li {
   margin-bottom: 0.5em;
 }
 
-/* Gold bullets and gold serif numbers */
-li::marker {
-  color: var(--gold-deep);
-}
-
-ol > li::marker {
-  font-family: var(--serif);
-  font-weight: 700;
-}
-
 /* Description list: the term in bold, its meaning under it */
 dl {
   margin: 0 0 1em;
@@ -317,9 +270,9 @@ dd {
 
 
 /* ---------------------------------------------------------------------------
-   7. Pictures and audio
+   7. Pictures
    Unit 3 topics: fluid media (max-width: 100%; height: auto), display: block,
-   object-fit: cover, aspect-ratio, overflow: hidden with border-radius.
+   margins and small grey text for a figure's caption.
    --------------------------------------------------------------------------- */
 
 /* Pictures and drawings never grow wider than their box */
@@ -330,10 +283,6 @@ svg {
   height: auto;
 }
 
-picture {
-  display: block;
-}
-
 figure {
   margin: 0;
 }
@@ -342,12 +291,6 @@ figcaption {
   margin-top: 10px;
   font-size: 0.875rem;
   color: var(--ink-soft);
-}
-
-/* Audio fills the width of its box */
-audio {
-  display: block;
-  width: 100%;
 }
 
 
@@ -396,7 +339,7 @@ tbody tr:hover {
   background: var(--gold-soft);
 }
 
-/* The last column (the money) gets a soft tint */
+/* The money columns get a soft tint */
 col:last-child {
   background: rgb(45 106 75 / 6%);
 }
@@ -422,7 +365,7 @@ tfoot th {
 /* ---------------------------------------------------------------------------
    9. Header and menu
    Unit 3 topics: flexbox (display: flex, flex-wrap, gap, align-items),
-   margin-left: auto pushes items apart, attribute selector [aria-current="page"]
+   margin-right: auto pushes items apart, attribute selector [aria-current="page"]
    marks the page you are on, :not() skips the brand.
    position: sticky with z-index is turned on for bigger screens in section 17.
    --------------------------------------------------------------------------- */
@@ -494,7 +437,7 @@ tfoot th {
    10. Layout helpers
    Unit 3 topics: min() for a fluid width, margin-inline: auto to centre,
    CSS Grid (repeat(), auto-fit, minmax(), fr), grid-template-areas,
-   :has() picks a grid area by what a box contains, flexbox for rows of links.
+   :has() picks a grid area by what a box contains.
    --------------------------------------------------------------------------- */
 
 /* Centred page column: full width minus 16px each side, at most 1120px */
@@ -509,7 +452,7 @@ tfoot th {
   margin-bottom: 48px;
 }
 
-/* Card grid: as many 230px-or-wider columns as fit; auto-fit lets 3 cards share the whole row */
+/* Card grid: as many 230px-or-wider columns as fit; auto-fit lets the cards share the whole row */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
@@ -590,10 +533,6 @@ tfoot th {
   margin-bottom: 0;
 }
 
-.hero a:not(.btn) {
-  color: var(--gold);
-}
-
 /* A plain .btn on the green band is an outline button */
 .hero .btn:not(.btn-light) {
   border-color: rgb(234 215 164 / 55%);
@@ -614,14 +553,11 @@ tfoot th {
 
 /* Cream box with a thin border and a soft shadow */
 .card {
+  padding: 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background-color: var(--cream-light);
   box-shadow: var(--shadow);
-}
-
-.card {
-  padding: 22px;
 }
 
 .card > :last-child {
@@ -629,7 +565,7 @@ tfoot th {
 }
 
 
-/* "Flowers today" facts: a <dl class="grid">, two columns even on phones */
+/* "Flowers today" facts: a <dl class="grid"> with narrower columns, so two fit side by side on most phones */
 dl.grid {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
 }
@@ -660,11 +596,8 @@ dl.grid dt + dd {
    --------------------------------------------------------------------------- */
 
 .btn,
-button,
-input[type="submit"],
-input[type="reset"] {
+button {
   display: inline-block;
-  width: auto;
   padding: 11px 22px;
   border: 1px solid var(--forest);
   border-radius: 999px;
@@ -681,9 +614,7 @@ input[type="reset"] {
 }
 
 .btn:hover,
-button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover {
+button:hover {
   background: var(--forest-light);
   color: #ffffff;
   transform: translateY(-1px);
@@ -696,7 +627,7 @@ button:active {
   transform: translateY(1px);
 }
 
-/* Light version: cream with a dark green border */
+/* Light version: cream with a sand border and dark green text */
 .btn-light {
   border-color: var(--line-strong);
   background: var(--cream-light);
@@ -881,8 +812,7 @@ input[type="checkbox"] {
   border-color: var(--leaf);
 }
 
-.choices label:has(:checked),
-.choices :checked + label {
+.choices label:has(:checked) {
   border-color: var(--leaf);
   background: var(--ok-soft);
   color: var(--forest);
@@ -916,7 +846,7 @@ code {
   font-size: 0.92em;
 }
 
-/* Keyboard key like F12 */
+/* Keyboard key like Enter */
 kbd {
   padding: 0.1em 0.45em;
   border: 1px solid var(--line-strong);
@@ -1016,11 +946,10 @@ pre code {
     margin-right: auto;
   }
 
-  /* A jump link (#plants) lands below the sticky bar: the padding makes room
-     for the bar and the negative margin takes the same space back */
-  section[id]:not(.card, .hero) {
-    padding-top: 72px;
-    margin-top: -72px;
+  /* A jump link (#flowers, #info) stops 72px early, so the sticky bar does not cover the heading */
+  section[id],
+  #info {
+    scroll-margin-top: 72px;
   }
 
   .hero {
@@ -1116,7 +1045,7 @@ pre code {
 }
 
 
-/* hidden must win over display: grid (the checkout .form is a grid) */
+/* Anything with the hidden attribute stays hidden, whatever display it has elsewhere */
 [hidden] {
   display: none !important;
 }

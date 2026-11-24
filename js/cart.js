@@ -79,7 +79,7 @@ form.addEventListener('submit', (event) => {
   const address = fields.address.value.trim();
   const date = fields.date.value;
 
-  // The same checks as the HTML attributes, done again in JavaScript
+  // The text and date checks again in JavaScript (the browser's own "required" covers the slot and payment)
   if (!currentUser()) return showMessage('order-msg', 'Please sign in first.', true);
   if (cartLines().length === 0) return showMessage('order-msg', 'Your cart is empty.', true);
   if (name.length < 2) return showMessage('order-msg', "Please type the receiver's name.", true);

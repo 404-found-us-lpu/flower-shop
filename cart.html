@@ -9,7 +9,7 @@
   <meta name="description" content="Your Bloom &amp; Petal cart: check your flowers, sign in and place your order.">
   <title>Your cart · Bloom &amp; Petal</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=14">
+  <link rel="stylesheet" href="css/style.css?v=15">
 </head>
 <body>
   <header class="site-header">
@@ -30,7 +30,7 @@
       <p class="lead">Check your flowers, then tell us who gets them and when. Delivery is <strong>Rs 50</strong>, and <mark>free from Rs 999</mark>.</p>
     </section>
 
-    <!-- The cart: js/order.js fills the table body and footer from the saved cart -->
+    <!-- The cart: js/cart.js fills the table body and footer from the saved cart -->
     <section class="section" aria-labelledby="cart-title">
       <h2 id="cart-title">Flowers in your cart</h2>
       <p id="cart-msg" class="msg" role="status">Loading your cart...</p>
@@ -85,7 +85,7 @@
         </p>
 
         <!-- Small note: where the account is kept -->
-        <p class="note">Press <kbd>Enter</kbd> to sign in. Accounts are now saved in this browser with
+        <p class="note">Press <kbd>Enter</kbd> to sign in. Accounts are saved in this browser with
           <code>localStorage</code>, so you stay signed in until you press Sign out. Nothing is sent to a server,
           so use a practice password, not a real one.</p>
       </form>
@@ -94,54 +94,54 @@
       <details class="card">
         <summary>New here? Create an account</summary>
 
-      <form class="form" id="register-form" method="post">
-        <fieldset>
-          <legend>About you</legend>
+        <form class="form" id="register-form" method="post">
+          <fieldset>
+            <legend>About you</legend>
 
-          <div class="field">
-            <label for="r-name">Full name</label>
-            <input type="text" id="r-name" name="fullname" required minlength="2" maxlength="60" autocomplete="name" placeholder="Your full name">
-          </div>
+            <div class="field">
+              <label for="r-name">Full name</label>
+              <input type="text" id="r-name" name="fullname" required minlength="2" maxlength="60" autocomplete="name" placeholder="Your full name">
+            </div>
 
-          <!-- type="email" makes the browser check for an @ and a domain -->
-          <div class="field">
-            <label for="r-email">Email</label>
-            <input type="email" id="r-email" name="email" required maxlength="80" autocomplete="email" placeholder="you@example.com">
-          </div>
+            <!-- type="email" makes the browser check for an @ and a domain -->
+            <div class="field">
+              <label for="r-email">Email</label>
+              <input type="email" id="r-email" name="email" required maxlength="80" autocomplete="email" placeholder="you@example.com">
+            </div>
 
-          <!-- pattern: 10 digits that start with 6, 7, 8 or 9 (an Indian mobile number) -->
-          <div class="field">
-            <label for="r-mobile">Mobile number</label>
-            <input type="tel" id="r-mobile" name="mobile" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric" autocomplete="tel-national" placeholder="9876501234">
-          </div>
-        </fieldset>
+            <!-- pattern: 10 digits that start with 6, 7, 8 or 9 (an Indian mobile number) -->
+            <div class="field">
+              <label for="r-mobile">Mobile number</label>
+              <input type="tel" id="r-mobile" name="mobile" required pattern="[6-9][0-9]{9}" maxlength="10" inputmode="numeric" autocomplete="tel-national" placeholder="9876501234">
+            </div>
+          </fieldset>
 
-        <fieldset>
-          <legend>Your password</legend>
+          <fieldset>
+            <legend>Your password</legend>
 
-          <!-- minlength: the password needs at least 6 characters -->
-          <div class="field">
-            <label for="r-password">Password</label>
-            <input type="password" id="r-password" name="password" required minlength="6" maxlength="64" autocomplete="new-password">
-          </div>
+            <!-- minlength: the password needs at least 6 characters -->
+            <div class="field">
+              <label for="r-password">Password</label>
+              <input type="password" id="r-password" name="password" required minlength="6" maxlength="64" autocomplete="new-password">
+            </div>
 
-          <div class="field">
-            <label for="r-confirm">Type the password again</label>
-            <input type="password" id="r-confirm" name="confirm" required minlength="6" maxlength="64" autocomplete="new-password">
-          </div>
+            <div class="field">
+              <label for="r-confirm">Type the password again</label>
+              <input type="password" id="r-confirm" name="confirm" required minlength="6" maxlength="64" autocomplete="new-password">
+            </div>
 
-          <div class="field">
-            <label for="r-agree"><input type="checkbox" id="r-agree" name="agree" required> I agree that my account is
-              saved in this browser only (a practice shop: do not use a real password)</label>
-          </div>
-        </fieldset>
+            <div class="field">
+              <label for="r-agree"><input type="checkbox" id="r-agree" name="agree" required> I agree that my account is
+                saved in this browser only (a practice shop: do not use a real password)</label>
+            </div>
+          </fieldset>
 
-        <!-- Messages from the script (role="status" makes screen readers read them out) -->
-        <p id="register-msg" class="msg" role="status"></p>
+          <!-- Messages from the script (role="status" makes screen readers read them out) -->
+          <p id="register-msg" class="msg" role="status"></p>
 
-        <p><button class="btn" type="submit">Create account</button></p>
+          <p><button class="btn" type="submit">Create account</button></p>
 
-      </form>
+        </form>
       </details>
     </section>
 
@@ -172,7 +172,7 @@
           </div>
         </fieldset>
 
-        <!-- 2. When: the day (min, max and value are set by js/order.js) and one of three time slots -->
+        <!-- 2. When: the day (min, max and value are set by js/cart.js) and one of three time slots -->
         <fieldset>
           <legend>When</legend>
 
@@ -220,7 +220,7 @@
         <!-- Errors show here -->
         <p id="order-msg" class="msg" role="status"></p>
 
-        <!-- Buttons: submit runs the checks in js/order.js; reset clears the form -->
+        <!-- Buttons: submit runs the checks in js/cart.js; reset clears the form -->
         <p>
           <button type="submit" class="btn">Place order</button>
           <button type="reset" class="btn btn-light">Clear form</button>
@@ -299,8 +299,8 @@
       <p>Open every day, 9 am to 8 pm</p>
     </div>
   </footer>
-  <script src="js/shop.js?v=14"></script>
-  <script src="js/account.js?v=14"></script>
-  <script src="js/cart.js?v=14"></script>
+  <script src="js/shop.js?v=15"></script>
+  <script src="js/account.js?v=15"></script>
+  <script src="js/cart.js?v=15"></script>
 </body>
 </html>
