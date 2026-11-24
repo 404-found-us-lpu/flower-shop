@@ -9,11 +9,11 @@
     4. Links and focus (pseudo-classes)
     5. Small text tags (type and attribute selectors)
     6. Lists (::marker)
-    7. Pictures, audio and maps (fluid media)
+    7. Pictures and audio (fluid media)
     8. Tables
     9. Header and menu (sticky position, flexbox)
    10. Layout helpers (width, sections, grid, split, contact grid)
-   11. Hero band (gradients, animation)
+   11. Hero band (plain green, animation)
    12. Cards and facts (box model, shadows)
    13. Buttons (transitions, :hover, :active)
    14. Forms (form styling, :user-invalid, accent-color)
@@ -317,7 +317,7 @@ dd {
 
 
 /* ---------------------------------------------------------------------------
-   7. Pictures, audio and maps
+   7. Pictures and audio
    Unit 3 topics: fluid media (max-width: 100%; height: auto), display: block,
    object-fit: cover, aspect-ratio, overflow: hidden with border-radius.
    --------------------------------------------------------------------------- */
@@ -348,34 +348,6 @@ figcaption {
 audio {
   display: block;
   width: 100%;
-}
-
-iframe {
-  display: block;
-  max-width: 100%;
-  border: 0;
-}
-
-/* The map box: rounded corners; the iframe inside keeps a 4:3 shape */
-.map {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--cream-light);
-  box-shadow: var(--shadow);
-}
-
-.map iframe,
-iframe.map {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  border: 0;
-}
-
-.map figcaption {
-  margin: 0;
-  padding: 10px 16px;
 }
 
 
@@ -561,14 +533,13 @@ tfoot th {
 }
 
 
-/* Contact page: named areas. Phones: one column, info then form then map */
+/* Shop info: named areas. Phones: one column, info then form */
 .contact-grid {
   display: grid;
   gap: 24px;
   grid-template-areas:
     "info"
-    "form"
-    "map";
+    "form";
 }
 
 /* Each box goes to its area, found by what it holds */
@@ -582,53 +553,25 @@ tfoot th {
   grid-area: form;
 }
 
-.contact-grid > .map,
-.contact-grid > :has(iframe) {
-  grid-area: map;
-}
-
 
 /* ---------------------------------------------------------------------------
    11. Hero band
-   Unit 3 topics: backgrounds - linear-gradient() and radial-gradient() layered,
-   position: relative + absolute for the decoration rings drawn with ::after,
-   box-shadow with spread, child combinator (.hero > *), :last-child,
-   animation (the @keyframes are in section 18).
+   Unit 3 topics: background-color, border-radius, box-shadow, the child combinator
+   (.hero > *), :last-child, :not(), animation (the @keyframes are in section 18).
    --------------------------------------------------------------------------- */
 
+/* One plain green colour, no pictures or patterns */
 .hero {
-  position: relative;
-  overflow: hidden;
   margin-top: 8px;
   padding: 40px 22px;
   border-radius: 24px;
   color: var(--on-dark);
   background-color: var(--forest);
-  background-image:
-    radial-gradient(circle at 15% 0%, rgb(80 130 100 / 35%), transparent 50%),
-    linear-gradient(150deg, #2e5641, var(--forest) 60%, #0f1f17);
   box-shadow: var(--shadow-lift);
 }
 
-/* Three thin gold rings in the corner, drawn by one empty ::after box */
-.hero::after {
-  content: "";
-  position: absolute;
-  right: -70px;
-  bottom: -70px;
-  width: 220px;
-  height: 220px;
-  border: 1px solid rgb(234 215 164 / 30%);
-  border-radius: 50%;
-  box-shadow:
-    0 0 0 36px rgb(234 215 164 / 5%),
-    0 0 0 72px rgb(234 215 164 / 4%);
-}
-
-/* Everything inside sits above the rings and rises in on page load */
+/* Everything inside rises in on page load */
 .hero > * {
-  position: relative;
-  z-index: 1;
   animation: rise 0.6s ease-out both;
 }
 
@@ -651,11 +594,6 @@ tfoot th {
   color: var(--gold);
 }
 
-.hero svg {
-  margin-bottom: 16px;
-}
-
-/* Small pill above the heading */
 /* A plain .btn on the green band is an outline button */
 .hero .btn:not(.btn-light) {
   border-color: rgb(234 215 164 / 55%);
@@ -1104,12 +1042,10 @@ pre code {
     grid-template-columns: 1fr 1fr;
   }
 
-  /* Contact page: info with the map under it on the left, the form on the right */
+  /* Shop info: the address on the left, the form on the right */
   .contact-grid {
     grid-template-columns: 1fr 1.3fr;
-    grid-template-areas:
-      "info form"
-      "map  form";
+    grid-template-areas: "info form";
     align-items: start;
   }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- Bloom & Petal - index.html - Made by: Yash -->
 <!-- The shop page: the welcome band, the numbered list of all 45 flowers with - and + buttons, then the shop info
-     (address, message form, map, delivery). js/index.js draws the flower list; js/contact.js runs the shop info. -->
+     (address, message form, delivery). js/index.js draws the flower list; js/contact.js runs the shop info. -->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,7 +9,7 @@
   <meta name="description" content="Bloom &amp; Petal is a flower shop in Jalandhar that delivers fresh bouquets, plants and Indian favourites like mogra and marigold.">
   <title>Bloom &amp; Petal · Flower shop in Jalandhar</title>
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body>
   <header class="site-header">
@@ -70,7 +70,7 @@
       <ol class="flower-list" id="flower-list"></ol>
     </section>
 
-    <!-- Contact grid, three parts in this order: info, form, map -->
+    <!-- Shop info grid, two parts: info and the message form -->
     <div class="section contact-grid" id="info">
 
       <!-- Info: address, phone, email and opening hours -->
@@ -137,19 +137,7 @@
         <p id="contact-msg" class="msg" role="status"></p>
 
         <p><button type="submit" class="btn">Send message</button></p>
-
-        <!-- Small note: why nothing leaves this page -->
-        <p class="note">Nothing is sent anywhere. js/contact.js checks the email and mobile number, thanks you on this page and clears the form. Nothing is saved; a real shop would send the message to its server.</p>
       </form>
-
-      <!-- Map: OpenStreetMap shown inside an <iframe> -->
-      <figure class="map">
-        <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=75.565%2C31.305%2C75.595%2C31.325&amp;layer=mapnik&amp;marker=31.315%2C75.580"
-          title="Map of Bloom &amp; Petal in Model Town, Jalandhar"
-          loading="lazy"></iframe>
-        <figcaption>Find the shop in Model Town Market. Map &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a></figcaption>
-      </figure>
 
     </div>
 
@@ -208,8 +196,8 @@ UPI ID      <code>bloompetal@upi</code></pre>
       <p>Owners: Yash, Satyam and Raghav · Open every day, 9 am to 8 pm</p>
     </div>
   </footer>
-  <script src="js/shop.js?v=11"></script>
-  <script src="js/index.js?v=11"></script>
-  <script src="js/contact.js?v=11"></script>
+  <script src="js/shop.js?v=13"></script>
+  <script src="js/index.js?v=13"></script>
+  <script src="js/contact.js?v=13"></script>
 </body>
 </html>

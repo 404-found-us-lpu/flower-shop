@@ -23,7 +23,7 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 
 | Page | What it does |
 |---|---|
-| index.html | The shop: welcome band, the numbered list of all 45 flowers (photo, name, price, - quantity +), then the shop info (address, hours, message form, map, delivery slots) |
+| index.html | The shop: welcome band, the numbered list of all 45 flowers (photo, name, price, - quantity +), then the shop info (address, hours, message form, delivery slots) |
 | cart.html | The cart (- quantity +, totals), sign in or create an account, the checkout form, and "Your order is placed" |
 
 ## How the code is organised
@@ -39,7 +39,7 @@ Demo login: **neha@example.com / neha123** (the sign-in page has a demo button),
 
 | Unit | Where |
 |---|---|
-| 1 HTML fundamentals | headings, text tags (strong, em, b, i, mark, small, sub, abbr, q, kbd, code, pre), lists, links (tel:, mailto:), images, inline SVG (rect, line, polyline, circle, text), audio, iframe |
+| 1 HTML fundamentals | headings, text tags (strong, em, b, i, mark, small, sub, abbr, q, kbd, code, pre), lists, links (tel:, mailto:), images, inline SVG (rect, line, polyline, circle, text), audio |
 | 2 Semantic HTML and forms | header, nav, main, section, article, footer, address, time, figure, forms with fieldset/legend, labels, input types, required, pattern, minlength, datalist, textarea, tables with caption, colgroup, thead, tbody, tfoot |
 | 3 CSS | variables, selectors, attribute selectors, combinators, colours, gradients, units, typography, box model, positioning, flexbox, grid with areas, pseudo-classes and pseudo-elements, form styling, transitions, keyframes, media queries |
 | 4 JavaScript fundamentals | const/let, template literals, functions and arrow functions, default parameters, if / else, arrays and objects, spread and destructuring |
