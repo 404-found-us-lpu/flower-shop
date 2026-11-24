@@ -200,8 +200,8 @@ a:hover {
 /* ---------------------------------------------------------------------------
    5. Small text tags
    Unit 3 topics: type selectors style one tag everywhere; attribute selector
-   abbr[title]; text-decoration (none, line-through); ::before and
-   ::after with content (the quote marks of <q>); em units grow with the text.
+   abbr[title]; em units grow with the text; font-style and white-space
+   change how the text of one tag is drawn.
    --------------------------------------------------------------------------- */
 
 strong,
@@ -240,8 +240,8 @@ time {
 
 /* ---------------------------------------------------------------------------
    6. Lists
-   Unit 3 topics: ::marker pseudo-element (colour of bullets and numbers),
-   child combinator (ol > li), description lists with dt and dd.
+   Unit 3 topics: spacing of lists with margin and padding in em units,
+   description lists with dt and dd.
    --------------------------------------------------------------------------- */
 
 ul,
