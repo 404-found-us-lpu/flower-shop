@@ -6,7 +6,7 @@ Made with **HTML, CSS and JavaScript only** (no frameworks, no server), using wh
 and the cart are saved in the browser with `localStorage`.
 
 * Subject: CSE326 - Internet Programming
-* Made by: Yash, Satyam and Raghav (Section K4P26GH), who are also the shop's owners on the site
+* Made by: Yash, Satyam and Raghav (Section K4P26GH)
 * Live website: https://project.lpu.lol
 * Code: https://github.com/404-found-us-lpu/flower-shop
 
