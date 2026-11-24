@@ -8,7 +8,7 @@ the cart and orders are saved in the browser with `localStorage`.
 * Subject: CSE326 - Internet Programming
 * Made by: Yash, Satyam and Raghav (Section K4P26GH), who are also the shop's owners on the site
 * Live website: https://project.lpu.lol
-* Code: https://github.com/yash-dhanda/flower-shop
+* Code: https://github.com/404-found-us-lpu/flower-shop
 
 ## How to open it
 
