@@ -20,7 +20,7 @@ function store(key, value) {
 
 // ---------------------------------------------------------------- Accounts
 // The demo customer is always there. Demo only: a real shop keeps passwords on a server, never in the browser.
-const DEMO_USER = { name: 'Neha Sharma', email: 'neha@example.com', password: 'neha123' };
+const DEMO_USER = { name: 'Customer', email: 'customer@example.com', password: 'customer123' };
 
 // Every account: the demo customer plus the ones made with "Create an account".
 function getUsers() {
@@ -138,7 +138,7 @@ function showMessage(id, text, isError = false) {
 }
 
 // ---------------------------------------------------------------- The header on every page (DOM)
-// Shows the cart count, and "Hi, Neha" + Sign out instead of Sign in when someone is signed in.
+// Shows the cart count, and "Hi, Customer" + Sign out instead of Sign in when someone is signed in.
 function updateHeader() {
   const count = document.getElementById('cart-count');
   if (count) count.textContent = cartCount();

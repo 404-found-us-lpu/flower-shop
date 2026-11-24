@@ -37,7 +37,7 @@ signinForm.addEventListener('submit', (event) => {
   }
 });
 
-// "Use the demo account" fills in Neha's email and password (DEMO_USER is in shop.js).
+// "Use the demo account" fills in the demo customer's email and password (DEMO_USER is in shop.js).
 document.getElementById('demo-btn').addEventListener('click', () => {
   signinForm.elements.email.value = DEMO_USER.email;
   signinForm.elements.password.value = DEMO_USER.password;

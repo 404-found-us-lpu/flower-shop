@@ -17,7 +17,7 @@ Live: https://project.lpu.lol
 On your own computer: open the folder in VS Code and use *Open with Live Server* (the flowers are loaded from
 `flowers.json` with `fetch`, which needs a web server; double-clicking the file is not enough).
 
-Demo login: **neha@example.com / neha123** (the sign-in page has a demo button), or create an account.
+Demo login: **customer@example.com / customer123** (the sign-in page has a demo button), or create an account.
 
 ## Pages
 
