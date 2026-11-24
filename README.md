@@ -2,7 +2,7 @@
 
 A two-page flower shop website: pick from 45 flowers (including Indian favourites like mogra, genda and aprajita)
 with - and + buttons, sign in, choose a delivery day and time, and place the order.
-Made with **HTML, CSS and JavaScript only** (no frameworks, no server), using what CSE326 Units 1-5 teach. Accounts,
+Made with **HTML, CSS and JavaScript only** (no frameworks, no server), using what CSE326 Units 1-5 teach. Accounts
 and the cart are saved in the browser with `localStorage`.
 
 * Subject: CSE326 - Internet Programming
