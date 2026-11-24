@@ -1,4 +1,4 @@
-/* Made by: Yash, Satyam and Raghav */
+/* Bloom & Petal */
 /* js/shop.js - the code every page shares.
    Unit 5 topics: Web Storage (localStorage), JSON, the Fetch API, regular expressions, dates,
    DOM selection and changes, and event handling. Each page has its own small script as well. */

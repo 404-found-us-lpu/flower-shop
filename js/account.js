@@ -1,4 +1,4 @@
-/* Made by: Yash */
+/* Bloom & Petal */
 /* js/account.js - "Sign in" and "Create an account" on the cart page.
    Unit 5 topics: DOM selection, event handling (submit, click), form validation with regular expressions
    (EMAIL_RULE, PHONE_RULE from shop.js), a higher-order function (find with a callback), Web Storage

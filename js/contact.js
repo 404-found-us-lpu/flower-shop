@@ -1,4 +1,4 @@
-/* Made by: Satyam */
+/* Bloom & Petal */
 /* js/contact.js - the message form in the shop info part of the shop page.
    Unit 5 topics: event handling (submit), form validation with regular expressions (EMAIL_RULE, PHONE_RULE). */
 

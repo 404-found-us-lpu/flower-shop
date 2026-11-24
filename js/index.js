@@ -1,4 +1,4 @@
-/* Made by: Raghav */
+/* Bloom & Petal */
 /* js/index.js - the shop page: the numbered list of flowers with - and + buttons.
    Unit 5 topics: Fetch API + JSON (getFlowers), map and template literals to build the list,
    DOM changes, event handling with event delegation (one listener for every - and + button). */

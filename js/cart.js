@@ -1,4 +1,4 @@
-/* Made by: Satyam */
+/* Bloom & Petal */
 /* js/cart.js - the cart and the checkout on cart.html.
    Unit 5 topics: Fetch API + JSON (getFlowers), higher-order functions (map, filter, find, reduce),
    dynamic content (the cart table), event handling (click, submit) with event delegation,
