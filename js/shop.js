@@ -75,8 +75,8 @@ function qtyInCart(id) {
 // The - and + buttons: change one flower's quantity by step (-1 or +1), from 0 to 10. 0 takes it out.
 function stepQty(id, step) {
   const qty = Math.min(10, Math.max(0, qtyInCart(id) + step));
-  const others = getCart().filter((item) => item.id !== id);
-  store(KEYS.cart, qty > 0 ? [...others, { id, qty }] : others);
+  const cart = qtyInCart(id) > 0 ? getCart() : [...getCart(), { id, qty }]; // a new flower goes at the end
+  store(KEYS.cart, cart.map((item) => (item.id === id ? { id, qty } : item)).filter((item) => item.qty > 0));
   updateHeader();
   return qty;
 }

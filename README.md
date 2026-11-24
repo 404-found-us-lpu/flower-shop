@@ -3,7 +3,7 @@
 A two-page flower shop website: pick from 45 flowers (including Indian favourites like mogra, genda and aprajita)
 with - and + buttons, sign in, choose a delivery day and time, and place the order.
 Made with **HTML, CSS and JavaScript only** (no frameworks, no server), using what CSE326 Units 1-5 teach. Accounts,
-the cart and orders are saved in the browser with `localStorage`.
+and the cart are saved in the browser with `localStorage`.
 
 * Subject: CSE326 - Internet Programming
 * Made by: Yash, Satyam and Raghav (Section K4P26GH), who are also the shop's owners on the site
@@ -29,7 +29,7 @@ Demo login: **customer@example.com / customer123** (the sign-in page has a demo 
 ## How the code is organised
 
 * `css/style.css` - the one stylesheet, with comments naming the Unit 3 topic of each part
-* `js/shop.js` - shared code: saved data (localStorage), accounts, loading the flowers (fetch + JSON), cart, orders,
+* `js/shop.js` - shared code: saved data (localStorage), accounts, loading the flowers (fetch + JSON), the cart,
   form rules (regular expressions), the header
 * `js/index.js` - the flower list on the shop page; `js/contact.js` - the shop info part; `js/cart.js` - the cart
   and checkout; `js/account.js` - sign in and create an account
@@ -43,7 +43,7 @@ Demo login: **customer@example.com / customer123** (the sign-in page has a demo 
 | 2 Semantic HTML and forms | header, nav, main, section, article, footer, address, time, figure, forms with fieldset/legend, labels, input types, required, pattern, minlength, datalist, textarea, tables with caption, colgroup, thead, tbody, tfoot |
 | 3 CSS | variables, selectors, attribute selectors, combinators, colours, gradients, units, typography, box model, positioning, flexbox, grid with areas, pseudo-classes and pseudo-elements, form styling, transitions, keyframes, media queries |
 | 4 JavaScript fundamentals | const/let, template literals, functions and arrow functions, default parameters, if / else, arrays and objects, spread and destructuring |
-| 5 Interactive web | DOM selection and changes, events, event delegation, form validation with regular expressions, dates, localStorage / sessionStorage, fetch + JSON, audio events (the chime), the - and + buttons with event delegation |
+| 5 Interactive web | DOM selection and changes, events, event delegation, form validation with regular expressions, dates, localStorage, fetch + JSON, audio (the chime), the - and + buttons with event delegation |
 
 ## Who made what
 

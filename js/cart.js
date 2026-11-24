@@ -17,7 +17,7 @@ const form = document.getElementById('order-form');
 const dateInput = document.getElementById('o-date');
 const chime = document.getElementById('chime');
 
-// The cart as full lines: [{ id, name, image, price, qty }].
+// The cart as full lines: each flower's details from flowers.json plus its qty.
 function cartLines() {
   return getCart()
     .map((item) => {
@@ -98,7 +98,7 @@ form.addEventListener('submit', (event) => {
 // Delivery date: from today to 60 days ahead, tomorrow picked to start with.
 dateInput.min = dateFromToday(0);
 dateInput.max = dateFromToday(60);
-dateInput.value = dateFromToday(1);
+dateInput.defaultValue = dateFromToday(1); // the starting date, and what "Clear form" goes back to
 
 // Load the flowers (Fetch API), then draw the cart.
 getFlowers()
